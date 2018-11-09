@@ -62,6 +62,68 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-svg实现基本动画" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/11/09/svg实现基本动画/" class="article-date">
+  <time datetime="2018-11-09T09:48:54.000Z" itemprop="datePublished">2018-11-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/11/09/svg实现基本动画/">SVG实现基本动画</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="SVG动画"><a href="#SVG动画" class="headerlink" title="SVG动画"></a>SVG动画</h3><p>实现动画的方式有很多种，在这里主要是使用CSS3动画三剑客来实现（animation、transform、transition），<br>在说SVG前先介绍一下所以的CSS3动画三剑客。</p>
+<h4 id="1-animation"><a href="#1-animation" class="headerlink" title="1.animation"></a>1.animation</h4><p>animation是如下几个属性的缩写，可以将<strong>动画</strong>与<strong>元素</strong>绑定，与keyframe共同使用。</p>
+<p><strong>语法</strong></p>
+<pre><code>animation: name duration timing-function delay iteration-count direction fill-mode play-state;
+</code></pre><ul>
+<li><strong>animation-name</strong>：规定需要绑定到选择器的 keyframe 名称；</li>
+<li><strong>animation-duration : value</strong>：规定完成动画所花费的时间，以秒或毫秒计；</li>
+<li><strong>animation-timing-funtion ： value(linear|ease|ease-in|ease-out|ease-in-out|timing-funtion</strong>：规定动画的速度曲线；</li>
+<li><strong>animation-delay : value</strong>：    规定在动画开始之前的延迟；</li>
+<li><strong>animation-iteration-count : value|infinite</strong>：规定动画应该播放的次数；</li>
+<li><strong>animation-direction : normal|reverse|alternate|alternate-reverse</strong>：规定是否应该轮流反向播放动画；</li>
+<li><strong>animation-fill-mode ： none|forwards|backwarks|both</strong>:设置动画在执行之前和之后如何将样式应用于其目标;</li>
+<li><strong>animation-play-state: paused|running</strong>：设置动画是否运行和停止;  </li>
+</ul>
+<h4 id="2-tranform"><a href="#2-tranform" class="headerlink" title="2.tranform"></a>2.tranform</h4><p>transform 属性向元素应用 2D 或 3D 转换。该属性允许我们对元素进行旋转、缩放、移动或倾斜。 </p>
+<p><strong>语法</strong></p>
+<pre><code>transform: none|transform-functions;
+</code></pre><ul>
+<li><strong>rotate</strong>：旋转</li>
+<li><strong>translate</strong>：移动</li>
+<li><strong>skew</strong>：倾斜</li>
+<li><strong>scale</strong>：缩放</li>
+</ul>
+<h4 id="3-transition"><a href="#3-transition" class="headerlink" title="3.transition"></a>3.transition</h4><p>transition是如下几个属性的缩写，可以实现样式到样式的过度效果，与animation有些相似，都可以做些简单的动画效果，但是transition没法想animation一样做到帧动画。</p>
+<p><strong>语法</strong>  </p>
+<pre><code>transition: property duration timing-function delay;  
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://heweixia.com/2018/11/09/svg实现基本动画/" data-id="cjo9uco4800012kp03nk6m0db" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-SVG基本用法" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/11/02/SVG基本用法/" class="article-date">
@@ -134,7 +196,7 @@
 </li>
 </ol>
 <ol start="6">
-<li><p><strong>stroke-dasharra</strong>：将虚线类型应用在描边上；</p>
+<li><p><strong>stroke-dasharray</strong>：将虚线类型应用在描边上；</p>
 <p> stroke-dasharray属性的参数，是一组用逗号分割的数字组成的数列。<font color="#f00">和path不一样，这里的数字必须用逗号分割（空格会被忽略）</font>。每一组数字，第一个用来表示填色区域的长度，第二个用来表示非填色区域的长度。</p>
 <pre><code>&lt;svg width=&quot;200&quot; height=&quot;150&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot; version=&quot;1.1&quot; style=&quot;border:1px solid #ddd&quot;&gt;
         &lt;path d=&quot;M 10 75 Q 50 10 100 75 T 190 75&quot; stroke=&quot;black&quot; stroke-linecap=&quot;round&quot; stroke-dasharray=&quot;5,10,2&quot; fill=&quot;none&quot; /&gt;
@@ -313,52 +375,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://heweixia.com/2018/11/02/SVG基本用法/" data-id="cjo6k265w0001hgp00dx9z0wp" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-hello-world" class="article article-type-post" itemscope="" itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/10/31/hello-world/" class="article-date">
-  <time datetime="2018-10-31T06:43:57.661Z" itemprop="datePublished">2018-10-31</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/31/hello-world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://heweixia.com/2018/10/31/hello-world/" data-id="cjo6k265j0000hgp01a7ihkx9" class="article-share-link">Share</a>
+      <a data-url="http://heweixia.com/2018/11/02/SVG基本用法/" data-id="cjo9uco4000002kp0mlwxrc2m" class="article-share-link">Share</a>
       
       
     </footer>
@@ -386,7 +403,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li></ul>
     </div>
   </div>
 
@@ -399,11 +416,11 @@
       <ul>
         
           <li>
-            <a href="/2018/11/02/SVG基本用法/">SVG基本用法</a>
+            <a href="/2018/11/09/svg实现基本动画/">SVG实现基本动画</a>
           </li>
         
           <li>
-            <a href="/2018/10/31/hello-world/">Hello World</a>
+            <a href="/2018/11/02/SVG基本用法/">SVG基本用法</a>
           </li>
         
       </ul>

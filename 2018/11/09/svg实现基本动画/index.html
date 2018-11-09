@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>SVG实现基本动画 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="SVG动画实现动画的方式有很多种，在这里主要是使用CSS3动画三剑客来实现（animation、transform、transition），在说SVG前先介绍一下所以的CSS3动画三剑客。 1.animationanimation是如下几个属性的缩写，可以将动画与元素绑定，与keyframe共同使用。 语法 animation: name duration timing-function dela">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SVG实现基本动画">
+<meta property="og:url" content="http://heweixia.com/2018/11/09/svg实现基本动画/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="SVG动画实现动画的方式有很多种，在这里主要是使用CSS3动画三剑客来实现（animation、transform、transition），在说SVG前先介绍一下所以的CSS3动画三剑客。 1.animationanimation是如下几个属性的缩写，可以将动画与元素绑定，与keyframe共同使用。 语法 animation: name duration timing-function dela">
+<meta property="og:locale" content="zh_CN.utf8">
+<meta property="og:updated_time" content="2018-11-09T09:50:14.817Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SVG实现基本动画">
+<meta name="twitter:description" content="SVG动画实现动画的方式有很多种，在这里主要是使用CSS3动画三剑客来实现（animation、transform、transition），在说SVG前先介绍一下所以的CSS3动画三剑客。 1.animationanimation是如下几个属性的缩写，可以将动画与元素绑定，与keyframe共同使用。 语法 animation: name duration timing-function dela">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://heweixia.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-svg实现基本动画" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/11/09/svg实现基本动画/" class="article-date">
+  <time datetime="2018-11-09T09:48:54.000Z" itemprop="datePublished">2018-11-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      SVG实现基本动画
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="SVG动画"><a href="#SVG动画" class="headerlink" title="SVG动画"></a>SVG动画</h3><p>实现动画的方式有很多种，在这里主要是使用CSS3动画三剑客来实现（animation、transform、transition），<br>在说SVG前先介绍一下所以的CSS3动画三剑客。</p>
+<h4 id="1-animation"><a href="#1-animation" class="headerlink" title="1.animation"></a>1.animation</h4><p>animation是如下几个属性的缩写，可以将<strong>动画</strong>与<strong>元素</strong>绑定，与keyframe共同使用。</p>
+<p><strong>语法</strong></p>
+<pre><code>animation: name duration timing-function delay iteration-count direction fill-mode play-state;
+</code></pre><ul>
+<li><strong>animation-name</strong>：规定需要绑定到选择器的 keyframe 名称；</li>
+<li><strong>animation-duration : value</strong>：规定完成动画所花费的时间，以秒或毫秒计；</li>
+<li><strong>animation-timing-funtion ： value(linear|ease|ease-in|ease-out|ease-in-out|timing-funtion</strong>：规定动画的速度曲线；</li>
+<li><strong>animation-delay : value</strong>：    规定在动画开始之前的延迟；</li>
+<li><strong>animation-iteration-count : value|infinite</strong>：规定动画应该播放的次数；</li>
+<li><strong>animation-direction : normal|reverse|alternate|alternate-reverse</strong>：规定是否应该轮流反向播放动画；</li>
+<li><strong>animation-fill-mode ： none|forwards|backwarks|both</strong>:设置动画在执行之前和之后如何将样式应用于其目标;</li>
+<li><strong>animation-play-state: paused|running</strong>：设置动画是否运行和停止;  </li>
+</ul>
+<h4 id="2-tranform"><a href="#2-tranform" class="headerlink" title="2.tranform"></a>2.tranform</h4><p>transform 属性向元素应用 2D 或 3D 转换。该属性允许我们对元素进行旋转、缩放、移动或倾斜。 </p>
+<p><strong>语法</strong></p>
+<pre><code>transform: none|transform-functions;
+</code></pre><ul>
+<li><strong>rotate</strong>：旋转</li>
+<li><strong>translate</strong>：移动</li>
+<li><strong>skew</strong>：倾斜</li>
+<li><strong>scale</strong>：缩放</li>
+</ul>
+<h4 id="3-transition"><a href="#3-transition" class="headerlink" title="3.transition"></a>3.transition</h4><p>transition是如下几个属性的缩写，可以实现样式到样式的过度效果，与animation有些相似，都可以做些简单的动画效果，但是transition没法想animation一样做到帧动画。</p>
+<p><strong>语法</strong>  </p>
+<pre><code>transition: property duration timing-function delay;  
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://heweixia.com/2018/11/09/svg实现基本动画/" data-id="cjo9uco4800012kp03nk6m0db" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/11/02/SVG基本用法/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">SVG基本用法</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/11/09/svg实现基本动画/">SVG实现基本动画</a>
+          </li>
+        
+          <li>
+            <a href="/2018/11/02/SVG基本用法/">SVG基本用法</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 hwx<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
