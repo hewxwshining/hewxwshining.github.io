@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>vue小记 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="1. 目录结构 src api  //跟后端请求的方法 base //基础组件 common  //通用的静态资源 fonts //字体 image  js style base.css //基本样式 icon.css //图标样式 font.css //字体样式 reset.css //默认样式重置 mixin.css //基本函数样式 variable.css //基本页面风格样式     c">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vue小记">
+<meta property="og:url" content="http://heweixia.com/2018/11/16/vue小记/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="1. 目录结构 src api  //跟后端请求的方法 base //基础组件 common  //通用的静态资源 fonts //字体 image  js style base.css //基本样式 icon.css //图标样式 font.css //字体样式 reset.css //默认样式重置 mixin.css //基本函数样式 variable.css //基本页面风格样式     c">
+<meta property="og:locale" content="zh_CN.utf8">
+<meta property="og:updated_time" content="2018-11-16T09:21:47.821Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="vue小记">
+<meta name="twitter:description" content="1. 目录结构 src api  //跟后端请求的方法 base //基础组件 common  //通用的静态资源 fonts //字体 image  js style base.css //基本样式 icon.css //图标样式 font.css //字体样式 reset.css //默认样式重置 mixin.css //基本函数样式 variable.css //基本页面风格样式     c">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://heweixia.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-vue小记" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/11/16/vue小记/" class="article-date">
+  <time datetime="2018-11-16T09:20:04.000Z" itemprop="datePublished">2018-11-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      vue小记
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="1-目录结构"><a href="#1-目录结构" class="headerlink" title="1. 目录结构"></a>1. 目录结构</h3><ol>
+<li>src<ol>
+<li>api  //跟后端请求的方法</li>
+<li>base //基础组件</li>
+<li>common  //通用的静态资源<ol>
+<li>fonts //字体</li>
+<li>image </li>
+<li>js</li>
+<li>style<ol>
+<li>base.css //基本样式</li>
+<li>icon.css //图标样式</li>
+<li>font.css //字体样式</li>
+<li>reset.css //默认样式重置</li>
+<li>mixin.css //基本函数样式</li>
+<li>variable.css //基本页面风格样式</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>commonents  //组件</li>
+<li>router //路由配置文件</li>
+<li>store  //存放vue页面状态文件</li>
+<li>app.vue </li>
+<li>main.js</li>
+</ol>
+</li>
+<li>static</li>
+</ol>
+<h3 id="2-添加依赖"><a href="#2-添加依赖" class="headerlink" title="2. 添加依赖"></a>2. 添加依赖</h3><ol>
+<li><p>babel-runtime  </p>
+<pre><code>babel-runtime 的作用也是模拟 ES2015 环境
+</code></pre></li>
+<li><p>fastclick  </p>
+<pre><code>import fastclick from &apos;fastclick&apos;
+fastclick.attach(document.body)//去掉移动端点击事件延迟3秒的等待
+</code></pre></li>
+<li><p>babel-polyfill 的作用也是模拟 ES2015 环境</p>
+</li>
+</ol>
+<h3 id="3-拼接url带参数"><a href="#3-拼接url带参数" class="headerlink" title="3. 拼接url带参数"></a>3. 拼接url带参数</h3><pre><code>function param(data){
+    let url = &apos;&apos;;
+    for(var k in data){
+        let value = data[k]!== undefined ? data[k]:&apos;&apos;;
+        url += &apos;&amp;${k}=${encodeURIComponent(value)}&apos;;
+    }
+    return url? url.substring(1):&apos;&apos;;
+}
+function getUrl(url,data){
+    url += (url.indexOf(&apos;?&apos;)&lt;0?&apos;?&apos;:&apos;&amp;&apos;)+param(data);
+}
+</code></pre><h3 id="4-判断某个元素是否含有该class"><a href="#4-判断某个元素是否含有该class" class="headerlink" title="4. 判断某个元素是否含有该class"></a>4. 判断某个元素是否含有该class</h3><pre><code>function hasClass(el,className){
+    let reg = new RegExp(&apos;(^|\\s)&apos;+className+&apos;(\\s|$)&apos;);
+    return reg.test(el.className);
+}
+//给元素添加class
+function addClass(el,className){
+    if(hasClass(el,className)){
+        return false;
+    };
+    let newClass = el.className.split(&apos; &apos;);
+    newClass.push(className);
+    el.className = newClass.join(&apos; &apos;);
+}
+</code></pre><h3 id="5-Vue中释放内存"><a href="#5-Vue中释放内存" class="headerlink" title="5. Vue中释放内存"></a>5. Vue中释放内存</h3><pre><code>destroyed(){
+    clearTimeout();
+}
+</code></pre><h3 id="6-数据缓存"><a href="#6-数据缓存" class="headerlink" title="6. 数据缓存"></a>6. 数据缓存</h3><pre><code>&lt;keep-alive&gt;
+    &lt;router-view&gt;&lt;/router-view&gt;
+&lt;/keep-alive&gt;
+</code></pre><h3 id="7-图片懒加载"><a href="#7-图片懒加载" class="headerlink" title="7. 图片懒加载"></a>7. 图片懒加载</h3><p>lazyload<br>    npm install vue-lazyload –save</p>
+<pre><code>//main.js
+import VueLazyload from &apos;vue-lazyload&apos;
+Vue.use(VueLazyload, {
+      error: &apos;static/img/logo.png&apos;,
+      loading: &apos;static/img/logo.png&apos;,
+})
+
+//index.vue
+&lt;img v-lazy=&quot;&apos;static/img/AI.png&apos;&quot;&gt;
+</code></pre><p><strong><em>注</em></strong>：此处的图片应该都放在src同级目录static文件夹下，要不然获取图片地址出错</p>
+<h3 id="8-路由组件异步加载-路由懒加载"><a href="#8-路由组件异步加载-路由懒加载" class="headerlink" title="8. 路由组件异步加载/路由懒加载"></a>8. 路由组件异步加载/路由懒加载</h3><pre><code>const Recommend = (resolve) =&gt; {
+  import(&apos;components/recommend/recommend&apos;).then((module) =&gt; {
+    resolve(module)
+  })
+}，
+//例如
+const addAI = (resolve) =&gt; {
+import (&apos;components/add-ai/addAI&apos;).then((module) =&gt; {
+   resolve(module)
+  })
+}
+</code></pre><p>###9. js实现动画</p>
+<h3 id="编译打包"><a href="#编译打包" class="headerlink" title="编译打包"></a>编译打包</h3><h3 id="移动端开发调试"><a href="#移动端开发调试" class="headerlink" title="移动端开发调试"></a>移动端开发调试</h3><ol>
+<li><p><a href="https://github.com/Tencent/vConsole" target="_blank" rel="noopener">使用vconsole</a>  </p>
+<pre><code>import Vconsole from &apos;vconsole&apos;;
+</code></pre></li>
+</ol>
+<h3 id="promise的数组顺序执行"><a href="#promise的数组顺序执行" class="headerlink" title="promise的数组顺序执行"></a>promise的数组顺序执行</h3><pre><code>function reduce(arr){
+    var sequence = Promise.resolve();
+    arr.forEach(function(item){
+        sequence = sequence.then(item)
+    });
+    return sequence;
+}
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://heweixia.com/2018/11/16/vue小记/" data-id="cjojtgd9800027wp0i3lf3knv" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/11/09/svg实现基本动画/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">SVG实现基本动画</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/11/16/vue小记/">vue小记</a>
+          </li>
+        
+          <li>
+            <a href="/2018/11/09/svg实现基本动画/">SVG实现基本动画</a>
+          </li>
+        
+          <li>
+            <a href="/2018/11/02/SVG基本用法/">SVG基本用法</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 hwx<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
