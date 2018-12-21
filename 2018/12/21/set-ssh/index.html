@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>set ssh | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="SSH Key 是一种方法来确定受信任的计算机，从而实现免密码登录。Git是分布式的代码管理工具，远程的代码管理是基于SSH的，所以要使用远程的Git则需要SSH的配置。下面的步骤将完成 生成SSH密钥并 添加公共密钥到GitHub上的帐户   1. 配置ssh格式的远程仓库地址 git remote add 远程仓库名 远程仓库地址 2. 创建ssh key ssh-keygen -t rsa">
+<meta property="og:type" content="article">
+<meta property="og:title" content="set ssh">
+<meta property="og:url" content="http://heweixia.com/2018/12/21/set-ssh/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="SSH Key 是一种方法来确定受信任的计算机，从而实现免密码登录。Git是分布式的代码管理工具，远程的代码管理是基于SSH的，所以要使用远程的Git则需要SSH的配置。下面的步骤将完成 生成SSH密钥并 添加公共密钥到GitHub上的帐户   1. 配置ssh格式的远程仓库地址 git remote add 远程仓库名 远程仓库地址 2. 创建ssh key ssh-keygen -t rsa">
+<meta property="og:locale" content="zh_CN.utf8">
+<meta property="og:image" content="https://i.imgur.com/CioSxin.png">
+<meta property="og:image" content="https://i.imgur.com/D1YPnBh.png">
+<meta property="og:image" content="https://i.imgur.com/XA06Xu2.png">
+<meta property="og:updated_time" content="2018-12-21T07:07:45.377Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="set ssh">
+<meta name="twitter:description" content="SSH Key 是一种方法来确定受信任的计算机，从而实现免密码登录。Git是分布式的代码管理工具，远程的代码管理是基于SSH的，所以要使用远程的Git则需要SSH的配置。下面的步骤将完成 生成SSH密钥并 添加公共密钥到GitHub上的帐户   1. 配置ssh格式的远程仓库地址 git remote add 远程仓库名 远程仓库地址 2. 创建ssh key ssh-keygen -t rsa">
+<meta name="twitter:image" content="https://i.imgur.com/CioSxin.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://heweixia.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-set-ssh" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/12/21/set-ssh/" class="article-date">
+  <time datetime="2018-12-21T02:53:40.000Z" itemprop="datePublished">2018-12-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      set ssh
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>SSH Key 是一种方法来确定受信任的计算机，从而实现免密码登录。<br>Git是分布式的代码管理工具，远程的代码管理是基于SSH的，所以要使用远程的Git则需要SSH的配置。<br>下面的步骤将完成 生成<strong>SSH密钥</strong>并 <strong>添加公共密钥到GitHub上的帐户</strong>  </p>
+<p><strong>1. 配置ssh格式的远程仓库地址</strong></p>
+<pre><code>git remote add 远程仓库名 远程仓库地址
+</code></pre><p><strong>2. 创建ssh key</strong></p>
+<pre><code>ssh-keygen -t rsa -C &quot;your_email@example.com&quot;
+</code></pre><p>一直回车，完成后，在用户主目录里找到.ssh目录，里面有id_rsa和id_rsa.pub两个文件，id_rsa是秘钥，id_rsa.pub是公钥；</p>
+<p><strong>3. 将SSH私钥添加到 ssh-agent</strong>  </p>
+<p>配置 ssh-agent 程序使用 SSH key</p>
+<p>1）在后台启动 ssh-agent</p>
+<pre><code>eval $(ssh-agent -s)
+</code></pre><p>2）将SSH私钥添加到 ssh-agent</p>
+<pre><code>ssh-add /c/Users/chenjs/.ssh/id_rsa
+</code></pre><p><img src="https://i.imgur.com/CioSxin.png" alt="https://i.imgur.com/CioSxin.png"></p>
+<p><strong>4. 将SSH公钥添加到GitHub账户</strong>  </p>
+<p>1）先复制SSH公钥的完整内容（/c/Users/chenjs/.ssh/id_rsa.pub）</p>
+<pre><code>clip &lt; /c/Users/chenjs/.ssh/id_rsa.pub
+</code></pre><p>2）进入GitHub的设置页面（登录GitHub，在右上角）</p>
+<pre><code>Setting-&gt;SSH Keys -&gt;add ssh key
+</code></pre><p><strong>5. 测试连接</strong>  </p>
+<p>1）打开 Git Bash 输入  </p>
+<pre><code>ssh -T git@github.com
+</code></pre><p>将会看到如下提示：</p>
+<p><img src="https://i.imgur.com/D1YPnBh.png" alt="https://i.imgur.com/D1YPnBh.png">  </p>
+<p>输入yes后回车</p>
+<p><img src="https://i.imgur.com/XA06Xu2.png" alt="https://i.imgur.com/XA06Xu2.png"></p>
+<p>如果提示中的用户名是你的，说明SSH key已经配置成功。<br>如果提示的是“ access denied”， you can read these instructions for diagnosing the issue.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://heweixia.com/2018/12/21/set-ssh/" data-id="cjpxp2om30000swp0x4d99zjl" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/11/16/vue小记/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">vue小记</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/12/21/set-ssh/">set ssh</a>
+          </li>
+        
+          <li>
+            <a href="/2018/11/16/vue小记/">vue小记</a>
+          </li>
+        
+          <li>
+            <a href="/2018/11/09/svg实现基本动画/">SVG实现基本动画</a>
+          </li>
+        
+          <li>
+            <a href="/2018/11/02/SVG基本用法/">SVG基本用法</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 hwx<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
