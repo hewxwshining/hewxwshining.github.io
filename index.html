@@ -84,14 +84,12 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>###一、 先快速了解::backdrop伪元素  </p>
-<blockquote>
+        <h3 id="一、-先快速了解-backdrop伪元素"><a href="#一、-先快速了解-backdrop伪元素" class="headerlink" title="一、 先快速了解::backdrop伪元素"></a>一、 先快速了解::backdrop伪元素</h3><blockquote>
 <p><strong>::backdrop</strong>伪元素是控制需要视觉聚焦的元素后面的背景元素样式的。</p>
 </blockquote>
-<p>在web中哪些元素需要视觉聚焦呢？一个是HTML5 <video>视频元素，还有就是HTMl5.2 <dialog>元素，以及处于全屏状态下的普通元素。</dialog></video></p>
+<p>在web中哪些元素需要视觉聚焦呢？一个是HTML5 <code>&lt;video&gt;</code>视频元素，还有就是HTMl5.2 <code>&lt;dialog&gt;</code>元素，以及处于全屏状态下的普通元素。</p>
 <p>下面分别看下::backdrop伪元素在上述这些HTML元素和场景中的表现吧。</p>
-<p>###二、 video元素中的::backdrop</p>
-<p>video元素中的::backdrop伪元素可以控制全屏时候视频后面层的样式，默认是纯黑色。我们可以通过设置background相关属性，把全屏播放的视频的幕布背景改成设计师眼中的透明色。</p>
+<h3 id="二、-video元素中的-backdrop"><a href="#二、-video元素中的-backdrop" class="headerlink" title="二、 video元素中的::backdrop"></a>二、 video元素中的::backdrop</h3><p>video元素中的::backdrop伪元素可以控制全屏时候视频后面层的样式，默认是纯黑色。我们可以通过设置background相关属性，把全屏播放的视频的幕布背景改成设计师眼中的透明色。</p>
 <p>CSS代码：</p>
 <pre><code>/* 给全屏时候视频背景加个透明 */
 video::backdrop {
@@ -106,8 +104,7 @@ video::backdrop {
 video::backdrop { visibility: hidden; }
 
 video::backdrop { display: none; }
-</code></pre><p>###三、 dialog元素中的::backdrop</p>
-<p>当我们使用dialog元素内置的showModal()显示带背景色的弹框时候，默认色黑色半透明，在我现在使用的Chrome浏览器下是rgba(0, 0, 0, 0.1);。</p>
+</code></pre><h3 id="三、-dialog元素中的-backdrop"><a href="#三、-dialog元素中的-backdrop" class="headerlink" title="三、 dialog元素中的::backdrop"></a>三、 dialog元素中的::backdrop</h3><p>当我们使用dialog元素内置的showModal()显示带背景色的弹框时候，默认色黑色半透明，在我现在使用的Chrome浏览器下是rgba(0, 0, 0, 0.1);。</p>
 <p>CSS代码：</p>
 <pre><code> dialog::backdrop {
     background-color: #fff;
@@ -133,8 +130,7 @@ video::backdrop { display: none; }
 &lt;/body&gt;
 </code></pre><font color="red"><strong>::backdrop</strong>伪元素既不继承也不继承任何其他元素。任何CSS都可以应用，没有限制。</font>
 
-<p>###四、 fullscreen API与::backdrop</p>
-<p>当借助HTML5 fullscreen API让网页中的某个普通元素全屏的时候，::backdrop伪元素也是可以控制背后的背景的。</p>
+<h3 id="四、-fullscreen-API与-backdrop"><a href="#四、-fullscreen-API与-backdrop" class="headerlink" title="四、 fullscreen API与::backdrop"></a>四、 fullscreen API与::backdrop</h3><p>当借助HTML5 fullscreen API让网页中的某个普通元素全屏的时候，::backdrop伪元素也是可以控制背后的背景的。</p>
 <p>例如，我们让一个<img>元素全屏，则可以使用下面的CSS让全屏后的图片backdrop背景变成“透明”：</p>
 <p>CSS代码：</p>
 <pre><code>/* 全屏图片的背景 */
@@ -162,7 +158,7 @@ img::backdrop {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://heweixia.com/2018/12/25/CSS-backdrop伪元素的作用/" data-id="cjq3phpv40000wcp0wtyup6ys" class="article-share-link">Share</a>
+      <a data-url="http://heweixia.com/2018/12/25/CSS-backdrop伪元素的作用/" data-id="cjq3pozxv0000fcp0x63dgz0i" class="article-share-link">Share</a>
       
       
     </footer>
@@ -224,7 +220,7 @@ img::backdrop {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://heweixia.com/2018/12/21/set-ssh/" data-id="cjq3phpvg0002wcp00or9u9lr" class="article-share-link">Share</a>
+      <a data-url="http://heweixia.com/2018/12/21/set-ssh/" data-id="cjq3pozy60002fcp0zpgw7ep1" class="article-share-link">Share</a>
       
       
     </footer>
@@ -364,7 +360,7 @@ import (&apos;components/add-ai/addAI&apos;).then((module) =&gt; {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://heweixia.com/2018/11/16/vue小记/" data-id="cjq3phpvy0003wcp015ox8lds" class="article-share-link">Share</a>
+      <a data-url="http://heweixia.com/2018/11/16/vue小记/" data-id="cjq3pozy90004fcp0h700jlt8" class="article-share-link">Share</a>
       
       
     </footer>
@@ -450,7 +446,7 @@ import (&apos;components/add-ai/addAI&apos;).then((module) =&gt; {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://heweixia.com/2018/11/09/svg实现基本动画/" data-id="cjq3phpvf0001wcp0bq1k7eq1" class="article-share-link">Share</a>
+      <a data-url="http://heweixia.com/2018/11/09/svg实现基本动画/" data-id="cjq3pozy70003fcp0e09mq7ql" class="article-share-link">Share</a>
       
       
     </footer>
@@ -711,7 +707,7 @@ import (&apos;components/add-ai/addAI&apos;).then((module) =&gt; {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://heweixia.com/2018/11/02/SVG基本用法/" data-id="cjq3phpw00004wcp03jebqaza" class="article-share-link">Share</a>
+      <a data-url="http://heweixia.com/2018/11/02/SVG基本用法/" data-id="cjq3pozy20001fcp09jamtm6w" class="article-share-link">Share</a>
       
       
     </footer>
