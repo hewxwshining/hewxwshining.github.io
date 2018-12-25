@@ -62,6 +62,116 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-CSS-backdrop伪元素的作用" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/12/25/CSS-backdrop伪元素的作用/" class="article-date">
+  <time datetime="2018-12-25T11:48:02.000Z" itemprop="datePublished">2018-12-25</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/12/25/CSS-backdrop伪元素的作用/">CSS::backdrop伪元素的作用</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>###一、 先快速了解::backdrop伪元素  </p>
+<blockquote>
+<p><strong>::backdrop</strong>伪元素是控制需要视觉聚焦的元素后面的背景元素样式的。</p>
+</blockquote>
+<p>在web中哪些元素需要视觉聚焦呢？一个是HTML5 <video>视频元素，还有就是HTMl5.2 <dialog>元素，以及处于全屏状态下的普通元素。</dialog></video></p>
+<p>下面分别看下::backdrop伪元素在上述这些HTML元素和场景中的表现吧。</p>
+<p>###二、 video元素中的::backdrop</p>
+<p>video元素中的::backdrop伪元素可以控制全屏时候视频后面层的样式，默认是纯黑色。我们可以通过设置background相关属性，把全屏播放的视频的幕布背景改成设计师眼中的透明色。</p>
+<p>CSS代码：</p>
+<pre><code>/* 给全屏时候视频背景加个透明 */
+video::backdrop {
+    background-color: #fff;
+    background-image: linear-gradient(45deg, #eee 25%, transparent 25%, transparent 75%, #eee 75%, #eee), linear-gradient(45deg, #eee 25%, transparent 25%, transparent 75%, #eee 75%, #eee);
+    background-size: 16px 16px;
+    background-position: 0 0, 8px 8px;
+}
+</code></pre><p>如果想要视频的全屏背景真·用户视觉不可见，下面3种声明都是可以的。</p>
+<pre><code>video::backdrop { opacity: 0; }
+
+video::backdrop { visibility: hidden; }
+
+video::backdrop { display: none; }
+</code></pre><p>###三、 dialog元素中的::backdrop</p>
+<p>当我们使用dialog元素内置的showModal()显示带背景色的弹框时候，默认色黑色半透明，在我现在使用的Chrome浏览器下是rgba(0, 0, 0, 0.1);。</p>
+<p>CSS代码：</p>
+<pre><code> dialog::backdrop {
+    background-color: #fff;
+    background-image: linear-gradient(45deg, #eee 25%, transparent 25%, transparent 75%, #eee 75%, #eee), linear-gradient(45deg, #eee 25%, transparent 25%, transparent 75%, #eee 75%, #eee);
+    background-size: 16px 16px;
+    background-position: 0 0, 8px 8px;
+}
+</code></pre><p>html代码：</p>
+<pre><code>&lt;body&gt;
+    &lt;dialog id=&quot;dialog&quot;&gt;
+        this is dialog
+        &lt;p&gt;&lt;input type=&quot;button&quot; id=&quot;buttonClose&quot; value=&quot;出现吧，弹框&quot;&gt;&lt;/p&gt;
+    &lt;/dialog&gt;
+    &lt;p&gt;&lt;input type=&quot;button&quot; id=&quot;buttonShow&quot; value=&quot;出现吧，弹框&quot;&gt;&lt;/p&gt;
+    &lt;script type=&quot;text/javascript&quot;&gt;
+    document.getElementById(&quot;buttonShow&quot;).addEventListener(&apos;click&apos;, function() {
+        document.getElementById(&quot;dialog&quot;).showModal();
+    })
+    document.getElementById(&quot;buttonClose&quot;).addEventListener(&apos;click&apos;, function() {
+        document.getElementById(&quot;dialog&quot;).close();
+    })
+    &lt;/script&gt;
+&lt;/body&gt;
+</code></pre><font color="red"><strong>::backdrop</strong>伪元素既不继承也不继承任何其他元素。任何CSS都可以应用，没有限制。</font>
+
+<p>###四、 fullscreen API与::backdrop</p>
+<p>当借助HTML5 fullscreen API让网页中的某个普通元素全屏的时候，::backdrop伪元素也是可以控制背后的背景的。</p>
+<p>例如，我们让一个<img>元素全屏，则可以使用下面的CSS让全屏后的图片backdrop背景变成“透明”：</p>
+<p>CSS代码：</p>
+<pre><code>/* 全屏图片的背景 */
+img::backdrop {
+    background-color: #fff;
+    background-image: linear-gradient(45deg, #eee 25%, transparent 25%, transparent 75%, #eee 75%, #eee), linear-gradient(45deg, #eee 25%, transparent 25%, transparent 75%, #eee 75%, #eee);
+    background-size: 16px 16px;
+    background-position: 0 0, 8px 8px;
+}
+</code></pre><p>html代码：</p>
+<pre><code>&lt;body&gt;
+    &lt;img id=&quot;image&quot; src=&quot;./mm.jpg&quot;&gt;
+    &lt;script type=&quot;text/javascript&quot;&gt;
+        document.getElementById(&quot;image&quot;).addEventListener(&apos;click&apos;, function () {
+            var doc = document;
+            if (doc.fullscreen) {
+                doc.cancelFullScreen();
+            } else {
+                this.requestFullScreen();    
+            }
+        });
+    &lt;/script&gt;
+&lt;/body&gt;
+</code></pre><font color="red"><strong>::backdrop</strong>对背景的控制要比:-moz-full-screen{}或:-webkit-full-screen{}等伪类要更强。</font>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://heweixia.com/2018/12/25/CSS-backdrop伪元素的作用/" data-id="cjq3phpv40000wcp0wtyup6ys" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-set-ssh" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/12/21/set-ssh/" class="article-date">
@@ -114,7 +224,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://heweixia.com/2018/12/21/set-ssh/" data-id="cjpxp2om30000swp0x4d99zjl" class="article-share-link">Share</a>
+      <a data-url="http://heweixia.com/2018/12/21/set-ssh/" data-id="cjq3phpvg0002wcp00or9u9lr" class="article-share-link">Share</a>
       
       
     </footer>
@@ -254,7 +364,7 @@ import (&apos;components/add-ai/addAI&apos;).then((module) =&gt; {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://heweixia.com/2018/11/16/vue小记/" data-id="cjpxp2omy0002swp0cszbgmmz" class="article-share-link">Share</a>
+      <a data-url="http://heweixia.com/2018/11/16/vue小记/" data-id="cjq3phpvy0003wcp015ox8lds" class="article-share-link">Share</a>
       
       
     </footer>
@@ -340,7 +450,7 @@ import (&apos;components/add-ai/addAI&apos;).then((module) =&gt; {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://heweixia.com/2018/11/09/svg实现基本动画/" data-id="cjpxp2omv0001swp0qcjryn7g" class="article-share-link">Share</a>
+      <a data-url="http://heweixia.com/2018/11/09/svg实现基本动画/" data-id="cjq3phpvf0001wcp0bq1k7eq1" class="article-share-link">Share</a>
       
       
     </footer>
@@ -601,7 +711,7 @@ import (&apos;components/add-ai/addAI&apos;).then((module) =&gt; {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://heweixia.com/2018/11/02/SVG基本用法/" data-id="cjpxp2oo30003swp00s0qc3r9" class="article-share-link">Share</a>
+      <a data-url="http://heweixia.com/2018/11/02/SVG基本用法/" data-id="cjq3phpw00004wcp03jebqaza" class="article-share-link">Share</a>
       
       
     </footer>
@@ -640,6 +750,10 @@ import (&apos;components/add-ai/addAI&apos;).then((module) =&gt; {
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2018/12/25/CSS-backdrop伪元素的作用/">CSS::backdrop伪元素的作用</a>
+          </li>
         
           <li>
             <a href="/2018/12/21/set-ssh/">set ssh</a>

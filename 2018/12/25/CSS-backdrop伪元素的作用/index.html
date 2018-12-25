@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>CSS::backdrop伪元素的作用 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="###一、 先快速了解::backdrop伪元素    ::backdrop伪元素是控制需要视觉聚焦的元素后面的背景元素样式的。  在web中哪些元素需要视觉聚焦呢？一个是HTML5 视频元素，还有就是HTMl5.2 元素，以及处于全屏状态下的普通元素。 下面分别看下::backdrop伪元素在上述这些HTML元素和场景中的表现吧。 ###二、 video元素中的::backdrop video元">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSS::backdrop伪元素的作用">
+<meta property="og:url" content="http://heweixia.com/2018/12/25/CSS-backdrop伪元素的作用/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="###一、 先快速了解::backdrop伪元素    ::backdrop伪元素是控制需要视觉聚焦的元素后面的背景元素样式的。  在web中哪些元素需要视觉聚焦呢？一个是HTML5 视频元素，还有就是HTMl5.2 元素，以及处于全屏状态下的普通元素。 下面分别看下::backdrop伪元素在上述这些HTML元素和场景中的表现吧。 ###二、 video元素中的::backdrop video元">
+<meta property="og:locale" content="zh_CN.utf8">
+<meta property="og:updated_time" content="2018-12-25T12:05:00.576Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CSS::backdrop伪元素的作用">
+<meta name="twitter:description" content="###一、 先快速了解::backdrop伪元素    ::backdrop伪元素是控制需要视觉聚焦的元素后面的背景元素样式的。  在web中哪些元素需要视觉聚焦呢？一个是HTML5 视频元素，还有就是HTMl5.2 元素，以及处于全屏状态下的普通元素。 下面分别看下::backdrop伪元素在上述这些HTML元素和场景中的表现吧。 ###二、 video元素中的::backdrop video元">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://heweixia.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-CSS-backdrop伪元素的作用" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/12/25/CSS-backdrop伪元素的作用/" class="article-date">
+  <time datetime="2018-12-25T11:48:02.000Z" itemprop="datePublished">2018-12-25</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      CSS::backdrop伪元素的作用
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>###一、 先快速了解::backdrop伪元素  </p>
+<blockquote>
+<p><strong>::backdrop</strong>伪元素是控制需要视觉聚焦的元素后面的背景元素样式的。</p>
+</blockquote>
+<p>在web中哪些元素需要视觉聚焦呢？一个是HTML5 <video>视频元素，还有就是HTMl5.2 <dialog>元素，以及处于全屏状态下的普通元素。</dialog></video></p>
+<p>下面分别看下::backdrop伪元素在上述这些HTML元素和场景中的表现吧。</p>
+<p>###二、 video元素中的::backdrop</p>
+<p>video元素中的::backdrop伪元素可以控制全屏时候视频后面层的样式，默认是纯黑色。我们可以通过设置background相关属性，把全屏播放的视频的幕布背景改成设计师眼中的透明色。</p>
+<p>CSS代码：</p>
+<pre><code>/* 给全屏时候视频背景加个透明 */
+video::backdrop {
+    background-color: #fff;
+    background-image: linear-gradient(45deg, #eee 25%, transparent 25%, transparent 75%, #eee 75%, #eee), linear-gradient(45deg, #eee 25%, transparent 25%, transparent 75%, #eee 75%, #eee);
+    background-size: 16px 16px;
+    background-position: 0 0, 8px 8px;
+}
+</code></pre><p>如果想要视频的全屏背景真·用户视觉不可见，下面3种声明都是可以的。</p>
+<pre><code>video::backdrop { opacity: 0; }
+
+video::backdrop { visibility: hidden; }
+
+video::backdrop { display: none; }
+</code></pre><p>###三、 dialog元素中的::backdrop</p>
+<p>当我们使用dialog元素内置的showModal()显示带背景色的弹框时候，默认色黑色半透明，在我现在使用的Chrome浏览器下是rgba(0, 0, 0, 0.1);。</p>
+<p>CSS代码：</p>
+<pre><code> dialog::backdrop {
+    background-color: #fff;
+    background-image: linear-gradient(45deg, #eee 25%, transparent 25%, transparent 75%, #eee 75%, #eee), linear-gradient(45deg, #eee 25%, transparent 25%, transparent 75%, #eee 75%, #eee);
+    background-size: 16px 16px;
+    background-position: 0 0, 8px 8px;
+}
+</code></pre><p>html代码：</p>
+<pre><code>&lt;body&gt;
+    &lt;dialog id=&quot;dialog&quot;&gt;
+        this is dialog
+        &lt;p&gt;&lt;input type=&quot;button&quot; id=&quot;buttonClose&quot; value=&quot;出现吧，弹框&quot;&gt;&lt;/p&gt;
+    &lt;/dialog&gt;
+    &lt;p&gt;&lt;input type=&quot;button&quot; id=&quot;buttonShow&quot; value=&quot;出现吧，弹框&quot;&gt;&lt;/p&gt;
+    &lt;script type=&quot;text/javascript&quot;&gt;
+    document.getElementById(&quot;buttonShow&quot;).addEventListener(&apos;click&apos;, function() {
+        document.getElementById(&quot;dialog&quot;).showModal();
+    })
+    document.getElementById(&quot;buttonClose&quot;).addEventListener(&apos;click&apos;, function() {
+        document.getElementById(&quot;dialog&quot;).close();
+    })
+    &lt;/script&gt;
+&lt;/body&gt;
+</code></pre><font color="red"><strong>::backdrop</strong>伪元素既不继承也不继承任何其他元素。任何CSS都可以应用，没有限制。</font>
+
+<p>###四、 fullscreen API与::backdrop</p>
+<p>当借助HTML5 fullscreen API让网页中的某个普通元素全屏的时候，::backdrop伪元素也是可以控制背后的背景的。</p>
+<p>例如，我们让一个<img>元素全屏，则可以使用下面的CSS让全屏后的图片backdrop背景变成“透明”：</p>
+<p>CSS代码：</p>
+<pre><code>/* 全屏图片的背景 */
+img::backdrop {
+    background-color: #fff;
+    background-image: linear-gradient(45deg, #eee 25%, transparent 25%, transparent 75%, #eee 75%, #eee), linear-gradient(45deg, #eee 25%, transparent 25%, transparent 75%, #eee 75%, #eee);
+    background-size: 16px 16px;
+    background-position: 0 0, 8px 8px;
+}
+</code></pre><p>html代码：</p>
+<pre><code>&lt;body&gt;
+    &lt;img id=&quot;image&quot; src=&quot;./mm.jpg&quot;&gt;
+    &lt;script type=&quot;text/javascript&quot;&gt;
+        document.getElementById(&quot;image&quot;).addEventListener(&apos;click&apos;, function () {
+            var doc = document;
+            if (doc.fullscreen) {
+                doc.cancelFullScreen();
+            } else {
+                this.requestFullScreen();    
+            }
+        });
+    &lt;/script&gt;
+&lt;/body&gt;
+</code></pre><font color="red"><strong>::backdrop</strong>对背景的控制要比:-moz-full-screen{}或:-webkit-full-screen{}等伪类要更强。</font>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://heweixia.com/2018/12/25/CSS-backdrop伪元素的作用/" data-id="cjq3phpv40000wcp0wtyup6ys" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/12/21/set-ssh/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">set ssh</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/12/25/CSS-backdrop伪元素的作用/">CSS::backdrop伪元素的作用</a>
+          </li>
+        
+          <li>
+            <a href="/2018/12/21/set-ssh/">set ssh</a>
+          </li>
+        
+          <li>
+            <a href="/2018/11/16/vue小记/">vue小记</a>
+          </li>
+        
+          <li>
+            <a href="/2018/11/09/svg实现基本动画/">SVG实现基本动画</a>
+          </li>
+        
+          <li>
+            <a href="/2018/11/02/SVG基本用法/">SVG基本用法</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 hwx<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
