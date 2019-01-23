@@ -7,18 +7,18 @@
   
   <title>箭头函数详记 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="箭头函数表达式的语法比函数表达式更短，并且没有自己的this，arguments，super或new.target。这些函数表达式更适用于那些本来需要匿名函数的地方，并且它们不能用作构造函数。  首先：我们先考虑一下这个箭头函数没有自己的this，arguments，super或new.target是什么意思？带着问题去看下面的内容会更事半功倍。 一、语法1.基础语法(参数1, 参数2, …,">
+  <meta name="description" content="箭头函数表达式的语法比函数表达式更短，并且没有自己的this，arguments，super或new.target。这些函数表达式更适用于那些本来需要匿名函数的地方，并且它们不能用作构造函数。 首先：我们先考虑一下这个箭头函数没有自己的this，arguments，super或new.target是什么意思？带着问题去看下面的内容会更事半功倍。 一、语法1.基础语法(参数1, 参数2, …, 参数">
 <meta name="keywords" content="箭头函数">
 <meta property="og:type" content="article">
 <meta property="og:title" content="箭头函数详记">
 <meta property="og:url" content="http://heweixia.com/2019/01/23/箭头函数详记/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="箭头函数表达式的语法比函数表达式更短，并且没有自己的this，arguments，super或new.target。这些函数表达式更适用于那些本来需要匿名函数的地方，并且它们不能用作构造函数。  首先：我们先考虑一下这个箭头函数没有自己的this，arguments，super或new.target是什么意思？带着问题去看下面的内容会更事半功倍。 一、语法1.基础语法(参数1, 参数2, …,">
+<meta property="og:description" content="箭头函数表达式的语法比函数表达式更短，并且没有自己的this，arguments，super或new.target。这些函数表达式更适用于那些本来需要匿名函数的地方，并且它们不能用作构造函数。 首先：我们先考虑一下这个箭头函数没有自己的this，arguments，super或new.target是什么意思？带着问题去看下面的内容会更事半功倍。 一、语法1.基础语法(参数1, 参数2, …, 参数">
 <meta property="og:locale" content="zh_CN.utf8">
-<meta property="og:updated_time" content="2019-01-23T02:23:49.700Z">
+<meta property="og:updated_time" content="2019-01-23T02:29:42.729Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="箭头函数详记">
-<meta name="twitter:description" content="箭头函数表达式的语法比函数表达式更短，并且没有自己的this，arguments，super或new.target。这些函数表达式更适用于那些本来需要匿名函数的地方，并且它们不能用作构造函数。  首先：我们先考虑一下这个箭头函数没有自己的this，arguments，super或new.target是什么意思？带着问题去看下面的内容会更事半功倍。 一、语法1.基础语法(参数1, 参数2, …,">
+<meta name="twitter:description" content="箭头函数表达式的语法比函数表达式更短，并且没有自己的this，arguments，super或new.target。这些函数表达式更适用于那些本来需要匿名函数的地方，并且它们不能用作构造函数。 首先：我们先考虑一下这个箭头函数没有自己的this，arguments，super或new.target是什么意思？带着问题去看下面的内容会更事半功倍。 一、语法1.基础语法(参数1, 参数2, …, 参数">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -91,9 +91,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <blockquote>
-<p>箭头函数表达式的语法比函数表达式更短，并且没有自己的<code>this</code>，<code>arguments</code>，<code>super</code>或<code>new.target</code>。这些函数表达式更适用于那些本<br>来需要匿名函数的地方，并且它们不能用作构造函数。</p>
-</blockquote>
+        <p><strong>箭头函数表达式的语法比函数表达式更短，并且没有自己的<code>this</code>，<code>arguments</code>，<code>super</code>或<code>new.target</code>。这些函数表达式更适用于那些本来需要匿名函数的地方，并且它们不能用作构造函数。</strong></p>
 <p><font color="red">首先</font>：我们先考虑一下这个箭头函数没有自己的<code>this</code>，<code>arguments</code>，<code>super</code>或<code>new.target</code>是什么意思？带着问题去看下面的内容会更事半功倍。</p>
 <h4 id="一、语法"><a href="#一、语法" class="headerlink" title="一、语法"></a>一、语法</h4><h5 id="1-基础语法"><a href="#1-基础语法" class="headerlink" title="1.基础语法"></a>1.基础语法</h5><pre><code>(参数1, 参数2, …, 参数N) =&gt; { 函数声明 }
 
@@ -127,7 +125,7 @@ f();  // 6
     }
 }
 console.log(Person.sayHello()) //我叫我今年undefined岁!
-</code></pre><p>打印的结果是<code>undefined</code>，知道是什么原因吗？当然，<code>setTimeout</code>方法里面的<code>this</code>指向的是<code>window</code>，所以是<code>undefined</code>，sayhello方法中的<code>this</code>才是指向Person的，如果按照下面的方式将sayHello中的<code>this</code>赋值给封闭变量self,就可以正确打印结果了</p>
+</code></pre><p>打印的结果是<code>undefined</code>，知道是什么原因吗？当然，<code>setTimeout</code>方法里面的<code>this</code>指向的是<code>window</code>，所以是<code>undefined</code>，sayhello方法中的<code>this</code>是指向Person的，如果按照下面的方式将sayHello中的<code>this</code>赋值给封闭变量self,就可以正确打印结果了</p>
 <pre><code>const Person1 = {
     &apos;name&apos;: &apos;little bear&apos;,
     &apos;age&apos;: 18,
@@ -151,9 +149,7 @@ console.log(Person1.sayHello());//我叫little bear我今年18岁!
 }
 console.log(Person3.sayHello());//我叫little bear我今年18岁!
 </code></pre><p>这个结果是否如你所料呢？</p>
-<blockquote>
-<p>箭头函数不会创建自己的<code>this</code>,它只会从自己的作用域链的上一层继承<code>this</code>。因此，在下面的代码中，传递给setInterval的函数内的this与<br>封闭函数中的this值相同</p>
-</blockquote>
+<p><strong>箭头函数不会创建自己的<code>this</code>,它只会从自己的作用域链的上一层继承<code>this</code>。因此，在下面的代码中，传递给setInterval的函数内的this与封闭函数中的this值相同。</strong></p>
 <p>我们再看看下面的代码就应该好理解了  </p>
 <pre><code> const Person5 = {
     &apos;name&apos;: &apos;little bear&apos;,
@@ -207,9 +203,7 @@ Person5.sayHello();//我叫我今年undefined岁!
 console.log(adder.add(1));         // 输出 2
 console.log(adder.addThruCall(1)); // 仍然输出 2（而不是3 ——译者注）
 </code></pre><p>结果：</p>
-<blockquote>
-<p>由于 箭头函数没有自己的this指针，通过 call() 或 apply() 方法调用一个函数时，只能传递参数（不能绑定this—译者注），他们的第一个参数会被忽略。（这种现象对于bind方法同样成立—译者注）</p>
-</blockquote>
+<p><strong>由于 箭头函数没有自己的this指针，通过 call() 或 apply() 方法调用一个函数时，只能传递参数（不能绑定this），他们的第一个参数会被忽略。</strong></p>
 <h4 id="三、不绑定arguments"><a href="#三、不绑定arguments" class="headerlink" title="三、不绑定arguments"></a>三、不绑定arguments</h4><p>我们都知道函数内部，<code>argument</code>是一个作为函数输入的值-原始数据或对象</p>
 <pre><code> var arguments = [5, 6, 7];
 
@@ -248,7 +242,7 @@ console.log(Foo.prototype); // undefined
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://heweixia.com/2019/01/23/箭头函数详记/" data-id="cjr8kfdr00006xovw33igardd" class="article-share-link">Share</a>
+      <a data-url="http://heweixia.com/2019/01/23/箭头函数详记/" data-id="cjr8kmqpo0007acvwln79kyqx" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/箭头函数/">箭头函数</a></li></ul>
