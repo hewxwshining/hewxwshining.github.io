@@ -62,6 +62,378 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-form表单样式自定义" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/01/25/form表单样式自定义/" class="article-date">
+  <time datetime="2019-01-25T09:11:10.000Z" itemprop="datePublished">2019-01-25</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/css3/">css3</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/01/25/form表单样式自定义/">form表单样式自定义</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="https://i.imgur.com/CO3kk9D.png" alt="https://i.imgur.com/CO3kk9D.png"></p>
+<p>代码：</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;Document&lt;/title&gt;
+    &lt;style type=&quot;text/css&quot;&gt;
+    html {
+        padding: 0px;
+        margin: 0px;
+        font-size: 0.75rem;
+    }
+
+    body {
+        padding: 0px;
+        margin: 0px;
+        font-size: 1.0rem;
+    }
+
+    form {
+        width: 400px;
+        margin: 20px;
+    }
+
+    .form-group {
+        margin-bottom: 1.25rem;
+    }
+
+    .form-group {
+        display: flex;
+        align-items: center;
+    }
+
+    .form-group&gt;label {
+        width: 5.0rem;
+        text-align: right;
+        box-sizing: border-box;
+        padding-right: 1.25rem;
+        align-self: center;
+    }
+
+    .form-group&gt;input {
+        flex-grow: 1;
+        border: 1px solid #ddd;
+        border-radius: 0.25rem;
+        padding: .375rem .75rem;
+        font-size: 1.0rem;
+        background-color: #fff;
+        background-clip: padding-box;
+        transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    }
+
+    .form-group&gt;input[type=&apos;text&apos;]:focus,
+    .form-group&gt;input[type=&quot;textarea&quot;]:focus,
+    .form-group&gt;input[type=&quot;password&quot;]:focus {
+        color: #495057;
+        border-color: #80bdff;
+        outline: 0;
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, .25);
+    }
+
+    input[type=&apos;radio&apos;],
+    input[type=&apos;checkbox&apos;] {
+        display: none;
+    }
+
+    input[type=&apos;radio&apos;]+label,
+    input[type=&apos;checkbox&apos;]+label {
+        margin-right: 1.25rem;
+    }
+
+    input[type=&apos;radio&apos;]+label:before,
+    input[type=&apos;checkbox&apos;]+label:before {
+        content: &quot;&quot;;
+        /*不换行空格*/
+        display: inline-block;
+        width: 1.2rem;
+        height: 1.2rem;
+        margin-right: .4rem;
+        border-radius: 100%;
+        border: 1px solid #ddd;
+        line-height: 1;
+        box-sizing: border-box;
+
+    }
+
+    input[type=&apos;radio&apos;]+label:before {
+        vertical-align: -0.166667rem;
+        /*因为content为空，数据无法对齐，只能用vertical-align调整*/
+    }
+
+    input[type=&apos;radio&apos;]:checked+label:before {
+        background-color: #5cb5f9;
+        background-clip: content-box;
+        padding: .15rem;
+        border-color: #5cb5f9;
+    }
+
+    input[type=&apos;checkbox&apos;]+label:before {
+        content: &quot;√&quot;;
+        color: #fff;
+        border-radius: 0.25rem;
+        font-weight: bold;
+    }
+
+    input[type=&apos;checkbox&apos;]:checked+label:before {
+        background-color: #5cb5f9;
+        text-align: center;
+        font-weight: bold;
+        border-color: #5cb5f9;
+
+    }
+
+    input[type=&apos;checkbox&apos;]#switch+label {
+        cursor: pointer;
+        width: 4rem;
+        height: 1.5rem;
+        display: block;
+        position: relative;
+        border: 1px solid #727577;
+        background-color: #727577;
+        border-radius: 1rem;
+        margin-right: 0px;
+        -webkit-transition: all 0.2s;
+        -o-transition: all 0.2s;
+        transition: all 0.2s;
+
+    }
+
+    input[type=&apos;checkbox&apos;]#switch+label:before {
+        content: &quot;&quot;;
+        width: 1.5rem;
+        height: 1.5rem;
+        border-radius: 100%;
+        background: #fff;
+        position: absolute;
+        margin-right: 0px;
+        -webkit-transition: all 0.3s;
+        -o-transition: all 0.3s;
+        transition: all 0.3s;
+
+    }
+
+    input[type=&apos;checkbox&apos;]#switch+label:after {
+        content: attr(data-off);
+        color: #fff;
+        position: absolute;
+        right: 0.5rem;
+        -webkit-transition: all 0.3s;
+        -o-transition: all 0.3s;
+        transition: all 0.3s;
+    }
+
+    input[type=&apos;checkbox&apos;]#switch:checked+label {
+        border: 1px solid #5cb5f9;
+        background-color: #5cb5f9;
+    }
+
+    input[type=&apos;checkbox&apos;]#switch:checked+label:before {
+        right: 0px;
+    }
+
+    input[type=&apos;checkbox&apos;]#switch:checked+label:after {
+        content: attr(data-on);
+        left: 0.5rem;
+    }
+
+    .form-range-group {
+        width: 12.5rem;
+    }
+
+    input[type=range] {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        /*这三个是去掉那条线原有的默认样式，亲测没啥用！*/
+        width: 100%;
+        border: none;
+        outline: none;
+        margin: 0px;
+        padding: 0px;
+        display: block;
+    }
+
+    /*设置控制条轨迹的样式*/
+    /* chrome 或者 safari */
+    input[type=&apos;range&apos;]::-webkit-slider-runnable-track {
+        height: 1rem;
+        background-color: #eee;
+        border-radius: 1rem;
+    }
+
+    /*firefox */
+    input[type=&apos;range&apos;]::-moz-range-track {
+        height: 1rem;
+        background-color: #eee;
+        border-radius: 1rem;
+    }
+
+    /*IE*/
+    input[type=&quot;range&quot;]::-ms-track {
+        color: transparent;
+        background-color: #eee;
+    }
+
+    /*设置控制的拖拽按钮样式*/
+    /*firefox 和 chrome*/
+    input[type=&apos;range&apos;]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        height: 1rem;
+        width: 1rem;
+        border-radius: 20%;
+        background: #1ba1e2;
+        cursor: pointer;
+        /*占用空间最小高度为16px,在父元素中使用align-items:center改变占用空间*/
+    }
+
+    /*firefox */
+    input[type=&apos;range&apos;]::-moz-range-thumb {
+        -moz-appearance: none;
+        height: 1rem;
+        width: 1rem;
+        border-radius: 20%;
+        background: #1ba1e2;
+        border: none;
+        cursor: pointer;
+        /*占用空间最小高度为17.33*/
+    }
+
+    /*IE*/
+    input[type=&apos;range&apos;]::-ms-thumb {
+        -ms-appearance: none;
+        height: 1rem;
+        width: 1rem;
+        border-radius: 20%;
+        background: #1ba1e2;
+        border: none;
+        cursor: pointer;
+    }
+
+
+
+
+    .btn {
+        display: inline-block;
+        font-weight: 400;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        border: 1px solid transparent;
+        padding: .375rem .75rem;
+        line-height: 1.5;
+        border-radius: .25rem;
+        transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    }
+
+    .btn:not(:disabled):not(.disabled) {
+        cursor: pointer;
+
+    }
+
+    .btn-primary {
+        color: #fff;
+        background-color: #007bff;
+        border-color: #007bff;
+    }
+
+    .btn-primary:hover {
+        filter: hue-rotate(14deg);
+    }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div class=&quot;wrapper&quot;&gt;
+        &lt;form action=&quot;&quot;&gt;
+            &lt;div class=&quot;form-group&quot;&gt;
+                &lt;label for=&quot;inputname&quot;&gt;输入框&lt;/label&gt;
+                &lt;input type=&quot;text&quot; name=&quot;inputname&quot; id=&quot;inputname&quot;&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;form-group&quot;&gt;
+                &lt;label for=&quot;inputpassword&quot;&gt;密码框&lt;/label&gt;
+                &lt;input type=&quot;password&quot; name=&quot;inputpassword&quot; id=&quot;inputpassword&quot;&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;form-group&quot;&gt;
+                &lt;label for=&quot;inputradio&quot;&gt;单选&lt;/label&gt;
+                &lt;div class=&quot;form-radio-group&quot;&gt;
+                    &lt;input type=&quot;radio&quot; name=&quot;radio&quot; value=&quot;true&quot; id=&quot;yes&quot;&gt;
+                    &lt;label for=&quot;yes&quot;&gt;YES&lt;/label&gt;
+                    &lt;input type=&quot;radio&quot; name=&quot;radio&quot; value=&quot;false&quot; id=&quot;no&quot;&gt;
+                    &lt;label for=&quot;no&quot;&gt;NO&lt;/label&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;form-group&quot;&gt;
+                &lt;label for=&quot;inputradio&quot;&gt;多选&lt;/label&gt;
+                &lt;div class=&quot;form-check-group&quot;&gt;
+                    &lt;input type=&quot;checkbox&quot; name=&quot;checkbox1&quot; value=&quot;checked1&quot; id=&quot;checked1&quot;&gt;
+                    &lt;label for=&quot;checked1&quot;&gt;checked1&lt;/label&gt;
+                    &lt;input type=&quot;checkbox&quot; name=&quot;checked2&quot; value=&quot;checked2&quot; id=&quot;checked2&quot;&gt;
+                    &lt;label for=&quot;checked2&quot;&gt;checked2&lt;/label&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;form-group&quot;&gt;
+                &lt;label for=&quot;switchinput&quot;&gt;开关&lt;/label&gt;
+                &lt;div class=&quot;form-swith-group&quot;&gt;
+                    &lt;input type=&quot;checkbox&quot; name=&quot;switch&quot; id=&quot;switch&quot;&gt;
+                    &lt;label for=&quot;switch&quot; class=&quot;switch&quot; data-on=&quot;on&quot; data-off=&quot;off&quot;&gt;&lt;/label&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;form-group&quot;&gt;
+                &lt;label for=&quot;range1&quot;&gt;滑块&lt;/label&gt;
+                &lt;div class=&quot;form-range-group&quot;&gt;&lt;input type=&quot;range&quot; name=&quot;range1&quot; id=&quot;range1&quot; min=&quot;0&quot; max=&quot;100&quot; step=&quot;1&quot;&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;form-group&quot;&gt;
+                &lt;label for=&quot;&quot;&gt;&lt;/label&gt;
+                &lt;div class=&quot;form-button-group&quot;&gt;
+                    &lt;button type=&quot;submit&quot; class=&quot;btn btn-primary&quot;&gt;提交&lt;/button&gt;
+                    &lt;button type=&quot;reset&quot; class=&quot;btn&quot;&gt;取消&lt;/button&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/form&gt;
+    &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://heweixia.com/2019/01/25/form表单样式自定义/" data-id="cjrbtwqco00097ovwy6dexesi" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/form/">form</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-箭头函数详记" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/01/23/箭头函数详记/" class="article-date">
@@ -239,7 +611,7 @@ console.log(Foo.prototype); // undefined
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://heweixia.com/2019/01/23/箭头函数详记/" data-id="cjr8kmqpo0007acvwln79kyqx" class="article-share-link">Share</a>
+      <a data-url="http://heweixia.com/2019/01/23/箭头函数详记/" data-id="cjrbtwqcp000a7ovwvo2wsvdk" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/箭头函数/">箭头函数</a></li></ul>
@@ -316,7 +688,7 @@ Tips:查了下默认的快捷键，SublimeText3中f1-f12中只有f11被默认为
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://heweixia.com/2019/01/16/Sublime-Text-3安装与常用/" data-id="cjr8kmqpf0001acvwzybqqz03" class="article-share-link">Share</a>
+      <a data-url="http://heweixia.com/2019/01/16/Sublime-Text-3安装与常用/" data-id="cjrbtwqbz00017ovw1hprusfh" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sublime/">sublime</a></li></ul>
@@ -424,7 +796,7 @@ img::backdrop {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://heweixia.com/2018/12/25/CSS-backdrop伪元素的作用/" data-id="cjr8kmqpa0000acvwlkgz97o4" class="article-share-link">Share</a>
+      <a data-url="http://heweixia.com/2018/12/25/CSS-backdrop伪元素的作用/" data-id="cjrbtwqbj00007ovw871zsp7y" class="article-share-link">Share</a>
       
       
     </footer>
@@ -486,7 +858,7 @@ img::backdrop {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://heweixia.com/2018/12/21/set-ssh/" data-id="cjr8kmqpi0002acvw5gms0kn7" class="article-share-link">Share</a>
+      <a data-url="http://heweixia.com/2018/12/21/set-ssh/" data-id="cjrbtwqce00067ovwd2vcym6k" class="article-share-link">Share</a>
       
       
     </footer>
@@ -626,7 +998,7 @@ import (&apos;components/add-ai/addAI&apos;).then((module) =&gt; {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://heweixia.com/2018/11/16/vue小记/" data-id="cjr8kmqpn0006acvwkxos36fn" class="article-share-link">Share</a>
+      <a data-url="http://heweixia.com/2018/11/16/vue小记/" data-id="cjrbtwqcf00077ovwra7pk7no" class="article-share-link">Share</a>
       
       
     </footer>
@@ -712,7 +1084,7 @@ import (&apos;components/add-ai/addAI&apos;).then((module) =&gt; {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://heweixia.com/2018/11/09/svg实现基本动画/" data-id="cjr8kmqpl0005acvwfh9ffxp2" class="article-share-link">Share</a>
+      <a data-url="http://heweixia.com/2018/11/09/svg实现基本动画/" data-id="cjrbtwqch00087ovwhkkaxibu" class="article-share-link">Share</a>
       
       
     </footer>
@@ -973,7 +1345,7 @@ import (&apos;components/add-ai/addAI&apos;).then((module) =&gt; {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://heweixia.com/2018/11/02/SVG基本用法/" data-id="cjr8kmqpv000eacvwuz8qrn6w" class="article-share-link">Share</a>
+      <a data-url="http://heweixia.com/2018/11/02/SVG基本用法/" data-id="cjrbtwqd3000j7ovwyjx0qfil" class="article-share-link">Share</a>
       
       
     </footer>
@@ -993,7 +1365,7 @@ import (&apos;components/add-ai/addAI&apos;).then((module) =&gt; {
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/es6/">es6</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/sublime/">sublime</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/css3/">css3</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/es6/">es6</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/sublime/">sublime</a></li></ul>
     </div>
   </div>
 
@@ -1003,7 +1375,7 @@ import (&apos;components/add-ai/addAI&apos;).then((module) =&gt; {
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/sublime/">sublime</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/箭头函数/">箭头函数</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/form/">form</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sublime/">sublime</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/箭头函数/">箭头函数</a></li></ul>
     </div>
   </div>
 
@@ -1013,7 +1385,7 @@ import (&apos;components/add-ai/addAI&apos;).then((module) =&gt; {
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/sublime/" style="font-size: 10px;">sublime</a> <a href="/tags/箭头函数/" style="font-size: 10px;">箭头函数</a>
+      <a href="/tags/form/" style="font-size: 10px;">form</a> <a href="/tags/sublime/" style="font-size: 10px;">sublime</a> <a href="/tags/箭头函数/" style="font-size: 10px;">箭头函数</a>
     </div>
   </div>
 
@@ -1035,6 +1407,10 @@ import (&apos;components/add-ai/addAI&apos;).then((module) =&gt; {
       <ul>
         
           <li>
+            <a href="/2019/01/25/form表单样式自定义/">form表单样式自定义</a>
+          </li>
+        
+          <li>
             <a href="/2019/01/23/箭头函数详记/">箭头函数详记</a>
           </li>
         
@@ -1048,10 +1424,6 @@ import (&apos;components/add-ai/addAI&apos;).then((module) =&gt; {
         
           <li>
             <a href="/2018/12/21/set-ssh/">set ssh</a>
-          </li>
-        
-          <li>
-            <a href="/2018/11/16/vue小记/">vue小记</a>
           </li>
         
       </ul>
