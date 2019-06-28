@@ -7,19 +7,19 @@
   
   <title>状态管理 Vuex | Hex笔记</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="#状态管理Vuex  安装vuex npm install vuex  在src目录下创建store/store.js文件，并初始化状态     import Vue from &amp;apos;vue&amp;apos;; import Vuex from &amp;apos;vuex&amp;apos;; Vue.use(Vuex);  const state = {     count: 10 };  const mut">
+  <meta name="description" content="状态管理Vuex 安装vuex  1npm install vuex">
 <meta name="keywords" content="vuex">
 <meta property="og:type" content="article">
 <meta property="og:title" content="状态管理 Vuex">
 <meta property="og:url" content="http://heweixia.com/2019/02/21/状态管理-Vuex/index.html">
 <meta property="og:site_name" content="Hex笔记">
-<meta property="og:description" content="#状态管理Vuex  安装vuex npm install vuex  在src目录下创建store/store.js文件，并初始化状态     import Vue from &amp;apos;vue&amp;apos;; import Vuex from &amp;apos;vuex&amp;apos;; Vue.use(Vuex);  const state = {     count: 10 };  const mut">
+<meta property="og:description" content="状态管理Vuex 安装vuex  1npm install vuex">
 <meta property="og:locale" content="zh_CN.utf8">
 <meta property="og:image" content="https://i.imgur.com/82Sj1EO.png">
-<meta property="og:updated_time" content="2019-02-21T09:00:09.610Z">
+<meta property="og:updated_time" content="2019-06-28T09:28:49.957Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="状态管理 Vuex">
-<meta name="twitter:description" content="#状态管理Vuex  安装vuex npm install vuex  在src目录下创建store/store.js文件，并初始化状态     import Vue from &amp;apos;vue&amp;apos;; import Vuex from &amp;apos;vuex&amp;apos;; Vue.use(Vuex);  const state = {     count: 10 };  const mut">
+<meta name="twitter:description" content="状态管理Vuex 安装vuex  1npm install vuex">
 <meta name="twitter:image" content="https://i.imgur.com/82Sj1EO.png">
   
     <link rel="alternate" href="/atom.xml" title="Hex笔记" type="application/atom+xml">
@@ -93,147 +93,32 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>#状态管理Vuex</p>
-<ol>
-<li><p>安装vuex</p>
-<pre><code>npm install vuex
-</code></pre></li>
-<li><p>在src目录下创建store/store.js文件，并初始化状态    </p>
-<pre><code>import Vue from &apos;vue&apos;;
-import Vuex from &apos;vuex&apos;;
-Vue.use(Vuex);
-
-const state = {
-    count: 10
-};
-
-const mutations = {
-    jia(state){
-        state.count++;
-    },
-    jian(state){
-        state.count--;
-    }
-}
-
-export default new Vuex.Store({
-    state,
-    mutations
-});
-</code></pre></li>
-<li><p>Vuex 通过 store 选项，提供了一种机制将状态从根组件“注入”到每一个子组件中（需调用 Vue.use(Vuex));</p>
-<pre><code>// (runtime-only or standalone) has been set in webpack.base.conf with an alias.
-import Vue from &apos;vue&apos;
-import App from &apos;./App&apos;
-import router from &apos;./router&apos;
-import store from &apos;./store/store&apos;//注入store组件
-
-Vue.config.productionTip = false
-/* eslint-disable no-new */
-new Vue({
-  el: &apos;#app&apos;,
-  router,
-  store,    
-  template: &apos;&lt;App/&gt;&apos;,
-  components: { App }
-})
-</code></pre></li>
-<li><p>在子组件中使用  </p>
-<pre><code>&lt;template&gt;
-  &lt;div class=&quot;hello&quot;&gt;
-    &lt;div class=&quot;content&quot;&gt;
-      &lt;p&gt;{{$store.state.count}} - {{count}}&lt;/p&gt;
-      &lt;button @click=&quot;$store.commit(&apos;jia&apos;)&quot;&gt;+&lt;/button&gt;
-      &lt;button @click=&quot;$store.commit(&apos;jian&apos;)&quot;&gt;-&lt;/button&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-&lt;/template&gt;
-
-&lt;script&gt;
-import { mapState } from &apos;vuex&apos;
-export default {
-  name: &apos;HelloWorld&apos;,
-  data () {
-    return {
-      msg: &apos;Welcome to Your Vue.js App&apos;,
-    }
-  },
-  computed:{
-    count(){
-      return this.$store.state.count + 10;
-    }
-  }
-}
-&lt;/script&gt;  
-</code></pre><p> 如图<br> <img src="https://i.imgur.com/82Sj1EO.png" alt="">  </p>
-</li>
+        <h2 id="状态管理Vuex"><a href="#状态管理Vuex" class="headerlink" title="状态管理Vuex"></a>状态管理Vuex</h2><ol>
+<li>安装vuex</li>
 </ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install vuex</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<ol start="2">
+<li>在src目录下创建store/store.js文件，并初始化状态    </li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">import Vue from &apos;vue&apos;;</span><br><span class="line">import Vuex from &apos;vuex&apos;;</span><br><span class="line">Vue.use(Vuex);</span><br><span class="line"></span><br><span class="line">const state = &#123;</span><br><span class="line">	count: 10</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">const mutations = &#123;</span><br><span class="line">	jia(state)&#123;</span><br><span class="line">		state.count++;</span><br><span class="line">	&#125;,</span><br><span class="line">	jian(state)&#123;</span><br><span class="line">		state.count--;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">export default new Vuex.Store(&#123;</span><br><span class="line">	state,</span><br><span class="line">	mutations</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>Vuex 通过 store 选项，提供了一种机制将状态从根组件“注入”到每一个子组件中（需调用 Vue.use(Vuex));</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">// (runtime-only or standalone) has been set in webpack.base.conf with an alias.</span><br><span class="line">import Vue from &apos;vue&apos;</span><br><span class="line">import App from &apos;./App&apos;</span><br><span class="line">import router from &apos;./router&apos;</span><br><span class="line">import store from &apos;./store/store&apos;//注入store组件</span><br><span class="line"></span><br><span class="line">Vue.config.productionTip = false</span><br><span class="line">/* eslint-disable no-new */</span><br><span class="line">new Vue(&#123;</span><br><span class="line">  el: &apos;#app&apos;,</span><br><span class="line">  router,</span><br><span class="line">  store,	</span><br><span class="line">  template: &apos;&lt;App/&gt;&apos;,</span><br><span class="line">  components: &#123; App &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li>在子组件中使用  </li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div class=&quot;hello&quot;&gt;</span><br><span class="line">    &lt;div class=&quot;content&quot;&gt;</span><br><span class="line">      &lt;p&gt;&#123;&#123;$store.state.count&#125;&#125; - &#123;&#123;count&#125;&#125;&lt;/p&gt;</span><br><span class="line">      &lt;button @click=&quot;$store.commit(&apos;jia&apos;)&quot;&gt;+&lt;/button&gt;</span><br><span class="line">      &lt;button @click=&quot;$store.commit(&apos;jian&apos;)&quot;&gt;-&lt;/button&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">import &#123; mapState &#125; from &apos;vuex&apos;</span><br><span class="line">export default &#123;</span><br><span class="line">  name: &apos;HelloWorld&apos;,</span><br><span class="line">  data () &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">      msg: &apos;Welcome to Your Vue.js App&apos;,</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  computed:&#123;</span><br><span class="line">    count()&#123;</span><br><span class="line">      return this.$store.state.count + 10;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<p>如图</p>
+<p><img src="https://i.imgur.com/82Sj1EO.png" alt="">  </p>
 <p><strong>注：</strong>更改Vuex中store的状态的（state）唯一方法是提交mutation；</p>
 <ol start="5">
 <li><p>mutation</p>
 <ul>
 <li>每个 mutation 都有一个字符串的 事件类型 (type) 和 一个 回调函数 (handler)，回调函数的第一个参数是state,第二个是字符串或着对象，为了多传几个参数一般都是对象：  </li>
-<li><pre><code>count mutations = {
-    fun1(state,obj){
-        ... //此处可以改变$store.state中的值
-    },
-    fun2(state,obj){
-        ...//此处可以改变$store.state中的值
-    }
-}
-</code></pre></li>
-<li><p>不能直接调用一个 mutation handler。这个选项更像是事件注册：“当触发一个类型为 increment 的 mutation 时，调用此函数。”要唤醒一个 mutation handler，你需要以相应的 type 调用 store.commit 方法：  </p>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line">		count mutations = &#123;</span><br><span class="line">			fun1(state,obj)&#123;</span><br><span class="line">				... //此处可以改变$store.state中的值</span><br><span class="line">			&#125;,</span><br><span class="line">			fun2(state,obj)&#123;</span><br><span class="line">				...//此处可以改变$store.state中的值</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">```		</span><br><span class="line"> * 不能直接调用一个 mutation handler。这个选项更像是事件注册：“当触发一个类型为 increment 的 mutation 时，调用此函数。”要唤醒一个 mutation handler，你需要以相应的 type 调用 store.commit 方法：  </span><br><span class="line"> *	</span><br><span class="line">		&lt;button @click=&quot;$store.commit(&apos;jia&apos;)&quot;&gt;+&lt;/button&gt;</span><br><span class="line">    		&lt;button @click=&quot;$store.commit(&apos;jian&apos;)&quot;&gt;-&lt;/button&gt;</span><br><span class="line">		</span><br><span class="line">		//可以向 store.commit 传入额外的参数，即 mutation 的 载荷（payload）</span><br><span class="line">		store.commit(&apos;fun1&apos;, obj)//obj 与mutation中定义mutations的obj参数一一对应  </span><br><span class="line">	</span><br><span class="line">		//提交 mutation 的另一种方式是直接使用包含 type 属性的对象：  </span><br><span class="line">		store.commit(&#123; type: &apos;increment&apos;,amount: 10&#125;)</span><br><span class="line"></span><br><span class="line"> 	**注：**mutation中的方法必须是同步函数，不可使用异步或回调；  </span><br><span class="line"></span><br><span class="line"> * 在组件中使用 this.$store.commit(&apos;xxx&apos;) 提交 mutation，或者使用 mapMutations 辅助函数将组件中的 methods 映射为 store.commit 调用（需要在根节点注入 store）  </span><br><span class="line"></span><br><span class="line">``` </span><br><span class="line"> 			&lt;template&gt;</span><br><span class="line">		  &lt;div class=&quot;hello&quot;&gt;</span><br><span class="line">		    &lt;div class=&quot;content&quot;&gt;</span><br><span class="line">		      &lt;p&gt;&#123;&#123;$store.state.count&#125;&#125; - &#123;&#123;count&#125;&#125;&lt;/p&gt;</span><br><span class="line">		      &lt;button @click=&quot;$store.commit(&apos;jia&apos;)&quot;&gt;+&lt;/button&gt;</span><br><span class="line">		      &lt;button @click=&quot;$store.commit(&apos;jian&apos;)&quot;&gt;-&lt;/button&gt;//这里的“jia”跟“jian”实现的效果都一样</span><br><span class="line">		      &lt;button @click=&quot;jia&quot;&gt;+&lt;/button&gt;</span><br><span class="line">		      &lt;button @click=&quot;jian&quot;&gt;-&lt;/button&gt;</span><br><span class="line">		    &lt;/div&gt;</span><br><span class="line">		  &lt;/div&gt;</span><br><span class="line">		&lt;/template&gt;</span><br><span class="line">		</span><br><span class="line">		&lt;script&gt;</span><br><span class="line">		import &#123; mapState &#125; from &apos;vuex&apos;</span><br><span class="line">		import &#123; mapMutations &#125; from &apos;vuex&apos;</span><br><span class="line">		export default &#123;</span><br><span class="line">		  name: &apos;HelloWorld&apos;,</span><br><span class="line">		  data () &#123;</span><br><span class="line">		    return &#123;</span><br><span class="line">		      msg: &apos;Welcome to Your Vue.js App&apos;,</span><br><span class="line">		    </span><br><span class="line">		    &#125;</span><br><span class="line">		  &#125;,</span><br><span class="line">		  computed:&#123;</span><br><span class="line">		    count()&#123;</span><br><span class="line">		      return this.$store.state.count + 10;</span><br><span class="line">		    &#125;</span><br><span class="line">		  &#125;,</span><br><span class="line">		  methods:&#123;</span><br><span class="line">		    ...mapMutations([//注意在mapMutations之前有三个点</span><br><span class="line">		      &quot;jia&quot;,</span><br><span class="line">		      &quot;jian&quot;</span><br><span class="line">		    ])</span><br><span class="line">		  &#125;,</span><br><span class="line">		  ...mapMutations(&#123;</span><br><span class="line">		      add: &apos;increment&apos; // 将 `this.add()` 映射为 `this.$store.commit(&apos;increment&apos;)`</span><br><span class="line">		  &#125;),</span><br><span class="line">		  ...mapMutations(&#123;// 将 `this.funobj()` 映射为 `this.$store.commit(&apos;fun1&apos;)`,并带有对象参数&#123;&#125;</span><br><span class="line">		      funobj:&#123;type:&apos;fun1&apos;,first:10,second:20&#125;</span><br><span class="line">		  &#125;)</span><br><span class="line">		&#125;</span><br><span class="line">		&lt;/script&gt;</span><br></pre></td></tr></table></figure>
 </li>
-<li>   <button @click="$store.commit('jia')">+</button><br>    <button @click="$store.commit('jian')">-</button>
-
-<p>   //可以向 store.commit 传入额外的参数，即 mutation 的 载荷（payload）<br>   store.commit(‘fun1’, obj)//obj 与mutation中定义mutations的obj参数一一对应  </p>
-<p>   //提交 mutation 的另一种方式是直接使用包含 type 属性的对象：<br>   store.commit({ type: ‘increment’,amount: 10})</p>
-<p><strong>注：</strong>mutation中的方法必须是同步函数，不可使用异步或回调；  </p>
-</li>
-<li><p>在组件中使用 this.$store.commit(‘xxx’) 提交 mutation，或者使用 mapMutations 辅助函数将组件中的 methods 映射为 store.commit 调用（需要在根节点注入 store）  </p>
-<pre><code>  &lt;template&gt;
-  &lt;div class=&quot;hello&quot;&gt;
-    &lt;div class=&quot;content&quot;&gt;
-      &lt;p&gt;{{$store.state.count}} - {{count}}&lt;/p&gt;
-      &lt;button @click=&quot;$store.commit(&apos;jia&apos;)&quot;&gt;+&lt;/button&gt;
-      &lt;button @click=&quot;$store.commit(&apos;jian&apos;)&quot;&gt;-&lt;/button&gt;//这里的“jia”跟“jian”实现的效果都一样
-      &lt;button @click=&quot;jia&quot;&gt;+&lt;/button&gt;
-      &lt;button @click=&quot;jian&quot;&gt;-&lt;/button&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-&lt;/template&gt;
-
-&lt;script&gt;
-import { mapState } from &apos;vuex&apos;
-import { mapMutations } from &apos;vuex&apos;
-export default {
-  name: &apos;HelloWorld&apos;,
-  data () {
-    return {
-      msg: &apos;Welcome to Your Vue.js App&apos;,
-
-    }
-  },
-  computed:{
-    count(){
-      return this.$store.state.count + 10;
-    }
-  },
-  methods:{
-    ...mapMutations([//注意在mapMutations之前有三个点
-      &quot;jia&quot;,
-      &quot;jian&quot;
-    ])
-  },
-  ...mapMutations({
-      add: &apos;increment&apos; // 将 `this.add()` 映射为 `this.$store.commit(&apos;increment&apos;)`
-  }),
-  ...mapMutations({// 将 `this.funobj()` 映射为 `this.$store.commit(&apos;fun1&apos;)`,并带有对象参数{}
-      funobj:{type:&apos;fun1&apos;,first:10,second:20}
-  })
-}
-&lt;/script&gt;
-</code></pre></li>
 </ul>
 </li>
 </ol>
@@ -244,18 +129,13 @@ export default {
 <li><p>最好提前在你的 store 中初始化好所有所需属性。</p>
 </li>
 <li><p>当需要在对象上添加新属性时，你应该使用  </p>
-<pre><code> Vue.set(obj, &apos;newProp&apos;, 123),
-
-或者以新对象替换老对象。例如，利用 stage-3 的对象展开运算符我们可以这样写：
-
- state.obj = { ...state.obj, newProp: 123 }
-</code></pre></li>
+</li>
 </ol>
-
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Vue.set(obj, &apos;newProp&apos;, 123),</span><br><span class="line">或者以新对象替换老对象。例如，利用 stage-3 的对象展开运算符我们可以这样写：</span><br><span class="line">state.obj = &#123; ...state.obj, newProp: 123 &#125;</span><br></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://heweixia.com/2019/02/21/状态管理-Vuex/" data-id="cjxfvu0oq000bqgvw1wr4at2m" class="article-share-link">Share</a>
+      <a data-url="http://heweixia.com/2019/02/21/状态管理-Vuex/" data-id="cjxfwa4t4000bs4vw5q3bw3kh" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vuex/">vuex</a></li></ul>
@@ -294,7 +174,7 @@ export default {
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/css3/">css3</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/es6/">es6</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/sublime/">sublime</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/vue/">vue</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/css3/">css3</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/js/">js</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/sublime/">sublime</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/svg/">svg</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/vue/">vue</a></li></ul>
     </div>
   </div>
 
@@ -304,7 +184,7 @@ export default {
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/form/">form</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sublime/">sublime</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vuex/">vuex</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/打包/">打包</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/箭头函数/">箭头函数</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6/">es6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/form/">form</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sublime/">sublime</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/svg/">svg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vuex/">vuex</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/动画/">动画</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/打包/">打包</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/箭头函数/">箭头函数</a></li></ul>
     </div>
   </div>
 
@@ -314,7 +194,7 @@ export default {
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/form/" style="font-size: 10px;">form</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/sublime/" style="font-size: 10px;">sublime</a> <a href="/tags/vuex/" style="font-size: 10px;">vuex</a> <a href="/tags/打包/" style="font-size: 10px;">打包</a> <a href="/tags/箭头函数/" style="font-size: 10px;">箭头函数</a>
+      <a href="/tags/es6/" style="font-size: 10px;">es6</a> <a href="/tags/form/" style="font-size: 10px;">form</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/sublime/" style="font-size: 10px;">sublime</a> <a href="/tags/svg/" style="font-size: 20px;">svg</a> <a href="/tags/vuex/" style="font-size: 10px;">vuex</a> <a href="/tags/动画/" style="font-size: 20px;">动画</a> <a href="/tags/打包/" style="font-size: 10px;">打包</a> <a href="/tags/箭头函数/" style="font-size: 10px;">箭头函数</a>
     </div>
   </div>
 

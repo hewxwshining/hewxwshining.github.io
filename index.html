@@ -97,7 +97,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://heweixia.com/2019/06/28/hexo学习/" data-id="cjxfvu0og0002qgvw7xylhy0t" class="article-share-link">Share</a>
+      <a data-url="http://heweixia.com/2019/06/28/hexo学习/" data-id="cjxfwa4ss0002s4vwg4lt2h2b" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
@@ -135,169 +135,19 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>#状态管理Vuex</p>
-<ol>
-<li><p>安装vuex</p>
-<pre><code>npm install vuex
-</code></pre></li>
-<li><p>在src目录下创建store/store.js文件，并初始化状态    </p>
-<pre><code>import Vue from &apos;vue&apos;;
-import Vuex from &apos;vuex&apos;;
-Vue.use(Vuex);
-
-const state = {
-    count: 10
-};
-
-const mutations = {
-    jia(state){
-        state.count++;
-    },
-    jian(state){
-        state.count--;
-    }
-}
-
-export default new Vuex.Store({
-    state,
-    mutations
-});
-</code></pre></li>
-<li><p>Vuex 通过 store 选项，提供了一种机制将状态从根组件“注入”到每一个子组件中（需调用 Vue.use(Vuex));</p>
-<pre><code>// (runtime-only or standalone) has been set in webpack.base.conf with an alias.
-import Vue from &apos;vue&apos;
-import App from &apos;./App&apos;
-import router from &apos;./router&apos;
-import store from &apos;./store/store&apos;//注入store组件
-
-Vue.config.productionTip = false
-/* eslint-disable no-new */
-new Vue({
-  el: &apos;#app&apos;,
-  router,
-  store,    
-  template: &apos;&lt;App/&gt;&apos;,
-  components: { App }
-})
-</code></pre></li>
-<li><p>在子组件中使用  </p>
-<pre><code>&lt;template&gt;
-  &lt;div class=&quot;hello&quot;&gt;
-    &lt;div class=&quot;content&quot;&gt;
-      &lt;p&gt;{{$store.state.count}} - {{count}}&lt;/p&gt;
-      &lt;button @click=&quot;$store.commit(&apos;jia&apos;)&quot;&gt;+&lt;/button&gt;
-      &lt;button @click=&quot;$store.commit(&apos;jian&apos;)&quot;&gt;-&lt;/button&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-&lt;/template&gt;
-
-&lt;script&gt;
-import { mapState } from &apos;vuex&apos;
-export default {
-  name: &apos;HelloWorld&apos;,
-  data () {
-    return {
-      msg: &apos;Welcome to Your Vue.js App&apos;,
-    }
-  },
-  computed:{
-    count(){
-      return this.$store.state.count + 10;
-    }
-  }
-}
-&lt;/script&gt;  
-</code></pre><p> 如图<br> <img src="https://i.imgur.com/82Sj1EO.png" alt="">  </p>
-</li>
+        <h2 id="状态管理Vuex"><a href="#状态管理Vuex" class="headerlink" title="状态管理Vuex"></a>状态管理Vuex</h2><ol>
+<li>安装vuex</li>
 </ol>
-<p><strong>注：</strong>更改Vuex中store的状态的（state）唯一方法是提交mutation；</p>
-<ol start="5">
-<li><p>mutation</p>
-<ul>
-<li>每个 mutation 都有一个字符串的 事件类型 (type) 和 一个 回调函数 (handler)，回调函数的第一个参数是state,第二个是字符串或着对象，为了多传几个参数一般都是对象：  </li>
-<li><pre><code>count mutations = {
-    fun1(state,obj){
-        ... //此处可以改变$store.state中的值
-    },
-    fun2(state,obj){
-        ...//此处可以改变$store.state中的值
-    }
-}
-</code></pre></li>
-<li><p>不能直接调用一个 mutation handler。这个选项更像是事件注册：“当触发一个类型为 increment 的 mutation 时，调用此函数。”要唤醒一个 mutation handler，你需要以相应的 type 调用 store.commit 方法：  </p>
-</li>
-<li>   <button @click="$store.commit('jia')">+</button><br>    <button @click="$store.commit('jian')">-</button>
-
-<p>   //可以向 store.commit 传入额外的参数，即 mutation 的 载荷（payload）<br>   store.commit(‘fun1’, obj)//obj 与mutation中定义mutations的obj参数一一对应  </p>
-<p>   //提交 mutation 的另一种方式是直接使用包含 type 属性的对象：<br>   store.commit({ type: ‘increment’,amount: 10})</p>
-<p><strong>注：</strong>mutation中的方法必须是同步函数，不可使用异步或回调；  </p>
-</li>
-<li><p>在组件中使用 this.$store.commit(‘xxx’) 提交 mutation，或者使用 mapMutations 辅助函数将组件中的 methods 映射为 store.commit 调用（需要在根节点注入 store）  </p>
-<pre><code>  &lt;template&gt;
-  &lt;div class=&quot;hello&quot;&gt;
-    &lt;div class=&quot;content&quot;&gt;
-      &lt;p&gt;{{$store.state.count}} - {{count}}&lt;/p&gt;
-      &lt;button @click=&quot;$store.commit(&apos;jia&apos;)&quot;&gt;+&lt;/button&gt;
-      &lt;button @click=&quot;$store.commit(&apos;jian&apos;)&quot;&gt;-&lt;/button&gt;//这里的“jia”跟“jian”实现的效果都一样
-      &lt;button @click=&quot;jia&quot;&gt;+&lt;/button&gt;
-      &lt;button @click=&quot;jian&quot;&gt;-&lt;/button&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-&lt;/template&gt;
-
-&lt;script&gt;
-import { mapState } from &apos;vuex&apos;
-import { mapMutations } from &apos;vuex&apos;
-export default {
-  name: &apos;HelloWorld&apos;,
-  data () {
-    return {
-      msg: &apos;Welcome to Your Vue.js App&apos;,
-
-    }
-  },
-  computed:{
-    count(){
-      return this.$store.state.count + 10;
-    }
-  },
-  methods:{
-    ...mapMutations([//注意在mapMutations之前有三个点
-      &quot;jia&quot;,
-      &quot;jian&quot;
-    ])
-  },
-  ...mapMutations({
-      add: &apos;increment&apos; // 将 `this.add()` 映射为 `this.$store.commit(&apos;increment&apos;)`
-  }),
-  ...mapMutations({// 将 `this.funobj()` 映射为 `this.$store.commit(&apos;fun1&apos;)`,并带有对象参数{}
-      funobj:{type:&apos;fun1&apos;,first:10,second:20}
-  })
-}
-&lt;/script&gt;
-</code></pre></li>
-</ul>
-</li>
-</ol>
-<p><strong>注：</strong>Mutation 需遵守 Vue 的响应规则</p>
-<ol>
-<li><p>既然 Vuex 的 store 中的状态是响应式的，那么当我们变更状态时，监视状态的 Vue 组件也会自动更新。这也意味着 Vuex 中的 mutation 也需要与使用 Vue 一样遵守一些注意事项：</p>
-</li>
-<li><p>最好提前在你的 store 中初始化好所有所需属性。</p>
-</li>
-<li><p>当需要在对象上添加新属性时，你应该使用  </p>
-<pre><code> Vue.set(obj, &apos;newProp&apos;, 123),
-
-或者以新对象替换老对象。例如，利用 stage-3 的对象展开运算符我们可以这样写：
-
- state.obj = { ...state.obj, newProp: 123 }
-</code></pre></li>
-</ol>
-
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install vuex</span><br></pre></td></tr></table></figure>
+        
+          <p class="article-more-link">
+            <a href="/2019/02/21/状态管理-Vuex/#more">Read More</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://heweixia.com/2019/02/21/状态管理-Vuex/" data-id="cjxfvu0oq000bqgvw1wr4at2m" class="article-share-link">Share</a>
+      <a data-url="http://heweixia.com/2019/02/21/状态管理-Vuex/" data-id="cjxfwa4t4000bs4vw5q3bw3kh" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vuex/">vuex</a></li></ul>
@@ -352,7 +202,7 @@ export default {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://heweixia.com/2019/02/21/解决-npm-run-build-卡住问题/" data-id="cjxfvu0ov000gqgvweyft24lz" class="article-share-link">Share</a>
+      <a data-url="http://heweixia.com/2019/02/21/解决-npm-run-build-卡住问题/" data-id="cjxfwa4tb000gs4vwnzxlidm2" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/打包/">打包</a></li></ul>
@@ -724,7 +574,7 @@ export default {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://heweixia.com/2019/01/25/form表单样式自定义/" data-id="cjxfvu0pb000uqgvw3vxmx73k" class="article-share-link">Share</a>
+      <a data-url="http://heweixia.com/2019/01/25/form表单样式自定义/" data-id="cjxfwa4u60014s4vwss3i8wqy" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/form/">form</a></li></ul>
@@ -743,7 +593,7 @@ export default {
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/es6/">es6</a>
+    <a class="article-category-link" href="/categories/js/">js</a>
   </div>
 
   </div>
@@ -764,159 +614,18 @@ export default {
       
         <p><strong>箭头函数表达式的语法比函数表达式更短，并且没有自己的<code>this</code>，<code>arguments</code>，<code>super</code>或<code>new.target</code>。这些函数表达式更适用于那些本来需要匿名函数的地方，并且它们不能用作构造函数。</strong></p>
 <p><font color="red">首先</font>：我们先考虑一下这个箭头函数没有自己的<code>this</code>，<code>arguments</code>，<code>super</code>或<code>new.target</code>是什么意思？带着问题去看下面的内容会更事半功倍。</p>
-<h4 id="一、语法"><a href="#一、语法" class="headerlink" title="一、语法"></a>一、语法</h4><h5 id="1-基础语法"><a href="#1-基础语法" class="headerlink" title="1.基础语法"></a>1.基础语法</h5><pre><code>(参数1, 参数2, …, 参数N) =&gt; { 函数声明 }
-
-//相当于：(参数1, 参数2, …, 参数N) =&gt;{ return 表达式; }
-(参数1, 参数2, …, 参数N) =&gt; 表达式（单一）
-
-// 当只有一个参数时，圆括号是可选的：
-(单一参数) =&gt; {函数声明}
-单一参数 =&gt; {函数声明}
-
-// 没有参数的函数应该写成一对圆括号。
-() =&gt; {函数声明}
-</code></pre><h5 id="2-高级语法"><a href="#2-高级语法" class="headerlink" title="2.高级语法"></a>2.高级语法</h5><pre><code>//加括号的函数体返回对象字面表达式：
-参数=&gt; ({foo: bar})
-
-//支持剩余参数和默认参数
-(参数1, 参数2, ...rest) =&gt; {函数声明}
-(参数1 = 默认值1,参数2, …, 参数N = 默认值N) =&gt; {函数声明}
-
-//同样支持参数列表解构
-let f = ([a, b] = [1, 2], {x: c} = {x: a + b}) =&gt; a + b + c;
-f();  // 6
-</code></pre><h4 id="二、没有自己的this，不绑定this"><a href="#二、没有自己的this，不绑定this" class="headerlink" title="二、没有自己的this，不绑定this"></a>二、没有自己的<code>this</code>，不绑定<code>this</code></h4><p>我们先看一下下面的代码，</p>
-<pre><code>const Person = {
-    &apos;name&apos;: &apos;little bear&apos;,
-    &apos;age&apos;: 18,
-    &apos;sayHello&apos;: function() {
-        setTimeout(function() {
-            console.log(&apos;我叫&apos; + this.name + &apos;我今年&apos; + this.age + &apos;岁!&apos;)
-        }, 1000)
-    }
-}
-console.log(Person.sayHello()) //我叫我今年undefined岁!
-</code></pre><p>打印的结果是<code>undefined</code>，知道是什么原因吗？当然，<code>setTimeout</code>方法里面的<code>this</code>指向的是<code>window</code>，所以是<code>undefined</code>，sayhello方法中的<code>this</code>是指向Person的，如果按照下面的方式将sayHello中的<code>this</code>赋值给封闭变量self,就可以正确打印结果了</p>
-<pre><code>const Person1 = {
-    &apos;name&apos;: &apos;little bear&apos;,
-    &apos;age&apos;: 18,
-    &apos;sayHello&apos;: function() {
-        var self = this;
-        setTimeout(function() {
-            console.log(&apos;我叫&apos; + self.name + &apos;我今年&apos; + self.age + &apos;岁!&apos;)
-        }, 1000)
-    }
-}
-console.log(Person1.sayHello());//我叫little bear我今年18岁!
-</code></pre><p>我们再看一下下面的代码，想想打印的结果是什么呢？</p>
-<pre><code>const Person3 = {
-    &apos;name&apos;: &apos;little bear&apos;,
-    &apos;age&apos;: 18,
-    sayHello() {
-        setTimeout(() =&gt; {
-            console.log(&apos;我叫&apos; + this.name + &apos;我今年&apos; + this.age + &apos;岁!&apos;)
-        }, 1000)
-    }
-}
-console.log(Person3.sayHello());//我叫little bear我今年18岁!
-</code></pre><p>这个结果是否如你所料呢？</p>
-<p><strong>箭头函数不会创建自己的<code>this</code>,它只会从自己的作用域链的上一层继承<code>this</code>。因此，在下面的代码中，传递给setInterval的函数内的this与封闭函数中的this值相同。</strong></p>
-<p>我们再看看下面的代码就应该好理解了  </p>
-<pre><code> const Person5 = {
-    &apos;name&apos;: &apos;little bear&apos;,
-    &apos;age&apos;: 18,
-    sayHello: () =&gt; {
-        setTimeout(() =&gt; {
-            console.log(&apos;我叫&apos; + this.name + &apos;我今年&apos; + this.age + &apos;岁!&apos;)
-        }, 1000)
-    }
-}
-Person5.sayHello();//我叫我今年undefined岁!
-</code></pre><p>封闭函数的<code>this</code>指向的是外部对象<code>window</code>，<code>setTimeout</code>继承上一层<code>this</code>,所以也是指向的<code>window</code>；</p>
-<p><strong>通过 call 或 apply 调用</strong></p>
-<p>首先我们回顾一下 <code>call</code> 跟 <code>apply</code> </p>
-<ol>
-<li><p>他们各自的定义：</p>
-<ul>
-<li>apply：调用一个对象的一个方法，用另一个对象替换当前对象。例如：B.apply(A, arguments);即A对象应用B对象的方法。</li>
-<li>call：调用一个对象的一个方法，用另一个对象替换当前对象。例如：B.call(A, args1,args2);即A对象调用B对象的方法。 </li>
-</ul>
-</li>
-<li><p>它们的共同之处：  </p>
-<p> 都“可以用来代替另一个对象调用一个方法，将一个函数的对象上下文从初始的上下文改变为由thisObj指定的新对象”。</p>
-</li>
-<li><p>它们的不同之处：</p>
-<ul>
-<li>apply：最多只能有两个参数——新this对象和一个数组argArray。如果给该方法传递多个参数，则把参数都写进这个数组里面，当然，即使只有一个参数，也要写进数组里。如果argArray不是一个有效的数组或arguments对象，那么将导致一个TypeError。如果没有提供argArray和thisObj任何一个参数，那么Global对象将被用作thisObj，并且无法被传递任何参数。</li>
-<li>call：它可以接受多个参数，第一个参数与apply一样，后面则是一串参数列表。这个方法主要用在js对象各方法相互调用的时候，使当前this实例指针保持一致，或者在特殊情况下需要改变this指针。如果没有提供thisObj参数，那么 Global 对象被用作thisObj。</li>
-</ul>
-</li>
-</ol>
-<p>我们先来看一下下面的代码，思考一下打印的结果，</p>
-<pre><code>var adder = {
-  base : 1,
-
-  add : function(a) {
-    var f = v =&gt; v + this.base;
-    return f(a);
-  },
-
-  addThruCall: function(a) {
-    var f = v =&gt; v + this.base;
-    var b = {
-      base : 2
-    };
-
-    return f.call(b, a);
-  }
-};
-
-console.log(adder.add(1));         // 输出 2
-console.log(adder.addThruCall(1)); // 仍然输出 2（而不是3 ——译者注）
-</code></pre><p>结果：</p>
-<p><strong>由于 箭头函数没有自己的this指针，通过 call() 或 apply() 方法调用一个函数时，只能传递参数（不能绑定this），他们的第一个参数会被忽略。</strong></p>
-<h4 id="三、不绑定arguments"><a href="#三、不绑定arguments" class="headerlink" title="三、不绑定arguments"></a>三、不绑定arguments</h4><p>我们都知道函数内部，<code>argument</code>是一个作为函数输入的值-原始数据或对象</p>
-<pre><code> var arguments = [5, 6, 7];
-
-function person1(a, b, c) {
-    console.log(arguments);
-}
-person1(1, 2);//arguments[1,2]
-
-var arr1 = () =&gt; { return arguments; }
-console.log(arr1());//[5,6,7]
-
-var arr2 = (a) =&gt; { return arguments; }
-console.log(arr2(1));//[5,6,7]
-</code></pre><p>从上就可以看出，一般的函数是绑定了<code>Arguments</code> 对象，而箭头函数没有绑定</p>
-<p>看下面的代码箭头函数中的<code>arguments</code>只是引用了封闭作用域内的<code>arguments</code></p>
-<pre><code>var arguments = [1, 2, 3];
-var arr = () =&gt; arguments[0];
-
-arr(); // 1
-
-function foo(n) {
-  var f = () =&gt; arguments[0] + n; // 隐式绑定 foo 函数的 arguments 对象. arguments[0] 是 n
-  return f();
-}
-
-foo(1); // 2
-</code></pre><h4 id="四、使用-new-操作符"><a href="#四、使用-new-操作符" class="headerlink" title="四、使用 new 操作符"></a>四、使用 new 操作符</h4><p>箭头函数不能用作构造器，和 new一起用会抛出错误。</p>
-<pre><code>var Foo = () =&gt; {};
-var foo = new Foo(); // TypeError: Foo is not a constructor  
-</code></pre><h4 id="五、使用prototype属性"><a href="#五、使用prototype属性" class="headerlink" title="五、使用prototype属性"></a>五、使用prototype属性</h4><p>箭头函数没有prototype属性。</p>
-<pre><code>var Foo = () =&gt; {};
-console.log(Foo.prototype); // undefined
-</code></pre><h4 id="六、使用-yield-关键字"><a href="#六、使用-yield-关键字" class="headerlink" title="六、使用 yield 关键字"></a>六、使用 yield 关键字</h4><p><code>yield</code>关键字通常不能在箭头函数中使用（除非是嵌套在允许使用的函数内）。因此，箭头函数不能用作生成器。</p>
-<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Functions/Arrow_functions" target="_blank" rel="noopener">点击可以查看更多详情</a></p>
-
+        
+          <p class="article-more-link">
+            <a href="/2019/01/23/箭头函数详记/#more">Read More</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://heweixia.com/2019/01/23/箭头函数详记/" data-id="cjxfvu0ot000cqgvwsw8fbe8a" class="article-share-link">Share</a>
+      <a data-url="http://heweixia.com/2019/01/23/箭头函数详记/" data-id="cjxfwa4t8000cs4vwtluaccdy" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/箭头函数/">箭头函数</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/箭头函数/">箭头函数</a></li></ul>
 
     </footer>
   </div>
@@ -953,44 +662,15 @@ console.log(Foo.prototype); // undefined
       
         <p>sublimetext是前端的一个神器，以其精简和可diy而让广大fans疯狂。</p>
 <p>在win10系统下安装sublime Text ,每次都会折腾一番，总会遇到这或那的问题，记录一下流程，跟遇到的问题以及解决的方法。</p>
-<h5 id="一、安装sublime"><a href="#一、安装sublime" class="headerlink" title="一、安装sublime"></a>一、安装sublime</h5><p>在<a href="http://www.sublimetext.com/3" title="官网" target="_blank" rel="noopener">官网</a>上下载win10下的sublime版本，直接安装，这没什么好说的。</p>
-<h5 id="二、安装插件"><a href="#二、安装插件" class="headerlink" title="二、安装插件"></a>二、安装插件</h5><p>Sublime 有很多插件，这些插件为我们写代码提供了非常强大的功能，这些插件需要单独安装。<br>而安装这些插件最方便的方法就是通过Package Control的插件，这其实就是一个插件管理器，帮助我们从Sublime中安装，升级和移除插件，这样对于我们管理插件来说是非常方便的，安装好它之后在通过它来安装其他插件。</p>
-<p>这里有两种方式安装package Control</p>
-<ul>
-<li>Ctrl+Shift+p -&gt; install package control -&gt;回车</li>
-<li>在菜单栏tools -&gt; install package control</li>
-</ul>
-<p>安装成功的情况应该会有这样的提示：  </p>
-<p><img src="https://i.imgur.com/O2HXr2I.png" alt="">  </p>
-<p>但是一般来说总会失败：</p>
-<p><img src="https://i.imgur.com/BzStBNu.png" alt=""></p>
-<p>如果失败了我们就要直接去下载package control</p>
-<p>package Control 安装源码地址：<a href="https://packagecontrol.io/installation" title="https://packagecontrol.io/installation" target="_blank" rel="noopener">https://packagecontrol.io/installation</a></p>
-<p>下载后的文件名称为：Package Control.sublime-package，将其解压到Package Control文件夹(注意文件夹名称首字母必须大写)，然后将文件夹拷贝到C:\Users\Administrator\AppData\Roaming\Sublime Text 3\Packages (即 Preferences –&gt; Browse Packages打开的路径)</p>
-<h5 id="三、常用插件"><a href="#三、常用插件" class="headerlink" title="三、常用插件"></a>三、常用插件</h5><h6 id="1-emmet"><a href="#1-emmet" class="headerlink" title="1.emmet"></a>1.emmet</h6><p>这个没有什么好说的，类似jQuery的语法，编码蹭蹭往上提。不过要求PyV8环境（安装完后你会看到有一个文件夹），最好还是选择在线装吧。</p>
-<p>PyV8 下载地址：<a href="https://github.com/emmetio/pyv8-binaries" target="_blank" rel="noopener">https://github.com/emmetio/pyv8-binaries</a>，将下载的文件解压到<br>PyV8文件夹（文件夹名唯一不可更改），然后将文件夹拷贝到C:\Users\Administrator\AppData\Roaming\Sublime Text 3\Installed Packages中，（即 preferences –&gt; Browse Package打开的路径的上一层路径下的Installed Packges中）</p>
-<h6 id="2-侧边栏增强插件SideBarEnhancements"><a href="#2-侧边栏增强插件SideBarEnhancements" class="headerlink" title="2. 侧边栏增强插件SideBarEnhancements"></a>2. 侧边栏增强插件SideBarEnhancements</h6><h6 id="3-控制台呼出插件Terminal"><a href="#3-控制台呼出插件Terminal" class="headerlink" title="3. 控制台呼出插件Terminal"></a>3. 控制台呼出插件Terminal</h6><pre><code>Tips:快捷键 ctrl+shift+T呼出当前文件路径的控制台
-</code></pre><h6 id="4-代码提示插件SublimeCodeIntel"><a href="#4-代码提示插件SublimeCodeIntel" class="headerlink" title="4. 代码提示插件SublimeCodeIntel"></a>4. 代码提示插件SublimeCodeIntel</h6><h6 id="5-代码排版插件Sublime-HTMLPrettify"><a href="#5-代码排版插件Sublime-HTMLPrettify" class="headerlink" title="5. 代码排版插件Sublime-HTMLPrettify"></a>5. 代码排版插件Sublime-HTMLPrettify</h6><pre><code>Tips:安装完快捷键ctrl+shift+h 一键格式化代码
-</code></pre><h6 id="6-CSS3前缀补充插件Autoprefixer"><a href="#6-CSS3前缀补充插件Autoprefixer" class="headerlink" title="6. CSS3前缀补充插件Autoprefixer"></a>6. CSS3前缀补充插件Autoprefixer</h6><pre><code>Tips:使用方法：在输入CSS3属性后（冒号前）按Tab键
-</code></pre><h6 id="7-一键浏览文件"><a href="#7-一键浏览文件" class="headerlink" title="7. 一键浏览文件"></a>7. 一键浏览文件</h6><p>Preferences-&gt;Key Bindings - User打开用户快捷键设置，如下设置</p>
-<pre><code>[
-    {
-        &quot;keys&quot;:[&quot;f12&quot;],//快捷键
-        &quot;command&quot;: &quot;side_bar_files_open_with&quot;,
-        &quot;args&quot;: {
-            &quot;paths&quot;: [],
-            &quot;application&quot;: &quot;C:\\Users\\v_wxiahe\\AppData\\Local\\Google\\Chrome\\Application\\chrome.exe&quot;,//浏览器地址
-            &quot;extensions&quot;: &quot;.*&quot;
-        }
-    }
-]
-
-Tips:查了下默认的快捷键，SublimeText3中f1-f12中只有f11被默认为全屏命令，其他的没设置。也就是说，你可以装十个八个浏览器一字排开按过去测试。
-</code></pre>
+        
+          <p class="article-more-link">
+            <a href="/2019/01/16/Sublime-Text-3安装与常用/#more">Read More</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://heweixia.com/2019/01/16/Sublime-Text-3安装与常用/" data-id="cjxfvu0oe0001qgvwegg12ji3" class="article-share-link">Share</a>
+      <a data-url="http://heweixia.com/2019/01/16/Sublime-Text-3安装与常用/" data-id="cjxfwa4sp0001s4vwpg0l7niy" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sublime/">sublime</a></li></ul>
@@ -1029,76 +709,15 @@ Tips:查了下默认的快捷键，SublimeText3中f1-f12中只有f11被默认为
 </blockquote>
 <p>在web中哪些元素需要视觉聚焦呢？一个是HTML5 <code>&lt;video&gt;</code>视频元素，还有就是HTMl5.2 <code>&lt;dialog&gt;</code>元素，以及处于全屏状态下的普通元素。</p>
 <p>下面分别看下::backdrop伪元素在上述这些HTML元素和场景中的表现吧。</p>
-<h3 id="二、-video元素中的-backdrop"><a href="#二、-video元素中的-backdrop" class="headerlink" title="二、 video元素中的::backdrop"></a>二、 video元素中的::backdrop</h3><p>video元素中的::backdrop伪元素可以控制全屏时候视频后面层的样式，默认是纯黑色。我们可以通过设置background相关属性，把全屏播放的视频的幕布背景改成设计师眼中的透明色。</p>
-<p>CSS代码：</p>
-<pre><code>/* 给全屏时候视频背景加个透明 */
-video::backdrop {
-    background-color: #fff;
-    background-image: linear-gradient(45deg, #eee 25%, transparent 25%, transparent 75%, #eee 75%, #eee), linear-gradient(45deg, #eee 25%, transparent 25%, transparent 75%, #eee 75%, #eee);
-    background-size: 16px 16px;
-    background-position: 0 0, 8px 8px;
-}
-</code></pre><p>如果想要视频的全屏背景真·用户视觉不可见，下面3种声明都是可以的。</p>
-<pre><code>video::backdrop { opacity: 0; }
-
-video::backdrop { visibility: hidden; }
-
-video::backdrop { display: none; }
-</code></pre><h3 id="三、-dialog元素中的-backdrop"><a href="#三、-dialog元素中的-backdrop" class="headerlink" title="三、 dialog元素中的::backdrop"></a>三、 dialog元素中的::backdrop</h3><p>当我们使用dialog元素内置的showModal()显示带背景色的弹框时候，默认色黑色半透明，在我现在使用的Chrome浏览器下是rgba(0, 0, 0, 0.1);。</p>
-<p>CSS代码：</p>
-<pre><code> dialog::backdrop {
-    background-color: #fff;
-    background-image: linear-gradient(45deg, #eee 25%, transparent 25%, transparent 75%, #eee 75%, #eee), linear-gradient(45deg, #eee 25%, transparent 25%, transparent 75%, #eee 75%, #eee);
-    background-size: 16px 16px;
-    background-position: 0 0, 8px 8px;
-}
-</code></pre><p>html代码：</p>
-<pre><code>&lt;body&gt;
-    &lt;dialog id=&quot;dialog&quot;&gt;
-        this is dialog
-        &lt;p&gt;&lt;input type=&quot;button&quot; id=&quot;buttonClose&quot; value=&quot;出现吧，弹框&quot;&gt;&lt;/p&gt;
-    &lt;/dialog&gt;
-    &lt;p&gt;&lt;input type=&quot;button&quot; id=&quot;buttonShow&quot; value=&quot;出现吧，弹框&quot;&gt;&lt;/p&gt;
-    &lt;script type=&quot;text/javascript&quot;&gt;
-    document.getElementById(&quot;buttonShow&quot;).addEventListener(&apos;click&apos;, function() {
-        document.getElementById(&quot;dialog&quot;).showModal();
-    })
-    document.getElementById(&quot;buttonClose&quot;).addEventListener(&apos;click&apos;, function() {
-        document.getElementById(&quot;dialog&quot;).close();
-    })
-    &lt;/script&gt;
-&lt;/body&gt;
-</code></pre><font color="red"><strong>::backdrop</strong>伪元素既不继承也不继承任何其他元素。任何CSS都可以应用，没有限制。</font>
-
-<h3 id="四、-fullscreen-API与-backdrop"><a href="#四、-fullscreen-API与-backdrop" class="headerlink" title="四、 fullscreen API与::backdrop"></a>四、 fullscreen API与::backdrop</h3><p>当借助HTML5 fullscreen API让网页中的某个普通元素全屏的时候，::backdrop伪元素也是可以控制背后的背景的。</p>
-<p>例如，我们让一个<img>元素全屏，则可以使用下面的CSS让全屏后的图片backdrop背景变成“透明”：</p>
-<p>CSS代码：</p>
-<pre><code>/* 全屏图片的背景 */
-img::backdrop {
-    background-color: #fff;
-    background-image: linear-gradient(45deg, #eee 25%, transparent 25%, transparent 75%, #eee 75%, #eee), linear-gradient(45deg, #eee 25%, transparent 25%, transparent 75%, #eee 75%, #eee);
-    background-size: 16px 16px;
-    background-position: 0 0, 8px 8px;
-}
-</code></pre><p>html代码：</p>
-<pre><code>&lt;body&gt;
-    &lt;img id=&quot;image&quot; src=&quot;./mm.jpg&quot;&gt;
-    &lt;script type=&quot;text/javascript&quot;&gt;
-        document.getElementById(&quot;image&quot;).addEventListener(&apos;click&apos;, function () {
-            var doc = document;
-            if (doc.fullscreen) {
-                doc.cancelFullScreen();
-            } else {
-                this.requestFullScreen();    
-            }
-        });
-    &lt;/script&gt;
-&lt;/body&gt;
-</code></pre><font color="red"><strong>::backdrop</strong>对背景的控制要比:-moz-full-screen{}或:-webkit-full-screen{}等伪类要更强。</font>
+        
+          <p class="article-more-link">
+            <a href="/2018/12/25/CSS-backdrop伪元素的作用/#more">Read More</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://heweixia.com/2018/12/25/CSS-backdrop伪元素的作用/" data-id="cjxfvu0o80000qgvwp3dzu38y" class="article-share-link">Share</a>
+      <a data-url="http://heweixia.com/2018/12/25/CSS-backdrop伪元素的作用/" data-id="cjxfwa4sj0000s4vwox15v786" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1131,36 +750,15 @@ img::backdrop {
     <div class="article-entry" itemprop="articleBody">
       
         <p>SSH Key 是一种方法来确定受信任的计算机，从而实现免密码登录。<br>Git是分布式的代码管理工具，远程的代码管理是基于SSH的，所以要使用远程的Git则需要SSH的配置。<br>下面的步骤将完成 生成<strong>SSH密钥</strong>并 <strong>添加公共密钥到GitHub上的帐户</strong>  </p>
-<p><strong>1. 配置ssh格式的远程仓库地址</strong></p>
-<pre><code>git remote add 远程仓库名 远程仓库地址
-</code></pre><p><strong>2. 创建ssh key</strong></p>
-<pre><code>ssh-keygen -t rsa -C &quot;your_email@example.com&quot;
-</code></pre><p>一直回车，完成后，在用户主目录里找到.ssh目录，里面有id_rsa和id_rsa.pub两个文件，id_rsa是秘钥，id_rsa.pub是公钥；</p>
-<p><strong>3. 将SSH私钥添加到 ssh-agent</strong>  </p>
-<p>配置 ssh-agent 程序使用 SSH key</p>
-<p>1）在后台启动 ssh-agent</p>
-<pre><code>eval $(ssh-agent -s)
-</code></pre><p>2）将SSH私钥添加到 ssh-agent</p>
-<pre><code>ssh-add /c/Users/chenjs/.ssh/id_rsa
-</code></pre><p><img src="https://i.imgur.com/CioSxin.png" alt="https://i.imgur.com/CioSxin.png"></p>
-<p><strong>4. 将SSH公钥添加到GitHub账户</strong>  </p>
-<p>1）先复制SSH公钥的完整内容（/c/Users/chenjs/.ssh/id_rsa.pub）</p>
-<pre><code>clip &lt; /c/Users/chenjs/.ssh/id_rsa.pub
-</code></pre><p>2）进入GitHub的设置页面（登录GitHub，在右上角）</p>
-<pre><code>Setting-&gt;SSH Keys -&gt;add ssh key
-</code></pre><p><strong>5. 测试连接</strong>  </p>
-<p>1）打开 Git Bash 输入  </p>
-<pre><code>ssh -T git@github.com
-</code></pre><p>将会看到如下提示：</p>
-<p><img src="https://i.imgur.com/D1YPnBh.png" alt="https://i.imgur.com/D1YPnBh.png">  </p>
-<p>输入yes后回车</p>
-<p><img src="https://i.imgur.com/XA06Xu2.png" alt="https://i.imgur.com/XA06Xu2.png"></p>
-<p>如果提示中的用户名是你的，说明SSH key已经配置成功。<br>如果提示的是“ access denied”， you can read these instructions for diagnosing the issue.</p>
-
+        
+          <p class="article-more-link">
+            <a href="/2018/12/21/set-ssh/#more">Read More</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://heweixia.com/2018/12/21/set-ssh/" data-id="cjxfvu0ok0005qgvwjt2ddeim" class="article-share-link">Share</a>
+      <a data-url="http://heweixia.com/2018/12/21/set-ssh/" data-id="cjxfwa4sx0005s4vw8enq81tx" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1176,6 +774,10 @@ img::backdrop {
   <time datetime="2018-11-16T09:20:04.000Z" itemprop="datePublished">2018-11-16</time>
 </a>
     
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/vue/">vue</a>
+  </div>
+
   </div>
   <div class="article-inner">
     
@@ -1218,89 +820,16 @@ img::backdrop {
 <li>main.js</li>
 </ol>
 </li>
-<li>static</li>
-</ol>
-<h3 id="2-添加依赖"><a href="#2-添加依赖" class="headerlink" title="2. 添加依赖"></a>2. 添加依赖</h3><ol>
-<li><p>babel-runtime  </p>
-<pre><code>babel-runtime 的作用也是模拟 ES2015 环境
-</code></pre></li>
-<li><p>fastclick  </p>
-<pre><code>import fastclick from &apos;fastclick&apos;
-fastclick.attach(document.body)//去掉移动端点击事件延迟3秒的等待
-</code></pre></li>
-<li><p>babel-polyfill 的作用也是模拟 ES2015 环境</p>
-</li>
-</ol>
-<h3 id="3-拼接url带参数"><a href="#3-拼接url带参数" class="headerlink" title="3. 拼接url带参数"></a>3. 拼接url带参数</h3><pre><code>function param(data){
-    let url = &apos;&apos;;
-    for(var k in data){
-        let value = data[k]!== undefined ? data[k]:&apos;&apos;;
-        url += &apos;&amp;${k}=${encodeURIComponent(value)}&apos;;
-    }
-    return url? url.substring(1):&apos;&apos;;
-}
-function getUrl(url,data){
-    url += (url.indexOf(&apos;?&apos;)&lt;0?&apos;?&apos;:&apos;&amp;&apos;)+param(data);
-}
-</code></pre><h3 id="4-判断某个元素是否含有该class"><a href="#4-判断某个元素是否含有该class" class="headerlink" title="4. 判断某个元素是否含有该class"></a>4. 判断某个元素是否含有该class</h3><pre><code>function hasClass(el,className){
-    let reg = new RegExp(&apos;(^|\\s)&apos;+className+&apos;(\\s|$)&apos;);
-    return reg.test(el.className);
-}
-//给元素添加class
-function addClass(el,className){
-    if(hasClass(el,className)){
-        return false;
-    };
-    let newClass = el.className.split(&apos; &apos;);
-    newClass.push(className);
-    el.className = newClass.join(&apos; &apos;);
-}
-</code></pre><h3 id="5-Vue中释放内存"><a href="#5-Vue中释放内存" class="headerlink" title="5. Vue中释放内存"></a>5. Vue中释放内存</h3><pre><code>destroyed(){
-    clearTimeout();
-}
-</code></pre><h3 id="6-数据缓存"><a href="#6-数据缓存" class="headerlink" title="6. 数据缓存"></a>6. 数据缓存</h3><pre><code>&lt;keep-alive&gt;
-    &lt;router-view&gt;&lt;/router-view&gt;
-&lt;/keep-alive&gt;
-</code></pre><h3 id="7-图片懒加载"><a href="#7-图片懒加载" class="headerlink" title="7. 图片懒加载"></a>7. 图片懒加载</h3><p>lazyload<br>    npm install vue-lazyload –save</p>
-<pre><code>//main.js
-import VueLazyload from &apos;vue-lazyload&apos;
-Vue.use(VueLazyload, {
-      error: &apos;static/img/logo.png&apos;,
-      loading: &apos;static/img/logo.png&apos;,
-})
-
-//index.vue
-&lt;img v-lazy=&quot;&apos;static/img/AI.png&apos;&quot;&gt;
-</code></pre><p><strong><em>注</em></strong>：此处的图片应该都放在src同级目录static文件夹下，要不然获取图片地址出错</p>
-<h3 id="8-路由组件异步加载-路由懒加载"><a href="#8-路由组件异步加载-路由懒加载" class="headerlink" title="8. 路由组件异步加载/路由懒加载"></a>8. 路由组件异步加载/路由懒加载</h3><pre><code>const Recommend = (resolve) =&gt; {
-  import(&apos;components/recommend/recommend&apos;).then((module) =&gt; {
-    resolve(module)
-  })
-}，
-//例如
-const addAI = (resolve) =&gt; {
-import (&apos;components/add-ai/addAI&apos;).then((module) =&gt; {
-   resolve(module)
-  })
-}
-</code></pre><p>###9. js实现动画</p>
-<h3 id="编译打包"><a href="#编译打包" class="headerlink" title="编译打包"></a>编译打包</h3><h3 id="移动端开发调试"><a href="#移动端开发调试" class="headerlink" title="移动端开发调试"></a>移动端开发调试</h3><ol>
-<li><p><a href="https://github.com/Tencent/vConsole" target="_blank" rel="noopener">使用vconsole</a>  </p>
-<pre><code>import Vconsole from &apos;vconsole&apos;;
-</code></pre></li>
-</ol>
-<h3 id="promise的数组顺序执行"><a href="#promise的数组顺序执行" class="headerlink" title="promise的数组顺序执行"></a>promise的数组顺序执行</h3><pre><code>function reduce(arr){
-    var sequence = Promise.resolve();
-    arr.forEach(function(item){
-        sequence = sequence.then(item)
-    });
-    return sequence;
-}
-</code></pre>
+<li>static</li></ol>
+        
+          <p class="article-more-link">
+            <a href="/2018/11/16/vue小记/#more">Read More</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://heweixia.com/2018/11/16/vue小记/" data-id="cjxfvu0on0007qgvwxyqe0ncr" class="article-share-link">Share</a>
+      <a data-url="http://heweixia.com/2018/11/16/vue小记/" data-id="cjxfwa4t00007s4vwfgixjos6" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1316,6 +845,10 @@ import (&apos;components/add-ai/addAI&apos;).then((module) =&gt; {
   <time datetime="2018-11-09T09:48:54.000Z" itemprop="datePublished">2018-11-09</time>
 </a>
     
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/svg/">svg</a>
+  </div>
+
   </div>
   <div class="article-inner">
     
@@ -1333,62 +866,19 @@ import (&apos;components/add-ai/addAI&apos;).then((module) =&gt; {
     <div class="article-entry" itemprop="articleBody">
       
         <h3 id="SVG动画"><a href="#SVG动画" class="headerlink" title="SVG动画"></a>SVG动画</h3><p>实现动画的方式有很多种，在这里主要是使用CSS3动画三剑客来实现（animation、transform、transition），<br>在说SVG前先介绍一下所以的CSS3动画三剑客。</p>
-<h4 id="1-animation"><a href="#1-animation" class="headerlink" title="1.animation"></a>1.animation</h4><p>animation是如下几个属性的缩写，可以将<strong>动画</strong>与<strong>元素</strong>绑定，与keyframe共同使用。</p>
-<p><strong>语法</strong></p>
-<pre><code>animation: name duration timing-function delay iteration-count direction fill-mode play-state;
-</code></pre><ul>
-<li><strong>animation-name</strong>：规定需要绑定到选择器的 keyframe 名称；</li>
-<li><strong>animation-duration : value</strong>：规定完成动画所花费的时间，以秒或毫秒计；</li>
-<li><strong>animation-timing-funtion ： value(linear | ease | ease-in | ease-out | ease-in-out | timing-funtion</strong>：规定动画的速度曲线；</li>
-<li><strong>animation-delay : value</strong>：    规定在动画开始之前的延迟；</li>
-<li><strong>animation-iteration-count : value | infinite</strong>：规定动画应该播放的次数；</li>
-<li><strong>animation-direction : normal | reverse | alternate | alternate-reverse</strong>：规定是否应该轮流反向播放动画；</li>
-<li><strong>animation-fill-mode ： none | forwards | backwards | both</strong>:设置动画在执行之前和之后如何将样式应用于其目标;</li>
-<li><strong>animation-play-state: paused | running</strong>：设置动画是否运行和停止;  </li>
-</ul>
-<h4 id="2-tranform"><a href="#2-tranform" class="headerlink" title="2.tranform"></a>2.tranform</h4><p>transform 属性向元素应用 2D 或 3D 转换。该属性允许我们对元素进行旋转、缩放、移动或倾斜。 </p>
-<p><strong>语法</strong></p>
-<pre><code>transform: none|transform-functions;
-</code></pre><ul>
-<li><strong>rotate</strong>：旋转</li>
-<li><strong>translate</strong>：移动</li>
-<li><strong>skew</strong>：倾斜</li>
-<li><strong>scale</strong>：缩放</li>
-</ul>
-<h4 id="3-transition"><a href="#3-transition" class="headerlink" title="3.transition"></a>3.transition</h4><p>transition是如下几个属性的缩写，可以实现样式到样式的过度效果，与animation有些相似，都可以做些简单的动画效果，但是transition没法想animation一样做到帧动画。</p>
-<p><strong>语法</strong>  </p>
-<pre><code>transition: property duration timing-function delay;
-</code></pre><ul>
-<li><strong>transition-property：all | property</strong>规定设置过渡效果的 CSS 属性的名称。</li>
-<li><strong>transition-duration：time</strong>    规定完成过渡效果需要多少秒或毫秒。</li>
-<li><strong>transition-timing-function：linear | ease | ease-in | ease-out | ease-in-out | cubic-<br>bezier(n,n,n,n)</strong> 规定速度效果的速度曲线。</li>
-<li><strong>transition-delay：time</strong>定义过渡效果何时开始。</li>
-</ul>
-<h4 id="4-线条动画"><a href="#4-线条动画" class="headerlink" title="4.线条动画"></a>4.线条动画</h4><p>直接使用前面三种方式实现线条动画是比较麻烦的，简单点的方法就是使用svg中的stroke-dasharray属性，不熟悉的话可以先来回顾一下<a href="https://heweixia.com/2018/11/02/SVG%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95/">svg中填充与边框属性</a>。例如下面，一个滚动的边框线条  </p>
-<p><strong>svg代码</strong></p>
-<pre><code>&lt;svg width=&quot;500&quot; height=&quot;500&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot; xmlns:xlink=&quot;http://www.w3.org/1999/xlink&quot;&gt;
-   &lt;rect x=&quot;50&quot; y=&quot;50&quot; width=&quot;200&quot; height=&quot;200&quot; fill=&quot;none&quot; stroke=&quot;black&quot;&gt;&lt;/rect&gt;
-&lt;/svg&gt;
-</code></pre><p><strong>css代码</strong></p>
-<pre><code>rect {
-    stroke-width: 10px;
-    animation: outlineRect 2s linear infinite;
-}
-
-@keyframes outlineRect {
-    0% {
-        stroke-dasharray:0px 200px 0px 200px;
-    }100% {
-        stroke-dasharray:400px 200px;
-    }
-}
-</code></pre>
+        
+          <p class="article-more-link">
+            <a href="/2018/11/09/svg实现基本动画/#more">Read More</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://heweixia.com/2018/11/09/svg实现基本动画/" data-id="cjxfvu0om0006qgvwkyhyv40q" class="article-share-link">Share</a>
+      <a data-url="http://heweixia.com/2018/11/09/svg实现基本动画/" data-id="cjxfwa4sz0006s4vw0k3iys2g" class="article-share-link">Share</a>
       
       
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/svg/">svg</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/动画/">动画</a></li></ul>
+
     </footer>
   </div>
   
@@ -1411,7 +901,7 @@ import (&apos;components/add-ai/addAI&apos;).then((module) =&gt; {
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/css3/">css3</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/es6/">es6</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/sublime/">sublime</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/vue/">vue</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/css3/">css3</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/js/">js</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/sublime/">sublime</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/svg/">svg</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/vue/">vue</a></li></ul>
     </div>
   </div>
 
@@ -1421,7 +911,7 @@ import (&apos;components/add-ai/addAI&apos;).then((module) =&gt; {
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/form/">form</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sublime/">sublime</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vuex/">vuex</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/打包/">打包</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/箭头函数/">箭头函数</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6/">es6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/form/">form</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sublime/">sublime</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/svg/">svg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vuex/">vuex</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/动画/">动画</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/打包/">打包</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/箭头函数/">箭头函数</a></li></ul>
     </div>
   </div>
 
@@ -1431,7 +921,7 @@ import (&apos;components/add-ai/addAI&apos;).then((module) =&gt; {
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/form/" style="font-size: 10px;">form</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/sublime/" style="font-size: 10px;">sublime</a> <a href="/tags/vuex/" style="font-size: 10px;">vuex</a> <a href="/tags/打包/" style="font-size: 10px;">打包</a> <a href="/tags/箭头函数/" style="font-size: 10px;">箭头函数</a>
+      <a href="/tags/es6/" style="font-size: 10px;">es6</a> <a href="/tags/form/" style="font-size: 10px;">form</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/sublime/" style="font-size: 10px;">sublime</a> <a href="/tags/svg/" style="font-size: 20px;">svg</a> <a href="/tags/vuex/" style="font-size: 10px;">vuex</a> <a href="/tags/动画/" style="font-size: 20px;">动画</a> <a href="/tags/打包/" style="font-size: 10px;">打包</a> <a href="/tags/箭头函数/" style="font-size: 10px;">箭头函数</a>
     </div>
   </div>
 

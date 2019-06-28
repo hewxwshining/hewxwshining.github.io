@@ -7,18 +7,18 @@
   
   <title>箭头函数详记 | Hex笔记</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="箭头函数表达式的语法比函数表达式更短，并且没有自己的this，arguments，super或new.target。这些函数表达式更适用于那些本来需要匿名函数的地方，并且它们不能用作构造函数。 首先：我们先考虑一下这个箭头函数没有自己的this，arguments，super或new.target是什么意思？带着问题去看下面的内容会更事半功倍。 一、语法1.基础语法(参数1, 参数2, …, 参数">
-<meta name="keywords" content="箭头函数">
+  <meta name="description" content="箭头函数表达式的语法比函数表达式更短，并且没有自己的this，arguments，super或new.target。这些函数表达式更适用于那些本来需要匿名函数的地方，并且它们不能用作构造函数。 首先：我们先考虑一下这个箭头函数没有自己的this，arguments，super或new.target是什么意思？带着问题去看下面的内容会更事半功倍。">
+<meta name="keywords" content="箭头函数,es6">
 <meta property="og:type" content="article">
 <meta property="og:title" content="箭头函数详记">
 <meta property="og:url" content="http://heweixia.com/2019/01/23/箭头函数详记/index.html">
 <meta property="og:site_name" content="Hex笔记">
-<meta property="og:description" content="箭头函数表达式的语法比函数表达式更短，并且没有自己的this，arguments，super或new.target。这些函数表达式更适用于那些本来需要匿名函数的地方，并且它们不能用作构造函数。 首先：我们先考虑一下这个箭头函数没有自己的this，arguments，super或new.target是什么意思？带着问题去看下面的内容会更事半功倍。 一、语法1.基础语法(参数1, 参数2, …, 参数">
+<meta property="og:description" content="箭头函数表达式的语法比函数表达式更短，并且没有自己的this，arguments，super或new.target。这些函数表达式更适用于那些本来需要匿名函数的地方，并且它们不能用作构造函数。 首先：我们先考虑一下这个箭头函数没有自己的this，arguments，super或new.target是什么意思？带着问题去看下面的内容会更事半功倍。">
 <meta property="og:locale" content="zh_CN.utf8">
-<meta property="og:updated_time" content="2019-01-23T02:29:42.729Z">
+<meta property="og:updated_time" content="2019-06-28T09:23:44.345Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="箭头函数详记">
-<meta name="twitter:description" content="箭头函数表达式的语法比函数表达式更短，并且没有自己的this，arguments，super或new.target。这些函数表达式更适用于那些本来需要匿名函数的地方，并且它们不能用作构造函数。 首先：我们先考虑一下这个箭头函数没有自己的this，arguments，super或new.target是什么意思？带着问题去看下面的内容会更事半功倍。 一、语法1.基础语法(参数1, 参数2, …, 参数">
+<meta name="twitter:description" content="箭头函数表达式的语法比函数表达式更短，并且没有自己的this，arguments，super或new.target。这些函数表达式更适用于那些本来需要匿名函数的地方，并且它们不能用作构造函数。 首先：我们先考虑一下这个箭头函数没有自己的this，arguments，super或new.target是什么意思？带着问题去看下面的内容会更事半功倍。">
   
     <link rel="alternate" href="/atom.xml" title="Hex笔记" type="application/atom+xml">
   
@@ -72,7 +72,7 @@
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/es6/">es6</a>
+    <a class="article-category-link" href="/categories/js/">js</a>
   </div>
 
   </div>
@@ -93,6 +93,7 @@
       
         <p><strong>箭头函数表达式的语法比函数表达式更短，并且没有自己的<code>this</code>，<code>arguments</code>，<code>super</code>或<code>new.target</code>。这些函数表达式更适用于那些本来需要匿名函数的地方，并且它们不能用作构造函数。</strong></p>
 <p><font color="red">首先</font>：我们先考虑一下这个箭头函数没有自己的<code>this</code>，<code>arguments</code>，<code>super</code>或<code>new.target</code>是什么意思？带着问题去看下面的内容会更事半功倍。</p>
+<a id="more"></a>
 <h4 id="一、语法"><a href="#一、语法" class="headerlink" title="一、语法"></a>一、语法</h4><h5 id="1-基础语法"><a href="#1-基础语法" class="headerlink" title="1.基础语法"></a>1.基础语法</h5><pre><code>(参数1, 参数2, …, 参数N) =&gt; { 函数声明 }
 
 //相当于：(参数1, 参数2, …, 参数N) =&gt;{ return 表达式; }
@@ -242,10 +243,10 @@ console.log(Foo.prototype); // undefined
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://heweixia.com/2019/01/23/箭头函数详记/" data-id="cjxfvu0ot000cqgvwsw8fbe8a" class="article-share-link">Share</a>
+      <a data-url="http://heweixia.com/2019/01/23/箭头函数详记/" data-id="cjxfwa4t8000cs4vwtluaccdy" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/箭头函数/">箭头函数</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/箭头函数/">箭头函数</a></li></ul>
 
     </footer>
   </div>
@@ -281,7 +282,7 @@ console.log(Foo.prototype); // undefined
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/css3/">css3</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/es6/">es6</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/sublime/">sublime</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/vue/">vue</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/css3/">css3</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/js/">js</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/sublime/">sublime</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/svg/">svg</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/vue/">vue</a></li></ul>
     </div>
   </div>
 
@@ -291,7 +292,7 @@ console.log(Foo.prototype); // undefined
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/form/">form</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sublime/">sublime</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vuex/">vuex</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/打包/">打包</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/箭头函数/">箭头函数</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6/">es6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/form/">form</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sublime/">sublime</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/svg/">svg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vuex/">vuex</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/动画/">动画</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/打包/">打包</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/箭头函数/">箭头函数</a></li></ul>
     </div>
   </div>
 
@@ -301,7 +302,7 @@ console.log(Foo.prototype); // undefined
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/form/" style="font-size: 10px;">form</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/sublime/" style="font-size: 10px;">sublime</a> <a href="/tags/vuex/" style="font-size: 10px;">vuex</a> <a href="/tags/打包/" style="font-size: 10px;">打包</a> <a href="/tags/箭头函数/" style="font-size: 10px;">箭头函数</a>
+      <a href="/tags/es6/" style="font-size: 10px;">es6</a> <a href="/tags/form/" style="font-size: 10px;">form</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/sublime/" style="font-size: 10px;">sublime</a> <a href="/tags/svg/" style="font-size: 20px;">svg</a> <a href="/tags/vuex/" style="font-size: 10px;">vuex</a> <a href="/tags/动画/" style="font-size: 20px;">动画</a> <a href="/tags/打包/" style="font-size: 10px;">打包</a> <a href="/tags/箭头函数/" style="font-size: 10px;">箭头函数</a>
     </div>
   </div>
 
