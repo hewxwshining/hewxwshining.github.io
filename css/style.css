@@ -547,6 +547,7 @@ body {
   -moz-transition: color 0.2s;
   -ms-transition: color 0.2s;
   transition: color 0.2s;
+  text-align: center;
 }
 a.article-title:hover {
   color: #258fb8;
@@ -603,7 +604,7 @@ a.article-title:hover {
   max-width: 100%;
   height: auto;
   display: block;
-  margin: auto;
+  margin: auto 0;
 }
 .article-entry iframe {
   border: none;
@@ -1093,20 +1094,22 @@ a.article-title:hover {
 }
 .article-entry pre,
 .article-entry .highlight {
-  background: #2d2d2d;
+  background: #f7f7f7;
   margin: 0 -20px;
   padding: 15px 20px;
   border-style: solid;
   border-color: #ddd;
-  border-width: 1px 0;
+  border-width: 0;
   overflow: auto;
-  color: #ccc;
+  color: #333;
   line-height: 22.400000000000002px;
 }
 .article-entry .highlight .gutter pre,
 .article-entry .gist .gist-file .gist-data .line-numbers {
-  color: #666;
+  color: #869194;
+  background-color: #eff2f3;
   font-size: 0.85em;
+  padding: 10px;
 }
 .article-entry pre,
 .article-entry code {
@@ -1117,15 +1120,21 @@ a.article-title:hover {
   text-shadow: 0 1px #fff;
   padding: 0 0.3em;
 }
+.article-entry pre {
+  margin: 0;
+}
 .article-entry pre code {
   background: none;
   text-shadow: none;
   padding: 0;
 }
+.article-entry .highlight {
+  margin: 20px 0;
+  padding: 0;
+}
 .article-entry .highlight pre {
   border: none;
-  margin: 0;
-  padding: 0;
+  padding: 10px;
 }
 .article-entry .highlight table {
   margin: 0;
@@ -1154,7 +1163,6 @@ a.article-title:hover {
 }
 .article-entry .highlight .gutter pre {
   text-align: right;
-  padding-right: 20px;
 }
 .article-entry .highlight .line {
   height: 22.400000000000002px;
@@ -1167,7 +1175,7 @@ a.article-title:hover {
   border-style: solid;
   border-color: #ddd;
   border-width: 1px 0;
-  background: #2d2d2d;
+  background: #f7f7f7;
   padding: 15px 20px 15px 0;
 }
 .article-entry .gist .gist-file {
@@ -1193,7 +1201,7 @@ a.article-title:hover {
   border: none;
 }
 .article-entry .gist .gist-file .gist-meta {
-  background: #2d2d2d;
+  background: #f7f7f7;
   color: #999;
   font: 0.85em -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   text-shadow: 0 0;
