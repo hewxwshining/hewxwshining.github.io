@@ -19,7 +19,7 @@
 <meta property="og:image" content="http://heweixia.com/images/more.png">
 <meta property="og:image" content="http://heweixia.com/images/readmore.png">
 <meta property="og:image" content="http://heweixia.com/images/error.png">
-<meta property="og:updated_time" content="2019-07-01T03:37:37.642Z">
+<meta property="og:updated_time" content="2019-07-01T06:27:14.414Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="hexo学习">
 <meta name="twitter:description" content="一直都有做笔记的想法，但是一直没有找到合适的工具，考虑了很久，尝试过其他的方法，最后还是决定使用hexo-真的很简单。接触hexo很久了，怪自己太懒，一直都没有怎么好好深入了解，趁着有心情的时候记录一些hexo的使用技巧，跟学习心得，巴拉巴拉…">
@@ -109,20 +109,25 @@
 <p>在页面上显示的效果是：<br><img src="/images/readmore.png" alt=""> </p>
 <p><strong>方法二：设置首页文章以摘要形式显示，打开主题配置文件，找到auto_excerpt进行修改</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">auto_excerpt:</span><br><span class="line">   enable: true</span><br><span class="line">   length: 150</span><br></pre></td></tr></table></figure></p>
 <p>其中length代表显示摘要的截取字符长度。<br>注：这两种方法，在博客首页显示的效果不一样，根据自己的需要，选择自己喜欢的方法</p>
-<h2 id="4、在笔记中添加图片"><a href="#4、在笔记中添加图片" class="headerlink" title="4、在笔记中添加图片"></a>4、在笔记中添加图片</h2><p><strong>方法一：</strong></p>
+<h2 id="4、在笔记中添加图片"><a href="#4、在笔记中添加图片" class="headerlink" title="4、在笔记中添加图片"></a>4、在笔记中添加图片</h2><p><strong>方法一</strong></p>
 <p>(1)在hexo目录下，安装插件：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-asset-image --save</span><br></pre></td></tr></table></figure>
 <p>(2)在hexo\source 目录下新建一个images文件夹，把图片放置在里面；<br>(3)在xxx.md文件中引用图片：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![header]( images/header.jpg)</span><br></pre></td></tr></table></figure>
-<p><strong>方法：二</strong>  </p>
+<p><strong>方法二</strong>  </p>
 <p>（1）通过将全局配置文件 （config.yml 文件）中的 post_asset_folder 选项设为 true；<br>（2）通过 <code>hexo new [layout] &lt;title&gt;</code>命令创建新文章XXX时自动创建一个文件夹 XXX ,这个资源文件夹将会有与这个 markdown 文件一样的名字；<br>（3）把XXX这个博文需要展示的图片放在XXX文件夹目录下；<br>（4）在XXX.md文件中引入图片的方式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;% asset_img example.jpg This is an example image %&#125;</span><br></pre></td></tr></table></figure></p>
 <p>注：本人在使用第二种方法时出现路径错误，所以 hex 笔记中的所有图片都是采用的第一个种方法实现的，路径错误如图所示：</p>
 <p><img src="/images/error.png" alt=""></p>
+<p><strong>方法三</strong></p>
+<p>直接使用 html 代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;img src=&quot;imgage path&quot; alt=&quot;&quot; style=&quot;&quot;&gt;</span><br></pre></td></tr></table></figure>
 <h2 id="5、发布文章"><a href="#5、发布文章" class="headerlink" title="5、发布文章"></a>5、发布文章</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo clean &amp;&amp; hexo g &amp;&amp; hexo d</span><br></pre></td></tr></table></figure>
+<p><strong><em>斜体字</em></strong></p>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://heweixia.com/2019/06/28/hexo学习/" data-id="cjxju2x5e0005c8vw0mchzad4" class="article-share-link">Share</a>
+      <a data-url="http://heweixia.com/2019/06/28/hexo学习/" data-id="cjxk0jjvh00011wvw1qnn4qi9" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
