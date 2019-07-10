@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>JS基础测试33 | Hex笔记</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="keywords" content="js">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS基础测试33">
+<meta property="og:url" content="http://heweixia.com/2019/07/10/JS基础测试33/index.html">
+<meta property="og:site_name" content="Hex笔记">
+<meta property="og:locale" content="zh_CN.utf8">
+<meta property="og:image" content="http://heweixia.com/images/base-test/js-33-1.png">
+<meta property="og:updated_time" content="2019-07-10T03:00:10.081Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JS基础测试33">
+<meta name="twitter:image" content="http://heweixia.com/images/base-test/js-33-1.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hex笔记" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hex笔记</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://heweixia.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-JS基础测试33" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/07/10/JS基础测试33/" class="article-date">
+  <time datetime="2019-07-10T02:01:28.000Z" itemprop="datePublished">2019-07-10</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/基础测试/">基础测试</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      JS基础测试33
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="/images/base-test/js-33-1.png" alt=""></p>
+<a id="more"></a>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:left">Chrome</th>
+<th style="text-align:left">Firefox</th>
+<th style="text-align:left">IE11</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><strong>0.6.toFixed(0)</strong></td>
+<td style="text-align:left">1</td>
+<td style="text-align:left">1</td>
+<td style="text-align:left">1</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>1.6.toFixed(0)</strong></td>
+<td style="text-align:left">2</td>
+<td style="text-align:left">2</td>
+<td style="text-align:left">2</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>0.35.toFixed(0)</strong></td>
+<td style="text-align:left">0.4</td>
+<td style="text-align:left">0.4</td>
+<td style="text-align:left">0.4</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>0.45.toFixed(0)</strong></td>
+<td style="text-align:left">0.4</td>
+<td style="text-align:left">0.4</td>
+<td style="text-align:left">0.5</td>
+</tr>
+</tbody>
+</table>
+<p>方案一： 采用四舍五入的方法。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">Number.prototype.toFixed = myToFixed;</span><br><span class="line">String.prototype.toFixed = myToFixed;</span><br><span class="line"></span><br><span class="line">function myToFixed(digits = 0) &#123;</span><br><span class="line">    let num = String(this);</span><br><span class="line">    console.log(num);</span><br><span class="line"></span><br><span class="line">    // 小数位不足时后置补零</span><br><span class="line">    const postfixZero = s =&gt; &#123;</span><br><span class="line">        let len = digits;</span><br><span class="line"></span><br><span class="line">        if (s.indexOf(&apos;.&apos;) &gt; 0) &#123;</span><br><span class="line">            len = digits - s.split(&apos;.&apos;)[1].length;</span><br><span class="line">        &#125; else if (len &gt; 0) &#123;</span><br><span class="line">            s += &apos;.&apos;; // 整数位后补小数点</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return s + &apos;0&apos;.repeat(len);</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    digits = parseInt(digits, 10);</span><br><span class="line"></span><br><span class="line">    if (isNaN(digits)) &#123; // 非数值</span><br><span class="line">        throw new Error(&apos;digits argument must be a number(or string number)&apos;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    if (digits &lt; 0) &#123; // 负数</span><br><span class="line">        throw new Error(&apos;digits argument must be greater than or equal to 0&apos;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    if (!isFinite(num)) &#123; // +-Infinity</span><br><span class="line">        return num;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    if (num.indexOf(&apos;.&apos;) &gt; 0) &#123;</span><br><span class="line">        let times = Math.pow(10, digits); // 根据小数位长度获取升幂倍数</span><br><span class="line">        num = Math.round(num * times) / times + &apos;&apos;; // 四舍五入，降幂</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return postfixZero(num);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>本期要点：</p>
+<ol>
+<li>toFixed有两个问题，一是兼容性，二是四舍五入不符合正常的四舍五入认知。金钱计算的时候容易出问题，必须两位小数。</li>
+<li>应该返回字符串；补全末尾的0。</li>
+<li><p>机智是实现：<br> 方式一：替换小数点保留精度后面一位5为6，</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var MytoFixed = function(digits)&#123;</span><br><span class="line">    var reg = new RegExp(&apos;(\\d*.\\d&#123;&apos; + digits + &apos;&#125;)5(\\d*)&apos;, &apos;g&apos;)</span><br><span class="line">    var number = Number(this.toString().replace(reg, &apos;$1&apos; + 6 + &apos;$2&apos;));</span><br><span class="line">    return NativetoFixed.call(number,digits);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p> 方式二：给小数点保留精度后面补一位小数</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var oldtoFixed = Number.prototype.toFixed</span><br><span class="line">Number.prototype.toFixed = function(digits)&#123;</span><br><span class="line">    var length = (parseFloat(this) + &apos;&apos;).replace(/^\d+\.?/, &apos;&apos;).length;</span><br><span class="line">    var len = length &gt; digits ? length : digits;</span><br><span class="line">    var number = Number(this) + Math.pow(10, -len-1);</span><br><span class="line">    return oldtoFixed.call(number, digits);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://heweixia.com/2019/07/10/JS基础测试33/" data-id="cjxwnovyz000b4ovwln1lmvwp" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2019/07/08/JS基础测试34/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">JS基础测试34</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/css3/">css3</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/js/">js</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/sublime/">sublime</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/svg/">svg</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/vue/">vue</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/基础测试/">基础测试</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/DOM/">DOM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6/">es6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/form/">form</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sublime/">sublime</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/svg/">svg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vuex/">vuex</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/动画/">动画</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/打包/">打包</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/箭头函数/">箭头函数</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/路由-vue/">路由 vue</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/DOM/" style="font-size: 15px;">DOM</a> <a href="/tags/es6/" style="font-size: 10px;">es6</a> <a href="/tags/form/" style="font-size: 10px;">form</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/js/" style="font-size: 20px;">js</a> <a href="/tags/sublime/" style="font-size: 10px;">sublime</a> <a href="/tags/svg/" style="font-size: 15px;">svg</a> <a href="/tags/vuex/" style="font-size: 10px;">vuex</a> <a href="/tags/动画/" style="font-size: 15px;">动画</a> <a href="/tags/打包/" style="font-size: 10px;">打包</a> <a href="/tags/箭头函数/" style="font-size: 10px;">箭头函数</a> <a href="/tags/路由-vue/" style="font-size: 10px;">路由 vue</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/07/10/JS基础测试33/">JS基础测试33</a>
+          </li>
+        
+          <li>
+            <a href="/2019/07/08/JS基础测试34/">JS基础测试34</a>
+          </li>
+        
+          <li>
+            <a href="/2019/07/08/DOM基础测试31/">DOM基础测试31</a>
+          </li>
+        
+          <li>
+            <a href="/2019/07/05/DOM基础测试27/">DOM基础测试27</a>
+          </li>
+        
+          <li>
+            <a href="/2019/07/05/JS基础测试31/">JS基础测试31</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 hwx<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

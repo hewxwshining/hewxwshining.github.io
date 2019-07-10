@@ -613,15 +613,19 @@ a.article-title:hover {
   width: 100%;
   border-collapse: collapse;
   border-spacing: 0;
+  border: 1px solid #ddd;
 }
 .article-entry th {
   font-weight: bold;
-  border-bottom: 3px solid #ddd;
-  padding-bottom: 0.5em;
+  border-bottom: 1px solid #ddd;
+  padding: 10px 0;
 }
 .article-entry td {
   border-bottom: 1px solid #ddd;
   padding: 10px 0;
+}
+.article-entry tr:nth-child(even) td {
+  background-color: #f7f7f7;
 }
 .article-entry blockquote {
   font-family: Georgia, "Times New Roman", serif;
