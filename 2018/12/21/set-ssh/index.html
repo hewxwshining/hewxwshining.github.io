@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
   
 
@@ -68,7 +68,7 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-set-ssh" class="article article-type-post" itemscope="" itemprop="blogPost">
+        <section id="main"><article id="post-set-ssh" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/12/21/set-ssh/" class="article-date">
   <time datetime="2018-12-21T02:53:40.000Z" itemprop="datePublished">2018-12-21</time>
@@ -92,27 +92,21 @@
       
         <p>SSH Key 是一种方法来确定受信任的计算机，从而实现免密码登录。<br>Git是分布式的代码管理工具，远程的代码管理是基于SSH的，所以要使用远程的Git则需要SSH的配置。<br>下面的步骤将完成 生成<strong>SSH密钥</strong>并 <strong>添加公共密钥到GitHub上的帐户</strong>  </p>
 <a id="more"></a>
+
 <p><strong>1. 配置ssh格式的远程仓库地址</strong></p>
-<pre><code>git remote add 远程仓库名 远程仓库地址
-</code></pre><p><strong>2. 创建ssh key</strong></p>
-<pre><code>ssh-keygen -t rsa -C &quot;your_email@example.com&quot;
-</code></pre><p>一直回车，完成后，在用户主目录里找到.ssh目录，里面有id_rsa和id_rsa.pub两个文件，id_rsa是秘钥，id_rsa.pub是公钥；</p>
+<pre><code>git remote add 远程仓库名 远程仓库地址</code></pre><p><strong>2. 创建ssh key</strong></p>
+<pre><code>ssh-keygen -t rsa -C &quot;your_email@example.com&quot;</code></pre><p>一直回车，完成后，在用户主目录里找到.ssh目录，里面有id_rsa和id_rsa.pub两个文件，id_rsa是秘钥，id_rsa.pub是公钥；</p>
 <p><strong>3. 将SSH私钥添加到 ssh-agent</strong>  </p>
 <p>配置 ssh-agent 程序使用 SSH key</p>
 <p>1）在后台启动 ssh-agent</p>
-<pre><code>eval $(ssh-agent -s)
-</code></pre><p>2）将SSH私钥添加到 ssh-agent</p>
-<pre><code>ssh-add /c/Users/chenjs/.ssh/id_rsa
-</code></pre><p><img src="https://i.imgur.com/CioSxin.png" alt="https://i.imgur.com/CioSxin.png"></p>
+<pre><code>eval $(ssh-agent -s)</code></pre><p>2）将SSH私钥添加到 ssh-agent</p>
+<pre><code>ssh-add /c/Users/chenjs/.ssh/id_rsa</code></pre><p><img src="https://i.imgur.com/CioSxin.png" alt="https://i.imgur.com/CioSxin.png"></p>
 <p><strong>4. 将SSH公钥添加到GitHub账户</strong>  </p>
 <p>1）先复制SSH公钥的完整内容（/c/Users/chenjs/.ssh/id_rsa.pub）</p>
-<pre><code>clip &lt; /c/Users/chenjs/.ssh/id_rsa.pub
-</code></pre><p>2）进入GitHub的设置页面（登录GitHub，在右上角）</p>
-<pre><code>Setting-&gt;SSH Keys -&gt;add ssh key
-</code></pre><p><strong>5. 测试连接</strong>  </p>
+<pre><code>clip &lt; /c/Users/chenjs/.ssh/id_rsa.pub</code></pre><p>2）进入GitHub的设置页面（登录GitHub，在右上角）</p>
+<pre><code>Setting-&gt;SSH Keys -&gt;add ssh key</code></pre><p><strong>5. 测试连接</strong>  </p>
 <p>1）打开 Git Bash 输入  </p>
-<pre><code>ssh -T git@github.com
-</code></pre><p>将会看到如下提示：</p>
+<pre><code>ssh -T git@github.com</code></pre><p>将会看到如下提示：</p>
 <p><img src="https://i.imgur.com/D1YPnBh.png" alt="https://i.imgur.com/D1YPnBh.png">  </p>
 <p>输入yes后回车</p>
 <p><img src="https://i.imgur.com/XA06Xu2.png" alt="https://i.imgur.com/XA06Xu2.png"></p>
@@ -121,7 +115,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://heweixia.com/2018/12/21/set-ssh/" data-id="cjxwuxi5v000cbcvwprzcpzj1" class="article-share-link">Share</a>
+      <a data-url="http://heweixia.com/2018/12/21/set-ssh/" data-id="cjyqoqkj3000h7wvwo8otep7b" class="article-share-link">Share</a>
       
       
     </footer>

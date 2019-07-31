@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
   
 
@@ -68,7 +68,7 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-Sublime-Text-3安装与常用" class="article article-type-post" itemscope="" itemprop="blogPost">
+        <section id="main"><article id="post-Sublime-Text-3安装与常用" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/01/16/Sublime-Text-3安装与常用/" class="article-date">
   <time datetime="2019-01-16T03:28:57.000Z" itemprop="datePublished">2019-01-16</time>
@@ -97,6 +97,7 @@
         <p>sublimetext是前端的一个神器，以其精简和可diy而让广大fans疯狂。</p>
 <p>在win10系统下安装sublime Text ,每次都会折腾一番，总会遇到这或那的问题，记录一下流程，跟遇到的问题以及解决的方法。</p>
 <a id="more"></a>
+
 <h5 id="一、安装sublime"><a href="#一、安装sublime" class="headerlink" title="一、安装sublime"></a>一、安装sublime</h5><p>在<a href="http://www.sublimetext.com/3" title="官网" target="_blank" rel="noopener">官网</a>上下载win10下的sublime版本，直接安装，这没什么好说的。</p>
 <h5 id="二、安装插件"><a href="#二、安装插件" class="headerlink" title="二、安装插件"></a>二、安装插件</h5><p>Sublime 有很多插件，这些插件为我们写代码提供了非常强大的功能，这些插件需要单独安装。<br>而安装这些插件最方便的方法就是通过Package Control的插件，这其实就是一个插件管理器，帮助我们从Sublime中安装，升级和移除插件，这样对于我们管理插件来说是非常方便的，安装好它之后在通过它来安装其他插件。</p>
 <p>这里有两种方式安装package Control</p>
@@ -105,18 +106,15 @@
 <li>在菜单栏tools -&gt; install package control</li>
 </ul>
 <p>安装成功的情况应该会有这样的提示：  </p>
-<p><img src="https://i.imgur.com/O2HXr2I.png" alt="">  </p>
+<p><img src="https://i.imgur.com/O2HXr2I.png" alt>  </p>
 <p>但是一般来说总会失败：</p>
-<p><img src="https://i.imgur.com/BzStBNu.png" alt=""></p>
+<p><img src="https://i.imgur.com/BzStBNu.png" alt></p>
 <p>如果失败了我们就要直接去下载package control</p>
 <p>package Control 安装源码地址：<a href="https://packagecontrol.io/installation" title="https://packagecontrol.io/installation" target="_blank" rel="noopener">https://packagecontrol.io/installation</a></p>
 <p>下载后的文件名称为：Package Control.sublime-package，将其解压到Package Control文件夹(注意文件夹名称首字母必须大写)，然后将文件夹拷贝到C:\Users\Administrator\AppData\Roaming\Sublime Text 3\Packages (即 Preferences –&gt; Browse Packages打开的路径)</p>
 <h5 id="三、常用插件"><a href="#三、常用插件" class="headerlink" title="三、常用插件"></a>三、常用插件</h5><h6 id="1-emmet"><a href="#1-emmet" class="headerlink" title="1.emmet"></a>1.emmet</h6><p>这个没有什么好说的，类似jQuery的语法，编码蹭蹭往上提。不过要求PyV8环境（安装完后你会看到有一个文件夹），最好还是选择在线装吧。</p>
 <p>PyV8 下载地址：<a href="https://github.com/emmetio/pyv8-binaries" target="_blank" rel="noopener">https://github.com/emmetio/pyv8-binaries</a>，将下载的文件解压到<br>PyV8文件夹（文件夹名唯一不可更改），然后将文件夹拷贝到C:\Users\Administrator\AppData\Roaming\Sublime Text 3\Installed Packages中，（即 preferences –&gt; Browse Package打开的路径的上一层路径下的Installed Packges中）</p>
-<h6 id="2-侧边栏增强插件SideBarEnhancements"><a href="#2-侧边栏增强插件SideBarEnhancements" class="headerlink" title="2. 侧边栏增强插件SideBarEnhancements"></a>2. 侧边栏增强插件SideBarEnhancements</h6><h6 id="3-控制台呼出插件Terminal"><a href="#3-控制台呼出插件Terminal" class="headerlink" title="3. 控制台呼出插件Terminal"></a>3. 控制台呼出插件Terminal</h6><pre><code>Tips:快捷键 ctrl+shift+T呼出当前文件路径的控制台
-</code></pre><h6 id="4-代码提示插件SublimeCodeIntel"><a href="#4-代码提示插件SublimeCodeIntel" class="headerlink" title="4. 代码提示插件SublimeCodeIntel"></a>4. 代码提示插件SublimeCodeIntel</h6><h6 id="5-代码排版插件Sublime-HTMLPrettify"><a href="#5-代码排版插件Sublime-HTMLPrettify" class="headerlink" title="5. 代码排版插件Sublime-HTMLPrettify"></a>5. 代码排版插件Sublime-HTMLPrettify</h6><pre><code>Tips:安装完快捷键ctrl+shift+h 一键格式化代码
-</code></pre><h6 id="6-CSS3前缀补充插件Autoprefixer"><a href="#6-CSS3前缀补充插件Autoprefixer" class="headerlink" title="6. CSS3前缀补充插件Autoprefixer"></a>6. CSS3前缀补充插件Autoprefixer</h6><pre><code>Tips:使用方法：在输入CSS3属性后（冒号前）按Tab键
-</code></pre><h6 id="7-一键浏览文件"><a href="#7-一键浏览文件" class="headerlink" title="7. 一键浏览文件"></a>7. 一键浏览文件</h6><p>Preferences-&gt;Key Bindings - User打开用户快捷键设置，如下设置</p>
+<h6 id="2-侧边栏增强插件SideBarEnhancements"><a href="#2-侧边栏增强插件SideBarEnhancements" class="headerlink" title="2. 侧边栏增强插件SideBarEnhancements"></a>2. 侧边栏增强插件SideBarEnhancements</h6><h6 id="3-控制台呼出插件Terminal"><a href="#3-控制台呼出插件Terminal" class="headerlink" title="3. 控制台呼出插件Terminal"></a>3. 控制台呼出插件Terminal</h6><pre><code>Tips:快捷键 ctrl+shift+T呼出当前文件路径的控制台</code></pre><h6 id="4-代码提示插件SublimeCodeIntel"><a href="#4-代码提示插件SublimeCodeIntel" class="headerlink" title="4. 代码提示插件SublimeCodeIntel"></a>4. 代码提示插件SublimeCodeIntel</h6><h6 id="5-代码排版插件Sublime-HTMLPrettify"><a href="#5-代码排版插件Sublime-HTMLPrettify" class="headerlink" title="5. 代码排版插件Sublime-HTMLPrettify"></a>5. 代码排版插件Sublime-HTMLPrettify</h6><pre><code>Tips:安装完快捷键ctrl+shift+h 一键格式化代码</code></pre><h6 id="6-CSS3前缀补充插件Autoprefixer"><a href="#6-CSS3前缀补充插件Autoprefixer" class="headerlink" title="6. CSS3前缀补充插件Autoprefixer"></a>6. CSS3前缀补充插件Autoprefixer</h6><pre><code>Tips:使用方法：在输入CSS3属性后（冒号前）按Tab键</code></pre><h6 id="7-一键浏览文件"><a href="#7-一键浏览文件" class="headerlink" title="7. 一键浏览文件"></a>7. 一键浏览文件</h6><p>Preferences-&gt;Key Bindings - User打开用户快捷键设置，如下设置</p>
 <pre><code>[
     {
         &quot;keys&quot;:[&quot;f12&quot;],//快捷键
@@ -129,12 +127,11 @@
     }
 ]
 
-Tips:查了下默认的快捷键，SublimeText3中f1-f12中只有f11被默认为全屏命令，其他的没设置。也就是说，你可以装十个八个浏览器一字排开按过去测试。
-</code></pre>
+Tips:查了下默认的快捷键，SublimeText3中f1-f12中只有f11被默认为全屏命令，其他的没设置。也就是说，你可以装十个八个浏览器一字排开按过去测试。</code></pre>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://heweixia.com/2019/01/16/Sublime-Text-3安装与常用/" data-id="cjxwuxi5t000bbcvw2dnhsms7" class="article-share-link">Share</a>
+      <a data-url="http://heweixia.com/2019/01/16/Sublime-Text-3安装与常用/" data-id="cjyqoqkiz000b7wvwyl3trh25" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sublime/">sublime</a></li></ul>

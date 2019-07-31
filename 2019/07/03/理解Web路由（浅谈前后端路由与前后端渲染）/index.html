@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
   
 
@@ -68,7 +68,7 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-理解Web路由（浅谈前后端路由与前后端渲染）" class="article article-type-post" itemscope="" itemprop="blogPost">
+        <section id="main"><article id="post-理解Web路由（浅谈前后端路由与前后端渲染）" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/07/03/理解Web路由（浅谈前后端路由与前后端渲染）/" class="article-date">
   <time datetime="2019-07-03T14:33:17.000Z" itemprop="datePublished">2019-07-03</time>
@@ -97,11 +97,16 @@
         <p>摘自：<a href="https://juejin.im/post/5ba350ece51d450e4f38b435" target="_blank" rel="noopener">https://juejin.im/post/5ba350ece51d450e4f38b435</a></p>
 <h2 id="1-什么是路由"><a href="#1-什么是路由" class="headerlink" title="1.什么是路由?"></a>1.什么是路由?</h2><p>在Web开发过程中，经常会遇到『路由』的概念。那么，到底什么是路由？简单来说，路由就是URL到函数的映射。</p>
 <a id="more"></a>
-<h2 id="2-router-和-route-的区别"><a href="#2-router-和-route-的区别" class="headerlink" title="2.router 和 route 的区别"></a>2.router 和 route 的区别</h2><p>route就是一条路由，它将一个URL路径和一个函数进行映射，例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/users        -&gt;  getAllUsers()</span><br><span class="line">/users/count  -&gt;  getUsersCount()</span><br></pre></td></tr></table></figure></p>
+
+<h2 id="2-router-和-route-的区别"><a href="#2-router-和-route-的区别" class="headerlink" title="2.router 和 route 的区别"></a>2.router 和 route 的区别</h2><p>route就是一条路由，它将一个URL路径和一个函数进行映射，例如：  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/users        -&gt;  getAllUsers()</span><br><span class="line">/users/count  -&gt;  getUsersCount()</span><br></pre></td></tr></table></figure>
+
 <p>这就是两条路由，当访问 /users 的时候，会执行 getAllUsers() 函数；当访问 /users/count 的时候，会执行 getUsersCount() 函数。</p>
 <p>而 router 可以理解为一个容器，或者说一种机制，它管理了一组 route。简单来说，route 只是进行了URL和函数的映射，而在当接收到一个URL之后，去路由映射表中查找相应的函数，这个过程是由 router 来处理的。一句话概括就是 “The router routes you to a route”。</p>
 <h2 id="3-服务端路由"><a href="#3-服务端路由" class="headerlink" title="3.服务端路由"></a>3.服务端路由</h2><p>对于服务器来说，当接收到客户端发来的HTTP请求，会根据请求的URL，来找到相应的映射函数，然后执行该函数，并将函数的返回值发送给客户端。对于最简单的静态资源服务器，可以认为，所有URL的映射函数就是一个文件读取操作。对于动态资源，映射函数可能是一个数据库读取操作，也可能是进行一些数据的处理，等等。</p>
-<p>以 Express 为例:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">app.get(&apos;/&apos;, (req, res) =&gt; &#123;</span><br><span class="line">  res.sendFile(&apos;index&apos;)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">app.get(&apos;/users&apos;, (req, res) =&gt; &#123;</span><br><span class="line">  db.queryAllUsers()</span><br><span class="line">    .then(data =&gt; res.send(data))</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>以 Express 为例:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">app.get(&apos;/&apos;, (req, res) =&gt; &#123;</span><br><span class="line">  res.sendFile(&apos;index&apos;)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">app.get(&apos;/users&apos;, (req, res) =&gt; &#123;</span><br><span class="line">  db.queryAllUsers()</span><br><span class="line">    .then(data =&gt; res.send(data))</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
 <p>这里定义了两条路由：</p>
 <ul>
 <li>当访问 / 的时候，会返回 index 页面</li>
@@ -111,44 +116,66 @@
 <p><strong>不仅仅是URL</strong><br>在 router 匹配 route 的过程中，不仅会根据URL来匹配，还会根据请求的方法来看是否匹配。例如上面的例子，如果通过 POST 方法来访问 /users，就会找不到正确的路由。</p>
 </blockquote>
 <h2 id="4-客户端路由"><a href="#4-客户端路由" class="headerlink" title="4.客户端路由"></a>4.客户端路由</h2><p>对于客户端（通常为浏览器）来说，路由的映射函数通常是进行一些DOM的显示和隐藏操作。这样，当访问不同的路径的时候，会显示不同的页面组件。客户端路由最常见的有以下两种实现方案：</p>
-<h3 id="1-基于Hash"><a href="#1-基于Hash" class="headerlink" title="(1)基于Hash"></a>(1)基于Hash</h3><p>我们知道，URL中 # 及其后面的部分为 hash。例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">const url = require(&apos;url&apos;)</span><br><span class="line">var a = url.parse(&apos;http://example.com/#/foo/bar&apos;)</span><br><span class="line">console.log(a.hash)</span><br><span class="line">// =&gt; #/foo/bar</span><br></pre></td></tr></table></figure></p>
+<h3 id="1-基于Hash"><a href="#1-基于Hash" class="headerlink" title="(1)基于Hash"></a>(1)基于Hash</h3><p>我们知道，URL中 # 及其后面的部分为 hash。例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">const url = require(&apos;url&apos;)</span><br><span class="line">var a = url.parse(&apos;http://example.com/#/foo/bar&apos;)</span><br><span class="line">console.log(a.hash)</span><br><span class="line">// =&gt; #/foo/bar</span><br></pre></td></tr></table></figure>
+
 <p>hash仅仅是客户端的一个状态，也就是说，当向服务器发请求的时候，hash部分并不会发过去。  </p>
-<p>通过监听 window 对象的 hashChange 事件，可以实现简单的路由。例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">window.onhashchange = function() &#123;</span><br><span class="line">  var hash = window.location.hash</span><br><span class="line">  var path = hash.substring(1)</span><br><span class="line"></span><br><span class="line">  switch (path) &#123;</span><br><span class="line">    case &apos;/&apos;:</span><br><span class="line">      showHome()</span><br><span class="line">      break</span><br><span class="line">    case &apos;/users&apos;:</span><br><span class="line">      showUsersList()</span><br><span class="line">      break</span><br><span class="line">    default:</span><br><span class="line">      show404NotFound()</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>通过监听 window 对象的 hashChange 事件，可以实现简单的路由。例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">window.onhashchange = function() &#123;</span><br><span class="line">  var hash = window.location.hash</span><br><span class="line">  var path = hash.substring(1)</span><br><span class="line"></span><br><span class="line">  switch (path) &#123;</span><br><span class="line">    case &apos;/&apos;:</span><br><span class="line">      showHome()</span><br><span class="line">      break</span><br><span class="line">    case &apos;/users&apos;:</span><br><span class="line">      showUsersList()</span><br><span class="line">      break</span><br><span class="line">    default:</span><br><span class="line">      show404NotFound()</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <h3 id="2-基于History-API"><a href="#2-基于History-API" class="headerlink" title="(2)基于History API"></a>(2)基于History API</h3><p>通过HTML5 History API可以在不刷新页面的情况下，直接改变当前URL。详细用法可以参考：</p>
 <ul>
 <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/History_API" target="_blank" rel="noopener">Manipulating the browser history</a></li>
 <li><a href="https://css-tricks.com/using-the-html5-history-api/" target="_blank" rel="noopener">Using the HTML5 History API | CSS-Tricks</a></li>
 </ul>
-<p>我们可以通过监听 window 对象的 popstate 事件，来实现简单的路由：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">window.onpopstate = function() &#123;</span><br><span class="line">  var path = window.location.pathname</span><br><span class="line"></span><br><span class="line">  switch (path) &#123;</span><br><span class="line">    case &apos;/&apos;:</span><br><span class="line">      showHome()</span><br><span class="line">      break</span><br><span class="line">    case &apos;/users&apos;:</span><br><span class="line">      showUsersList()</span><br><span class="line">      break</span><br><span class="line">    default:</span><br><span class="line">      show404NotFound()</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>但是这种方法只能捕获前进或后退事件，无法捕获 pushState 和 replaceState，一种最简单的解决方法是替换 pushState 方法，例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var pushState = history.pushState</span><br><span class="line">history.pushState = function() &#123;</span><br><span class="line">  pushState.apply(history, arguments)</span><br><span class="line"></span><br><span class="line">  // emit a event or just run a callback</span><br><span class="line">  emitEventOrRunCallback()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>我们可以通过监听 window 对象的 popstate 事件，来实现简单的路由：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">window.onpopstate = function() &#123;</span><br><span class="line">  var path = window.location.pathname</span><br><span class="line"></span><br><span class="line">  switch (path) &#123;</span><br><span class="line">    case &apos;/&apos;:</span><br><span class="line">      showHome()</span><br><span class="line">      break</span><br><span class="line">    case &apos;/users&apos;:</span><br><span class="line">      showUsersList()</span><br><span class="line">      break</span><br><span class="line">    default:</span><br><span class="line">      show404NotFound()</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>但是这种方法只能捕获前进或后退事件，无法捕获 pushState 和 replaceState，一种最简单的解决方法是替换 pushState 方法，例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var pushState = history.pushState</span><br><span class="line">history.pushState = function() &#123;</span><br><span class="line">  pushState.apply(history, arguments)</span><br><span class="line"></span><br><span class="line">  // emit a event or just run a callback</span><br><span class="line">  emitEventOrRunCallback()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>不过，最好的方法还是使用实现好的 <a href="https://github.com/ReactTraining/history" target="_blank" rel="noopener">history</a> 库。</p>
-<h3 id="3-两种方法的比较"><a href="#3-两种方法的比较" class="headerlink" title="(3)两种方法的比较"></a>(3)两种方法的比较</h3><p>总的来说，基于Hash的路由，兼容性更好；基于History API的路由，更加直观和正式。<br>但是，有一点很大的区别是，基于Hash的路由不需要对服务器做改动，基于History API的路由需要对服务器做一些改造。下面来详细分析。<br>假设服务器只有如下文件（script.js被index.html所引用）：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/-</span><br><span class="line"> |- index.html</span><br><span class="line"> |- script.js</span><br></pre></td></tr></table></figure></p>
-<p>基于Hash的路径有：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">http://example.com/</span><br><span class="line">http://example.com/#/foobar</span><br></pre></td></tr></table></figure></p>
-<p>基于History API的路径有：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">http://example.com/</span><br><span class="line">http://example.com/foobar</span><br></pre></td></tr></table></figure></p>
+<h3 id="3-两种方法的比较"><a href="#3-两种方法的比较" class="headerlink" title="(3)两种方法的比较"></a>(3)两种方法的比较</h3><p>总的来说，基于Hash的路由，兼容性更好；基于History API的路由，更加直观和正式。<br>但是，有一点很大的区别是，基于Hash的路由不需要对服务器做改动，基于History API的路由需要对服务器做一些改造。下面来详细分析。<br>假设服务器只有如下文件（script.js被index.html所引用）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/-</span><br><span class="line"> |- index.html</span><br><span class="line"> |- script.js</span><br></pre></td></tr></table></figure>
+
+<p>基于Hash的路径有：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">http://example.com/</span><br><span class="line">http://example.com/#/foobar</span><br></pre></td></tr></table></figure>
+
+<p>基于History API的路径有：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">http://example.com/</span><br><span class="line">http://example.com/foobar</span><br></pre></td></tr></table></figure>
+
 <p>当直接访问 / 的时候，两者的行为是一致的，都是返回了 index.html 文件。</p>
 <p>当从 / 跳转到 /#/foobar 或者 /foobar 的时候，也都是正常的，因为此时已经加载了页面以及脚本文件，所以路由跳转正常。</p>
 <p>当直接访问 /#/foobar 的时候，实际上向服务器发起的请求是 /，因此会首先加载页面及脚本文件，接下来脚本执行路由跳转，一切正常。</p>
 <p>当直接访问 /foobar 的时候，实际上向服务器发起的请求也是 /foobar，然而服务器端只能匹配 / 而无法匹配 /foobar，因此会出现404错误。</p>
 <p>因此如果使用了基于History API的路由，需要改造服务器端，使得访问 /foobar 的时候也能返回 index.html 文件，这样当浏览器加载了页面及脚本之后，就能进行路由跳转了。</p>
 <h2 id="5-动态路由"><a href="#5-动态路由" class="headerlink" title="5.动态路由"></a>5.动态路由</h2><p>上面提到的例子都是静态路由，也就是说，路径都是固定的。但是有时候我们需要在路径中传入参数，例如获取某个用户的信息，我们不可能为每个用户创建一条路由，而是在通过捕获路径中的参数（例如用户id）来实现。</p>
-<p>例如在 Express 中：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">app.get(&apos;/user/:id&apos;, (req, res, next) =&gt; &#123;</span><br><span class="line">  // ... ...</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
-<p>在 Flask 中：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@app.route(&apos;/user/&lt;user_id&gt;&apos;)</span><br><span class="line">def get_user_info(user_id):</span><br><span class="line">    pass</span><br></pre></td></tr></table></figure></p>
+<p>例如在 Express 中：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">app.get(&apos;/user/:id&apos;, (req, res, next) =&gt; &#123;</span><br><span class="line">  // ... ...</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>在 Flask 中：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@app.route(&apos;/user/&lt;user_id&gt;&apos;)</span><br><span class="line">def get_user_info(user_id):</span><br><span class="line">    pass</span><br></pre></td></tr></table></figure>
+
 <h2 id="6-严格路由"><a href="#6-严格路由" class="headerlink" title="6.严格路由"></a>6.严格路由</h2><p>在很多情况下，会遇到 /foobar 和 /foobar/ 的情况，它们看起来非常类似，然而实际上有所区别，具体的行为也是视服务器设置而定。</p>
-<p>在 <a href="">Flask的文档</a> 中，提到，末尾有斜线的路径，类比于文件系统的一个目录；末尾没有斜线的路径，类比于一个文件。因此访问 /foobar 的时候，可能会重定向到 /foobar/，而反过来则不会。</p>
-<p>如果使用的是 <a href="">Express</a>，默认这两者是一样的，也可以通过 app.set 来设置 strict routing，来区别对待这两种情况。</p>
+<p>在 <a href>Flask的文档</a> 中，提到，末尾有斜线的路径，类比于文件系统的一个目录；末尾没有斜线的路径，类比于一个文件。因此访问 /foobar 的时候，可能会重定向到 /foobar/，而反过来则不会。</p>
+<p>如果使用的是 <a href>Express</a>，默认这两者是一样的，也可以通过 app.set 来设置 strict routing，来区别对待这两种情况。</p>
 <h2 id="什么是路由？"><a href="#什么是路由？" class="headerlink" title="什么是路由？"></a>什么是路由？</h2><blockquote>
 <p>在Web开发过程中，经常会遇到『路由』的概念。那么，到底什么是路由？简单来说，路由就是URL到函数的映射。</p>
 </blockquote>
 <p>访问的URL会映射到相应的函数里（这个函数是广义的，可以是前端的函数也可以是后端的函数），然后由相应的函数来决定返回给这个URL什么东西。路由就是在做一个匹配的工作。</p>
 <h2 id="从后端路由讲起"><a href="#从后端路由讲起" class="headerlink" title="从后端路由讲起"></a>从后端路由讲起</h2><p>在web开发早期的「刀耕火种」年代里，一直是后端路由占据主导地位。不管是php，还是jsp、asp，用户能通过URL访问到的页面，大多是通过后端路由匹配之后再返回给浏览器的。经典面试题，「你从浏览器地址栏里输入<a href="http://www.baidu.com到你看到网页这个过程中经历了什么」其实讲的也是这个道理。" target="_blank" rel="noopener">www.baidu.com到你看到网页这个过程中经历了什么」其实讲的也是这个道理。</a></p>
-<p><img src="/images/route1/8700af19ly1fproibqucxj20lu03odg9.jpg" alt=""></p>
+<p><img src="/images/route1/8700af19ly1fproibqucxj20lu03odg9.jpg" alt></p>
 <p>在web后端，不管是什么语言的后端框架，都会有一个专门开辟出来的路由模块或者路由区域，用来匹配用户给出的URL地址，以及一些表单提交、ajax请求的地址。通常遇到无法匹配的路由，后端将会返回一个404状态码。这也是我们常说的404 NOT FOUND的由来。</p>
 <h2 id="URL-与-Methods"><a href="#URL-与-Methods" class="headerlink" title="URL 与 Methods"></a>URL 与 Methods</h2><p>如果你关注RESTful API，那么将会很熟悉下面四种发起请求的类型：GET，POST，PUT，DELETE。</p>
 <blockquote>
 <p>它们分别对应四种基本操作：GET用来获取资源，POST用来新建资源（也可以用于更新资源），PUT用来更新资源，DELETE用来删除资源。——来自阮一峰《理解RESTful架构》</p>
 </blockquote>
-<p>虽然上面说的是RESTful API，但是实际上我们在地址栏输入一个URL，并回车的时候，是以GET请求发出去的。这也体现了，URL地址和请求的method也应该是一一对应。下面给出一个例子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">router.post(&apos;/user/:id&apos;, addUser)</span><br></pre></td></tr></table></figure></p>
-<p>假如我的后端路由配置里只有这一句路由。那么我通过浏览器里访问：<a href="http://xxx.com/user/123的话是无法访问到的，也会返回一个404。因为后端只配了一个post方法的路由。如果要接受这个请求，那么必须有如下的路由：" target="_blank" rel="noopener">http://xxx.com/user/123的话是无法访问到的，也会返回一个404。因为后端只配了一个post方法的路由。如果要接受这个请求，那么必须有如下的路由：</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">router.get(&apos;/user/:id&apos;, getUser) // 配置get路由</span><br><span class="line">router.post(&apos;/user/:id&apos;, addUser)</span><br></pre></td></tr></table></figure></p>
+<p>虽然上面说的是RESTful API，但是实际上我们在地址栏输入一个URL，并回车的时候，是以GET请求发出去的。这也体现了，URL地址和请求的method也应该是一一对应。下面给出一个例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">router.post(&apos;/user/:id&apos;, addUser)</span><br></pre></td></tr></table></figure>
+
+<p>假如我的后端路由配置里只有这一句路由。那么我通过浏览器里访问：<a href="http://xxx.com/user/123的话是无法访问到的，也会返回一个404。因为后端只配了一个post方法的路由。如果要接受这个请求，那么必须有如下的路由：" target="_blank" rel="noopener">http://xxx.com/user/123的话是无法访问到的，也会返回一个404。因为后端只配了一个post方法的路由。如果要接受这个请求，那么必须有如下的路由：</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">router.get(&apos;/user/:id&apos;, getUser) // 配置get路由</span><br><span class="line">router.post(&apos;/user/:id&apos;, addUser)</span><br></pre></td></tr></table></figure>
+
 <h2 id="后端路由与服务端渲染"><a href="#后端路由与服务端渲染" class="headerlink" title="后端路由与服务端渲染"></a>后端路由与服务端渲染</h2><p>前面说了，「刀耕火种」的年代里，网页通常是通过后端路由直出给客户端浏览器的。也就是网页的html一般是在后端服务器里通过模板引擎渲染好再交给前端的。至于一些其他的效果，是通过预先写在页面里的jQuery、Bootstrap等常见的前端框架去负责的。</p>
 <p>如果你说有些网站已经是通过ajax去实现的页面，比如gmail，比如qq邮箱。那么你要注意到哪怕是这些页面，它们页面的「龙骨」也并非是全部通过ajax去实现的，依然还是后端直出——这也就是我们现在又老生常谈的<strong>服务端渲染</strong>。</p>
 <p>服务端渲染的好处有很多，比如对于SEO友好，一些对安全性要求高的页面采用服务端渲染是更保险的。而在当时还没有node.js的年代，为了良好地构建前端页面，都是通过服务端语言对应的模板引擎来实现动态网页、页面结构的组织、组件的复用。比如Laravel的blade，用在Django上的jinja2，用在Struts的jsp等等。实际上到如今，一门后端语言想要能实现自己的web功能，都需要有自己对应的模板引擎。</p>
@@ -163,8 +190,9 @@
 <p>前端路由应用最广泛的例子就是当今的SPA的web项目。不管是Vue、React还是Angular的页面工程，都离不开相应配套的router工具。前端路由带来的最明显的好处就是，地址栏URL的跳转不会白屏了——这也得益于前端渲染带来的好处。</p>
 <h3 id="前端路由与前端渲染"><a href="#前端路由与前端渲染" class="headerlink" title="前端路由与前端渲染"></a>前端路由与前端渲染</h3><p>讲前端路由就不能不说前端渲染。我以Vue项目为例。如果你是用官方的vue-cli搭配webpack模板构建的项目，你有没有想过你的浏览器拿到的html是什么样的？是你页面长的那样有button有form的样子么？我想不是的。在生产模式下，你看看构建出来的index.html长什么样：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">  &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">  &lt;title&gt;Vue&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">  &lt;div id=&quot;app&quot;&gt;&lt;/div&gt;</span><br><span class="line">  &lt;script type=&quot;text/javascript&quot; src=&quot;xxxx.xxx.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">  &lt;script type=&quot;text/javascript&quot; src=&quot;yyyy.yyy.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">  &lt;script type=&quot;text/javascript&quot; src=&quot;zzzz.zzz.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
 <p>通常长上面这个样子。可以看到，这个其实就是你的浏览器从服务端拿到的html。这里面空荡荡的只有一个 <code>&lt;div id=&quot;app&quot;&gt;&lt;/div&gt;</code>这个入口的div以及下面配套的一系列js文件。所以你看到的页面其实是通过那些js渲染出来的。这也是我们常说的前端渲染。</p>
-<p><img src="/images/route1/2.png" alt=""></p>
+<p><img src="/images/route1/2.png" alt></p>
 <p>前端渲染把渲染的任务交给了浏览器，通过客户端的算力来解决页面的构建，这个很大程度上缓解了服务端的压力。而且配合前端路由，无缝的页面切换体验自然是对用户友好的。不过带来的坏处就是对SEO不友好，毕竟搜索引擎的爬虫只能爬到上面那样的html，对浏览器的版本也会有相应的要求。</p>
 <p>需要明确的是，只要在浏览器地址栏输入URL再回车，是一定会去后端服务器请求一次的。而如果是在页面里通过点击按钮等操作，利用router库的api来进行的URL更新是不会去后端服务器请求的。</p>
 <h4 id="Hash模式"><a href="#Hash模式" class="headerlink" title="Hash模式"></a>Hash模式</h4><p>hash模式利用的是浏览器不会对#号后面的路径对服务端发起路由请求。也即在浏览器里输入如下这两个地址：<a href="http://localhost/#/user/1和http://localhost/其实到服务端都是去请求http://localhost这个页面的内容。" target="_blank" rel="noopener">http://localhost/#/user/1和http://localhost/其实到服务端都是去请求http://localhost这个页面的内容。</a></p>
@@ -183,13 +211,14 @@
 <h2 id="实列：使用Vue-和-Flask中创建单页面应用去除导航栏中的-号"><a href="#实列：使用Vue-和-Flask中创建单页面应用去除导航栏中的-号" class="headerlink" title="实列：使用Vue 和 Flask中创建单页面应用去除导航栏中的#号"></a>实列：使用Vue 和 Flask中创建单页面应用去除导航栏中的#号</h2><p>Vue项目去掉地址栏中的#号，最常用的方式就是在路由中使用 history 模式，存在的问题与原因如上文所述，HTML5的History-Mode在Vue-router中需要配置Web服务器的重定向，将所有路径指向index.html</p>
 <p>以Flask创建的 <code>web server</code> 为例，做法很简单，将现有路由修改为以下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@app.route(&apos;/&apos;, defaults=&#123;&apos;path&apos;: &apos;&apos;&#125;)</span><br><span class="line">@app.route(&apos;/&lt;path:path&gt;&apos;)</span><br><span class="line">def catch_all(path):</span><br><span class="line">    return render_template(&quot;index.html&quot;)</span><br></pre></td></tr></table></figure>
+
 <p>现在输入网址localhost:5000/xxxx 都将重新定向到index.html和vue-router将处理路由。</p>
 <p>参考：<br><a href="https://juejin.im/post/5ab0a21df265da23a228efd3" target="_blank" rel="noopener">使用 Vue.js 和 Flask 来构建一个单页的App</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://heweixia.com/2019/07/03/理解Web路由（浅谈前后端路由与前后端渲染）/" data-id="cjxwuxi7c001zbcvw0xedh0dx" class="article-share-link">Share</a>
+      <a data-url="http://heweixia.com/2019/07/03/理解Web路由（浅谈前后端路由与前后端渲染）/" data-id="cjyqoqkkh001y7wvwe8k3ibnc" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/路由-vue/">路由 vue</a></li></ul>

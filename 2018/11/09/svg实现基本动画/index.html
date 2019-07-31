@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
   
 
@@ -65,7 +65,7 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-svg实现基本动画" class="article article-type-post" itemscope="" itemprop="blogPost">
+        <section id="main"><article id="post-svg实现基本动画" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/11/09/svg实现基本动画/" class="article-date">
   <time datetime="2018-11-09T09:48:54.000Z" itemprop="datePublished">2018-11-09</time>
@@ -95,8 +95,7 @@
 <a id="more"></a>
 <h4 id="1-animation"><a href="#1-animation" class="headerlink" title="1.animation"></a>1.animation</h4><p>animation是如下几个属性的缩写，可以将<strong>动画</strong>与<strong>元素</strong>绑定，与keyframe共同使用。</p>
 <p><strong>语法</strong></p>
-<pre><code>animation: name duration timing-function delay iteration-count direction fill-mode play-state;
-</code></pre><ul>
+<pre><code>animation: name duration timing-function delay iteration-count direction fill-mode play-state;</code></pre><ul>
 <li><strong>animation-name</strong>：规定需要绑定到选择器的 keyframe 名称；</li>
 <li><strong>animation-duration : value</strong>：规定完成动画所花费的时间，以秒或毫秒计；</li>
 <li><strong>animation-timing-funtion ： value(linear | ease | ease-in | ease-out | ease-in-out | timing-funtion</strong>：规定动画的速度曲线；</li>
@@ -108,8 +107,7 @@
 </ul>
 <h4 id="2-tranform"><a href="#2-tranform" class="headerlink" title="2.tranform"></a>2.tranform</h4><p>transform 属性向元素应用 2D 或 3D 转换。该属性允许我们对元素进行旋转、缩放、移动或倾斜。 </p>
 <p><strong>语法</strong></p>
-<pre><code>transform: none|transform-functions;
-</code></pre><ul>
+<pre><code>transform: none|transform-functions;</code></pre><ul>
 <li><strong>rotate</strong>：旋转</li>
 <li><strong>translate</strong>：移动</li>
 <li><strong>skew</strong>：倾斜</li>
@@ -117,8 +115,7 @@
 </ul>
 <h4 id="3-transition"><a href="#3-transition" class="headerlink" title="3.transition"></a>3.transition</h4><p>transition是如下几个属性的缩写，可以实现样式到样式的过度效果，与animation有些相似，都可以做些简单的动画效果，但是transition没法想animation一样做到帧动画。</p>
 <p><strong>语法</strong>  </p>
-<pre><code>transition: property duration timing-function delay;
-</code></pre><ul>
+<pre><code>transition: property duration timing-function delay;</code></pre><ul>
 <li><strong>transition-property：all | property</strong>规定设置过渡效果的 CSS 属性的名称。</li>
 <li><strong>transition-duration：time</strong>    规定完成过渡效果需要多少秒或毫秒。</li>
 <li><strong>transition-timing-function：linear | ease | ease-in | ease-out | ease-in-out | cubic-<br>bezier(n,n,n,n)</strong> 规定速度效果的速度曲线。</li>
@@ -128,8 +125,7 @@
 <p><strong>svg代码</strong></p>
 <pre><code>&lt;svg width=&quot;500&quot; height=&quot;500&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot; xmlns:xlink=&quot;http://www.w3.org/1999/xlink&quot;&gt;
    &lt;rect x=&quot;50&quot; y=&quot;50&quot; width=&quot;200&quot; height=&quot;200&quot; fill=&quot;none&quot; stroke=&quot;black&quot;&gt;&lt;/rect&gt;
-&lt;/svg&gt;
-</code></pre><p><strong>css代码</strong></p>
+&lt;/svg&gt;</code></pre><p><strong>css代码</strong></p>
 <pre><code>rect {
     stroke-width: 10px;
     animation: outlineRect 2s linear infinite;
@@ -141,12 +137,11 @@
     }100% {
         stroke-dasharray:400px 200px;
     }
-}
-</code></pre>
+}</code></pre>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://heweixia.com/2018/11/09/svg实现基本动画/" data-id="cjxwuxi64000jbcvwtni1op6d" class="article-share-link">Share</a>
+      <a data-url="http://heweixia.com/2018/11/09/svg实现基本动画/" data-id="cjyqoqkj8000j7wvwt71hdg9n" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/svg/">svg</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/动画/">动画</a></li></ul>

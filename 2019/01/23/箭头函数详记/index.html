@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
   
 
@@ -65,7 +65,7 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-箭头函数详记" class="article article-type-post" itemscope="" itemprop="blogPost">
+        <section id="main"><article id="post-箭头函数详记" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/01/23/箭头函数详记/" class="article-date">
   <time datetime="2019-01-23T02:22:32.000Z" itemprop="datePublished">2019-01-23</time>
@@ -94,6 +94,7 @@
         <p><strong>箭头函数表达式的语法比函数表达式更短，并且没有自己的<code>this</code>，<code>arguments</code>，<code>super</code>或<code>new.target</code>。这些函数表达式更适用于那些本来需要匿名函数的地方，并且它们不能用作构造函数。</strong></p>
 <p><font color="red">首先</font>：我们先考虑一下这个箭头函数没有自己的<code>this</code>，<code>arguments</code>，<code>super</code>或<code>new.target</code>是什么意思？带着问题去看下面的内容会更事半功倍。</p>
 <a id="more"></a>
+
 <h4 id="一、语法"><a href="#一、语法" class="headerlink" title="一、语法"></a>一、语法</h4><h5 id="1-基础语法"><a href="#1-基础语法" class="headerlink" title="1.基础语法"></a>1.基础语法</h5><pre><code>(参数1, 参数2, …, 参数N) =&gt; { 函数声明 }
 
 //相当于：(参数1, 参数2, …, 参数N) =&gt;{ return 表达式; }
@@ -104,8 +105,7 @@
 单一参数 =&gt; {函数声明}
 
 // 没有参数的函数应该写成一对圆括号。
-() =&gt; {函数声明}
-</code></pre><h5 id="2-高级语法"><a href="#2-高级语法" class="headerlink" title="2.高级语法"></a>2.高级语法</h5><pre><code>//加括号的函数体返回对象字面表达式：
+() =&gt; {函数声明}</code></pre><h5 id="2-高级语法"><a href="#2-高级语法" class="headerlink" title="2.高级语法"></a>2.高级语法</h5><pre><code>//加括号的函数体返回对象字面表达式：
 参数=&gt; ({foo: bar})
 
 //支持剩余参数和默认参数
@@ -114,8 +114,7 @@
 
 //同样支持参数列表解构
 let f = ([a, b] = [1, 2], {x: c} = {x: a + b}) =&gt; a + b + c;
-f();  // 6
-</code></pre><h4 id="二、没有自己的this，不绑定this"><a href="#二、没有自己的this，不绑定this" class="headerlink" title="二、没有自己的this，不绑定this"></a>二、没有自己的<code>this</code>，不绑定<code>this</code></h4><p>我们先看一下下面的代码，</p>
+f();  // 6</code></pre><h4 id="二、没有自己的this，不绑定this"><a href="#二、没有自己的this，不绑定this" class="headerlink" title="二、没有自己的this，不绑定this"></a>二、没有自己的<code>this</code>，不绑定<code>this</code></h4><p>我们先看一下下面的代码，</p>
 <pre><code>const Person = {
     &apos;name&apos;: &apos;little bear&apos;,
     &apos;age&apos;: 18,
@@ -125,8 +124,7 @@ f();  // 6
         }, 1000)
     }
 }
-console.log(Person.sayHello()) //我叫我今年undefined岁!
-</code></pre><p>打印的结果是<code>undefined</code>，知道是什么原因吗？当然，<code>setTimeout</code>方法里面的<code>this</code>指向的是<code>window</code>，所以是<code>undefined</code>，sayhello方法中的<code>this</code>是指向Person的，如果按照下面的方式将sayHello中的<code>this</code>赋值给封闭变量self,就可以正确打印结果了</p>
+console.log(Person.sayHello()) //我叫我今年undefined岁!</code></pre><p>打印的结果是<code>undefined</code>，知道是什么原因吗？当然，<code>setTimeout</code>方法里面的<code>this</code>指向的是<code>window</code>，所以是<code>undefined</code>，sayhello方法中的<code>this</code>是指向Person的，如果按照下面的方式将sayHello中的<code>this</code>赋值给封闭变量self,就可以正确打印结果了</p>
 <pre><code>const Person1 = {
     &apos;name&apos;: &apos;little bear&apos;,
     &apos;age&apos;: 18,
@@ -137,8 +135,7 @@ console.log(Person.sayHello()) //我叫我今年undefined岁!
         }, 1000)
     }
 }
-console.log(Person1.sayHello());//我叫little bear我今年18岁!
-</code></pre><p>我们再看一下下面的代码，想想打印的结果是什么呢？</p>
+console.log(Person1.sayHello());//我叫little bear我今年18岁!</code></pre><p>我们再看一下下面的代码，想想打印的结果是什么呢？</p>
 <pre><code>const Person3 = {
     &apos;name&apos;: &apos;little bear&apos;,
     &apos;age&apos;: 18,
@@ -148,8 +145,7 @@ console.log(Person1.sayHello());//我叫little bear我今年18岁!
         }, 1000)
     }
 }
-console.log(Person3.sayHello());//我叫little bear我今年18岁!
-</code></pre><p>这个结果是否如你所料呢？</p>
+console.log(Person3.sayHello());//我叫little bear我今年18岁!</code></pre><p>这个结果是否如你所料呢？</p>
 <p><strong>箭头函数不会创建自己的<code>this</code>,它只会从自己的作用域链的上一层继承<code>this</code>。因此，在下面的代码中，传递给setInterval的函数内的this与封闭函数中的this值相同。</strong></p>
 <p>我们再看看下面的代码就应该好理解了  </p>
 <pre><code> const Person5 = {
@@ -161,8 +157,7 @@ console.log(Person3.sayHello());//我叫little bear我今年18岁!
         }, 1000)
     }
 }
-Person5.sayHello();//我叫我今年undefined岁!
-</code></pre><p>封闭函数的<code>this</code>指向的是外部对象<code>window</code>，<code>setTimeout</code>继承上一层<code>this</code>,所以也是指向的<code>window</code>；</p>
+Person5.sayHello();//我叫我今年undefined岁!</code></pre><p>封闭函数的<code>this</code>指向的是外部对象<code>window</code>，<code>setTimeout</code>继承上一层<code>this</code>,所以也是指向的<code>window</code>；</p>
 <p><strong>通过 call 或 apply 调用</strong></p>
 <p>首先我们回顾一下 <code>call</code> 跟 <code>apply</code> </p>
 <ol>
@@ -202,8 +197,7 @@ Person5.sayHello();//我叫我今年undefined岁!
 };
 
 console.log(adder.add(1));         // 输出 2
-console.log(adder.addThruCall(1)); // 仍然输出 2（而不是3 ——译者注）
-</code></pre><p>结果：</p>
+console.log(adder.addThruCall(1)); // 仍然输出 2（而不是3 ——译者注）</code></pre><p>结果：</p>
 <p><strong>由于 箭头函数没有自己的this指针，通过 call() 或 apply() 方法调用一个函数时，只能传递参数（不能绑定this），他们的第一个参数会被忽略。</strong></p>
 <h4 id="三、不绑定arguments"><a href="#三、不绑定arguments" class="headerlink" title="三、不绑定arguments"></a>三、不绑定arguments</h4><p>我们都知道函数内部，<code>argument</code>是一个作为函数输入的值-原始数据或对象</p>
 <pre><code> var arguments = [5, 6, 7];
@@ -217,8 +211,7 @@ var arr1 = () =&gt; { return arguments; }
 console.log(arr1());//[5,6,7]
 
 var arr2 = (a) =&gt; { return arguments; }
-console.log(arr2(1));//[5,6,7]
-</code></pre><p>从上就可以看出，一般的函数是绑定了<code>Arguments</code> 对象，而箭头函数没有绑定</p>
+console.log(arr2(1));//[5,6,7]</code></pre><p>从上就可以看出，一般的函数是绑定了<code>Arguments</code> 对象，而箭头函数没有绑定</p>
 <p>看下面的代码箭头函数中的<code>arguments</code>只是引用了封闭作用域内的<code>arguments</code></p>
 <pre><code>var arguments = [1, 2, 3];
 var arr = () =&gt; arguments[0];
@@ -230,20 +223,17 @@ function foo(n) {
   return f();
 }
 
-foo(1); // 2
-</code></pre><h4 id="四、使用-new-操作符"><a href="#四、使用-new-操作符" class="headerlink" title="四、使用 new 操作符"></a>四、使用 new 操作符</h4><p>箭头函数不能用作构造器，和 new一起用会抛出错误。</p>
+foo(1); // 2</code></pre><h4 id="四、使用-new-操作符"><a href="#四、使用-new-操作符" class="headerlink" title="四、使用 new 操作符"></a>四、使用 new 操作符</h4><p>箭头函数不能用作构造器，和 new一起用会抛出错误。</p>
 <pre><code>var Foo = () =&gt; {};
-var foo = new Foo(); // TypeError: Foo is not a constructor  
-</code></pre><h4 id="五、使用prototype属性"><a href="#五、使用prototype属性" class="headerlink" title="五、使用prototype属性"></a>五、使用prototype属性</h4><p>箭头函数没有prototype属性。</p>
+var foo = new Foo(); // TypeError: Foo is not a constructor  </code></pre><h4 id="五、使用prototype属性"><a href="#五、使用prototype属性" class="headerlink" title="五、使用prototype属性"></a>五、使用prototype属性</h4><p>箭头函数没有prototype属性。</p>
 <pre><code>var Foo = () =&gt; {};
-console.log(Foo.prototype); // undefined
-</code></pre><h4 id="六、使用-yield-关键字"><a href="#六、使用-yield-关键字" class="headerlink" title="六、使用 yield 关键字"></a>六、使用 yield 关键字</h4><p><code>yield</code>关键字通常不能在箭头函数中使用（除非是嵌套在允许使用的函数内）。因此，箭头函数不能用作生成器。</p>
+console.log(Foo.prototype); // undefined</code></pre><h4 id="六、使用-yield-关键字"><a href="#六、使用-yield-关键字" class="headerlink" title="六、使用 yield 关键字"></a>六、使用 yield 关键字</h4><p><code>yield</code>关键字通常不能在箭头函数中使用（除非是嵌套在允许使用的函数内）。因此，箭头函数不能用作生成器。</p>
 <p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Functions/Arrow_functions" target="_blank" rel="noopener">点击可以查看更多详情</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://heweixia.com/2019/01/23/箭头函数详记/" data-id="cjxwuxi6f000ubcvw31ytl3q8" class="article-share-link">Share</a>
+      <a data-url="http://heweixia.com/2019/01/23/箭头函数详记/" data-id="cjyqoqkje000u7wvwanqf2uyq" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/箭头函数/">箭头函数</a></li></ul>
