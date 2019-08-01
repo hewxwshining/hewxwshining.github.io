@@ -5,20 +5,19 @@
   
 
   
-  <title>JS基础测试34 | Hex笔记</title>
+  <title>JS基础测试32 | Hex笔记</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="简答题所有题目公用一个上下文，已知数组： 1let arr = [1,2,,3];   arr 的长度是什么？ 去除 arr 中的空数组项； ar2 = arr.map(parseInt)，请写下 arr2 的内容； arr 和 arr2 合并成数组 arr3 ， 兼容IE8+ ； 去除数组 arr3 中重复内容；">
-<meta name="keywords" content="js">
+  <meta name="keywords" content="js">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JS基础测试34">
-<meta property="og:url" content="http://heweixia.com/2019/07/08/JS基础测试34/index.html">
+<meta property="og:title" content="JS基础测试32">
+<meta property="og:url" content="http://heweixia.com/2019/08/01/JS基础测试32/index.html">
 <meta property="og:site_name" content="Hex笔记">
-<meta property="og:description" content="简答题所有题目公用一个上下文，已知数组： 1let arr = [1,2,,3];   arr 的长度是什么？ 去除 arr 中的空数组项； ar2 = arr.map(parseInt)，请写下 arr2 的内容； arr 和 arr2 合并成数组 arr3 ， 兼容IE8+ ； 去除数组 arr3 中重复内容；">
 <meta property="og:locale" content="zh_CN.utf8">
-<meta property="og:updated_time" content="2019-07-09T06:57:00.814Z">
+<meta property="og:image" content="http://heweixia.com/images/base-test/js-32-1.png">
+<meta property="og:updated_time" content="2019-08-01T09:54:43.985Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JS基础测试34">
-<meta name="twitter:description" content="简答题所有题目公用一个上下文，已知数组： 1let arr = [1,2,,3];   arr 的长度是什么？ 去除 arr 中的空数组项； ar2 = arr.map(parseInt)，请写下 arr2 的内容； arr 和 arr2 合并成数组 arr3 ， 兼容IE8+ ； 去除数组 arr3 中重复内容；">
+<meta name="twitter:title" content="JS基础测试32">
+<meta name="twitter:image" content="http://heweixia.com/images/base-test/js-32-1.png">
   
     <link rel="alternate" href="/atom.xml" title="Hex笔记" type="application/atom+xml">
   
@@ -65,10 +64,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-JS基础测试34" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-JS基础测试32" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/07/08/JS基础测试34/" class="article-date">
-  <time datetime="2019-07-08T09:25:43.000Z" itemprop="datePublished">2019-07-08</time>
+    <a href="/2019/08/01/JS基础测试32/" class="article-date">
+  <time datetime="2019-08-01T09:09:06.000Z" itemprop="datePublished">2019-08-01</time>
 </a>
     
   <div class="article-category">
@@ -83,7 +82,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      JS基础测试34
+      JS基础测试32
     </h1>
   
 
@@ -91,57 +90,43 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><strong>简答题</strong><br>所有题目公用一个上下文，已知数组：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">let arr = [1,2,,3];</span><br></pre></td></tr></table></figure>
-
-<ol>
-<li>arr 的长度是什么？</li>
-<li>去除 arr 中的空数组项；</li>
-<li><code>ar2 = arr.map(parseInt)</code>，请写下 arr2 的内容；</li>
-<li>arr 和 arr2 合并成数组 arr3 ， 兼容IE8+ ；</li>
-<li>去除数组 arr3 中重复内容；</li>
-</ol>
+        <p><img src="/images/base-test/js-32-1.png" alt></p>
 <a id="more"></a>
 
-<p>第一题： 4<br>第二题： arr = arr.filter( v=&gt;!!v); //[1,2,3]<br>第三题： [1,NaN,NaN]<br>第四题： arr3 = arr.concat(arr2)// [1, 2, 3, 1, NaN, NaN]<br>第五题： […new Set(arr3)] // [1, 2, 3, NaN]</p>
-<p><strong>详解：</strong></p>
-<p>第一题：空数组项也会作为length的一部分；空数组项和空字符串项是有区别的。</p>
-<p>第二题：  </p>
-<ol>
-<li>数组中的 empty 元素不会参与数组项遍历，故只需返回 true 即可过滤掉 empty 元素（而不会牵连 0、NaN、null、undefined、’’ 这些）arr.filter(it =&gt; true)。然后补充，但是走for循环，还是会遍历empty数组项。</li>
-<li>或者filter方法参数直接就是一个function即可。例如：arr.filter(Boolean)，arr.filter(Number)， arr.filter(String)</li>
-<li>上面并不会最好的方法。数组有个API，天然去除空数组项，<code>arr.flat()</code>。flat()可以让数组扁平化的方法</li>
-</ol>
-<p>第三题：<br>首先先来回顾一下 <strong>map()</strong> 和 <strong>parseInt()</strong>两个方法 </p>
-<p>Arrapy.map()：方法创建一个新数组，其结果是该数组中的每个元素都调用一个提供的函数后返回的结果。<br>语法：</p>
-<blockquote>
-<p>var new_array = arr.map(function callback(currentValue[, index[, array]]) {<br>// Return element for new_array<br>}[, thisArg])</p>
-</blockquote>
-<ul>
-<li>callback 生成新数组元素的函数，使用三个参数:</li>
-<li>currentValue：callback数组中正在处理的当前元素</li>
-<li>index | 可选：callback 数组中正在处理的当前元素的索引。</li>
-<li>array | 可选：callback  map 方法被调用的数组。</li>
-<li>thisArg | 可选：执行 callback 函数时使用的this 值。</li>
-<li>返回值：一个新数组，每个元素都是回调函数的结果。</li>
-</ul>
-<p><strong>parseInt(string, radix)</strong>  string为字符串，radix为介于2-36之间的数。使用者告诉这个函数string（比如11）是radix（比如2）进制的，函数将固定返回string以十进制时显示的数（3）<br>注意：string 中的每个数字都要比 radix 小，否则返回 <strong>NaN</strong></p>
-<p><strong>再仔细想想原题中的答案，为什么是[1,NaN,NaN],不难看出，map 的回调函数的参数 index 索引值作为了 parseInt 的基数 radix ,导致出现超范围的 radix 赋值和不合法的进制解析，才会返回 NaN 。</strong></p>
-<p>也许你还会怀疑索引值和基数radix对应关系的准确性，这时你可以重新定义parseInt函数，再来测试一下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function parseInt(str, radix) &#123; </span><br><span class="line">    return str+&apos;-&apos;+radix; </span><br><span class="line">&#125;;</span><br><span class="line">var a=[&quot;1&quot;, &quot;2&quot;, &quot;3&quot;, &quot;4&quot;,&quot;5&quot;,6,7,8,9,10,11,12,13,14,15];</span><br><span class="line">a.map(parseInt);</span><br></pre></td></tr></table></figure>
+<h4 id="第一题"><a href="#第一题" class="headerlink" title="第一题"></a>第一题</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">document.cookie</span><br></pre></td></tr></table></figure>
 
-<p>输出结果为：[“1-0”,”2-1”,”3-2”,”4-3”,”5-4”,”6-5”,”7-6”,”8-7”,”9-8”,”10-9”,”11-10”,”12-11”,”13-12”,”14-13”,”15-14”]。</p>
-<p>通过此例，再次证明，索引index的起始值从0开始，与radix的对应如前陈述一致，所以才会出现返回NaN的类型值。</p>
-<p>第四题：concat，可以数组合并。可以分别连接子项，也可以直接连接数组。如果不考虑兼容，可以[…arr, …arr2]。其他参考方法：</p>
-<pre><code>1. Array.prototype.push.apply(arr3, arr2)
-2. [].push.apply(arr3, arr2)</code></pre><p>此时arr3是合并后的数组；  </p>
-<p>第五题：数组去重。使用 new Set(arr3) ，然后把Set对象转换成数组。转数组两个常用方法:  </p>
-<pre><code>1. Array.from(new Set(arr3))
-2. [...new Set(arr3)] </code></pre>
+<h4 id="第二题"><a href="#第二题" class="headerlink" title="第二题"></a>第二题</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">document.cookie = &apos;userid=1&apos;</span><br></pre></td></tr></table></figure>
+
+<h4 id="第三题"><a href="#第三题" class="headerlink" title="第三题"></a>第三题</h4><p>方法一：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var expires = 24 * 36e5;  // 过期时间：1 天</span><br><span class="line">document.cookie = &apos;userid=1; expires=&apos; + (new Date((+new Date(time)) + expires)).toUTCString();</span><br></pre></td></tr></table></figure>
+
+<p>方法二：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">document.cookie =&apos;userid=1; max-age=86400&apos;</span><br></pre></td></tr></table></figure>
+
+<p><em>1.通过前端手段设置cookie的过期时间，一定要使用服务器时间，不能使用本地时间。两个原因：一个是和服务侧统一；本地时间是不准的，用户可以修改的；</em><br><em>2.设置过期时间可以expires，也可以是max-age。区别是什么呢？max-age是更新的过期时间用法，是IE9+浏览器才支持的，更容易理解和记忆。</em></p>
+<h4 id="第四题"><a href="#第四题" class="headerlink" title="第四题"></a>第四题</h4><p>常规方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">getCookie(&apos;_csrfToken&apos;);</span><br><span class="line">function getCookie(name) &#123;  </span><br><span class="line">  var arr = document.cookie.split(/;\s/);</span><br><span class="line"></span><br><span class="line">  for (var i = 0; i &lt; arr.length; i++) &#123;</span><br><span class="line">    var params = arr[i].split(&apos;=&apos;);</span><br><span class="line"></span><br><span class="line">    if (name === params[0]) &#123;</span><br><span class="line">      return params[1];</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  return &apos;&apos;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>正则表达式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">decodeURIComponent((document.cookie.match(/(^| )_csrfToken=([^;]+)/)||[,,&apos;&apos;])[2])</span><br></pre></td></tr></table></figure>
+
+<h4 id="第五题"><a href="#第五题" class="headerlink" title="第五题"></a>第五题</h4><p>方法一：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">document.cookie = &apos;ywkey=; expires=&apos; + new Date(Date.now() - 1e10).toUTCString();</span><br></pre></td></tr></table></figure>
+
+<p>方法二：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">document.cookie=&quot;ywkey=;max-age=-1&quot;</span><br></pre></td></tr></table></figure>
+
+<p><em>删除cookie可以设置过期时间为之前。</em></p>
+<h4 id="第六题"><a href="#第六题" class="headerlink" title="第六题"></a>第六题</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">localStorage.setItem(&apos;userid&apos;, 1)  或者 localStorage.userid = 1;</span><br></pre></td></tr></table></figure>
+
+<h4 id="第七题"><a href="#第七题" class="headerlink" title="第七题"></a>第七题</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">var expires = 24 * 36e5 * 7;  // 过期时间：7 天</span><br><span class="line"></span><br><span class="line">// 存储时加个时间戳</span><br><span class="line">localStorage.setItem(&apos;userid&apos;, JSON.stringify(&#123;</span><br><span class="line">  data: 1,</span><br><span class="line">  stamp: Date.now() + expires</span><br><span class="line">&#125;));</span><br><span class="line"></span><br><span class="line">// 取值时进行判断</span><br><span class="line">var store_userid = JSON.parse(localStorage.getItem(&apos;userid&apos;));</span><br><span class="line">var uidStamp = store_userid.stamp;</span><br><span class="line">var userid;</span><br><span class="line"></span><br><span class="line">if (uidStamp &lt;= Date.now()) &#123;  // 过期</span><br><span class="line">  localStorage.removeItem(&apos;userid&apos;);</span><br><span class="line">&#125; else &#123;</span><br><span class="line">  userid = store_userid.data;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><em>localStorage过期时间，JSON.stringify和JSON.parse是可读性很不错，也容易维护的实现</em></p>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://heweixia.com/2019/07/08/JS基础测试34/" data-id="cjysi6i63000b98vw1g18is77" class="article-share-link">Share</a>
+      <a data-url="http://heweixia.com/2019/08/01/JS基础测试32/" data-id="cjysi6i5x000698vwcnr31m43" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li></ul>
@@ -152,19 +137,10 @@
     
 <nav id="article-nav">
   
-    <a href="/2019/07/10/JS基础测试33/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          JS基础测试33
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/07/08/DOM基础测试31/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2019/07/10/JS基础测试33/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">DOM基础测试31</div>
+      <div class="article-nav-title">JS基础测试33</div>
     </a>
   
 </nav>
