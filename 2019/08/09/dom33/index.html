@@ -5,20 +5,19 @@
   
 
   
-  <title>JS基础测试34 | Hex笔记</title>
+  <title>Hex笔记</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="简答题所有题目公用一个上下文，已知数组： 1let arr = [1,2,,3];   arr 的长度是什么？ 去除 arr 中的空数组项； ar2 = arr.map(parseInt)，请写下 arr2 的内容； arr 和 arr2 合并成数组 arr3 ， 兼容IE8+ ； 去除数组 arr3 中重复内容；">
-<meta name="keywords" content="js">
+  <meta name="description" content="(function() {         var div = document.createElement(&apos;div&apos;);         div.style.width = &apos;300px&apos;;         div.style.height = &apos;150px&apos;;         div.style.background = &apos;linear-g">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JS基础测试34">
-<meta property="og:url" content="http://heweixia.com/2019/07/08/JS基础测试34/index.html">
+<meta property="og:title" content="Hex笔记">
+<meta property="og:url" content="http://heweixia.com/2019/08/09/dom33/index.html">
 <meta property="og:site_name" content="Hex笔记">
-<meta property="og:description" content="简答题所有题目公用一个上下文，已知数组： 1let arr = [1,2,,3];   arr 的长度是什么？ 去除 arr 中的空数组项； ar2 = arr.map(parseInt)，请写下 arr2 的内容； arr 和 arr2 合并成数组 arr3 ， 兼容IE8+ ； 去除数组 arr3 中重复内容；">
+<meta property="og:description" content="(function() {         var div = document.createElement(&apos;div&apos;);         div.style.width = &apos;300px&apos;;         div.style.height = &apos;150px&apos;;         div.style.background = &apos;linear-g">
 <meta property="og:locale" content="zh_CN.utf8">
-<meta property="og:updated_time" content="2019-07-09T06:57:00.814Z">
+<meta property="og:updated_time" content="2019-08-09T07:21:40.203Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JS基础测试34">
-<meta name="twitter:description" content="简答题所有题目公用一个上下文，已知数组： 1let arr = [1,2,,3];   arr 的长度是什么？ 去除 arr 中的空数组项； ar2 = arr.map(parseInt)，请写下 arr2 的内容； arr 和 arr2 合并成数组 arr3 ， 兼容IE8+ ； 去除数组 arr3 中重复内容；">
+<meta name="twitter:title" content="Hex笔记">
+<meta name="twitter:description" content="(function() {         var div = document.createElement(&apos;div&apos;);         div.style.width = &apos;300px&apos;;         div.style.height = &apos;150px&apos;;         div.style.background = &apos;linear-g">
   
     <link rel="alternate" href="/atom.xml" title="Hex笔记" type="application/atom+xml">
   
@@ -65,106 +64,81 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-JS基础测试34" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-dom33" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/07/08/JS基础测试34/" class="article-date">
-  <time datetime="2019-07-08T09:25:43.000Z" itemprop="datePublished">2019-07-08</time>
+    <a href="/2019/08/09/dom33/" class="article-date">
+  <time datetime="2019-08-09T07:13:57.323Z" itemprop="datePublished">2019-08-09</time>
 </a>
     
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/基础测试/">基础测试</a>
-  </div>
-
   </div>
   <div class="article-inner">
     
     
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      JS基础测试34
-    </h1>
-  
-
-      </header>
-    
     <div class="article-entry" itemprop="articleBody">
       
-        <p><strong>简答题</strong><br>所有题目公用一个上下文，已知数组：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">let arr = [1,2,,3];</span><br></pre></td></tr></table></figure>
+        <!DOCTYPE html>
+<html lang="en">
 
-<ol>
-<li>arr 的长度是什么？</li>
-<li>去除 arr 中的空数组项；</li>
-<li><code>ar2 = arr.map(parseInt)</code>，请写下 arr2 的内容；</li>
-<li>arr 和 arr2 合并成数组 arr3 ， 兼容IE8+ ；</li>
-<li>去除数组 arr3 中重复内容；</li>
-</ol>
-<a id="more"></a>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
 
-<p>第一题： 4<br>第二题： arr = arr.filter( v=&gt;!!v); //[1,2,3]<br>第三题： [1,NaN,NaN]<br>第四题： arr3 = arr.concat(arr2)// [1, 2, 3, 1, NaN, NaN]<br>第五题： […new Set(arr3)] // [1, 2, 3, NaN]</p>
-<p><strong>详解：</strong></p>
-<p>第一题：空数组项也会作为length的一部分；空数组项和空字符串项是有区别的。</p>
-<p>第二题：  </p>
-<ol>
-<li>数组中的 empty 元素不会参与数组项遍历，故只需返回 true 即可过滤掉 empty 元素（而不会牵连 0、NaN、null、undefined、’’ 这些）arr.filter(it =&gt; true)。然后补充，但是走for循环，还是会遍历empty数组项。</li>
-<li>或者filter方法参数直接就是一个function即可。例如：arr.filter(Boolean)，arr.filter(Number)， arr.filter(String)</li>
-<li>上面并不会最好的方法。数组有个API，天然去除空数组项，<code>arr.flat()</code>。flat()可以让数组扁平化的方法</li>
-</ol>
-<p>第三题：<br>首先先来回顾一下 <strong>map()</strong> 和 <strong>parseInt()</strong>两个方法 </p>
-<p>Arrapy.map()：方法创建一个新数组，其结果是该数组中的每个元素都调用一个提供的函数后返回的结果。<br>语法：</p>
-<blockquote>
-<p>var new_array = arr.map(function callback(currentValue[, index[, array]]) {<br>// Return element for new_array<br>}[, thisArg])</p>
-</blockquote>
-<ul>
-<li>callback 生成新数组元素的函数，使用三个参数:</li>
-<li>currentValue：callback数组中正在处理的当前元素</li>
-<li>index | 可选：callback 数组中正在处理的当前元素的索引。</li>
-<li>array | 可选：callback  map 方法被调用的数组。</li>
-<li>thisArg | 可选：执行 callback 函数时使用的this 值。</li>
-<li>返回值：一个新数组，每个元素都是回调函数的结果。</li>
-</ul>
-<p><strong>parseInt(string, radix)</strong>  string为字符串，radix为介于2-36之间的数。使用者告诉这个函数string（比如11）是radix（比如2）进制的，函数将固定返回string以十进制时显示的数（3）<br>注意：string 中的每个数字都要比 radix 小，否则返回 <strong>NaN</strong></p>
-<p><strong>再仔细想想原题中的答案，为什么是[1,NaN,NaN],不难看出，map 的回调函数的参数 index 索引值作为了 parseInt 的基数 radix ,导致出现超范围的 radix 赋值和不合法的进制解析，才会返回 NaN 。</strong></p>
-<p>也许你还会怀疑索引值和基数radix对应关系的准确性，这时你可以重新定义parseInt函数，再来测试一下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function parseInt(str, radix) &#123; </span><br><span class="line">    return str+&apos;-&apos;+radix; </span><br><span class="line">&#125;;</span><br><span class="line">var a=[&quot;1&quot;, &quot;2&quot;, &quot;3&quot;, &quot;4&quot;,&quot;5&quot;,6,7,8,9,10,11,12,13,14,15];</span><br><span class="line">a.map(parseInt);</span><br></pre></td></tr></table></figure>
+<body>
+    <script type="text/javascript">
+    (function() {
+        var div = document.createElement('div');
+        div.style.width = '300px';
+        div.style.height = '150px';
+        div.style.background = 'linear-gradient(to bottom right, red , blue)';
+        document.body.appendChild(div);
+        var counter = function(val) {
+            // 255 可以被 3 整除, 得到85帧
+            var step = 3;
+            var asc = true;
+            return {
+                next: function() {
+                    if (asc && val === 255) {
+                        asc = false;
+                    } else if (!asc && val === 0) {
+                        asc = true;
+                    }
+                    if (asc) {
+                        val += step;
+                    } else {
+                        val -= step;
+                    }
+                    return val;
+                }
+            };
+        }
+        var descendCounter = counter(255);
+        var riseCounter = counter(0);
+        //想在一秒内得到85帧, 约得11毫秒
+        setInterval(function() {
+            div.style.background = 'linear-gradient(to bottom right,rgb(' + descendCounter.next() + ',0,' + riseCounter.next() + '),rgb(' + riseCounter.next() + ',0,' + descendCounter.next() + '))';
+        }, 11);
+    })();
+    </script>
+</body>
 
-<p>输出结果为：[“1-0”,”2-1”,”3-2”,”4-3”,”5-4”,”6-5”,”7-6”,”8-7”,”9-8”,”10-9”,”11-10”,”12-11”,”13-12”,”14-13”,”15-14”]。</p>
-<p>通过此例，再次证明，索引index的起始值从0开始，与radix的对应如前陈述一致，所以才会出现返回NaN的类型值。</p>
-<p>第四题：concat，可以数组合并。可以分别连接子项，也可以直接连接数组。如果不考虑兼容，可以[…arr, …arr2]。其他参考方法：</p>
-<pre><code>1. Array.prototype.push.apply(arr3, arr2)
-2. [].push.apply(arr3, arr2)</code></pre><p>此时arr3是合并后的数组；  </p>
-<p>第五题：数组去重。使用 new Set(arr3) ，然后把Set对象转换成数组。转数组两个常用方法:  </p>
-<pre><code>1. Array.from(new Set(arr3))
-2. [...new Set(arr3)] </code></pre>
+</html>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://heweixia.com/2019/07/08/JS基础测试34/" data-id="cjz3sw6n1000cl0vwsq3d6999" class="article-share-link">Share</a>
+      <a data-url="http://heweixia.com/2019/08/09/dom33/" data-id="cjz3sw6nb000pl0vww842jlw5" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li></ul>
-
     </footer>
   </div>
   
     
 <nav id="article-nav">
   
-    <a href="/2019/07/10/JS基础测试33/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          JS基础测试33
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/07/08/DOM基础测试31/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2019/08/09/DOM基础测试33/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">DOM基础测试31</div>
+      <div class="article-nav-title">DOM基础测试33</div>
     </a>
   
 </nav>
