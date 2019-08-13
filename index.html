@@ -62,69 +62,44 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-dom33" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-React学习历程1" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/08/09/dom33/" class="article-date">
-  <time datetime="2019-08-09T07:13:57.323Z" itemprop="datePublished">2019-08-09</time>
+    <a href="/2019/08/13/React学习历程1/" class="article-date">
+  <time datetime="2019-08-13T02:01:50.000Z" itemprop="datePublished">2019-08-13</time>
 </a>
     
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/react/">react</a>
+  </div>
+
   </div>
   <div class="article-inner">
     
     
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/08/13/React学习历程1/">React学习历程1</a>
+    </h1>
+  
+
+      </header>
+    
     <div class="article-entry" itemprop="articleBody">
       
-        <!DOCTYPE html>
-<html lang="en">
-
-<head><meta name="generator" content="Hexo 3.9.0">
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-
-<body>
-    <script type="text/javascript">
-    (function() {
-        var div = document.createElement('div');
-        div.style.width = '300px';
-        div.style.height = '150px';
-        div.style.background = 'linear-gradient(to bottom right, red , blue)';
-        document.body.appendChild(div);
-        var counter = function(val) {
-            // 255 可以被 3 整除, 得到85帧
-            var step = 3;
-            var asc = true;
-            return {
-                next: function() {
-                    if (asc && val === 255) {
-                        asc = false;
-                    } else if (!asc && val === 0) {
-                        asc = true;
-                    }
-                    if (asc) {
-                        val += step;
-                    } else {
-                        val -= step;
-                    }
-                    return val;
-                }
-            };
-        }
-        var descendCounter = counter(255);
-        var riseCounter = counter(0);
-        //想在一秒内得到85帧, 约得11毫秒
-        setInterval(function() {
-            div.style.background = 'linear-gradient(to bottom right,rgb(' + descendCounter.next() + ',0,' + riseCounter.next() + '),rgb(' + riseCounter.next() + ',0,' + descendCounter.next() + '))';
-        }, 11);
-    })();
-    </script>
-</body>
-
-</html>
+        <h3 id="什么是React"><a href="#什么是React" class="headerlink" title="什么是React?"></a>什么是React?</h3><blockquote>
+<p>React 是一个声明式，高效且灵活的用于构建用户界面的 JavaScript 库。使用 React 可以将一些简短、独立的代码片段组合成复杂的 UI 界面，这些代码片段被称作“组件”。</p>
+</blockquote>
+        
+          <p class="article-more-link">
+            <a href="/2019/08/13/React学习历程1/#more">Read More</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://heweixia.com/2019/08/09/dom33/" data-id="cjz3sw6nb000pl0vww842jlw5" class="article-share-link">Share</a>
+      <a data-url="http://heweixia.com/2019/08/13/React学习历程1/" data-id="cjz9fwfoo000rvgvw4o9bvtdq" class="article-share-link">Share</a>
       
       
     </footer>
@@ -169,7 +144,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://heweixia.com/2019/08/09/DOM基础测试33/" data-id="cjz3sw6ms0005l0vwqp4qh5zq" class="article-share-link">Share</a>
+      <a data-url="http://heweixia.com/2019/08/09/DOM基础测试33/" data-id="cjz9fwfo70006vgvwey48kx1m" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DOM/">DOM</a></li></ul>
@@ -216,7 +191,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://heweixia.com/2019/08/07/css基础测试9/" data-id="cjz3sw6n5000il0vwsfgwmkku" class="article-share-link">Share</a>
+      <a data-url="http://heweixia.com/2019/08/07/css基础测试9/" data-id="cjz9fwfov0012vgvwa3eqk0j2" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/">CSS</a></li></ul>
@@ -263,7 +238,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://heweixia.com/2019/08/01/JS基础测试32/" data-id="cjz3sw6mz000al0vwyr2xhbam" class="article-share-link">Share</a>
+      <a data-url="http://heweixia.com/2019/08/01/JS基础测试32/" data-id="cjz9fwfo30004vgvwwj38fq8d" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li></ul>
@@ -310,7 +285,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://heweixia.com/2019/07/10/JS基础测试33/" data-id="cjz3sw6n3000gl0vwpgw66438" class="article-share-link">Share</a>
+      <a data-url="http://heweixia.com/2019/07/10/JS基础测试33/" data-id="cjz9fwfoh000gvgvwzlhwcoij" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li></ul>
@@ -366,7 +341,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://heweixia.com/2019/07/08/JS基础测试34/" data-id="cjz3sw6n1000cl0vwsq3d6999" class="article-share-link">Share</a>
+      <a data-url="http://heweixia.com/2019/07/08/JS基础测试34/" data-id="cjz9fwfob000avgvw0sfzkuqz" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li></ul>
@@ -413,7 +388,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://heweixia.com/2019/07/08/DOM基础测试31/" data-id="cjz3sw6mq0004l0vwg34y8rlf" class="article-share-link">Share</a>
+      <a data-url="http://heweixia.com/2019/07/08/DOM基础测试31/" data-id="cjz9fwfns0000vgvwje86v1wf" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DOM/">DOM</a></li></ul>
@@ -464,7 +439,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://heweixia.com/2019/07/05/DOM基础测试27/" data-id="cjz3sw6mf0000l0vw8br38zhp" class="article-share-link">Share</a>
+      <a data-url="http://heweixia.com/2019/07/05/DOM基础测试27/" data-id="cjz9fwfod000cvgvwkigtrd2f" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DOM/">DOM</a></li></ul>
@@ -512,7 +487,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://heweixia.com/2019/07/05/JS基础测试31/" data-id="cjz3sw6mu0006l0vw36nzeafo" class="article-share-link">Share</a>
+      <a data-url="http://heweixia.com/2019/07/05/JS基础测试31/" data-id="cjz9fwfo50005vgvwe2tzqvbo" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li></ul>
@@ -560,7 +535,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://heweixia.com/2019/07/03/理解Web路由（浅谈前后端路由与前后端渲染）/" data-id="cjz3sw6oj0029l0vwieiyr1dp" class="article-share-link">Share</a>
+      <a data-url="http://heweixia.com/2019/07/03/理解Web路由（浅谈前后端路由与前后端渲染）/" data-id="cjz9fwfq30027vgvw42nrltmu" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/路由-vue/">路由 vue</a></li></ul>
@@ -587,7 +562,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/css3/">css3</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/js/">js</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/sublime/">sublime</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/svg/">svg</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/vue/">vue</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/基础测试/">基础测试</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/css3/">css3</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/js/">js</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/react/">react</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/sublime/">sublime</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/svg/">svg</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/vue/">vue</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/基础测试/">基础测试</a></li></ul>
     </div>
   </div>
 
@@ -629,7 +604,7 @@
       <ul>
         
           <li>
-            <a href="/2019/08/09/dom33/">(no title)</a>
+            <a href="/2019/08/13/React学习历程1/">React学习历程1</a>
           </li>
         
           <li>
