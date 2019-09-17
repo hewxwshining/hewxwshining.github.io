@@ -1122,9 +1122,11 @@ a.article-title:hover {
   font-family: "Source Code Pro", Consolas, Monaco, Menlo, Consolas, monospace;
 }
 .article-entry code {
-  background: #eee;
   text-shadow: 0 1px #fff;
-  padding: 0 0.3em;
+  background-color: #fff5f5;
+  color: #ff502c;
+  font-size: 0.87em;
+  padding: 0.065em 0.4em;
 }
 .article-entry pre {
   margin: 0;
