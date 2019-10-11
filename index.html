@@ -62,6 +62,108 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-移动端开发总结" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/10/11/移动端开发总结/" class="article-date">
+  <time datetime="2019-10-11T02:51:27.000Z" itemprop="datePublished">2019-10-11</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/移动端开发/">移动端开发</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/10/11/移动端开发总结/">移动端开发总结</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="一、meta标签相关知识"><a href="#一、meta标签相关知识" class="headerlink" title="一、meta标签相关知识"></a>一、meta标签相关知识</h3><p>1、移动端页面设置视口宽度等于设备宽度，并禁止缩放。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no&quot; /&gt;</span><br></pre></td></tr></table></figure>
+
+<p>2、移动端页面设置视口宽度等于定宽（如640px），并禁止缩放，常用于微信浏览器页面。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta name=&quot;viewport&quot; content=&quot;width=640,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no&quot; /&gt;</span><br></pre></td></tr></table></figure>
+
+<p>3、禁止将页面中的数字识别为电话号码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta name=&quot;format-detection&quot; content=&quot;telephone=no&quot; /&gt;</span><br></pre></td></tr></table></figure>
+
+<p>4、忽略Android平台中对邮箱地址的识别</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta name=&quot;format-detection&quot; content=&quot;email=no&quot; /&gt;</span><br></pre></td></tr></table></figure>
+
+<p>5、当网站添加到主屏幕快速启动方式，可隐藏地址栏，仅针对ios的safari</p>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<!-- ios7.0版本以后，safari上已看不到效果 -->
+
+<p>6、将网站添加到主屏幕快速启动方式，仅针对ios的safari顶端状态条的样式</p>
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<!-- 可选default、black、black-translucent -->
+
+<p><strong>viewport 模板</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;meta charset=&quot;utf-8&quot;&gt;</span><br><span class="line">&lt;meta content=&quot;width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no&quot; name=&quot;viewport&quot;&gt;</span><br><span class="line">&lt;meta content=&quot;yes&quot; name=&quot;apple-mobile-web-app-capable&quot;&gt;</span><br><span class="line">&lt;meta content=&quot;black&quot; name=&quot;apple-mobile-web-app-status-bar-style&quot;&gt;</span><br><span class="line">&lt;meta content=&quot;telephone=no&quot; name=&quot;format-detection&quot;&gt;</span><br><span class="line">&lt;meta content=&quot;email=no&quot; name=&quot;format-detection&quot;&gt;</span><br><span class="line">&lt;title&gt;title&lt;/title&gt;</span><br><span class="line">&lt;link rel=&quot;stylesheet&quot; href=&quot;index.css&quot;&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line"></span><br><span class="line">&lt;body&gt;</span><br><span class="line">    content...</span><br><span class="line">&lt;/body&gt;</span><br><span class="line"></span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="二、CSS样式技巧"><a href="#二、CSS样式技巧" class="headerlink" title="二、CSS样式技巧"></a>二、CSS样式技巧</h3><p>1、禁止ios和android用户选中文字</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.css&#123;-webkit-user-select:none&#125;</span><br></pre></td></tr></table></figure>
+
+<p>2、禁止ios长按时触发系统的菜单，禁止ios&amp;android长按时下载图片</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.css&#123;-webkit-touch-callout: none&#125;</span><br></pre></td></tr></table></figure>
+
+<p>3、webkit去除表单元素的默认样式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.css&#123;-webkit-appearance:none;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>4、修改webkit表单输入框placeholder的样式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">input::-webkit-input-placeholder&#123;color:#AAAAAA;&#125;</span><br><span class="line">input:focus::-webkit-input-placeholder&#123;color:#EEEEEE;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>5、去除android a/button/input标签被点击时产生的边框 &amp; 去除ios a标签被点击时产生的半透明灰色背景</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a,button,input&#123;-webkit-tap-highlight-color:rgba(255,0,0,0);&#125;</span><br></pre></td></tr></table></figure>
+
+<p>6、ios使用-webkit-text-size-adjust禁止调整字体大小</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">body&#123;-webkit-text-size-adjust: 100%!important;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>7、android 上去掉语音输入按钮</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">input::-webkit-input-speech-button &#123;display: none&#125;</span><br></pre></td></tr></table></figure>
+
+<p>8、移动端定义字体，移动端没有微软雅黑字体</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/* 移动端定义字体的代码 */</span><br><span class="line">body&#123;font-family:Helvetica;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>9、禁用Webkit内核浏览器的文字大小调整功能。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-webkit-text-size-adjust: none;</span><br></pre></td></tr></table></figure>
+
+<p>10、去掉 input[type=search] 搜索框默认的叉号</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">input[type=&quot;search&quot;]&#123;</span><br><span class="line">    -webkit-appearance:none;</span><br><span class="line">&#125;</span><br><span class="line">input::-webkit-search-cancel-button &#123;</span><br><span class="line">    display: none;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="三、其他技巧"><a href="#三、其他技巧" class="headerlink" title="三、其他技巧"></a>三、其他技巧</h3><p>1、手机拍照和上传图片</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 选择照片 --&gt;</span><br><span class="line">&lt;input type=file accept=&quot;image/*&quot;&gt;</span><br><span class="line">&lt;!-- 选择视频 --&gt;</span><br><span class="line">&lt;input type=file accept=&quot;video/*&quot;&gt;</span><br></pre></td></tr></table></figure>
+
+<p>2、取消input在ios下，输入的时候英文首字母的默认大写</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input autocapitalize=&quot;off&quot; autocorrect=&quot;off&quot; /&gt;</span><br></pre></td></tr></table></figure>
+
+<p>3、打电话和发短信</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;a href=&quot;tel:0755-10086&quot;&gt;打电话给:0755-10086&lt;/a&gt;</span><br><span class="line">&lt;a href=&quot;sms:10086&quot;&gt;发短信给: 10086&lt;/a&gt;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://heweixia.com/2019/10/11/移动端开发总结/" data-id="ck1lk0bqo001vn8vwgu73rm4j" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/移动端开发/">移动端开发</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-DOM基础测试38" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/10/10/DOM基础测试38/" class="article-date">
@@ -99,7 +201,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://heweixia.com/2019/10/10/DOM基础测试38/" data-id="ck1k3yu4v000f5ovwtmlmzddo" class="article-share-link">Share</a>
+      <a data-url="http://heweixia.com/2019/10/10/DOM基础测试38/" data-id="ck1lk0bpo000fn8vwiunroaix" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DOM/">DOM</a></li></ul>
@@ -146,7 +248,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://heweixia.com/2019/09/30/JS基础测试27/" data-id="ck1k3yu4y000h5ovwcbin6zbl" class="article-share-link">Share</a>
+      <a data-url="http://heweixia.com/2019/09/30/JS基础测试27/" data-id="ck1lk0bpq000hn8vwa7aogpye" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li></ul>
@@ -232,7 +334,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://heweixia.com/2019/09/17/64条最常用正则表达式/" data-id="ck1k3yu4700005ovwjr6z7z1o" class="article-share-link">Share</a>
+      <a data-url="http://heweixia.com/2019/09/17/64条最常用正则表达式/" data-id="ck1lk0bp40000n8vwx56cyaw2" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/regexp/">regexp</a></li></ul>
@@ -279,7 +381,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://heweixia.com/2019/09/17/JS基础测试37/" data-id="ck1k3yu5c000y5ovw1vshnkl3" class="article-share-link">Share</a>
+      <a data-url="http://heweixia.com/2019/09/17/JS基础测试37/" data-id="ck1lk0bq4000yn8vwqhnx8u6j" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li></ul>
@@ -326,7 +428,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://heweixia.com/2019/09/16/DOM基础测试37/" data-id="ck1k3yu4r000b5ovw500p8pq2" class="article-share-link">Share</a>
+      <a data-url="http://heweixia.com/2019/09/16/DOM基础测试37/" data-id="ck1lk0bpl000bn8vwk8fbydhf" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DOM/">DOM</a></li></ul>
@@ -376,7 +478,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://heweixia.com/2019/08/19/React-学习历程（react-router）/" data-id="ck1k3yu5g00145ovw2p4ay2ct" class="article-share-link">Share</a>
+      <a data-url="http://heweixia.com/2019/08/19/React-学习历程（react-router）/" data-id="ck1lk0bq80014n8vw6okhwy3o" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react-router/">react-router</a></li></ul>
@@ -427,7 +529,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://heweixia.com/2019/08/15/React-学习历程2/" data-id="ck1k3yu5e00115ovw31e6gsvc" class="article-share-link">Share</a>
+      <a data-url="http://heweixia.com/2019/08/15/React-学习历程2/" data-id="ck1lk0bq60011n8vwfr3q4rva" class="article-share-link">Share</a>
       
       
     </footer>
@@ -474,7 +576,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://heweixia.com/2019/08/13/React学习历程1/" data-id="ck1k3yu5i00185ovwdnmuvait" class="article-share-link">Share</a>
+      <a data-url="http://heweixia.com/2019/08/13/React学习历程1/" data-id="ck1lk0bq90018n8vwju1a43ym" class="article-share-link">Share</a>
       
       
     </footer>
@@ -519,57 +621,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://heweixia.com/2019/08/09/DOM基础测试33/" data-id="ck1k3yu4p000a5ovwp7zsa1mb" class="article-share-link">Share</a>
+      <a data-url="http://heweixia.com/2019/08/09/DOM基础测试33/" data-id="ck1lk0bpj000an8vwpbxut9n2" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DOM/">DOM</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-CSS基础测试9" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/08/07/CSS基础测试9/" class="article-date">
-  <time datetime="2019-08-07T07:08:07.000Z" itemprop="datePublished">2019-08-07</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/基础测试/">基础测试</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/07/CSS基础测试9/">css基础测试9</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><img src="/images/base-test/css-9-1.png" alt></p>
-        
-          <p class="article-more-link">
-            <a href="/2019/08/07/CSS基础测试9/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://heweixia.com/2019/08/07/CSS基础测试9/" data-id="ck1k3yu4i00045ovwptswdaej" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/">CSS</a></li></ul>
 
     </footer>
   </div>
@@ -593,7 +648,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Regexp/">Regexp</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/css3/">css3</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/js/">js</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/reactjs/">reactjs</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/sublime/">sublime</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/svg/">svg</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/vue/">vue</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/基础测试/">基础测试</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Regexp/">Regexp</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/css3/">css3</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/js/">js</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/reactjs/">reactjs</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/sublime/">sublime</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/svg/">svg</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/vue/">vue</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/基础测试/">基础测试</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/移动端开发/">移动端开发</a></li></ul>
     </div>
   </div>
 
@@ -603,7 +658,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DOM/">DOM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6/">es6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/form/">form</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react-router/">react-router</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/regexp/">regexp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sublime/">sublime</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/svg/">svg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vuex/">vuex</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/动画/">动画</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/打包/">打包</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/箭头函数/">箭头函数</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/路由-vue/">路由 vue</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DOM/">DOM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6/">es6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/form/">form</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react-router/">react-router</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/regexp/">regexp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sublime/">sublime</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/svg/">svg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vuex/">vuex</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/动画/">动画</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/打包/">打包</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/移动端开发/">移动端开发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/箭头函数/">箭头函数</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/路由-vue/">路由 vue</a></li></ul>
     </div>
   </div>
 
@@ -613,7 +668,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/DOM/" style="font-size: 16.67px;">DOM</a> <a href="/tags/es6/" style="font-size: 10px;">es6</a> <a href="/tags/form/" style="font-size: 10px;">form</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/js/" style="font-size: 20px;">js</a> <a href="/tags/react-router/" style="font-size: 10px;">react-router</a> <a href="/tags/regexp/" style="font-size: 10px;">regexp</a> <a href="/tags/sublime/" style="font-size: 10px;">sublime</a> <a href="/tags/svg/" style="font-size: 13.33px;">svg</a> <a href="/tags/vuex/" style="font-size: 10px;">vuex</a> <a href="/tags/动画/" style="font-size: 13.33px;">动画</a> <a href="/tags/打包/" style="font-size: 10px;">打包</a> <a href="/tags/箭头函数/" style="font-size: 10px;">箭头函数</a> <a href="/tags/路由-vue/" style="font-size: 10px;">路由 vue</a>
+      <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/DOM/" style="font-size: 16.67px;">DOM</a> <a href="/tags/es6/" style="font-size: 10px;">es6</a> <a href="/tags/form/" style="font-size: 10px;">form</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/js/" style="font-size: 20px;">js</a> <a href="/tags/react-router/" style="font-size: 10px;">react-router</a> <a href="/tags/regexp/" style="font-size: 10px;">regexp</a> <a href="/tags/sublime/" style="font-size: 10px;">sublime</a> <a href="/tags/svg/" style="font-size: 13.33px;">svg</a> <a href="/tags/vuex/" style="font-size: 10px;">vuex</a> <a href="/tags/动画/" style="font-size: 13.33px;">动画</a> <a href="/tags/打包/" style="font-size: 10px;">打包</a> <a href="/tags/移动端开发/" style="font-size: 10px;">移动端开发</a> <a href="/tags/箭头函数/" style="font-size: 10px;">箭头函数</a> <a href="/tags/路由-vue/" style="font-size: 10px;">路由 vue</a>
     </div>
   </div>
 
@@ -635,6 +690,10 @@
       <ul>
         
           <li>
+            <a href="/2019/10/11/移动端开发总结/">移动端开发总结</a>
+          </li>
+        
+          <li>
             <a href="/2019/10/10/DOM基础测试38/">DOM基础测试38</a>
           </li>
         
@@ -648,10 +707,6 @@
         
           <li>
             <a href="/2019/09/17/JS基础测试37/">JS基础测试37</a>
-          </li>
-        
-          <li>
-            <a href="/2019/09/16/DOM基础测试37/">DOM基础测试37</a>
           </li>
         
       </ul>
