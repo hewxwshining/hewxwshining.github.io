@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>CSS基础测试13 | Hex笔记</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="keywords" content="CSS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSS基础测试13">
+<meta property="og:url" content="http://heweixia.com/2019/10/17/CSS基础测试13/index.html">
+<meta property="og:site_name" content="Hex笔记">
+<meta property="og:locale" content="zh_CN.utf8">
+<meta property="og:image" content="http://heweixia.com/images/base-test/css-13-1.png">
+<meta property="og:updated_time" content="2019-10-18T02:30:47.418Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CSS基础测试13">
+<meta name="twitter:image" content="http://heweixia.com/images/base-test/css-13-1.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hex笔记" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hex笔记</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://heweixia.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-CSS基础测试13" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/10/17/CSS基础测试13/" class="article-date">
+  <time datetime="2019-10-17T08:10:54.000Z" itemprop="datePublished">2019-10-17</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/基础测试/">基础测试</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      CSS基础测试13
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="/images/base-test/css-13-1.png" alt></p>
+<a id="more"></a>
+
+<p>CSS代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">summary::-webkit-details-marker &#123;</span><br><span class="line">        display: none;</span><br><span class="line">    &#125;</span><br><span class="line">    details &#123;</span><br><span class="line">        display: inline-block;</span><br><span class="line">    &#125;</span><br><span class="line">    svg &#123;</span><br><span class="line">        vertical-align: -3px;</span><br><span class="line">    &#125;</span><br><span class="line">    .btn-group &#123;</span><br><span class="line">        font-size: 0;</span><br><span class="line">        display: inline-block;</span><br><span class="line">    &#125;</span><br><span class="line">    .btn-group~.btn-group &#123;</span><br><span class="line">        margin-left: 15px;</span><br><span class="line">    &#125;</span><br><span class="line">    .btn-title,</span><br><span class="line">    .btn-link &#123;</span><br><span class="line">        display: inline-block;</span><br><span class="line">        padding: 6px 10px;</span><br><span class="line">        font-size: 14px;</span><br><span class="line">        line-height: inherit;</span><br><span class="line">        border: 1px solid #c5c9cc;</span><br><span class="line">        color: #000;</span><br><span class="line">    &#125;</span><br><span class="line">    .btn-title &#123;</span><br><span class="line">        background-color: #eff3f6;</span><br><span class="line">        background-image: linear-gradient(to bottom, #fafbfc, #eff3f6);</span><br><span class="line">        border-radius: 3px 0 0 3px;</span><br><span class="line">        cursor: pointer;</span><br><span class="line">    &#125;</span><br><span class="line">    summary.dropdown::after &#123;</span><br><span class="line">        content: &quot;&quot;;</span><br><span class="line">        display: inline-block;</span><br><span class="line">        width: 0;</span><br><span class="line">        height: 0;</span><br><span class="line">        vertical-align: -3px;</span><br><span class="line">        border: 5px solid transparent;</span><br><span class="line">        border-top-color: currentcolor;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    .btn-link &#123;</span><br><span class="line">        background-color: #fff;</span><br><span class="line">        border-left: 0;</span><br><span class="line">        border-radius: 0 3px 3px 0;</span><br><span class="line">        text-decoration: none;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>HTML 代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;btn-group&quot;&gt;</span><br><span class="line">      &lt;details&gt;</span><br><span class="line">          &lt;summary class=&quot;btn-title dropdown&quot;&gt;</span><br><span class="line">              &lt;svg t=&quot;1571305548535&quot; class=&quot;icon&quot; viewBox=&quot;0 0 1024 1024&quot; version=&quot;1.1&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot; p-id=&quot;3153&quot; width=&quot;18&quot; height=&quot;18&quot;&gt;</span><br><span class="line">                  &lt;path d=&quot;M519.872 168.336C290.768 168.336 95.12 310.848 15.84 512c79.272 201.152 274.928 343.664 504.032 343.664 229.12 0 424.768-142.512 504.04-343.664-79.272-201.152-274.696-343.664-504.04-343.664z m0 572.776c-126.464 0-229.104-102.64-229.104-229.112s102.64-229.104 229.104-229.104c126.472 0 229.12 102.64 229.12 229.104s-102.648 229.112-229.12 229.112z m0-366.568c-75.832 0-137.464 61.624-137.464 137.456s61.632 137.464 137.464 137.464S657.344 587.84 657.344 512s-61.632-137.456-137.472-137.456z m0 0&quot; p-id=&quot;3154&quot;&gt;&lt;/path&gt;</span><br><span class="line">              &lt;/svg&gt;</span><br><span class="line">              &lt;span&gt;Unwatch&lt;/span&gt;</span><br><span class="line">          &lt;/summary&gt;</span><br><span class="line">      &lt;/details&gt;</span><br><span class="line">      &lt;a class=&quot;btn-link&quot; href=&quot;javscript:;&quot;&gt;63&lt;/a&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">  &lt;div class=&quot;btn-group&quot;&gt;</span><br><span class="line">      &lt;details&gt;</span><br><span class="line">          &lt;summary class=&quot;btn-title&quot;&gt;</span><br><span class="line">              &lt;svg t=&quot;1571365310109&quot; class=&quot;icon&quot; viewBox=&quot;0 0 1025 1024&quot; version=&quot;1.1&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot; p-id=&quot;2549&quot; width=&quot;18&quot; height=&quot;18&quot;&gt;</span><br><span class="line">                  &lt;path d=&quot;M511.647966 65.011715l147.751013 261.631012 300.466322 87.079348L750.703761 661.444666l37.962388 297.490405L511.646942 832.041062 234.632853 958.935071l37.960341-297.490405L63.430631 413.722075l300.468369-87.079348L511.647966 65.011715&quot; p-id=&quot;2550&quot;&gt;&lt;/path&gt;</span><br><span class="line">              &lt;/svg&gt;</span><br><span class="line">              &lt;span&gt;Star&lt;/span&gt;</span><br><span class="line">          &lt;/summary&gt;</span><br><span class="line">      &lt;/details&gt;</span><br><span class="line">      &lt;a class=&quot;btn-link&quot; href=&quot;javscript:;&quot;&gt;445&lt;/a&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">  &lt;div class=&quot;btn-group&quot;&gt;</span><br><span class="line">      &lt;details&gt;</span><br><span class="line">          &lt;summary class=&quot;btn-title&quot;&gt;</span><br><span class="line">              &lt;svg t=&quot;1571365411496&quot; class=&quot;icon&quot; viewBox=&quot;0 0 1024 1024&quot; version=&quot;1.1&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot; p-id=&quot;3443&quot; width=&quot;18&quot; height=&quot;18&quot;&gt;</span><br><span class="line">                  &lt;path d=&quot;M426.666667 234.666667C426.666667 152.32 359.68 85.333333 277.333333 85.333333S128 152.32 128 234.666667c0 68.352 46.421333 125.482667 109.184 143.146666 7.082667 50.474667 33.664 136.832 131.712 174.037334C469.333333 590.037333 469.333333 620.117333 469.333333 640v6.954667c-61.44 18.517333-106.666667 74.965333-106.666666 142.378666 0 82.346667 66.986667 149.333333 149.333333 149.333334s149.333333-66.986667 149.333333-149.333334c0-67.413333-45.226667-123.861333-106.666666-142.378666V640c0-19.882667 0-49.962667 100.437333-88.106667 98.048-37.205333 124.629333-123.562667 131.712-174.037333C849.578667 360.149333 896 303.018667 896 234.666667 896 152.32 829.013333 85.333333 746.666667 85.333333S597.333333 152.32 597.333333 234.666667c0 66.218667 43.605333 121.813333 103.424 141.354666-6.229333 31.36-24.106667 76.416-75.861333 96.085334-50.858667 19.285333-87.594667 40.661333-112.896 65.536-25.301333-24.874667-61.994667-46.250667-112.896-65.536-51.754667-19.669333-69.674667-64.725333-75.861333-96.085334C383.061333 356.48 426.666667 300.885333 426.666667 234.666667zM746.666667 170.666667c35.285333 0 64 28.714667 64 64S781.952 298.666667 746.666667 298.666667 682.666667 269.952 682.666667 234.666667 711.381333 170.666667 746.666667 170.666667z m-170.666667 618.666666c0 35.285333-28.714667 64-64 64s-64-28.714667-64-64 28.714667-64 64-64 64 28.714667 64 64zM277.333333 298.666667C242.048 298.666667 213.333333 269.952 213.333333 234.666667S242.048 170.666667 277.333333 170.666667 341.333333 199.381333 341.333333 234.666667 312.618667 298.666667 277.333333 298.666667z&quot; fill=&quot;&quot; p-id=&quot;3444&quot;&gt;&lt;/path&gt;</span><br><span class="line">              &lt;/svg&gt;</span><br><span class="line">              &lt;span&gt;Fork&lt;/span&gt;</span><br><span class="line">          &lt;/summary&gt;</span><br><span class="line">      &lt;/details&gt;</span><br><span class="line">      &lt;a class=&quot;btn-link&quot; href=&quot;javscript:;&quot;&gt;445&lt;/a&gt;</span><br><span class="line">  &lt;/div&gt;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://heweixia.com/2019/10/17/CSS基础测试13/" data-id="ck1viy80j0004g0vw9xst5vpr" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/">CSS</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2019/10/11/移动端开发总结/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">移动端开发总结</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Regexp/">Regexp</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/css3/">css3</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/js/">js</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/reactjs/">reactjs</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/sublime/">sublime</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/svg/">svg</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/vue/">vue</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/基础测试/">基础测试</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/移动端开发/">移动端开发</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DOM/">DOM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6/">es6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/form/">form</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react-router/">react-router</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/regexp/">regexp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sublime/">sublime</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/svg/">svg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vuex/">vuex</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/动画/">动画</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/打包/">打包</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/移动端开发/">移动端开发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/箭头函数/">箭头函数</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/路由-vue/">路由 vue</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/CSS/" style="font-size: 13.33px;">CSS</a> <a href="/tags/DOM/" style="font-size: 16.67px;">DOM</a> <a href="/tags/es6/" style="font-size: 10px;">es6</a> <a href="/tags/form/" style="font-size: 10px;">form</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/js/" style="font-size: 20px;">js</a> <a href="/tags/react-router/" style="font-size: 10px;">react-router</a> <a href="/tags/regexp/" style="font-size: 10px;">regexp</a> <a href="/tags/sublime/" style="font-size: 10px;">sublime</a> <a href="/tags/svg/" style="font-size: 13.33px;">svg</a> <a href="/tags/vuex/" style="font-size: 10px;">vuex</a> <a href="/tags/动画/" style="font-size: 13.33px;">动画</a> <a href="/tags/打包/" style="font-size: 10px;">打包</a> <a href="/tags/移动端开发/" style="font-size: 10px;">移动端开发</a> <a href="/tags/箭头函数/" style="font-size: 10px;">箭头函数</a> <a href="/tags/路由-vue/" style="font-size: 10px;">路由 vue</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/10/17/CSS基础测试13/">CSS基础测试13</a>
+          </li>
+        
+          <li>
+            <a href="/2019/10/11/移动端开发总结/">移动端开发总结</a>
+          </li>
+        
+          <li>
+            <a href="/2019/10/10/DOM基础测试38/">DOM基础测试38</a>
+          </li>
+        
+          <li>
+            <a href="/2019/09/30/JS基础测试27/">JS基础测试27</a>
+          </li>
+        
+          <li>
+            <a href="/2019/09/17/64条最常用正则表达式/">64条最常用正则表达式</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 hwx<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
