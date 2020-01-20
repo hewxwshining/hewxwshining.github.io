@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>vue路由传参 | Hex笔记</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="这里只说一下vue路由传参的几种常见方式，关于vue 路由的详细说解说可以在这篇文章查看更多 方案一通过路由配置，传递需要的参数  12345&amp;#123;	path:&amp;apos;/user/:id&amp;apos;,	name:&amp;apos;user&amp;apos;,	component:User&amp;#125;  这里只能设置一个参数， 且跳转时页面时必须将参数带上 跳转时可以通过声明式和编程式的方式跳转： 1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vue路由传参">
+<meta property="og:url" content="http://heweixia.com/2020/01/20/vue路由传参/index.html">
+<meta property="og:site_name" content="Hex笔记">
+<meta property="og:description" content="这里只说一下vue路由传参的几种常见方式，关于vue 路由的详细说解说可以在这篇文章查看更多 方案一通过路由配置，传递需要的参数  12345&amp;#123;	path:&amp;apos;/user/:id&amp;apos;,	name:&amp;apos;user&amp;apos;,	component:User&amp;#125;  这里只能设置一个参数， 且跳转时页面时必须将参数带上 跳转时可以通过声明式和编程式的方式跳转： 1">
+<meta property="og:locale" content="zh_CN.utf8">
+<meta property="og:updated_time" content="2020-01-20T09:39:05.951Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="vue路由传参">
+<meta name="twitter:description" content="这里只说一下vue路由传参的几种常见方式，关于vue 路由的详细说解说可以在这篇文章查看更多 方案一通过路由配置，传递需要的参数  12345&amp;#123;	path:&amp;apos;/user/:id&amp;apos;,	name:&amp;apos;user&amp;apos;,	component:User&amp;#125;  这里只能设置一个参数， 且跳转时页面时必须将参数带上 跳转时可以通过声明式和编程式的方式跳转： 1">
+  
+    <link rel="alternate" href="/atom.xml" title="Hex笔记" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hex笔记</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://heweixia.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-vue路由传参" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/01/20/vue路由传参/" class="article-date">
+  <time datetime="2020-01-20T06:49:07.000Z" itemprop="datePublished">2020-01-20</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/vue/">vue</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      vue路由传参
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>这里只说一下vue路由传参的几种常见方式，关于vue 路由的详细说解说可以在这篇文章查看<a href="/2019/07/03/理解Web路由（浅谈前后端路由与前后端渲染）/">更多</a></p>
+<h3 id="方案一"><a href="#方案一" class="headerlink" title="方案一"></a>方案一</h3><p>通过路由配置，传递需要的参数 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	path:&apos;/user/:id&apos;,</span><br><span class="line">	name:&apos;user&apos;,</span><br><span class="line">	component:User</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong><em>这里只能设置一个参数， 且跳转时页面时必须将参数带上</em></strong></p>
+<p>跳转时可以通过声明式和编程式的方式跳转：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">let id = 4</span><br><span class="line">//声明式</span><br><span class="line">&lt;router-link :to=&quot;&apos;/user/$&#123;id&#125;&apos;&quot;&gt;user&lt;/router-link&gt; // -&gt; /user/4</span><br><span class="line">&lt;router-link :to=&quot;&#123;name: &apos;user&apos; , params:&#123;id: id&#125;&#125;&quot;&gt;user&lt;/router-link&gt; // -&gt; /user/4</span><br><span class="line">//编程式</span><br><span class="line">router.push(&#123; path: `/user/$&#123;id&#125;` &#125;)</span><br><span class="line">router.push(&#123; name: &apos;user&apos;, params: &#123; id: id &#125;&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>在子组件的路由中可以通过<code>params</code>属性获取所有的参数：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">this.$route.params.id</span><br></pre></td></tr></table></figure>
+
+<h3 id="方案二"><a href="#方案二" class="headerlink" title="方案二"></a>方案二</h3><p>通过 <code>params</code> 来传递参数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">let  id = 4</span><br><span class="line">//声明式</span><br><span class="line">&lt;router-link to=&quot;&#123;name: &apos;user&apos; , params:&#123;id: id&#125;&#125;&quot;&gt;user&lt;/router-link&gt;</span><br><span class="line">//编程式</span><br><span class="line">this.$router.push(&#123;name: &apos;user&apos;,params: &#123; id: id&#125;&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>对应路由配置处，可以添加 <code>/:id</code> 也可以不用添加任何参数，添加后方式像方案一一样。 当不添加时，参数值不会在URL后面显示，同时子组件只能在第一次加载时通过 <code>router.params</code> 获取当前参数值， 当页面刷新后，传递的参数会被删除。</p>
+<h3 id="方案三"><a href="#方案三" class="headerlink" title="方案三"></a>方案三</h3><p>通过 <code>query</code> 来传递参数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">let id = 4</span><br><span class="line">//声明式</span><br><span class="line">&lt;router-link :to=&quot;&#123;path:&apos;/user&apos;, query:&#123;id: id&#125;&#125;&quot;&gt;user&lt;/router-link&gt; // -&gt; /user?id=4</span><br><span class="line">&lt;router-link :to=&quot;&#123;name: &apos;user&apos; , query:&#123;id: id&#125;&#125;&quot;&gt;user&lt;/router-link&gt; // -&gt; /user?id=4</span><br><span class="line">//函数式</span><br><span class="line">this.$router.push(&#123;name:&quot;user&quot;,query:&#123;id: id&#125; &#125;)</span><br><span class="line">this.$router.push(&#123;push:&quot;/user&quot;,query:&#123;id: id&#125; &#125;)</span><br></pre></td></tr></table></figure>
+
+<p>在子组件的路由中可以通过<code>query</code>属性获取所有的参数：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">this.$route.query.id</span><br></pre></td></tr></table></figure>
+
+<p>通过这种方式可以传递多个参数，与 params 相比，刷新当前页面后参数不会被删除。</p>
+<h3 id="方案四"><a href="#方案四" class="headerlink" title="方案四"></a>方案四</h3><p>在组件中使用 <code>$route</code> 会使之与其对应路由形成高度耦合，从而使组件只能在某些特定的 URL 上使用，限制了其灵活性, <a href="https://router.vuejs.org/zh/guide/essentials/passing-props.html#%E5%AF%B9%E8%B1%A1%E6%A8%A1%E5%BC%8F" target="_blank" rel="noopener">查看详细解说</a>。</p>
+<p>使用 <code>props</code> 将组件 和路由解耦</p>
+<p>取代与 <code>$route</code> 的耦合</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">const User = &#123;</span><br><span class="line">  template: &apos;&lt;div&gt;User &#123;&#123; $route.params.id &#125;&#125;&lt;/div&gt;&apos;</span><br><span class="line">&#125;</span><br><span class="line">const router = new VueRouter(&#123;</span><br><span class="line">  routes: [</span><br><span class="line">    &#123; path: &apos;/user/:id&apos;, component: User &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>通过 <code>props</code> 解耦</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">const User = &#123;</span><br><span class="line">  props: [&apos;id&apos;],</span><br><span class="line">  template: &apos;&lt;div&gt;User &#123;&#123; id &#125;&#125;&lt;/div&gt;&apos;</span><br><span class="line">&#125;</span><br><span class="line">const router = new VueRouter(&#123;</span><br><span class="line">  routes: [</span><br><span class="line">    &#123; path: &apos;/user/:id&apos;, component: User, props: true &#125;,</span><br><span class="line"></span><br><span class="line">    // 对于包含命名视图的路由，你必须分别为每个命名视图添加 `props` 选项：</span><br><span class="line">    &#123;</span><br><span class="line">      path: &apos;/user/:id&apos;,</span><br><span class="line">      components: &#123; default: User, sidebar: Sidebar &#125;,</span><br><span class="line">      props: &#123; default: true, sidebar: false &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>这样你便可以在任何地方使用该组件，使得该组件更易于重用和测试。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">import Vue from &apos;vue&apos;</span><br><span class="line">import VueRouter from &apos;vue-router&apos;</span><br><span class="line">import Hello from &apos;./Hello.vue&apos;</span><br><span class="line"></span><br><span class="line">Vue.use(VueRouter)</span><br><span class="line"></span><br><span class="line">function dynamicPropsFn (route) &#123;</span><br><span class="line">  const now = new Date()</span><br><span class="line">  return &#123;</span><br><span class="line">    name: (now.getFullYear() + parseInt(route.params.years)) + &apos;!&apos;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">const router = new VueRouter(&#123;</span><br><span class="line">  mode: &apos;history&apos;,</span><br><span class="line">  base: __dirname,</span><br><span class="line">  routes: [</span><br><span class="line">    &#123; path: &apos;/&apos;, component: Hello &#125;, // No props, no nothing</span><br><span class="line">    &#123; path: &apos;/hello/:name&apos;, component: Hello, props: true &#125;, // Pass route.params to props</span><br><span class="line">    &#123; path: &apos;/static&apos;, component: Hello, props: &#123; name: &apos;world&apos; &#125;&#125;, // static values</span><br><span class="line">    &#123; path: &apos;/dynamic/:years&apos;, component: Hello, props: dynamicPropsFn &#125;, // custom logic for mapping between route and props</span><br><span class="line">    &#123; path: &apos;/attrs&apos;, component: Hello, props: &#123; name: &apos;attrs&apos; &#125;&#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">new Vue(&#123;</span><br><span class="line">  router,</span><br><span class="line">  template: `</span><br><span class="line">    &lt;div id=&quot;app&quot;&gt;</span><br><span class="line">      &lt;h1&gt;Route props&lt;/h1&gt;</span><br><span class="line">      &lt;ul&gt;</span><br><span class="line">        &lt;li&gt;&lt;router-link to=&quot;/&quot;&gt;/&lt;/router-link&gt;&lt;/li&gt;</span><br><span class="line">        &lt;li&gt;&lt;router-link to=&quot;/hello/you&quot;&gt;/hello/you&lt;/router-link&gt;&lt;/li&gt;</span><br><span class="line">        &lt;li&gt;&lt;router-link to=&quot;/static&quot;&gt;/static&lt;/router-link&gt;&lt;/li&gt;</span><br><span class="line">        &lt;li&gt;&lt;router-link to=&quot;/dynamic/1&quot;&gt;/dynamic/1&lt;/router-link&gt;&lt;/li&gt;</span><br><span class="line">        &lt;li&gt;&lt;router-link to=&quot;/attrs&quot;&gt;/attrs&lt;/router-link&gt;&lt;/li&gt;</span><br><span class="line">      &lt;/ul&gt;</span><br><span class="line">      &lt;router-view class=&quot;view&quot; foo=&quot;123&quot;&gt;&lt;/router-view&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  `</span><br><span class="line">&#125;).$mount(&apos;#app&apos;)</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://heweixia.com/2020/01/20/vue路由传参/" data-id="ck5m9nhv00029ugvwfwft8uan" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2020/01/02/JS基础测试40/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">JS基础测试40</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Regexp/">Regexp</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/css3/">css3</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/js/">js</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/reactjs/">reactjs</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/sublime/">sublime</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/svg/">svg</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/vue/">vue</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/基础测试/">基础测试</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/移动端开发/">移动端开发</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DOM/">DOM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6/">es6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/form/">form</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react-router/">react-router</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/regexp/">regexp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sublime/">sublime</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/svg/">svg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vuex/">vuex</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/动画/">动画</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/打包/">打包</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/移动端开发/">移动端开发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/箭头函数/">箭头函数</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/路由-vue/">路由 vue</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/CSS/" style="font-size: 15px;">CSS</a> <a href="/tags/DOM/" style="font-size: 17.5px;">DOM</a> <a href="/tags/es6/" style="font-size: 10px;">es6</a> <a href="/tags/form/" style="font-size: 10px;">form</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/js/" style="font-size: 20px;">js</a> <a href="/tags/react-router/" style="font-size: 10px;">react-router</a> <a href="/tags/regexp/" style="font-size: 10px;">regexp</a> <a href="/tags/sublime/" style="font-size: 10px;">sublime</a> <a href="/tags/svg/" style="font-size: 12.5px;">svg</a> <a href="/tags/vuex/" style="font-size: 10px;">vuex</a> <a href="/tags/动画/" style="font-size: 12.5px;">动画</a> <a href="/tags/打包/" style="font-size: 10px;">打包</a> <a href="/tags/移动端开发/" style="font-size: 10px;">移动端开发</a> <a href="/tags/箭头函数/" style="font-size: 10px;">箭头函数</a> <a href="/tags/路由-vue/" style="font-size: 10px;">路由 vue</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/01/20/vue路由传参/">vue路由传参</a>
+          </li>
+        
+          <li>
+            <a href="/2020/01/02/JS基础测试40/">JS基础测试40</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/09/CSS基础测试15/">CSS基础测试15</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/25/DOM基础测试39/">DOW基础测试39</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/25/JS基础测试39/">JS基础测试39</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 hwx<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

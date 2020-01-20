@@ -62,6 +62,267 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-vue路由传参" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/01/20/vue路由传参/" class="article-date">
+  <time datetime="2020-01-20T06:49:07.000Z" itemprop="datePublished">2020-01-20</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/vue/">vue</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/01/20/vue路由传参/">vue路由传参</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>这里只说一下vue路由传参的几种常见方式，关于vue 路由的详细说解说可以在这篇文章查看<a href="/2019/07/03/理解Web路由（浅谈前后端路由与前后端渲染）/">更多</a></p>
+<h3 id="方案一"><a href="#方案一" class="headerlink" title="方案一"></a>方案一</h3><p>通过路由配置，传递需要的参数 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	path:&apos;/user/:id&apos;,</span><br><span class="line">	name:&apos;user&apos;,</span><br><span class="line">	component:User</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong><em>这里只能设置一个参数， 且跳转时页面时必须将参数带上</em></strong></p>
+<p>跳转时可以通过声明式和编程式的方式跳转：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">let id = 4</span><br><span class="line">//声明式</span><br><span class="line">&lt;router-link :to=&quot;&apos;/user/$&#123;id&#125;&apos;&quot;&gt;user&lt;/router-link&gt; // -&gt; /user/4</span><br><span class="line">&lt;router-link :to=&quot;&#123;name: &apos;user&apos; , params:&#123;id: id&#125;&#125;&quot;&gt;user&lt;/router-link&gt; // -&gt; /user/4</span><br><span class="line">//编程式</span><br><span class="line">router.push(&#123; path: `/user/$&#123;id&#125;` &#125;)</span><br><span class="line">router.push(&#123; name: &apos;user&apos;, params: &#123; id: id &#125;&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>在子组件的路由中可以通过<code>params</code>属性获取所有的参数：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">this.$route.params.id</span><br></pre></td></tr></table></figure>
+
+<h3 id="方案二"><a href="#方案二" class="headerlink" title="方案二"></a>方案二</h3><p>通过 <code>params</code> 来传递参数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">let  id = 4</span><br><span class="line">//声明式</span><br><span class="line">&lt;router-link to=&quot;&#123;name: &apos;user&apos; , params:&#123;id: id&#125;&#125;&quot;&gt;user&lt;/router-link&gt;</span><br><span class="line">//编程式</span><br><span class="line">this.$router.push(&#123;name: &apos;user&apos;,params: &#123; id: id&#125;&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>对应路由配置处，可以添加 <code>/:id</code> 也可以不用添加任何参数，添加后方式像方案一一样。 当不添加时，参数值不会在URL后面显示，同时子组件只能在第一次加载时通过 <code>router.params</code> 获取当前参数值， 当页面刷新后，传递的参数会被删除。</p>
+<h3 id="方案三"><a href="#方案三" class="headerlink" title="方案三"></a>方案三</h3><p>通过 <code>query</code> 来传递参数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">let id = 4</span><br><span class="line">//声明式</span><br><span class="line">&lt;router-link :to=&quot;&#123;path:&apos;/user&apos;, query:&#123;id: id&#125;&#125;&quot;&gt;user&lt;/router-link&gt; // -&gt; /user?id=4</span><br><span class="line">&lt;router-link :to=&quot;&#123;name: &apos;user&apos; , query:&#123;id: id&#125;&#125;&quot;&gt;user&lt;/router-link&gt; // -&gt; /user?id=4</span><br><span class="line">//函数式</span><br><span class="line">this.$router.push(&#123;name:&quot;user&quot;,query:&#123;id: id&#125; &#125;)</span><br><span class="line">this.$router.push(&#123;push:&quot;/user&quot;,query:&#123;id: id&#125; &#125;)</span><br></pre></td></tr></table></figure>
+
+<p>在子组件的路由中可以通过<code>query</code>属性获取所有的参数：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">this.$route.query.id</span><br></pre></td></tr></table></figure>
+
+<p>通过这种方式可以传递多个参数，与 params 相比，刷新当前页面后参数不会被删除。</p>
+<h3 id="方案四"><a href="#方案四" class="headerlink" title="方案四"></a>方案四</h3><p>在组件中使用 <code>$route</code> 会使之与其对应路由形成高度耦合，从而使组件只能在某些特定的 URL 上使用，限制了其灵活性, <a href="https://router.vuejs.org/zh/guide/essentials/passing-props.html#%E5%AF%B9%E8%B1%A1%E6%A8%A1%E5%BC%8F" target="_blank" rel="noopener">查看详细解说</a>。</p>
+<p>使用 <code>props</code> 将组件 和路由解耦</p>
+<p>取代与 <code>$route</code> 的耦合</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">const User = &#123;</span><br><span class="line">  template: &apos;&lt;div&gt;User &#123;&#123; $route.params.id &#125;&#125;&lt;/div&gt;&apos;</span><br><span class="line">&#125;</span><br><span class="line">const router = new VueRouter(&#123;</span><br><span class="line">  routes: [</span><br><span class="line">    &#123; path: &apos;/user/:id&apos;, component: User &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>通过 <code>props</code> 解耦</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">const User = &#123;</span><br><span class="line">  props: [&apos;id&apos;],</span><br><span class="line">  template: &apos;&lt;div&gt;User &#123;&#123; id &#125;&#125;&lt;/div&gt;&apos;</span><br><span class="line">&#125;</span><br><span class="line">const router = new VueRouter(&#123;</span><br><span class="line">  routes: [</span><br><span class="line">    &#123; path: &apos;/user/:id&apos;, component: User, props: true &#125;,</span><br><span class="line"></span><br><span class="line">    // 对于包含命名视图的路由，你必须分别为每个命名视图添加 `props` 选项：</span><br><span class="line">    &#123;</span><br><span class="line">      path: &apos;/user/:id&apos;,</span><br><span class="line">      components: &#123; default: User, sidebar: Sidebar &#125;,</span><br><span class="line">      props: &#123; default: true, sidebar: false &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>这样你便可以在任何地方使用该组件，使得该组件更易于重用和测试。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">import Vue from &apos;vue&apos;</span><br><span class="line">import VueRouter from &apos;vue-router&apos;</span><br><span class="line">import Hello from &apos;./Hello.vue&apos;</span><br><span class="line"></span><br><span class="line">Vue.use(VueRouter)</span><br><span class="line"></span><br><span class="line">function dynamicPropsFn (route) &#123;</span><br><span class="line">  const now = new Date()</span><br><span class="line">  return &#123;</span><br><span class="line">    name: (now.getFullYear() + parseInt(route.params.years)) + &apos;!&apos;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">const router = new VueRouter(&#123;</span><br><span class="line">  mode: &apos;history&apos;,</span><br><span class="line">  base: __dirname,</span><br><span class="line">  routes: [</span><br><span class="line">    &#123; path: &apos;/&apos;, component: Hello &#125;, // No props, no nothing</span><br><span class="line">    &#123; path: &apos;/hello/:name&apos;, component: Hello, props: true &#125;, // Pass route.params to props</span><br><span class="line">    &#123; path: &apos;/static&apos;, component: Hello, props: &#123; name: &apos;world&apos; &#125;&#125;, // static values</span><br><span class="line">    &#123; path: &apos;/dynamic/:years&apos;, component: Hello, props: dynamicPropsFn &#125;, // custom logic for mapping between route and props</span><br><span class="line">    &#123; path: &apos;/attrs&apos;, component: Hello, props: &#123; name: &apos;attrs&apos; &#125;&#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">new Vue(&#123;</span><br><span class="line">  router,</span><br><span class="line">  template: `</span><br><span class="line">    &lt;div id=&quot;app&quot;&gt;</span><br><span class="line">      &lt;h1&gt;Route props&lt;/h1&gt;</span><br><span class="line">      &lt;ul&gt;</span><br><span class="line">        &lt;li&gt;&lt;router-link to=&quot;/&quot;&gt;/&lt;/router-link&gt;&lt;/li&gt;</span><br><span class="line">        &lt;li&gt;&lt;router-link to=&quot;/hello/you&quot;&gt;/hello/you&lt;/router-link&gt;&lt;/li&gt;</span><br><span class="line">        &lt;li&gt;&lt;router-link to=&quot;/static&quot;&gt;/static&lt;/router-link&gt;&lt;/li&gt;</span><br><span class="line">        &lt;li&gt;&lt;router-link to=&quot;/dynamic/1&quot;&gt;/dynamic/1&lt;/router-link&gt;&lt;/li&gt;</span><br><span class="line">        &lt;li&gt;&lt;router-link to=&quot;/attrs&quot;&gt;/attrs&lt;/router-link&gt;&lt;/li&gt;</span><br><span class="line">      &lt;/ul&gt;</span><br><span class="line">      &lt;router-view class=&quot;view&quot; foo=&quot;123&quot;&gt;&lt;/router-view&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  `</span><br><span class="line">&#125;).$mount(&apos;#app&apos;)</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://heweixia.com/2020/01/20/vue路由传参/" data-id="ck5m9nhv00029ugvwfwft8uan" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-JS基础测试40" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/01/02/JS基础测试40/" class="article-date">
+  <time datetime="2020-01-02T06:36:12.000Z" itemprop="datePublished">2020-01-02</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/基础测试/">基础测试</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/01/02/JS基础测试40/">JS基础测试40</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="/images/base-test/js-40-1.png" alt></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://heweixia.com/2020/01/02/JS基础测试40/" data-id="ck5m9nhts0015ugvwlafyr1q1" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-CSS基础测试15" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/12/09/CSS基础测试15/" class="article-date">
+  <time datetime="2019-12-09T09:28:01.000Z" itemprop="datePublished">2019-12-09</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/基础测试/">基础测试</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/09/CSS基础测试15/">CSS基础测试15</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="/images/base-test/css-15-1.png" alt></p>
+        
+          <p class="article-more-link">
+            <a href="/2019/12/09/CSS基础测试15/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://heweixia.com/2019/12/09/CSS基础测试15/" data-id="ck5m9nhsm0001ugvwjfydwirf" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/">CSS</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-DOM基础测试39" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/25/DOM基础测试39/" class="article-date">
+  <time datetime="2019-11-25T08:52:53.000Z" itemprop="datePublished">2019-11-25</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/基础测试/">基础测试</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/25/DOM基础测试39/">DOW基础测试39</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="/images/base-test/dom-39-1.png" alt> </p>
+<p>CSS代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line">.img-list &#123;</span><br><span class="line">       padding: 10px;</span><br><span class="line">       display: flex;</span><br><span class="line">       flex-wrap: wrap;</span><br><span class="line">       background: #efefef;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   .img-list .img-item &#123;</span><br><span class="line">       width: 100px;</span><br><span class="line">       height: 100px;</span><br><span class="line">       display: flex;</span><br><span class="line">       justify-content: center;</span><br><span class="line">       border: 1px solid #dfdfe0;</span><br><span class="line">       overflow: hidden;</span><br><span class="line">       margin: 10px;</span><br><span class="line">       background: #fff;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   .img-list .img-item img &#123;</span><br><span class="line">       height: 100%;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   .img-preview &#123;</span><br><span class="line">       max-width: 100%;</span><br><span class="line">       max-height: 100%;</span><br><span class="line">       transition: .3s;</span><br><span class="line">       visibility: hidden;</span><br><span class="line">       transform: scale(0.5);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   dialog &#123;</span><br><span class="line">       display: flex;</span><br><span class="line">       box-sizing: border-box;</span><br><span class="line">       position: fixed;</span><br><span class="line">       justify-content: center;</span><br><span class="line">       align-items: center;</span><br><span class="line">       padding: 20px;</span><br><span class="line">       border: 0;</span><br><span class="line">       left: 0;</span><br><span class="line">       top: 0;</span><br><span class="line">       width: 100%;</span><br><span class="line">       height: 100%;</span><br><span class="line">       background: rgba(0, 0, 0, .5);</span><br><span class="line">       font-size: 20px;</span><br><span class="line">       color: #fff;</span><br><span class="line">       transition: .3s;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   dialog[open] &#123;</span><br><span class="line">       visibility: visible;</span><br><span class="line">       opacity: 1;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   dialog:not([open]) &#123;</span><br><span class="line">       display: flex;</span><br><span class="line">       visibility: hidden;</span><br><span class="line">       opacity: 0;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   dialog[open][loading]::before &#123;</span><br><span class="line">       position: absolute;</span><br><span class="line">       content: &quot;loading...&quot;;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   dialog[open]:not([loading]) .img-preview &#123;</span><br><span class="line">       visibility: visible;</span><br><span class="line">       transform: scale(1);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<p>HTML代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;img-list&quot; id=&quot;img-list&quot;&gt;</span><br><span class="line">        &lt;div class=&quot;img-item&quot;&gt;</span><br><span class="line">            &lt;img class=&quot;img-thumb&quot; src=&quot;https://images.pexels.com/photos/2387874/pexels-photo-2387874.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=200&quot; data-src=&quot;https://images.pexels.com/photos/2387874/pexels-photo-2387874.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1560&quot;&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">        &lt;div class=&quot;img-item&quot;&gt;</span><br><span class="line">            &lt;img class=&quot;img-thumb&quot; src=&quot;https://images.pexels.com/photos/2524767/pexels-photo-2524767.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=200&quot; data-src=&quot;https://images.pexels.com/photos/2524767/pexels-photo-2524767.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=940&quot;&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">        &lt;div class=&quot;img-item&quot;&gt;</span><br><span class="line">            &lt;img class=&quot;img-thumb&quot; src=&quot;https://images.pexels.com/photos/2669181/pexels-photo-2669181.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=200&quot; data-src=&quot;https://images.pexels.com/photos/2669181/pexels-photo-2669181.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=940&quot;&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    &lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+<p>JS代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">let imgList = document.getElementById(&apos;img-list&apos;);</span><br><span class="line"> let dialog = document.getElementById(&apos;dialog&apos;);</span><br><span class="line"> let imgPreview = document.getElementById(&apos;img-preview&apos;);</span><br><span class="line"></span><br><span class="line"> imgList.addEventListener(&apos;click&apos;, function(e) &#123;</span><br><span class="line">     if (e.target.tagName == &apos;IMG&apos;) &#123;</span><br><span class="line">         dialog.setAttribute(&apos;loading&apos;, true)</span><br><span class="line">         dialog.showModal();</span><br><span class="line">         var img = new Image();</span><br><span class="line">         img.src = e.target.dataset.src;</span><br><span class="line">         img.onload = function() &#123;</span><br><span class="line">             dialog.removeAttribute(&apos;loading&apos;);</span><br><span class="line">             imgPreview.src = img.src;</span><br><span class="line">         &#125;</span><br><span class="line">     &#125;</span><br><span class="line"> &#125;)</span><br><span class="line"></span><br><span class="line"> dialog.addEventListener(&apos;click&apos;, function(e) &#123;</span><br><span class="line">     if (e.target.tagName = &apos;DIALOG&apos;) &#123;</span><br><span class="line">         this.close();</span><br><span class="line">     &#125;</span><br><span class="line"> &#125;)</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://heweixia.com/2019/11/25/DOM基础测试39/" data-id="ck5m9nhtk000zugvwocvlxivy" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DOM/">DOM</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-JS基础测试39" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/25/JS基础测试39/" class="article-date">
+  <time datetime="2019-11-25T07:53:30.000Z" itemprop="datePublished">2019-11-25</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/基础测试/">基础测试</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/25/JS基础测试39/">JS基础测试39</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="/images/base-test/js-39-1.png" alt></p>
+<p>(1)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">function colorPad(color) &#123;</span><br><span class="line">    var reg = /^#?([0-9a-f]&#123;1,3&#125;|[0-9a-f]&#123;6&#125;)$/i;</span><br><span class="line">    if (reg.test(color)) &#123;</span><br><span class="line">        return color.replace(reg, function (all, $1) &#123;</span><br><span class="line">            var hex = &apos;&apos;;</span><br><span class="line">            if ($1.length === 3) &#123;</span><br><span class="line">                hex = $1.split(&apos;&apos;).map(function (el) &#123;</span><br><span class="line">                    return el.repeat(2);</span><br><span class="line">                &#125;).join(&apos;&apos;)</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                hex = $1.repeat(6 / $1.length);</span><br><span class="line">            &#125;</span><br><span class="line">            return &apos;#&apos; + hex.toLowerCase();</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        return &apos;#000000&apos;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>(2)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">function colorRadom() &#123;</span><br><span class="line">    return &apos;#&apos; + (~~(Math.random() * 0xffffff)).toString(16).padStart(6,&apos;0&apos;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>(3)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">function colorRange(a, b) &#123;</span><br><span class="line">    var color1 = colorPad(a);</span><br><span class="line">    var color2 = colorPad(b);</span><br><span class="line">    var min = parseInt((color1 &gt; color2 ? color2 : color1).slice(1), 16);</span><br><span class="line">    var max = parseInt((color1 &gt; color2 ? color1 : color2).slice(1), 16);</span><br><span class="line">    return &apos;#&apos; + (min + ~~(Math.random() * (max - min))).toString(16).padStart(6,&apos;0&apos;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://heweixia.com/2019/11/25/JS基础测试39/" data-id="ck5m9nhu4001gugvw69rd59fw" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-CSS基础测试13" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/10/17/CSS基础测试13/" class="article-date">
@@ -89,6 +350,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p><img src="/images/base-test/css-13-1.png" alt></p>
+<p><a href="https://codepen.io/hewxwshining/pen/OJJRvJE" target="_blank" rel="noopener">demo</a></p>
         
           <p class="article-more-link">
             <a href="/2019/10/17/CSS基础测试13/#more">Read More</a>
@@ -97,7 +359,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://heweixia.com/2019/10/17/CSS基础测试13/" data-id="ck1viy80j0004g0vw9xst5vpr" class="article-share-link">Share</a>
+      <a data-url="http://heweixia.com/2019/10/17/CSS基础测试13/" data-id="ck5m9nhso0002ugvw94e968ji" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/">CSS</a></li></ul>
@@ -199,7 +461,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://heweixia.com/2019/10/11/移动端开发总结/" data-id="ck1viy81w001yg0vwbu2peur2" class="article-share-link">Share</a>
+      <a data-url="http://heweixia.com/2019/10/11/移动端开发总结/" data-id="ck5m9nhvb002mugvww6rktz1n" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/移动端开发/">移动端开发</a></li></ul>
@@ -248,7 +510,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://heweixia.com/2019/10/10/DOM基础测试38/" data-id="ck1viy812000og0vw5h2xqz1h" class="article-share-link">Share</a>
+      <a data-url="http://heweixia.com/2019/10/10/DOM基础测试38/" data-id="ck5m9nht0000dugvw75jcwpy0" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DOM/">DOM</a></li></ul>
@@ -295,7 +557,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://heweixia.com/2019/09/30/JS基础测试27/" data-id="ck1viy80z000lg0vw75ijo4uq" class="article-share-link">Share</a>
+      <a data-url="http://heweixia.com/2019/09/30/JS基础测试27/" data-id="ck5m9nht6000kugvwj7qlnicd" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li></ul>
@@ -381,7 +643,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://heweixia.com/2019/09/17/64条最常用正则表达式/" data-id="ck1viy8080000g0vwm450i2ck" class="article-share-link">Share</a>
+      <a data-url="http://heweixia.com/2019/09/17/64条最常用正则表达式/" data-id="ck5m9nhsv0007ugvwco9561th" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/regexp/">regexp</a></li></ul>
@@ -393,251 +655,11 @@
 
 
   
-    <article id="post-JS基础测试37" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/09/17/JS基础测试37/" class="article-date">
-  <time datetime="2019-09-17T01:35:55.000Z" itemprop="datePublished">2019-09-17</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/基础测试/">基础测试</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/09/17/JS基础测试37/">JS基础测试37</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><img src="/images/base-test/js-37-1.png" alt></p>
-        
-          <p class="article-more-link">
-            <a href="/2019/09/17/JS基础测试37/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://heweixia.com/2019/09/17/JS基础测试37/" data-id="ck1viy818000yg0vw7gyfzvjy" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-DOM基础测试37" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/09/16/DOM基础测试37/" class="article-date">
-  <time datetime="2019-09-16T09:51:07.000Z" itemprop="datePublished">2019-09-16</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/基础测试/">基础测试</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/09/16/DOM基础测试37/">DOM基础测试37</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><img src="/images/base-test/dom-37-1.png" alt></p>
-        
-          <p class="article-more-link">
-            <a href="/2019/09/16/DOM基础测试37/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://heweixia.com/2019/09/16/DOM基础测试37/" data-id="ck1viy80t000fg0vwedcd5opf" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DOM/">DOM</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-React-学习历程（react-router）" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/08/19/React-学习历程（react-router）/" class="article-date">
-  <time datetime="2019-08-19T08:55:21.000Z" itemprop="datePublished">2019-08-19</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/reactjs/">reactjs</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/19/React-学习历程（react-router）/">React-学习历程（react-router）</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>React Router 是一个基于 React 之上的强大路由库，它可以让你向应用中快速地添加视图和数据流，同时保持页面与 URL 间的同步。</p>
-<p><strong>以下的实例都是基于 “react-router”=”^5.0.1” 进行测试的</strong></p>
-<h3 id="一、创建一个简单路由"><a href="#一、创建一个简单路由" class="headerlink" title="一、创建一个简单路由"></a>一、创建一个简单路由</h3><p><strong>1、使用 npm 添加 react-router</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save react-router react-router-dom</span><br></pre></td></tr></table></figure>
-
-<p><strong>2、在项目中引入路由</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import &#123; HashRouter as Router, Link, Route &#125; from &quot;react-router-dom&quot;;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://heweixia.com/2019/08/19/React-学习历程（react-router）/" data-id="ck1viy81g001bg0vwdgmjhpl6" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react-router/">react-router</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-React-学习历程2" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/08/15/React-学习历程2/" class="article-date">
-  <time datetime="2019-08-15T06:53:23.000Z" itemprop="datePublished">2019-08-15</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/reactjs/">reactjs</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/15/React-学习历程2/">React 学习历程2</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="React-生命週期"><a href="#React-生命週期" class="headerlink" title="React 生命週期"></a>React 生命週期</h3><p>React 组件的生命周期可分成三个状态：</p>
-<ul>
-<li>Mounting：已插入 DOM</li>
-<li>Updating：正在被重新渲染</li>
-<li>Unmounting：已移出 DOM
-        
-          <p class="article-more-link">
-            <a href="/2019/08/15/React-学习历程2/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://heweixia.com/2019/08/15/React-学习历程2/" data-id="ck1viy81e0017g0vwlmdrajm9" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-React学习历程1" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/08/13/React学习历程1/" class="article-date">
-  <time datetime="2019-08-13T02:01:50.000Z" itemprop="datePublished">2019-08-13</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/reactjs/">reactjs</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/13/React学习历程1/">React学习历程1</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="什么是React"><a href="#什么是React" class="headerlink" title="什么是React?"></a>什么是React?</h3><blockquote>
-<p>React 是一个声明式，高效且灵活的用于构建用户界面的 JavaScript 库。使用 React 可以将一些简短、独立的代码片段组合成复杂的 UI 界面，这些代码片段被称作“组件”。</p>
-</blockquote>
-        
-          <p class="article-more-link">
-            <a href="/2019/08/13/React学习历程1/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://heweixia.com/2019/08/13/React学习历程1/" data-id="ck1viy81c0014g0vwi3ffxm8k" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
 
 
   <nav id="page-nav">
     
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
   </nav>
 
 </section>
@@ -668,7 +690,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/CSS/" style="font-size: 13.33px;">CSS</a> <a href="/tags/DOM/" style="font-size: 16.67px;">DOM</a> <a href="/tags/es6/" style="font-size: 10px;">es6</a> <a href="/tags/form/" style="font-size: 10px;">form</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/js/" style="font-size: 20px;">js</a> <a href="/tags/react-router/" style="font-size: 10px;">react-router</a> <a href="/tags/regexp/" style="font-size: 10px;">regexp</a> <a href="/tags/sublime/" style="font-size: 10px;">sublime</a> <a href="/tags/svg/" style="font-size: 13.33px;">svg</a> <a href="/tags/vuex/" style="font-size: 10px;">vuex</a> <a href="/tags/动画/" style="font-size: 13.33px;">动画</a> <a href="/tags/打包/" style="font-size: 10px;">打包</a> <a href="/tags/移动端开发/" style="font-size: 10px;">移动端开发</a> <a href="/tags/箭头函数/" style="font-size: 10px;">箭头函数</a> <a href="/tags/路由-vue/" style="font-size: 10px;">路由 vue</a>
+      <a href="/tags/CSS/" style="font-size: 15px;">CSS</a> <a href="/tags/DOM/" style="font-size: 17.5px;">DOM</a> <a href="/tags/es6/" style="font-size: 10px;">es6</a> <a href="/tags/form/" style="font-size: 10px;">form</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/js/" style="font-size: 20px;">js</a> <a href="/tags/react-router/" style="font-size: 10px;">react-router</a> <a href="/tags/regexp/" style="font-size: 10px;">regexp</a> <a href="/tags/sublime/" style="font-size: 10px;">sublime</a> <a href="/tags/svg/" style="font-size: 12.5px;">svg</a> <a href="/tags/vuex/" style="font-size: 10px;">vuex</a> <a href="/tags/动画/" style="font-size: 12.5px;">动画</a> <a href="/tags/打包/" style="font-size: 10px;">打包</a> <a href="/tags/移动端开发/" style="font-size: 10px;">移动端开发</a> <a href="/tags/箭头函数/" style="font-size: 10px;">箭头函数</a> <a href="/tags/路由-vue/" style="font-size: 10px;">路由 vue</a>
     </div>
   </div>
 
@@ -677,7 +699,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li></ul>
     </div>
   </div>
 
@@ -690,23 +712,23 @@
       <ul>
         
           <li>
-            <a href="/2019/10/17/CSS基础测试13/">CSS基础测试13</a>
+            <a href="/2020/01/20/vue路由传参/">vue路由传参</a>
           </li>
         
           <li>
-            <a href="/2019/10/11/移动端开发总结/">移动端开发总结</a>
+            <a href="/2020/01/02/JS基础测试40/">JS基础测试40</a>
           </li>
         
           <li>
-            <a href="/2019/10/10/DOM基础测试38/">DOM基础测试38</a>
+            <a href="/2019/12/09/CSS基础测试15/">CSS基础测试15</a>
           </li>
         
           <li>
-            <a href="/2019/09/30/JS基础测试27/">JS基础测试27</a>
+            <a href="/2019/11/25/DOM基础测试39/">DOW基础测试39</a>
           </li>
         
           <li>
-            <a href="/2019/09/17/64条最常用正则表达式/">64条最常用正则表达式</a>
+            <a href="/2019/11/25/JS基础测试39/">JS基础测试39</a>
           </li>
         
       </ul>
@@ -721,7 +743,7 @@
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2019 hwx<br>
+      &copy; 2020 hwx<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
