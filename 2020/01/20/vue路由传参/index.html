@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="Hex笔记">
 <meta property="og:description" content="这里只说一下vue路由传参的几种常见方式，关于vue 路由的详细说解说可以在这篇文章查看更多 方案一通过路由配置，传递需要的参数  12345&amp;#123;	path:&amp;apos;/user/:id&amp;apos;,	name:&amp;apos;user&amp;apos;,	component:User&amp;#125;  这里只能设置一个参数， 且跳转时页面时必须将参数带上 跳转时可以通过声明式和编程式的方式跳转： 1">
 <meta property="og:locale" content="zh_CN.utf8">
-<meta property="og:updated_time" content="2020-01-20T09:39:05.951Z">
+<meta property="og:updated_time" content="2020-01-20T09:51:10.320Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="vue路由传参">
 <meta name="twitter:description" content="这里只说一下vue路由传参的几种常见方式，关于vue 路由的详细说解说可以在这篇文章查看更多 方案一通过路由配置，传递需要的参数  12345&amp;#123;	path:&amp;apos;/user/:id&amp;apos;,	name:&amp;apos;user&amp;apos;,	component:User&amp;#125;  这里只能设置一个参数， 且跳转时页面时必须将参数带上 跳转时可以通过声明式和编程式的方式跳转： 1">
@@ -100,6 +100,8 @@
 
 <p>在子组件的路由中可以通过<code>params</code>属性获取所有的参数：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">this.$route.params.id</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
 
 <h3 id="方案二"><a href="#方案二" class="headerlink" title="方案二"></a>方案二</h3><p>通过 <code>params</code> 来传递参数。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">let  id = 4</span><br><span class="line">//声明式</span><br><span class="line">&lt;router-link to=&quot;&#123;name: &apos;user&apos; , params:&#123;id: id&#125;&#125;&quot;&gt;user&lt;/router-link&gt;</span><br><span class="line">//编程式</span><br><span class="line">this.$router.push(&#123;name: &apos;user&apos;,params: &#123; id: id&#125;&#125;)</span><br></pre></td></tr></table></figure>
