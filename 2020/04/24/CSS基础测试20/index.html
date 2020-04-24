@@ -5,15 +5,24 @@
   
 
   
-  <title>Tag: CSS | Hex笔记</title>
+  <title>CSS基础测试20 | Hex笔记</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hex笔记">
-<meta property="og:url" content="http://heweixia.com/tags/CSS/index.html">
+  <meta name="description" content="第一眼看到这个题， 感觉跟文本溢出使用省略号有点相似，最后做出的思路也是异曲同工之效">
+<meta name="keywords" content="CSS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSS基础测试20">
+<meta property="og:url" content="http://heweixia.com/2020/04/24/CSS基础测试20/index.html">
 <meta property="og:site_name" content="Hex笔记">
+<meta property="og:description" content="第一眼看到这个题， 感觉跟文本溢出使用省略号有点相似，最后做出的思路也是异曲同工之效">
 <meta property="og:locale" content="zh_CN.utf8">
+<meta property="og:image" content="http://heweixia.com/images/base-test/css-20-1.png">
+<meta property="og:image" content="http://heweixia.com/images/base-test/css-20-2.png">
+<meta property="og:image" content="http://heweixia.com/images/base-test/css-20-3.png">
+<meta property="og:updated_time" content="2020-04-24T06:50:05.674Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hex笔记">
+<meta name="twitter:title" content="CSS基础测试20">
+<meta name="twitter:description" content="第一眼看到这个题， 感觉跟文本溢出使用省略号有点相似，最后做出的思路也是异曲同工之效">
+<meta name="twitter:image" content="http://heweixia.com/images/base-test/css-20-1.png">
   
     <link rel="alternate" href="/atom.xml" title="Hex笔记" type="application/atom+xml">
   
@@ -60,107 +69,70 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2020/04/24/CSS基础测试20/" class="archive-article-date">
-  <time datetime="2020-04-24T02:42:56.000Z" itemprop="datePublished">Apr 24</time>
+        <section id="main"><article id="post-CSS基础测试20" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/04/24/CSS基础测试20/" class="article-date">
+  <time datetime="2020-04-24T02:42:56.000Z" itemprop="datePublished">2020-04-24</time>
 </a>
-      
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/基础测试/">基础测试</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/04/24/CSS基础测试20/">CSS基础测试20</a>
+    <h1 class="article-title" itemprop="name">
+      CSS基础测试20
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
+      </header>
     
-    
+    <div class="article-entry" itemprop="articleBody">
       
-        </div></section>
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2019/12/09/CSS基础测试15/" class="archive-article-date">
-  <time datetime="2019-12-09T09:28:01.000Z" itemprop="datePublished">Dec 9</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/12/09/CSS基础测试15/">CSS基础测试15</a>
-    </h1>
-  
+        <p><img src="/images/base-test/css-20-1.png" alt="省略布局"><br>第一眼看到这个题， 感觉跟文本溢出使用省略号有点相似，最后做出的思路也是异曲同工之效</p>
+<a id="more"></a>
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2019/10/17/CSS基础测试13/" class="archive-article-date">
-  <time datetime="2019-10-17T08:10:54.000Z" itemprop="datePublished">Oct 17</time>
-</a>
+<p>我们先看一下文本溢出使用省略号显示的情况：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">p &#123;</span><br><span class="line">    width: 100px;</span><br><span class="line">    height: 30px;</span><br><span class="line">    border: 1px solid #ddd;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.no-wrap &#123;</span><br><span class="line">    white-space: nowrap;</span><br><span class="line">    overflow: hidden;</span><br><span class="line">    text-overflow: ellipsis;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&lt;p class=&quot;no-wrap &quot;&gt;this is test this is test this is test this is test this is test this is test&lt;/p&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/base-test/css-20-2.png" alt="文本溢出"></p>
+<p>从上面的例子可以看出来， 为了确认文本的溢出， 所以包裹文本的标签 （p）需要先确定宽度 和高度，设置文本内容不换行, 超出的内容隐藏掉， 并设置在可视区域使用 省略号 代替 隐藏的部分 。</p>
+<p>这道题也是一样， 随着包裹内容的 div 的变化，内容自动显示与隐藏， 这里要注意的内容是以一个个整体出现跟消失的，不仅仅只是部分截取隐藏消失， 跟文本的溢出有些区别，<code>flex</code> 布局 刚好能解决这个问题</p>
+<p>方法一：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">css:</span><br><span class="line">.flex-wrapper &#123;</span><br><span class="line">    display: flex;</span><br><span class="line">    flex-wrap: nowrap;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.flex-content &#123;</span><br><span class="line">    display: flex;</span><br><span class="line">    flex-wrap: wrap;</span><br><span class="line">    flex-shrink: 1;</span><br><span class="line">    height: 33px;</span><br><span class="line">    overflow: hidden;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">span &#123;</span><br><span class="line">    padding: 5px 10px;</span><br><span class="line">    border: 1px solid #ddd;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">span.item &#123;</span><br><span class="line">    flex-grow: 1;</span><br><span class="line">    display: inline-block;</span><br><span class="line">    text-align: center;</span><br><span class="line">    white-space: nowrap;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">html:</span><br><span class="line"></span><br><span class="line">&lt;div class=&quot;flex-wrapper&quot;&gt;</span><br><span class="line">    &lt;span class=&quot;before&quot;&gt;&amp;lt;&lt;/span&gt;</span><br><span class="line">    &lt;div class=&quot;flex-content&quot;&gt;</span><br><span class="line">        &lt;span class=&quot;item&quot;&gt;2020年4月-6月&lt;/span&gt;</span><br><span class="line">        &lt;span class=&quot;item&quot;&gt;2020年1月-3月&lt;/span&gt;</span><br><span class="line">        &lt;span class=&quot;item&quot;&gt;2020年度OKR&lt;/span&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">    &lt;span class=&quot;next&quot;&gt;&amp;gt;&lt;/span&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/base-test/css-20-3.png" alt="flex布局"></p>
+
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/10/17/CSS基础测试13/">CSS基础测试13</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2019/08/07/CSS基础测试9/" class="archive-article-date">
-  <time datetime="2019-08-07T07:08:07.000Z" itemprop="datePublished">Aug 7</time>
-</a>
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://heweixia.com/2020/04/24/CSS基础测试20/" data-id="ck9du6wdk0001lgvw18pmamc6" class="article-share-link">Share</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/07/CSS基础测试9/">css基础测试9</a>
-    </h1>
-  
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/">CSS</a></li></ul>
 
-    </header>
+    </footer>
   </div>
-</article>
+  
+    
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2020/04/08/vue-cli项目升级webpack4-x后二三事/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">vue-cli项目升级webpack4.x后二三事</div>
+    </a>
   
+</nav>
 
+  
+</article>
 
 </section>
         
