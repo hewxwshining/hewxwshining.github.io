@@ -5,15 +5,19 @@
   
 
   
-  <title>Archives | Hex笔记</title>
+  <title>DOM基础测试49 | Hex笔记</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hex笔记">
-<meta property="og:url" content="http://heweixia.com/archives/index.html">
+  <meta name="description" content="题目已知页面上有一个 &amp;lt;select&amp;gt;下拉框元素，假设该元素的 DOM 对象是 select，请问：1、请获得当前下拉框元素所在的&amp;lt;form&amp;gt;元素；2、请问，当前下拉框选中元素的索引值（选中项的序号）是多少？3、请问，我想知道第3个&amp;lt;options&amp;gt;元素的value属性值，代码该如何书写？4、设置 select.value = ‘xxx’ 并不能让&amp;lt;sel">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DOM基础测试49">
+<meta property="og:url" content="http://heweixia.com/2020/07/06/DOM基础测试49/index.html">
 <meta property="og:site_name" content="Hex笔记">
+<meta property="og:description" content="题目已知页面上有一个 &amp;lt;select&amp;gt;下拉框元素，假设该元素的 DOM 对象是 select，请问：1、请获得当前下拉框元素所在的&amp;lt;form&amp;gt;元素；2、请问，当前下拉框选中元素的索引值（选中项的序号）是多少？3、请问，我想知道第3个&amp;lt;options&amp;gt;元素的value属性值，代码该如何书写？4、设置 select.value = ‘xxx’ 并不能让&amp;lt;sel">
 <meta property="og:locale" content="zh_CN.utf8">
+<meta property="og:updated_time" content="2020-07-06T07:52:28.711Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hex笔记">
+<meta name="twitter:title" content="DOM基础测试49">
+<meta name="twitter:description" content="题目已知页面上有一个 &amp;lt;select&amp;gt;下拉框元素，假设该元素的 DOM 对象是 select，请问：1、请获得当前下拉框元素所在的&amp;lt;form&amp;gt;元素；2、请问，当前下拉框选中元素的索引值（选中项的序号）是多少？3、请问，我想知道第3个&amp;lt;options&amp;gt;元素的value属性值，代码该如何书写？4、设置 select.value = ‘xxx’ 并不能让&amp;lt;sel">
   
     <link rel="alternate" href="/atom.xml" title="Hex笔记" type="application/atom+xml">
   
@@ -60,226 +64,57 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2020/07/06/DOM基础测试49/" class="archive-article-date">
-  <time datetime="2020-07-06T07:39:42.000Z" itemprop="datePublished">Jul 6</time>
+        <section id="main"><article id="post-DOM基础测试49" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/07/06/DOM基础测试49/" class="article-date">
+  <time datetime="2020-07-06T07:39:42.000Z" itemprop="datePublished">2020-07-06</time>
 </a>
-      
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/07/06/DOM基础测试49/">DOM基础测试49</a>
+    <h1 class="article-title" itemprop="name">
+      DOM基础测试49
     </h1>
   
 
-    </header>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><p>已知页面上有一个 <code>&lt;select&gt;</code>下拉框元素，假设该元素的 DOM 对象是 select，请问：<br>1、请获得当前下拉框元素所在的<code>&lt;form&gt;</code>元素；<br>2、请问，当前下拉框选中元素的索引值（选中项的序号）是多少？<br>3、请问，我想知道第3个<code>&lt;options&gt;</code>元素的value属性值，代码该如何书写？<br>4、设置 select.value = ‘xxx’ 并不能让<code>&lt;select&gt;</code>下拉框元素触发 change 事件，实现使用 value 属性赋值的时候，下拉框元素 change 事件可以被触发。</p>
+<a id="more"></a>
+
+<p>html:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;form action=&quot;index_submit&quot; method=&quot;get&quot; accept-charset=&quot;utf-8&quot;&gt;</span><br><span class="line">    &lt;select name=&quot;test&quot;&gt;</span><br><span class="line">        &lt;option value=&quot;test1&quot;&gt;test1&lt;/option&gt;</span><br><span class="line">        &lt;option value=&quot;test2&quot;&gt;test2&lt;/option&gt;</span><br><span class="line">        &lt;option value=&quot;test3&quot;&gt;test3&lt;/option&gt;</span><br><span class="line">    &lt;/select&gt;</span><br><span class="line">    &lt;button type=&quot;button&quot; onclick=&quot;selectFunc()&quot;&gt;点击&lt;/button&gt;</span><br><span class="line">&lt;/form&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="解答"><a href="#解答" class="headerlink" title="解答"></a>解答</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">let select = document.querySelector(&apos;select&apos;);</span><br><span class="line"></span><br><span class="line">//第一问：</span><br><span class="line">console.log(select.form)</span><br><span class="line"></span><br><span class="line">//第二问：</span><br><span class="line">console.log(select.selectedIndex)</span><br><span class="line"></span><br><span class="line">//第三问：</span><br><span class="line">console.log(select[2].value)</span><br><span class="line"></span><br><span class="line">//第四问：</span><br><span class="line">//select标签直接改变 value 值时， 不会触发 onchange 事件；</span><br><span class="line">//在HTMLSelectElemtn的原型上做操作；</span><br><span class="line">const props = Object.getOwnPropertyDescriptor(HTMLSelectElement.prototype, &apos;value&apos;);</span><br><span class="line">Object.defineProperty(HTMLSelectElement.prototype, &apos;value&apos;, &#123;</span><br><span class="line">    ...props,</span><br><span class="line">    set(v) &#123;</span><br><span class="line">        props.set.call(this, v);</span><br><span class="line">        console.log(v)</span><br><span class="line">        this.dispatchEvent(new InputEvent(&apos;change&apos;));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line">//测试</span><br><span class="line">select.onchange = function(v) &#123;</span><br><span class="line">     console.log(v.target.value)</span><br><span class="line">&#125;</span><br><span class="line">function selectFunc() &#123;</span><br><span class="line">    document.querySelector(&apos;select&apos;).value = &quot;test3&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://heweixia.com/2020/07/06/DOM基础测试49/" data-id="ckca80krd000vyovwgzvgfb7c" class="article-share-link">Share</a>
+      
+      
+    </footer>
   </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2020/07/06/DOM基础测试41/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">DOM基础测试41</div>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2020/07/06/DOM基础测试41/" class="archive-article-date">
-  <time datetime="2020-07-06T03:03:50.000Z" itemprop="datePublished">Jul 6</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/07/06/DOM基础测试41/">DOM基础测试41</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2020/06/30/小程序开发笔记/" class="archive-article-date">
-  <time datetime="2020-06-30T09:26:26.000Z" itemprop="datePublished">Jun 30</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/06/30/小程序开发笔记/">小程序开发笔记</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2020/04/24/CSS基础测试20/" class="archive-article-date">
-  <time datetime="2020-04-24T02:42:56.000Z" itemprop="datePublished">Apr 24</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/04/24/CSS基础测试20/">CSS基础测试20</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2020/04/08/vue-cli项目升级webpack4-x后二三事/" class="archive-article-date">
-  <time datetime="2020-04-08T05:14:00.000Z" itemprop="datePublished">Apr 8</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/04/08/vue-cli项目升级webpack4-x后二三事/">vue-cli项目升级webpack4.x后二三事</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2020/01/20/vue路由传参/" class="archive-article-date">
-  <time datetime="2020-01-20T06:49:07.000Z" itemprop="datePublished">Jan 20</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/01/20/vue路由传参/">vue路由传参</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2020/01/02/JS基础测试40/" class="archive-article-date">
-  <time datetime="2020-01-02T06:36:12.000Z" itemprop="datePublished">Jan 2</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/01/02/JS基础测试40/">JS基础测试40</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-      
-        </div></section>
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2019/12/09/CSS基础测试15/" class="archive-article-date">
-  <time datetime="2019-12-09T09:28:01.000Z" itemprop="datePublished">Dec 9</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/12/09/CSS基础测试15/">CSS基础测试15</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2019/11/25/DOM基础测试39/" class="archive-article-date">
-  <time datetime="2019-11-25T08:52:53.000Z" itemprop="datePublished">Nov 25</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/11/25/DOM基础测试39/">DOW基础测试39</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2019/11/25/JS基础测试39/" class="archive-article-date">
-  <time datetime="2019-11-25T07:53:30.000Z" itemprop="datePublished">Nov 25</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/11/25/JS基础测试39/">JS基础测试39</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-
-  <nav id="page-nav">
-    
-    <span class="page-number current">1</span><a class="page-number" href="/archives/page/2/">2</a><a class="page-number" href="/archives/page/3/">3</a><a class="page-number" href="/archives/page/4/">4</a><a class="extend next" rel="next" href="/archives/page/2/">Next &raquo;</a>
-  </nav>
 
 </section>
         
