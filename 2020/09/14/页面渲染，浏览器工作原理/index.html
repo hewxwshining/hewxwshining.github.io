@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>页面渲染，浏览器工作原理 | Hex笔记</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="1、 浏览器解析域名； 浏览器缓存中没有该域名 IP 地址， 通过域名服务器（ NDS ）进行查找,返回该域名的IP地址；  浏览器缓存中有该域名 IP 地址， 直接访问该IP地址；   2、 浏览器向服务器发起连接请求 （ TCP 三次握手）3、 浏览器向服务器发起 HTTP GET 请求对于网站来说，这个请求通常是一个HTML文件 3、服务器向浏览器相关的响应头和 THML 内容 初始页面加载">
+<meta name="keywords" content="html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="页面渲染，浏览器工作原理">
+<meta property="og:url" content="http://heweixia.com/2020/09/14/页面渲染，浏览器工作原理/index.html">
+<meta property="og:site_name" content="Hex笔记">
+<meta property="og:description" content="1、 浏览器解析域名； 浏览器缓存中没有该域名 IP 地址， 通过域名服务器（ NDS ）进行查找,返回该域名的IP地址；  浏览器缓存中有该域名 IP 地址， 直接访问该IP地址；   2、 浏览器向服务器发起连接请求 （ TCP 三次握手）3、 浏览器向服务器发起 HTTP GET 请求对于网站来说，这个请求通常是一个HTML文件 3、服务器向浏览器相关的响应头和 THML 内容 初始页面加载">
+<meta property="og:locale" content="zh_CN.utf8">
+<meta property="og:updated_time" content="2020-09-14T09:31:06.382Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="页面渲染，浏览器工作原理">
+<meta name="twitter:description" content="1、 浏览器解析域名； 浏览器缓存中没有该域名 IP 地址， 通过域名服务器（ NDS ）进行查找,返回该域名的IP地址；  浏览器缓存中有该域名 IP 地址， 直接访问该IP地址；   2、 浏览器向服务器发起连接请求 （ TCP 三次握手）3、 浏览器向服务器发起 HTTP GET 请求对于网站来说，这个请求通常是一个HTML文件 3、服务器向浏览器相关的响应头和 THML 内容 初始页面加载">
+  
+    <link rel="alternate" href="/atom.xml" title="Hex笔记" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hex笔记</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://heweixia.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-页面渲染，浏览器工作原理" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/09/14/页面渲染，浏览器工作原理/" class="article-date">
+  <time datetime="2020-09-14T09:05:55.000Z" itemprop="datePublished">2020-09-14</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/前端基础/">前端基础</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      页面渲染，浏览器工作原理
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="1、-浏览器解析域名；"><a href="#1、-浏览器解析域名；" class="headerlink" title="1、 浏览器解析域名；"></a>1、 浏览器解析域名；</h3><ul>
+<li><p>浏览器缓存中没有该域名 IP 地址， 通过域名服务器（ NDS ）进行查找,返回该域名的IP地址；</p>
+</li>
+<li><p>浏览器缓存中有该域名 IP 地址， 直接访问该IP地址；</p>
+</li>
+</ul>
+<h3 id="2、-浏览器向服务器发起连接请求-（-TCP-三次握手）"><a href="#2、-浏览器向服务器发起连接请求-（-TCP-三次握手）" class="headerlink" title="2、 浏览器向服务器发起连接请求 （ TCP 三次握手）"></a>2、 浏览器向服务器发起连接请求 （ TCP 三次握手）</h3><h3 id="3、-浏览器向服务器发起-HTTP-GET-请求"><a href="#3、-浏览器向服务器发起-HTTP-GET-请求" class="headerlink" title="3、 浏览器向服务器发起 HTTP GET 请求"></a>3、 浏览器向服务器发起 HTTP GET 请求</h3><p>对于网站来说，这个请求通常是一个HTML文件</p>
+<h3 id="3、服务器向浏览器相关的响应头和-THML-内容"><a href="#3、服务器向浏览器相关的响应头和-THML-内容" class="headerlink" title="3、服务器向浏览器相关的响应头和 THML 内容"></a>3、服务器向浏览器相关的响应头和 THML 内容</h3><ul>
+<li><p>初始页面加载的14Kb规则，TCP慢开始就是初始响应为14Kb的原因</p>
+<p>  TCP第一个响应包是14kb大小。这是慢开始的一部分，慢开始是一种均衡网络连接速度的算法。慢开始逐渐增加发送数据的数量直到达到网络的最大带宽。</p>
+</li>
+</ul>
+<h3 id="4、浏览器解析返回的数据；"><a href="#4、浏览器解析返回的数据；" class="headerlink" title="4、浏览器解析返回的数据；"></a>4、浏览器解析返回的数据；</h3><p><strong>解析</strong> 是浏览器将通过网络接收的数据转换为 DOM 和 CSSOM 的步骤，通过渲染器把 DOM 和 CSSOM 在屏幕上绘制成页面</p>
+<a id="more"></a>
+
+<p><strong>（1）处理 HTML 标记，并构建 DOM 树</strong></p>
+<p>DOM 树描述的HTML文档的内容。<html> 是文档中的第一个标签，也是 DOM 树的根节点 。 DOM 反应了不同标记之间的关系和层次结构， 嵌套在其他标记中的标记为子节点， DOM 节点数量越多构建树做需要的时间也就也长；</html></p>
+<p>当解析器发现非阻塞资源，例如图片、css文件时， 解析仍继续解析， 但是对于 <code>&lt;script&gt;</code> 标签（特别是没有 <code>async</code> 和 <code>defer</code> 属性—） 会阻断渲染并停止 HTML 的接卸；</p>
+<p><strong>（2）处理 CSS 文件，并构建 CSSOM 树</strong></p>
+<p>CSSOM 与 DOM 的数据模型非常相似， 它们是两颗树， 有独立的数据结构，浏览器将 CSS 规则解析成可以理解和使用的样式映射关系。浏览器遍历CSS中的每个规则集， 根据 CSS 选择器创建具有父、子和兄弟的的节点树；</p>
+<p><strong>（3）构建 Render 树</strong></p>
+<p>将 DOM 树 和 CSSOM 树组合成一颗 Render 树， 渲染树从DOM树的根节点开始构建， 遍历每个可见节点；</p>
+<p><strong>（4）布局 Paint</strong></p>
+<p>构建渲染树后，开始布局。渲染树标识显示哪些节点（即使不可见）及其计算样式，但不标识每个节点的尺寸或位置。为了确定每个对象的确切大小和位置，浏览器从渲染树的根开始遍历它。</p>
+<p>第一次确定节点的大小和位置称为布局。随后对节点大小和位置的重新计算称为回流。假设初始布局发生在返回图像之前。由于我们没有声明图像的大小，因此一旦知道图像大小，就会有回流。</p>
+<p>在渲染树上运行布局以计算每个节点的几何体。布局是确定呈现树中所有节点的宽度、高度和位置，以及确定页面上每个对象的大小和位置的过程。回流是对页面的任何部分或整个文档的任何后续大小和位置的确定。  </p>
+<p><strong>（5）绘制内容</strong></p>
+<p>将各个节点绘制到屏幕上，第一次出现的节点称为first meaningful paint。在绘制或光栅化阶段，浏览器将在布局阶段计算的每个框转换为屏幕上的实际像素。绘画包括将元素的每个可视部分绘制到屏幕上，包括文本、颜色、边框、阴影和替换的元素（如按钮和图像）</p>
+<p><strong>合成</strong><br>当文档的各个部分以不同的层绘制，相互重叠时，必须进行合成，以确保它们以正确的顺序绘制到屏幕上，并正确显示内容。  </p>
+<p>当页面继续加载资产时，可能会发生回流（回想一下我们迟到的示例图像），回流会触发重新绘制和重新组合。如果我们定义了图像的大小，就不需要重新绘制，只需要重新绘制需要重新绘制的层，并在必要时进行合成。但我们没有包括图像大小！从服务器获取图像后，渲染过程将返回到布局步骤并从那里重新开始。</p>
+<h3 id="5、浏览器与服务器断开请求；"><a href="#5、浏览器与服务器断开请求；" class="headerlink" title="5、浏览器与服务器断开请求；"></a>5、浏览器与服务器断开请求；</h3>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://heweixia.com/2020/09/14/页面渲染，浏览器工作原理/" data-id="ckf2bvvcv002y58vwbl792d1w" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/html/">html</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2020/09/10/VUE双向绑定原理/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">VUE双向绑定原理</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Regexp/">Regexp</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/css3/">css3</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/js/">js</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/reactjs/">reactjs</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/sublime/">sublime</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/svg/">svg</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/vue/">vue</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端基础/">前端基础</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/基础测试/">基础测试</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/小程序/">小程序</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/移动端开发/">移动端开发</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DOM/">DOM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6/">es6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/form/">form</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/">html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react-router/">react-router</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/regexp/">regexp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sublime/">sublime</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/svg/">svg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/">vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vuex/">vuex</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack/">webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/动画/">动画</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/小程序/">小程序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/打包/">打包</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/移动端开发/">移动端开发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/箭头函数/">箭头函数</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/路由-vue/">路由 vue</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/CSS/" style="font-size: 15px;">CSS</a> <a href="/tags/DOM/" style="font-size: 17.5px;">DOM</a> <a href="/tags/es6/" style="font-size: 10px;">es6</a> <a href="/tags/form/" style="font-size: 10px;">form</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/js/" style="font-size: 20px;">js</a> <a href="/tags/react-router/" style="font-size: 10px;">react-router</a> <a href="/tags/regexp/" style="font-size: 10px;">regexp</a> <a href="/tags/sublime/" style="font-size: 10px;">sublime</a> <a href="/tags/svg/" style="font-size: 12.5px;">svg</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/vuex/" style="font-size: 10px;">vuex</a> <a href="/tags/webpack/" style="font-size: 10px;">webpack</a> <a href="/tags/动画/" style="font-size: 12.5px;">动画</a> <a href="/tags/小程序/" style="font-size: 10px;">小程序</a> <a href="/tags/打包/" style="font-size: 10px;">打包</a> <a href="/tags/移动端开发/" style="font-size: 10px;">移动端开发</a> <a href="/tags/箭头函数/" style="font-size: 10px;">箭头函数</a> <a href="/tags/路由-vue/" style="font-size: 10px;">路由 vue</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">June 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/09/14/页面渲染，浏览器工作原理/">页面渲染，浏览器工作原理</a>
+          </li>
+        
+          <li>
+            <a href="/2020/09/10/VUE双向绑定原理/">VUE双向绑定原理</a>
+          </li>
+        
+          <li>
+            <a href="/2020/09/08/call、apply、bind、new-实现原理/">call、apply、bind、new 实现原理</a>
+          </li>
+        
+          <li>
+            <a href="/2020/07/06/DOM基础测试49/">DOM基础测试49</a>
+          </li>
+        
+          <li>
+            <a href="/2020/07/06/DOM基础测试41/">DOM基础测试41</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 hwx<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
