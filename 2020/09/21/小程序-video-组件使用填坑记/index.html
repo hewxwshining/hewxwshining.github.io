@@ -5,15 +5,20 @@
   
 
   
-  <title>Archives: 2019/1 | Hex笔记</title>
+  <title>小程序 video 组件使用填坑记 | Hex笔记</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hex笔记">
-<meta property="og:url" content="http://heweixia.com/archives/2019/01/index.html">
+  <meta name="description" content="video 组件最近业务开发时遇到视频播放到结束前几秒的位置时自动停止播放的情况，而且在不同的播放环境下表现形式不一样：  系统播放器环境下可以完整无卡顿播放； google 浏览器中在结束前几秒自动停止，不会继续播放；  对于上面情况的视频，小程序 video 组件监听方法在开发者工具、Android和ios表现形式也不一样； 123456789101112131415&amp;lt;video	 id">
+<meta name="keywords" content="小程序">
+<meta property="og:type" content="article">
+<meta property="og:title" content="小程序 video 组件使用填坑记">
+<meta property="og:url" content="http://heweixia.com/2020/09/21/小程序-video-组件使用填坑记/index.html">
 <meta property="og:site_name" content="Hex笔记">
+<meta property="og:description" content="video 组件最近业务开发时遇到视频播放到结束前几秒的位置时自动停止播放的情况，而且在不同的播放环境下表现形式不一样：  系统播放器环境下可以完整无卡顿播放； google 浏览器中在结束前几秒自动停止，不会继续播放；  对于上面情况的视频，小程序 video 组件监听方法在开发者工具、Android和ios表现形式也不一样； 123456789101112131415&amp;lt;video	 id">
 <meta property="og:locale" content="zh_CN.utf8">
+<meta property="og:updated_time" content="2020-09-22T01:54:15.719Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hex笔记">
+<meta name="twitter:title" content="小程序 video 组件使用填坑记">
+<meta name="twitter:description" content="video 组件最近业务开发时遇到视频播放到结束前几秒的位置时自动停止播放的情况，而且在不同的播放环境下表现形式不一样：  系统播放器环境下可以完整无卡顿播放； google 浏览器中在结束前几秒自动停止，不会继续播放；  对于上面情况的视频，小程序 video 组件监听方法在开发者工具、Android和ios表现形式也不一样； 123456789101112131415&amp;lt;video	 id">
   
     <link rel="alternate" href="/atom.xml" title="Hex笔记" type="application/atom+xml">
   
@@ -60,78 +65,99 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2019/01/25/form表单样式自定义/" class="archive-article-date">
-  <time datetime="2019-01-25T09:11:10.000Z" itemprop="datePublished">Jan 25</time>
+        <section id="main"><article id="post-小程序-video-组件使用填坑记" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/09/21/小程序-video-组件使用填坑记/" class="article-date">
+  <time datetime="2020-09-21T09:01:30.000Z" itemprop="datePublished">2020-09-21</time>
 </a>
-      
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/01/25/form表单样式自定义/">form表单样式自定义</a>
+    <h1 class="article-title" itemprop="name">
+      小程序 video 组件使用填坑记
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
+      </header>
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2019/01/23/箭头函数详记/" class="archive-article-date">
-  <time datetime="2019-01-23T02:22:32.000Z" itemprop="datePublished">Jan 23</time>
-</a>
+    <div class="article-entry" itemprop="articleBody">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/01/23/箭头函数详记/">箭头函数详记</a>
-    </h1>
-  
+        <h3 id="video-组件"><a href="#video-组件" class="headerlink" title="video 组件"></a>video 组件</h3><p>最近业务开发时遇到视频播放到结束前几秒的位置时自动停止播放的情况，而且在不同的播放环境下表现形式不一样：</p>
+<ul>
+<li>系统播放器环境下可以完整无卡顿播放；</li>
+<li>google 浏览器中在结束前几秒自动停止，不会继续播放；</li>
+</ul>
+<p>对于上面情况的视频，小程序 video 组件监听方法在开发者工具、Android和ios表现形式也不一样；</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;video</span><br><span class="line">	 id=&quot;myVideo&quot;</span><br><span class="line">	 autoplay </span><br><span class="line">	 src=&quot;&#123;&#123;currentMediaPath&#125;&#125;&quot;</span><br><span class="line">	 custom-cache=&quot;&#123;&#123;false&#125;&#125;&quot; </span><br><span class="line">	 controls=&apos;&#123;&#123;false&#125;&#125;&apos;</span><br><span class="line">	 bindplay=&quot;handlePlay&quot; </span><br><span class="line">	 bindpause=&quot;handlepause&quot;</span><br><span class="line">	 bindended=&quot;handleVideoEnd&quot;</span><br><span class="line">	 binderror=&quot;handleVideoError&quot; </span><br><span class="line">	 bindtimeupdate = &quot;handleTimeUpdate&quot;</span><br><span class="line">	 muted=&quot;&#123;&#123;true&#125;&#125;&quot; </span><br><span class="line">	 enable-progress-gesture=&quot;&#123;&#123;false&#125;&#125;&quot; </span><br><span class="line">	 show-center-play-btn=&quot;&#123;&#123;false&#125;&#125;&quot; &gt;</span><br><span class="line">&lt;/video&gt;</span><br></pre></td></tr></table></figure>
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2019/01/16/Sublime-Text-3安装与常用/" class="archive-article-date">
-  <time datetime="2019-01-16T03:28:57.000Z" itemprop="datePublished">Jan 16</time>
-</a>
+<table>
+<thead>
+<tr>
+<th>是否响应</th>
+<th align="center">bindplay</th>
+<th align="center">bindpause</th>
+<th align="center">bindended</th>
+<th align="center">binderror</th>
+<th align="center">bindtimeupdate</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>开发者工具</td>
+<td align="center">是</td>
+<td align="center">是</td>
+<td align="center">是</td>
+<td align="center">是</td>
+<td align="center">是</td>
+</tr>
+<tr>
+<td>Android10</td>
+<td align="center">是</td>
+<td align="center">否</td>
+<td align="center">否</td>
+<td align="center">否</td>
+<td align="center">是</td>
+</tr>
+<tr>
+<td>IOS</td>
+<td align="center">是</td>
+<td align="center">是</td>
+<td align="center">是</td>
+<td align="center">是</td>
+<td align="center">是</td>
+</tr>
+</tbody></table>
+<p>业务需求是需要在视频播放完后自动隐藏其自身，但是因为 android 无法监听到 bindend 与 bindpause 即使试了很多方法都没有用，最后只能监听到 bindtimeupdate 方法， </p>
+<p>bindtimeupdate 播放进度变化时触发 ， 这个函数会返回一个当前播放进度， 跟视频的总时长，当当前进度大于总时长时隐藏自身，除了这个方法还没找到其他方法解决目前的问题</p>
+
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/01/16/Sublime-Text-3安装与常用/">Sublime Text 3安装与常用插件</a>
-    </h1>
-  
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://heweixia.com/2020/09/21/小程序-video-组件使用填坑记/" data-id="ckfdb3sxr002sdkvw2qvrl179" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/小程序/">小程序</a></li></ul>
 
-    </header>
+    </footer>
   </div>
-</article>
+  
+    
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2020/09/16/前端面试整理/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">前端面试整理</div>
+    </a>
   
+</nav>
 
+  
+</article>
 
 </section>
         
