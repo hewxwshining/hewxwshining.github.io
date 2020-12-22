@@ -62,6 +62,82 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-小程序开发笔记" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/06/30/小程序开发笔记/" class="article-date">
+  <time datetime="2020-06-30T09:26:26.000Z" itemprop="datePublished">2020-06-30</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/小程序/">小程序</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/06/30/小程序开发笔记/">小程序开发笔记</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="预览小程序"><a href="#预览小程序" class="headerlink" title="预览小程序"></a>预览小程序</h3><ol>
+<li>申请 AppID；</li>
+<li>下载微信开发者工具，创建一个初始项目，创建项目时需要将填入已申请好的 AppID；</li>
+<li>点击“开发者工具”工具栏上的预览按钮，使用微信扫描生成的二维码,即可查看小程序在手机端的表现；<br><img src="/images/wx_tools/preview.png" alt="预览小程序"></li>
+</ol>
+<h3 id="获取服务端数据"><a href="#获取服务端数据" class="headerlink" title="获取服务端数据"></a>获取服务端数据</h3><p>本地开发时，点击 详情-&gt;勾选“不校验合法域名、web-view（业务域名）、TLS版本以及HTTPS证书”，即可按页面开发流程的方式获取到服务器的数据<br><img src="/images/wx_tools/set_configuration.png" alt="本地设置"></p>
+<h3 id="自定义-tabBar"><a href="#自定义-tabBar" class="headerlink" title="自定义 tabBar"></a>自定义 tabBar</h3><p>小程序原生的 tabBar 无法满足开发需求，需要自定义一个 tabBar ， 详情可参数官方文档 ，官方文档有几处描述不够清晰，这里给出一个详细步骤。</p>
+<h4 id="1、配置信息"><a href="#1、配置信息" class="headerlink" title="1、配置信息"></a>1、配置信息</h4><ul>
+<li>在 app.json 中的 tabBar 项指定 custom 字段，同时其余 tabBar 相关配置也补充完整。</li>
+<li>所有 tab 页的 json 里需声明 usingComponents 项，也可以在 app.json 全局开启。</li>
+</ul>
+<p>实例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;tabBar&quot;: &#123;</span><br><span class="line">  	&quot;custom&quot;:true,</span><br><span class="line">    &quot;list&quot;: [</span><br><span class="line">      &#123;</span><br><span class="line">        &quot;pagePath&quot;: &quot;pages/index/index&quot;,</span><br><span class="line">        &quot;text&quot;: &quot;首页&quot;</span><br><span class="line">      &#125;,&#123;</span><br><span class="line">        &quot;pagePath&quot;: &quot;pages/mytask/index&quot;,</span><br><span class="line">        &quot;text&quot;: &quot;我的&quot;</span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;usingComponents&quot;: &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><font color="red">注：custom 属性设置是关键，true : 显示自定义tabBar, false: 显示小程序原生的tabBar;</font></p>
+<h4 id="2、添加自定义的-tabBar-代码文件"><a href="#2、添加自定义的-tabBar-代码文件" class="headerlink" title="2、添加自定义的 tabBar 代码文件"></a>2、添加自定义的 tabBar 代码文件</h4><p>按在项目根目录创建一个 custom-tab-bar的组件，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">custom-tab-bar/index.js </span><br><span class="line">custom-tab-bar/index.json</span><br><span class="line">custom-tab-bar/index.wxml</span><br><span class="line">custom-tab-bar/index.wxss</span><br></pre></td></tr></table></figure>
+
+<p><strong>custom-tab-bar/index.js:</strong>  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">Component(&#123;</span><br><span class="line">  data: &#123;</span><br><span class="line">    selected: 0,</span><br><span class="line">    color: &quot;#7A7E83&quot;,</span><br><span class="line">    selectedColor: &quot;#3cc51f&quot;,</span><br><span class="line">    list: [&#123;</span><br><span class="line">      &quot;iconPath&quot;:&quot;/assets/images/home.png&quot;,</span><br><span class="line">      &quot;pagePath&quot;: &quot;/pages/index/index&quot;,</span><br><span class="line">      &quot;selectedIconPath&quot;:&quot;/assets/images/home_hover.png&quot;,</span><br><span class="line">      &quot;text&quot;: &quot;首页&quot;</span><br><span class="line">    &#125;, &#123;</span><br><span class="line">      &quot;iconPath&quot;:&quot;/assets/images/menu.png&quot;,</span><br><span class="line">      &quot;pagePath&quot;: &quot;/pages/mytask/index&quot;,</span><br><span class="line">      &quot;selectedIconPath&quot;:&quot;/assets/images/menu_hover.png&quot;,</span><br><span class="line">      &quot;text&quot;: &quot;我的&quot;</span><br><span class="line">    &#125;]</span><br><span class="line">  &#125;,</span><br><span class="line">  attached() &#123;</span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    switchTab(e) &#123;</span><br><span class="line">      let data = e.currentTarget.dataset;</span><br><span class="line">      let url = data.path</span><br><span class="line">      wx.switchTab(&#123;url&#125;)</span><br><span class="line">      this.setData(&#123;</span><br><span class="line">        selected: data.index</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p><strong>custom-tab-bar/index.json:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;component&quot;: true</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>custom-tab-bar/index.wxml:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;cover-view class=&quot;tab-bar&quot;&gt;</span><br><span class="line">	&lt;cover-view class=&quot;tab-bar-border&quot;&gt;&lt;/cover-view&gt;</span><br><span class="line">	&lt;cover-view wx:for=&quot;&#123;&#123;list&#125;&#125;&quot; wx:key=&quot;index&quot; class=&quot;tab-bar-item&quot; data-path=&quot;&#123;&#123;item.pagePath&#125;&#125;&quot; data-index=&quot;&#123;&#123;index&#125;&#125;&quot; bindtap=&quot;switchTab&quot;&gt;</span><br><span class="line">		&lt;cover-image  src=&quot;&#123;&#123;selected === index ? item.selectedIconPath : item.iconPath&#125;&#125;&quot;&gt;&lt;/cover-image&gt;</span><br><span class="line">    	&lt;cover-view style=&quot;color: &#123;&#123;selected === index ? selectedColor : color&#125;&#125;&quot;&gt;&#123;&#123;item.text&#125;&#125;&lt;/cover-view&gt;</span><br><span class="line">	&lt;/cover-view&gt;</span><br><span class="line">&lt;/cover-view&gt;</span><br></pre></td></tr></table></figure>
+
+<p><strong>custom-tab-bar/index.wxss:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">.tab-bar &#123;</span><br><span class="line">  position: fixed;</span><br><span class="line">  bottom: 0;</span><br><span class="line">  left: 0;</span><br><span class="line">  right: 0;</span><br><span class="line">  height: 48px;</span><br><span class="line">  background: white;</span><br><span class="line">  display: flex;</span><br><span class="line">  padding-bottom: env(safe-area-inset-bottom);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.tab-bar-border &#123;</span><br><span class="line">  background-color: rgba(0, 0, 0, 0.33);</span><br><span class="line">  position: absolute;</span><br><span class="line">  left: 0;</span><br><span class="line">  top: 0;</span><br><span class="line">  width: 100%;</span><br><span class="line">  height: 1px;</span><br><span class="line">  transform: scaleY(0.5);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.tab-bar-item &#123;</span><br><span class="line">  flex: 1;</span><br><span class="line">  text-align: center;</span><br><span class="line">  display: flex;</span><br><span class="line">  justify-content: center;</span><br><span class="line">  align-items: center;</span><br><span class="line">  flex-direction: column;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.tab-bar-item cover-image &#123;</span><br><span class="line">  width: 27px;</span><br><span class="line">  height: 27px;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.tab-bar-item cover-view &#123;</span><br><span class="line">  font-size: 10px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="3、在-tabBar-中更新选中状态；"><a href="#3、在-tabBar-中更新选中状态；" class="headerlink" title="3、在 tabBar 中更新选中状态；"></a>3、在 tabBar 中更新选中状态；</h4><p>从 <code>custom-tab-bar/index.js</code> 我们可以看出， tabBar 的选中状态是通过 selected 变量实现的。 在跳转不同的 tab 页时， selected 无法确认某个 tabBar 实例， 因此在 tab 当前页面下， 需要通过 getTabBar 接口获取组件实例，并调用 setData 更新选中态。<br>例如 <code>&quot;pagePath&quot;: &quot;/pages/index/index&quot;</code> ：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">onShow:function()&#123;</span><br><span class="line">  if (typeof this.getTabBar === &apos;function&apos; &amp;&amp; this.getTabBar()) &#123;</span><br><span class="line">    this.getTabBar().setData(&#123;</span><br><span class="line">      selected:0</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+<p><font color="red"> 这里 <code>selected = 0</code> 是与 custom-tab-bar/index.js 中 list 一一对应的  </font></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://heweixia.com/2020/06/30/小程序开发笔记/" data-id="ckizdta3n002zu0vwyoi060x4" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/小程序/">小程序</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-CSS基础测试20" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/04/24/CSS基础测试20/" class="article-date">
@@ -97,7 +173,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://heweixia.com/2020/04/24/CSS基础测试20/" data-id="ckg97j48y000itwvw2tn9b8zj" class="article-share-link">Share</a>
+      <a data-url="http://heweixia.com/2020/04/24/CSS基础测试20/" data-id="ckizdta1z0005u0vwdnhybfml" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/">CSS</a></li></ul>
@@ -144,7 +220,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://heweixia.com/2020/04/08/vue-cli项目升级webpack4-x后二三事/" data-id="ckg97j4ax0045twvw9il3ecv1" class="article-share-link">Share</a>
+      <a data-url="http://heweixia.com/2020/04/08/vue-cli项目升级webpack4-x后二三事/" data-id="ckizdta4q0050u0vwvesfqdvn" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/webpack/">webpack</a></li></ul>
@@ -200,7 +276,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://heweixia.com/2020/01/20/vue路由传参/" data-id="ckg97j4a7002utwvwj8x5z6yf" class="article-share-link">Share</a>
+      <a data-url="http://heweixia.com/2020/01/20/vue路由传参/" data-id="ckizdta3h002nu0vweaaqikdr" class="article-share-link">Share</a>
       
       
     </footer>
@@ -241,7 +317,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://heweixia.com/2020/01/02/JS基础测试40/" data-id="ckg97j49i001htwvwbpyelpgo" class="article-share-link">Share</a>
+      <a data-url="http://heweixia.com/2020/01/02/JS基础测试40/" data-id="ckizdta2y001ou0vwp4a0fg41" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li></ul>
@@ -288,7 +364,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://heweixia.com/2019/12/09/CSS基础测试15/" data-id="ckg97j4as003xtwvwr77hp6wx" class="article-share-link">Share</a>
+      <a data-url="http://heweixia.com/2019/12/09/CSS基础测试15/" data-id="ckizdta4l004ru0vwr0uco72r" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/">CSS</a></li></ul>
@@ -335,7 +411,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://heweixia.com/2019/11/25/DOM基础测试39/" data-id="ckg97j49f001btwvwmzcxeze7" class="article-share-link">Share</a>
+      <a data-url="http://heweixia.com/2019/11/25/DOM基础测试39/" data-id="ckizdta2d000ou0vw8o2enlrh" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DOM/">DOM</a></li></ul>
@@ -385,7 +461,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://heweixia.com/2019/11/25/JS基础测试39/" data-id="ckg97j49n001ttwvwwdfshy03" class="article-share-link">Share</a>
+      <a data-url="http://heweixia.com/2019/11/25/JS基础测试39/" data-id="ckizdta2w001lu0vw2dyj6lyc" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li></ul>
@@ -433,7 +509,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://heweixia.com/2019/10/17/CSS基础测试13/" data-id="ckg97j48b0000twvw9jq6sobk" class="article-share-link">Share</a>
+      <a data-url="http://heweixia.com/2019/10/17/CSS基础测试13/" data-id="ckizdta1x0004u0vwd8ejbxwy" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/">CSS</a></li></ul>
@@ -535,59 +611,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://heweixia.com/2019/10/11/移动端开发总结/" data-id="ckg97j4ac0035twvwumri0ofr" class="article-share-link">Share</a>
+      <a data-url="http://heweixia.com/2019/10/11/移动端开发总结/" data-id="ckizdta3r0035u0vwu7c4ihla" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/移动端开发/">移动端开发</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-DOM基础测试38" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/10/10/DOM基础测试38/" class="article-date">
-  <time datetime="2019-10-10T02:46:22.000Z" itemprop="datePublished">2019-10-10</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/基础测试/">基础测试</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/10/10/DOM基础测试38/">DOM基础测试38</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>简单的单选框验证测试</p>
-<p><img src="/images/base-test/dom-38-1.png" alt></p>
-<p>解答</p>
-        
-          <p class="article-more-link">
-            <a href="/2019/10/10/DOM基础测试38/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://heweixia.com/2019/10/10/DOM基础测试38/" data-id="ckg97j49c0014twvwc64u6nbb" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DOM/">DOM</a></li></ul>
 
     </footer>
   </div>
@@ -631,7 +658,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/CSS/" style="font-size: 16px;">CSS</a> <a href="/tags/DOM/" style="font-size: 18px;">DOM</a> <a href="/tags/es6/" style="font-size: 10px;">es6</a> <a href="/tags/form/" style="font-size: 10px;">form</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/html/" style="font-size: 12px;">html</a> <a href="/tags/js/" style="font-size: 20px;">js</a> <a href="/tags/react-router/" style="font-size: 10px;">react-router</a> <a href="/tags/regexp/" style="font-size: 10px;">regexp</a> <a href="/tags/sublime/" style="font-size: 10px;">sublime</a> <a href="/tags/svg/" style="font-size: 14px;">svg</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/vuex/" style="font-size: 10px;">vuex</a> <a href="/tags/webpack/" style="font-size: 10px;">webpack</a> <a href="/tags/动画/" style="font-size: 14px;">动画</a> <a href="/tags/小程序/" style="font-size: 12px;">小程序</a> <a href="/tags/打包/" style="font-size: 10px;">打包</a> <a href="/tags/移动端开发/" style="font-size: 10px;">移动端开发</a> <a href="/tags/箭头函数/" style="font-size: 10px;">箭头函数</a> <a href="/tags/路由-vue/" style="font-size: 10px;">路由 vue</a>
+      <a href="/tags/CSS/" style="font-size: 16px;">CSS</a> <a href="/tags/DOM/" style="font-size: 18px;">DOM</a> <a href="/tags/es6/" style="font-size: 10px;">es6</a> <a href="/tags/form/" style="font-size: 10px;">form</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/html/" style="font-size: 12px;">html</a> <a href="/tags/js/" style="font-size: 20px;">js</a> <a href="/tags/react-router/" style="font-size: 10px;">react-router</a> <a href="/tags/regexp/" style="font-size: 10px;">regexp</a> <a href="/tags/sublime/" style="font-size: 10px;">sublime</a> <a href="/tags/svg/" style="font-size: 14px;">svg</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/vuex/" style="font-size: 10px;">vuex</a> <a href="/tags/webpack/" style="font-size: 10px;">webpack</a> <a href="/tags/动画/" style="font-size: 14px;">动画</a> <a href="/tags/小程序/" style="font-size: 14px;">小程序</a> <a href="/tags/打包/" style="font-size: 10px;">打包</a> <a href="/tags/移动端开发/" style="font-size: 10px;">移动端开发</a> <a href="/tags/箭头函数/" style="font-size: 10px;">箭头函数</a> <a href="/tags/路由-vue/" style="font-size: 10px;">路由 vue</a>
     </div>
   </div>
 
@@ -653,6 +680,10 @@
       <ul>
         
           <li>
+            <a href="/2020/10/15/小程序-audio-使用填坑记/">小程序-audio-使用填坑记</a>
+          </li>
+        
+          <li>
             <a href="/2020/10/14/JSON对象与Blob对象互相转换/">JSON对象与Blob对象互相转换</a>
           </li>
         
@@ -666,10 +697,6 @@
         
           <li>
             <a href="/2020/09/16/前端面试整理/">前端面试整理</a>
-          </li>
-        
-          <li>
-            <a href="/2020/09/14/页面渲染，浏览器工作原理/">页面渲染，浏览器工作原理</a>
           </li>
         
       </ul>
