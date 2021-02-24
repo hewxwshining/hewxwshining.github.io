@@ -24,7 +24,8 @@
 <meta property="og:image" content="http://heweixia.com/images/svg/1-4.gif">
 <meta property="og:image" content="http://heweixia.com/images/svg/1-5.gif">
 <meta property="og:image" content="http://heweixia.com/images/svg/1-6.gif">
-<meta property="og:updated_time" content="2020-10-14T08:35:37.059Z">
+<meta property="og:image" content="http://heweixia.com/images/svg/1-7.jpg">
+<meta property="og:updated_time" content="2021-02-24T08:54:32.676Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="文字沿着不规则路径排版">
 <meta name="twitter:description" content="想一想，如何实现一下三种文字沿着不规则路径排版布局  布局1：文字沿着路径排列 布局2：文字动态沿着路径排列 布局3：文字不规则环绕布局 查看原文地址">
@@ -110,53 +111,236 @@
 <a id="more"></a>
 
 <h2 id="布局1：文字沿着路径排列"><a href="#布局1：文字沿着路径排列" class="headerlink" title="布局1：文字沿着路径排列"></a>布局1：文字沿着路径排列</h2><p>一个简单的例子，使用SVG实现，代码如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;svg viewBox=&quot;0 30 300 130&quot; height=&quot;150&quot;&gt;</span><br><span class="line">  &lt;defs&gt;</span><br><span class="line">	&lt;path id=&quot;zxxPath&quot; fill=&quot;none&quot; stroke=&quot;red&quot; d=&quot;M10,80 q100,120 120,20 q140,-50 160,0&quot; /&gt;</span><br><span class="line">  &lt;defs&gt;</span><br><span class="line">  &lt;text&gt;</span><br><span class="line">    &lt;textPath href=&quot;#zxxPath&quot;&gt;</span><br><span class="line">        实际开发，path路径是应该在&amp;lt;defs&amp;gt;中不显示 </span><br><span class="line">    &lt;/textPath&gt;</span><br><span class="line">  &lt;/text&gt;</span><br><span class="line">&lt;/svg&gt;</span><br></pre></td></tr></table></figure>
-
-<p> 在 <code>defs</code> 元素中定义的图形元素不会直接呈现， 效果如下,如果去掉 <code>defs</code> 元素， 图中的红色底线就会出现。<br> <img src="/images/svg/1-1.png" alt="布局1"></p>
+<pre><code>&lt;svg viewBox=&quot;0 30 300 130&quot; height=&quot;150&quot;&gt;
+  &lt;defs&gt;
+    &lt;path id=&quot;zxxPath&quot; fill=&quot;none&quot; stroke=&quot;red&quot; d=&quot;M10,80 q100,120 120,20 q140,-50 160,0&quot; /&gt;
+  &lt;defs&gt;
+  &lt;text&gt;
+    &lt;textPath href=&quot;#zxxPath&quot;&gt;
+        实际开发，path路径是应该在&amp;lt;defs&amp;gt;中不显示 
+    &lt;/textPath&gt;
+  &lt;/text&gt;
+&lt;/svg&gt;</code></pre><p> 在 <code>defs</code> 元素中定义的图形元素不会直接呈现， 效果如下,如果去掉 <code>defs</code> 元素， 图中的红色底线就会出现。<br> <img src="/images/svg/1-1.png" alt="布局1"></p>
 <p><code>&lt;textPath&gt;</code>元素的 href 属性只能指向 <code>&lt;path&gt;</code> 元素，也就是下面的用法是无效的：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;svg viewBox=&quot;0 30 300 130&quot; height=&quot;150&quot;&gt;</span><br><span class="line">  &lt;circle id=&quot;zxxCircle&quot; cx=&quot;150&quot; cy=&quot;75&quot; r=&quot;60&quot;&gt;&lt;/circle&gt;</span><br><span class="line">  &lt;text&gt;</span><br><span class="line">    &lt;textPath href=&quot;#zxxCircle&quot;&gt;实际开发，path路径是应该在&amp;lt;defs&amp;gt;中不显示 &lt;/textPath&gt;</span><br><span class="line">  &lt;/text&gt;</span><br><span class="line">&lt;/svg&gt;</span><br></pre></td></tr></table></figure>
-
-<p>这其实是个问题，因为使用 <code>&lt;circle&gt;</code> 元素手写一个圆，或者使用 <code>&lt;rect&gt;</code>元素手写一个矩形对于大多数开发者而言，是没有任何压力的。</p>
+<pre><code>&lt;svg viewBox=&quot;0 30 300 130&quot; height=&quot;150&quot;&gt;
+  &lt;circle id=&quot;zxxCircle&quot; cx=&quot;150&quot; cy=&quot;75&quot; r=&quot;60&quot;&gt;&lt;/circle&gt;
+  &lt;text&gt;
+    &lt;textPath href=&quot;#zxxCircle&quot;&gt;实际开发，path路径是应该在&amp;lt;defs&amp;gt;中不显示 &lt;/textPath&gt;
+  &lt;/text&gt;
+&lt;/svg&gt;</code></pre><p>这其实是个问题，因为使用 <code>&lt;circle&gt;</code> 元素手写一个圆，或者使用 <code>&lt;rect&gt;</code>元素手写一个矩形对于大多数开发者而言，是没有任何压力的。</p>
 <p>但是你让开发者直接使用 <code>&lt;path&gt;</code> 元素手写一个圆，那就触及技能的盲区，已然无法驾驭。但是不怕，我们可以通过<a href="https://www.zhangxinxu.com/sp/path.html" target="_blank" rel="noopener">SVG图形元素代码转换成路径元素代码工具</a>轻松得到一个图形的路径地址</p>
 <p>例1：</p>
 <p> <img src="/images/svg/1-2.png" alt="例1"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;svg viewBox=&quot;-10 -10 180 168&quot; width=&quot;160&quot; height=&quot;148&quot;&gt;</span><br><span class="line">    &lt;defs&gt;</span><br><span class="line">        &lt;path id=&quot;zxxPath2&quot; d=&quot;M118,0c-17,0-31.5,13.5-38,28C73.5,13.5,59,0,42,0C19,0,0,19,0,42c0,47,47.5,59.5,80,106</span><br><span class="line">c30.5-46.5,80-60.5,80-106C160,19,141,0,118,0z&quot; /&gt;</span><br><span class="line">    &lt;/defs&gt;</span><br><span class="line">    &lt;text&gt;</span><br><span class="line">        &lt;textPath href=&quot;#zxxPath2&quot;&gt;⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐&lt;/textPath&gt;</span><br><span class="line">    &lt;/text&gt;</span><br><span class="line">&lt;/svg&gt;</span><br></pre></td></tr></table></figure>
-
-
-<p>例2：</p>
+<pre><code>&lt;svg viewBox=&quot;-10 -10 180 168&quot; width=&quot;160&quot; height=&quot;148&quot;&gt;
+    &lt;defs&gt;
+        &lt;path id=&quot;zxxPath2&quot; d=&quot;M118,0c-17,0-31.5,13.5-38,28C73.5,13.5,59,0,42,0C19,0,0,19,0,42c0,47,47.5,59.5,80,106
+c30.5-46.5,80-60.5,80-106C160,19,141,0,118,0z&quot; /&gt;
+    &lt;/defs&gt;
+    &lt;text&gt;
+        &lt;textPath href=&quot;#zxxPath2&quot;&gt;⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐&lt;/textPath&gt;
+    &lt;/text&gt;
+&lt;/svg&gt;</code></pre><p>例2：</p>
 <p> <img src="/images/svg/1-3.png" alt="例2"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;svg viewBox=&quot;0 ,0, 300 300&quot; width=&quot;300&quot; height=&quot;300&quot;&gt;</span><br><span class="line">    &lt;path id=&quot;zxxPath2&quot; d=&quot;M20 50a30 30 0 1 0 60 0a30 30 0 1 0 -60 0z&quot; /&gt;</span><br><span class="line">    &lt;path id=&quot;zxxPath3&quot; fill=&quot;none&quot; d=&quot;M10 80a70 70 0 1 0 140 0a70 70 0 1 0 -140 0z&quot; /&gt;</span><br><span class="line">    &lt;text&gt;</span><br><span class="line">        &lt;textPath href=&quot;#zxxPath3&quot;&gt;我这文字呀文字我这文字呀文字我这文字呀文字我这文字呀文字我这文字呀文字我这文字呀文字&lt;/textPath&gt;</span><br><span class="line">        &lt;textPath href=&quot;#zxxPath2&quot;&gt;⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐&lt;/textPath&gt;</span><br><span class="line">    &lt;/text&gt;</span><br><span class="line">&lt;/svg&gt;</span><br></pre></td></tr></table></figure>
-
-<h2 id="布局2：文字沿着路径移动-offset-path"><a href="#布局2：文字沿着路径移动-offset-path" class="headerlink" title="布局2：文字沿着路径移动 offset-path"></a>布局2：文字沿着路径移动 offset-path</h2><p>  <img src="/images/svg/1-4.gif" alt="布局2"></p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"> &lt;!-- css样式 --&gt;</span><br><span class="line">.horse-run &#123;</span><br><span class="line">        /* 之前语法 始于2015年9月，M58版本会移除，大约2017年4月 */</span><br><span class="line">        motion-path: path(&quot;M10,80 q100,120 120,20 q140,-50 160,0&quot;);</span><br><span class="line">        /* 当前规范上的语法 2016年12月支持 */</span><br><span class="line">        offset-path: path(&quot;M10,80 q100,120 120,20 q140,-50 160,0&quot;);</span><br><span class="line">        animation: move 3s linear 1;</span><br><span class="line">    &#125;</span><br><span class="line">@keyframes move &#123;</span><br><span class="line">    /* 之前语法 */</span><br><span class="line">    100% &#123;</span><br><span class="line">        motion-offset: 100%;</span><br><span class="line">    &#125;</span><br><span class="line">    /* 当前规范语法 */</span><br><span class="line">    100% &#123;</span><br><span class="line">        offset-distance: 100%;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;!-- html代码 --&gt;</span><br><span class="line">&lt;img src=&quot;./1.png&quot; width=&quot;40&quot; height=&quot;43&quot; class=&quot;horse-run&quot;&gt;</span><br><span class="line">&lt;svg width=&quot;280&quot; height=&quot;150&quot; viewBox=&quot;0 0 280 150&quot;&gt;</span><br><span class="line">    &lt;path d=&quot;M10,80 q100,120 120,20 q140,-50 160,0&quot; stroke=&quot;#cd0000&quot; stroke-width=&quot;2&quot; fill=&quot;none&quot; /&gt;</span><br><span class="line">&lt;/svg&gt;</span><br></pre></td></tr></table></figure>
-
-<h2 id="布局3：文字不规则环绕布局-shape-outside"><a href="#布局3：文字不规则环绕布局-shape-outside" class="headerlink" title="布局3：文字不规则环绕布局 shape-outside"></a>布局3：文字不规则环绕布局 shape-outside</h2><p><strong>CSS Shapes布局可以实现不规则的文字环绕效果，需要和浮动配合使用。</strong></p>
+<pre><code>&lt;svg viewBox=&quot;0 ,0, 300 300&quot; width=&quot;300&quot; height=&quot;300&quot;&gt;
+    &lt;path id=&quot;zxxPath2&quot; d=&quot;M20 50a30 30 0 1 0 60 0a30 30 0 1 0 -60 0z&quot; /&gt;
+    &lt;path id=&quot;zxxPath3&quot; fill=&quot;none&quot; d=&quot;M10 80a70 70 0 1 0 140 0a70 70 0 1 0 -140 0z&quot; /&gt;
+    &lt;text&gt;
+        &lt;textPath href=&quot;#zxxPath3&quot;&gt;我这文字呀文字我这文字呀文字我这文字呀文字我这文字呀文字我这文字呀文字我这文字呀文字&lt;/textPath&gt;
+        &lt;textPath href=&quot;#zxxPath2&quot;&gt;⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐&lt;/textPath&gt;
+    &lt;/text&gt;
+&lt;/svg&gt;</code></pre><h2 id="布局2：文字沿着路径移动-offset-path"><a href="#布局2：文字沿着路径移动-offset-path" class="headerlink" title="布局2：文字沿着路径移动 offset-path"></a>布局2：文字沿着路径移动 offset-path</h2><p>  <img src="/images/svg/1-4.gif" alt="布局2"></p>
+<pre><code> &lt;!-- css样式 --&gt;
+.horse-run {
+        /* 之前语法 始于2015年9月，M58版本会移除，大约2017年4月 */
+        motion-path: path(&quot;M10,80 q100,120 120,20 q140,-50 160,0&quot;);
+        /* 当前规范上的语法 2016年12月支持 */
+        offset-path: path(&quot;M10,80 q100,120 120,20 q140,-50 160,0&quot;);
+        animation: move 3s linear 1;
+    }
+@keyframes move {
+    /* 之前语法 */
+    100% {
+        motion-offset: 100%;
+    }
+    /* 当前规范语法 */
+    100% {
+        offset-distance: 100%;
+    }
+}
+&lt;!-- html代码 --&gt;
+&lt;img src=&quot;./1.png&quot; width=&quot;40&quot; height=&quot;43&quot; class=&quot;horse-run&quot;&gt;
+&lt;svg width=&quot;280&quot; height=&quot;150&quot; viewBox=&quot;0 0 280 150&quot;&gt;
+    &lt;path d=&quot;M10,80 q100,120 120,20 q140,-50 160,0&quot; stroke=&quot;#cd0000&quot; stroke-width=&quot;2&quot; fill=&quot;none&quot; /&gt;
+&lt;/svg&gt;</code></pre><h2 id="布局3：文字不规则环绕布局-shape-outside"><a href="#布局3：文字不规则环绕布局-shape-outside" class="headerlink" title="布局3：文字不规则环绕布局 shape-outside"></a>布局3：文字不规则环绕布局 shape-outside</h2><p><strong>CSS Shapes布局可以实现不规则的文字环绕效果，需要和浮动配合使用。</strong></p>
 <h3 id="详细了解shape-outside"><a href="#详细了解shape-outside" class="headerlink" title="详细了解shape-outside"></a>详细了解shape-outside</h3><p>shape-outside是不规则形状环绕布局的核心，支持的属性值分为如下四大类：</p>
 <blockquote>
-<p>none – 默认值<br><shape-box> – 图形盒子。<br><basic-shape> – 基本图形函数。<br><image> – 图像类。</image></basic-shape></shape-box></p>
+<p>none – 默认值<br><shape-box> – 图形盒子<br><basic-shape> – 基本图形函数<br>&lt;image&gt; – 图像类  </basic-shape></shape-box></p>
 </blockquote>
 <p>其中：</p>
 <ul>
-<li>none很好理解，表示就是普通的矩形环绕。</li>
-<li><shape-box>（图形盒子）是shape相关布局中的一个名词，比clip-path属性中的<geometry-box>（几何盒子）支持的盒子要少一些，就是CSS2.1中的基本盒模型的4种盒子，分别是margin-box，border-box，padding-box和content-box。要来指定文字环绕的时候是依照哪个盒子的边缘来计算的。</geometry-box></shape-box></li>
-<li>&lt;basic-shape&gt;指的是基本形状函数，和CSS clip-path剪裁属性支持的基本形状函数一模一样。</li>
-<li>&lt;image&gt; 值的是图像类，包括URL链接图片，渐变图像，cross-fade()，element()等。所有这些图像类，CSS3 mask遮罩属性也都支持，本文只会介绍常用的URL链接和渐变图像，其他图片类不介绍，有兴趣可以访问介绍遮罩的这篇文章，有完全展示。不同类型属性值使用示意（取自MDN）：</li>
+<li><p>none很好理解，表示就是普通的矩形环绕。</p>
+</li>
+<li><p><shape-box>（图形盒子）是shape相关布局中的一个名词，比clip-path属性中的<geometry-box>（几何盒子）支持的盒子要少一些，就是CSS2.1中的基本盒模型的4种盒子，分别是margin-box，border-box，padding-box和content-box。要来指定文字环绕的时候是依照哪个盒子的边缘来计算的。</geometry-box></shape-box></p>
+</li>
+<li><p>&lt;basic-shape&gt;指的是基本形状函数，和CSS clip-path剪裁属性支持的基本形状函数一模一样。</p>
+</li>
+<li><p>&lt;image&gt; 值的是图像类，包括URL链接图片，渐变图像，cross-fade()，element()等。所有这些图像类，CSS3 mask遮罩属性也都支持，本文只会介绍常用的URL链接和渐变图像，其他图片类不介绍，有兴趣可以访问介绍遮罩的这篇文章，有完全展示。不同类型属性值使用示意（取自MDN）：</p>
+<pre><code>/* 关键字值 */
+shape-outside: none;
+shape-outside: margin-box;
+shape-outside: content-box;
+shape-outside: border-box;
+shape-outside: padding-box;
+
+/* 函数值 */
+shape-outside: circle();
+shape-outside: ellipse();
+shape-outside: inset(10px 10px 10px 10px);
+shape-outside: polygon(10px 10px, 20px 20px, 30px 30px);
+
+/* &lt;url&gt;值 */
+shape-outside: url(image.png);
+
+/* 渐变值 */
+shape-outside: linear-gradient(45deg, rgba(255, 255, 255, 0) 150px, red 150px);
+我们通过一个一个实例快速了解下各个类型属性值的作用和表现。</code></pre></li>
 </ul>
-<p>/* 关键字值 */<br>shape-outside: none;<br>shape-outside: margin-box;<br>shape-outside: content-box;<br>shape-outside: border-box;<br>shape-outside: padding-box;</p>
-<p>/* 函数值 */<br>shape-outside: circle();<br>shape-outside: ellipse();<br>shape-outside: inset(10px 10px 10px 10px);<br>shape-outside: polygon(10px 10px, 20px 20px, 30px 30px);</p>
-<p>/* <url>值 */<br>shape-outside: url(image.png);</url></p>
-<p>/* 渐变值 */<br>shape-outside: linear-gradient(45deg, rgba(255, 255, 255, 0) 150px, red 150px);<br>我们通过一个一个实例快速了解下各个类型属性值的作用和表现。</p>
 <p>例1：</p>
 <p> <img src="/images/svg/1-5.gif" alt="例1"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">//CSS:</span><br><span class="line">.shape &#123;</span><br><span class="line">    float: left;</span><br><span class="line">    width: 60px;</span><br><span class="line">    height: 60px;</span><br><span class="line">    padding: 10px;</span><br><span class="line">    margin: 10px;</span><br><span class="line">    border: 10px solid;</span><br><span class="line">    border-radius: 50%;</span><br><span class="line">    background-color: currentColor;</span><br><span class="line">    background-clip: content-box;</span><br><span class="line">    color: #cd0000;</span><br><span class="line">    shape-outside: none;</span><br><span class="line">&#125;</span><br><span class="line">//HTM</span><br><span class="line">&lt;div style=&quot;width: 400px; height: 200px&quot;&gt;</span><br><span class="line">    &lt;span class=&quot;shape&quot;&gt;&lt;/span&gt;</span><br><span class="line">    &lt;p&gt;在CSS Shapes布局问世之前，文字像杂志一样的任意形状的排版几乎是不可能的，一直都是用网格、盒子和直线构造。</span><br><span class="line">        CSS Shapes允许我们定义文本环绕的几何形状。这些形状可以是圆、椭圆、简单或复杂的多边形，甚至是任意的图像和多彩的渐变。&lt;/p&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;div&gt;</span><br><span class="line">    &lt;p&gt;选择shape-outside属性值&lt;/p&gt;</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">        &lt;input type=&quot;radio&quot; id=&quot;none&quot; name=&quot;shape&quot; value=&quot;none&quot; checked&gt;</span><br><span class="line">        &lt;label for=&quot;none&quot;&gt;none&lt;/label&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">        &lt;input type=&quot;radio&quot; id=&quot;margin-box&quot; name=&quot;shape&quot; value=&quot;margin-box&quot;&gt;</span><br><span class="line">        &lt;label for=&quot;margin-box&quot;&gt;margin-box&lt;/label&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">        &lt;input type=&quot;radio&quot; id=&quot;border-box&quot; name=&quot;shape&quot; value=&quot;border-box&quot;&gt;</span><br><span class="line">        &lt;label for=&quot;border-box&quot;&gt;border-box&lt;/label&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">        &lt;input type=&quot;radio&quot; id=&quot;padding-box&quot; name=&quot;shape&quot; value=&quot;padding-box&quot;&gt;</span><br><span class="line">        &lt;label for=&quot;padding-box&quot;&gt;padding-box&lt;/label&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">        &lt;input type=&quot;radio&quot; id=&quot;content-box&quot; name=&quot;shape&quot; value=&quot;content-box&quot;&gt;</span><br><span class="line">        &lt;label for=&quot;content-box&quot;&gt;content-box&lt;/label&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">//JS</span><br><span class="line">&lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">[].slice.call(document.querySelectorAll(&apos;input[name=&quot;shape&quot;]&apos;)).forEach(function(radio) &#123;</span><br><span class="line">    radio.addEventListener(&apos;click&apos;, function() &#123;</span><br><span class="line">        document.querySelector(&apos;.shape&apos;).style.shapeOutside = this.value;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-
-<p>例2：</p>
+<pre><code>//CSS:
+.shape {
+    float: left;
+    width: 60px;
+    height: 60px;
+    padding: 10px;
+    margin: 10px;
+    border: 10px solid;
+    border-radius: 50%;
+    background-color: currentColor;
+    background-clip: content-box;
+    color: #cd0000;
+    shape-outside: none;
+}
+//HTM
+&lt;div style=&quot;width: 400px; height: 200px&quot;&gt;
+    &lt;span class=&quot;shape&quot;&gt;&lt;/span&gt;
+    &lt;p&gt;在CSS Shapes布局问世之前，文字像杂志一样的任意形状的排版几乎是不可能的，一直都是用网格、盒子和直线构造。
+        CSS Shapes允许我们定义文本环绕的几何形状。这些形状可以是圆、椭圆、简单或复杂的多边形，甚至是任意的图像和多彩的渐变。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div&gt;
+    &lt;p&gt;选择shape-outside属性值&lt;/p&gt;
+    &lt;div&gt;
+        &lt;input type=&quot;radio&quot; id=&quot;none&quot; name=&quot;shape&quot; value=&quot;none&quot; checked&gt;
+        &lt;label for=&quot;none&quot;&gt;none&lt;/label&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+        &lt;input type=&quot;radio&quot; id=&quot;margin-box&quot; name=&quot;shape&quot; value=&quot;margin-box&quot;&gt;
+        &lt;label for=&quot;margin-box&quot;&gt;margin-box&lt;/label&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+        &lt;input type=&quot;radio&quot; id=&quot;border-box&quot; name=&quot;shape&quot; value=&quot;border-box&quot;&gt;
+        &lt;label for=&quot;border-box&quot;&gt;border-box&lt;/label&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+        &lt;input type=&quot;radio&quot; id=&quot;padding-box&quot; name=&quot;shape&quot; value=&quot;padding-box&quot;&gt;
+        &lt;label for=&quot;padding-box&quot;&gt;padding-box&lt;/label&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+        &lt;input type=&quot;radio&quot; id=&quot;content-box&quot; name=&quot;shape&quot; value=&quot;content-box&quot;&gt;
+        &lt;label for=&quot;content-box&quot;&gt;content-box&lt;/label&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+//JS
+&lt;script type=&quot;text/javascript&quot;&gt;
+[].slice.call(document.querySelectorAll(&apos;input[name=&quot;shape&quot;]&apos;)).forEach(function(radio) {
+    radio.addEventListener(&apos;click&apos;, function() {
+        document.querySelector(&apos;.shape&apos;).style.shapeOutside = this.value;
+    });
+});
+&lt;/script&gt;</code></pre><p>例2：</p>
 <p> <img src="/images/svg/1-6.gif" alt="例2"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line">//CSS：</span><br><span class="line">.box &#123;</span><br><span class="line">    max-width: 414px;</span><br><span class="line">    height: 480px;</span><br><span class="line">    border: solid #000;</span><br><span class="line">    margin: auto;</span><br><span class="line">    overflow: auto;</span><br><span class="line">&#125;</span><br><span class="line">.shape &#123;</span><br><span class="line">    float: left;</span><br><span class="line">    width: 30px;</span><br><span class="line">    height: 340px;</span><br><span class="line">    shape-outside: polygon(0 0, 0 150px, 16px 154px, 30px 166px, 30px 314px, 16px 326px, 0 330px, 0 0);</span><br><span class="line">    transition: shape-outside .15s;</span><br><span class="line">&#125;</span><br><span class="line">.liuhai &#123;</span><br><span class="line">    width: 24px;</span><br><span class="line">    height: 180px;</span><br><span class="line">    background: url(./liu.png) no-repeat left center;</span><br><span class="line">    position: absolute;</span><br><span class="line">    margin-top: 150px;</span><br><span class="line">&#125;</span><br><span class="line">.content ul &#123;</span><br><span class="line">    list-style: none;</span><br><span class="line">    padding: 0;</span><br><span class="line">    margin: 0;</span><br><span class="line">&#125;</span><br><span class="line">.content li &#123;</span><br><span class="line">    border-bottom: 1px solid #eee;</span><br><span class="line">    padding: .5em;</span><br><span class="line">&#125;</span><br><span class="line">//HTML</span><br><span class="line">&lt;div id=&quot;box&quot; class=&quot;box&quot;&gt;</span><br><span class="line">    &lt;i id=&quot;shape&quot; class=&quot;shape&quot;&gt;&lt;/i&gt;</span><br><span class="line">    &lt;i class=&quot;liuhai&quot;&gt;&lt;/i&gt;</span><br><span class="line">    &lt;div class=&quot;content&quot;&gt;</span><br><span class="line">        &lt;ul&gt;</span><br><span class="line">            &lt;li&gt;为了防止看花眼&lt;/li&gt;</span><br><span class="line">            &lt;li&gt;我就手动敲下面的文字&lt;/li&gt;</span><br><span class="line">            &lt;li&gt;原本我偷懒&lt;/li&gt;</span><br><span class="line">         		......</span><br><span class="line">            &lt;li&gt;原本我偷懒&lt;/li&gt;</span><br><span class="line">            &lt;li&gt;理论上还可以使用CSS region实现&lt;/li&gt;</span><br><span class="line">            &lt;li&gt;但没有这个方法容易理解&lt;/li&gt;</span><br><span class="line">        &lt;/ul&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">//JS</span><br><span class="line">&lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">var eleShape = document.getElementById(&apos;shape&apos;);</span><br><span class="line">var eleBox = document.getElementById(&apos;box&apos;);</span><br><span class="line">// 保证shape元素高度足够</span><br><span class="line">eleShape.style.height = eleBox.scrollHeight + &apos;px&apos;;</span><br><span class="line">var funShape = function() &#123;</span><br><span class="line">    var scrollTop = eleBox.scrollTop;</span><br><span class="line">    // 滚动偏移应用在shape-outside上</span><br><span class="line">    var shapeOutside = &apos;polygon(0 0, 0 &apos; + (150 + scrollTop) + &apos;px, 16px &apos; + (154 + scrollTop) + &apos;px, 30px &apos; + (166 + scrollTop) + &apos;px, 30px &apos; + (314 + scrollTop) + &apos;px, 16px &apos; + (326 + scrollTop) + &apos;px, 0 &apos; + (330 + scrollTop) + &apos;px, 0 0)&apos;;</span><br><span class="line">    eleShape.style.shapeOutside = shapeOutside;</span><br><span class="line">&#125;;</span><br><span class="line">// 滚动时候实时改变shape形状</span><br><span class="line">eleBox.addEventListener(&apos;scroll&apos;, funShape);</span><br><span class="line">funShape();</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<pre><code>//CSS：
+.box {
+    max-width: 414px;
+    height: 480px;
+    border: solid #000;
+    margin: auto;
+    overflow: auto;
+}
+.shape {
+    float: left;
+    width: 30px;
+    height: 340px;
+    shape-outside: polygon(0 0, 0 150px, 16px 154px, 30px 166px, 30px 314px, 16px 326px, 0 330px, 0 0);
+    transition: shape-outside .15s;
+}
+.liuhai {
+    width: 24px;
+    height: 180px;
+    background: url(./liu.png) no-repeat left center;
+    position: absolute;
+    margin-top: 150px;
+}
+.content ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.content li {
+    border-bottom: 1px solid #eee;
+    padding: .5em;
+}
+//HTML
+&lt;div id=&quot;box&quot; class=&quot;box&quot;&gt;
+    &lt;i id=&quot;shape&quot; class=&quot;shape&quot;&gt;&lt;/i&gt;
+    &lt;i class=&quot;liuhai&quot;&gt;&lt;/i&gt;
+    &lt;div class=&quot;content&quot;&gt;
+        &lt;ul&gt;
+            &lt;li&gt;为了防止看花眼&lt;/li&gt;
+            &lt;li&gt;我就手动敲下面的文字&lt;/li&gt;
+            &lt;li&gt;原本我偷懒&lt;/li&gt;
+                ......
+            &lt;li&gt;原本我偷懒&lt;/li&gt;
+            &lt;li&gt;理论上还可以使用CSS region实现&lt;/li&gt;
+            &lt;li&gt;但没有这个方法容易理解&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+//JS
+&lt;script type=&quot;text/javascript&quot;&gt;
+var eleShape = document.getElementById(&apos;shape&apos;);
+var eleBox = document.getElementById(&apos;box&apos;);
+// 保证shape元素高度足够
+eleShape.style.height = eleBox.scrollHeight + &apos;px&apos;;
+var funShape = function() {
+    var scrollTop = eleBox.scrollTop;
+    // 滚动偏移应用在shape-outside上
+    var shapeOutside = &apos;polygon(0 0, 0 &apos; + (150 + scrollTop) + &apos;px, 16px &apos; + (154 + scrollTop) + &apos;px, 30px &apos; + (166 + scrollTop) + &apos;px, 30px &apos; + (314 + scrollTop) + &apos;px, 16px &apos; + (326 + scrollTop) + &apos;px, 0 &apos; + (330 + scrollTop) + &apos;px, 0 0)&apos;;
+    eleShape.style.shapeOutside = shapeOutside;
+};
+// 滚动时候实时改变shape形状
+eleBox.addEventListener(&apos;scroll&apos;, funShape);
+funShape();
+&lt;/script&gt;</code></pre><h2 id="弧形字"><a href="#弧形字" class="headerlink" title="弧形字"></a>弧形字</h2><p><img src="/images/svg/1-7.jpg" alt="弧形字"></p>
+<pre><code>&lt;svg width=&quot;500&quot; height=&quot;500&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot; version=&quot;1.1&quot;&gt;
+    &lt;circle cx=&quot;100&quot; cy=&quot;100&quot; r=&quot;50&quot; fill=&quot;none&quot; stroke=&quot;#cfd1d2&quot; fill-opacity=&quot;0&quot; stroke-width=&quot;5&quot;&gt;&lt;/circle&gt;
+    &lt;circle cx=&quot;100&quot; cy=&quot;100&quot; r=&quot;50&quot; fill=&quot;#e0e0e0&quot;&gt;&lt;/circle&gt;
+    &lt;path id=&quot;my_path&quot; d=&quot;M62 100 A 38 38 0 0 1 138 100 &quot; fill=&quot;none&quot; stroke=&quot;none&quot; /&gt;
+    &lt;path id=&quot;rnb_bottom&quot; d=&quot;M78 138 A 45 45 0 0 0 123 138 &quot; fill=&quot;none&quot; stroke=&quot;none&quot; /&gt;
+    &lt;text&gt;
+        &lt;textPath xlink:href=&quot;#my_path&quot; font-size=&quot; 12&quot; letter-spacing=&quot;10&quot;&gt;中国人民银行&lt;/textPath&gt;
+    &lt;/text&gt;
+    &lt;text x=&quot;100&quot; y=&quot;100&quot; font-size=&quot;70&quot; font-weight=&quot;bold&quot; fill=&quot;#888&quot; transform=&quot;translate(-23,27)&quot;&gt;
+        1
+    &lt;/text&gt;
+    &lt;text&gt;
+        &lt;textPath xlink:href=&quot;#rnb_bottom&quot; letter-spacing=&quot;8&quot; font-size=&quot;10&quot;&gt;2003&lt;/textPath&gt;
+    &lt;/text&gt;
+&lt;/svg&gt;</code></pre>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://heweixia.com/2020/10/12/文字沿着不规则路径排版/" data-id="ckizdta4t0053u0vwkzaittkk" class="article-share-link">Share</a>
+      <a data-url="http://heweixia.com/2020/10/12/文字沿着不规则路径排版/" data-id="cklj8qg1u005tkcvwm4x84ws6" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/svg/">svg</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/动画/">动画</a></li></ul>
@@ -195,7 +379,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Regexp/">Regexp</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/css3/">css3</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/js/">js</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/reactjs/">reactjs</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/sublime/">sublime</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/svg/">svg</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/vue/">vue</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端基础/">前端基础</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/基础测试/">基础测试</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/小程序/">小程序</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/移动端开发/">移动端开发</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/面试/">面试</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/CSS/">CSS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Regexp/">Regexp</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/css3/">css3</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/flex/">flex</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/js/">js</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/reactjs/">reactjs</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/sublime/">sublime</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/svg/">svg</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/vue/">vue</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端基础/">前端基础</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/基础测试/">基础测试</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/小程序/">小程序</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/移动端开发/">移动端开发</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/面试/">面试</a></li></ul>
     </div>
   </div>
 
@@ -205,7 +389,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DOM/">DOM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6/">es6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/form/">form</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/">html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react-router/">react-router</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/regexp/">regexp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sublime/">sublime</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/svg/">svg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/">vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vuex/">vuex</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack/">webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/动画/">动画</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/小程序/">小程序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/打包/">打包</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/移动端开发/">移动端开发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/箭头函数/">箭头函数</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/路由-vue/">路由 vue</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DOM/">DOM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/config/">config</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6/">es6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/form/">form</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/">html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/img/">img</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/layout/">layout</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react-router/">react-router</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/regexp/">regexp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/router/">router</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sublime/">sublime</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/svg/">svg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/">vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vuex/">vuex</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack/">webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/动画/">动画</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/小程序/">小程序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/布局/">布局</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/移动端开发/">移动端开发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/箭头函数/">箭头函数</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/路由-vue/">路由 vue</a></li></ul>
     </div>
   </div>
 
@@ -215,7 +399,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/CSS/" style="font-size: 16px;">CSS</a> <a href="/tags/DOM/" style="font-size: 18px;">DOM</a> <a href="/tags/es6/" style="font-size: 10px;">es6</a> <a href="/tags/form/" style="font-size: 10px;">form</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/html/" style="font-size: 12px;">html</a> <a href="/tags/js/" style="font-size: 20px;">js</a> <a href="/tags/react-router/" style="font-size: 10px;">react-router</a> <a href="/tags/regexp/" style="font-size: 10px;">regexp</a> <a href="/tags/sublime/" style="font-size: 10px;">sublime</a> <a href="/tags/svg/" style="font-size: 14px;">svg</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/vuex/" style="font-size: 10px;">vuex</a> <a href="/tags/webpack/" style="font-size: 10px;">webpack</a> <a href="/tags/动画/" style="font-size: 14px;">动画</a> <a href="/tags/小程序/" style="font-size: 14px;">小程序</a> <a href="/tags/打包/" style="font-size: 10px;">打包</a> <a href="/tags/移动端开发/" style="font-size: 10px;">移动端开发</a> <a href="/tags/箭头函数/" style="font-size: 10px;">箭头函数</a> <a href="/tags/路由-vue/" style="font-size: 10px;">路由 vue</a>
+      <a href="/tags/CSS/" style="font-size: 16px;">CSS</a> <a href="/tags/DOM/" style="font-size: 18px;">DOM</a> <a href="/tags/config/" style="font-size: 12px;">config</a> <a href="/tags/es6/" style="font-size: 10px;">es6</a> <a href="/tags/form/" style="font-size: 10px;">form</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/html/" style="font-size: 12px;">html</a> <a href="/tags/img/" style="font-size: 10px;">img</a> <a href="/tags/js/" style="font-size: 20px;">js</a> <a href="/tags/layout/" style="font-size: 10px;">layout</a> <a href="/tags/react-router/" style="font-size: 10px;">react-router</a> <a href="/tags/regexp/" style="font-size: 10px;">regexp</a> <a href="/tags/router/" style="font-size: 10px;">router</a> <a href="/tags/sublime/" style="font-size: 10px;">sublime</a> <a href="/tags/svg/" style="font-size: 14px;">svg</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/vuex/" style="font-size: 10px;">vuex</a> <a href="/tags/webpack/" style="font-size: 10px;">webpack</a> <a href="/tags/动画/" style="font-size: 14px;">动画</a> <a href="/tags/小程序/" style="font-size: 14px;">小程序</a> <a href="/tags/布局/" style="font-size: 10px;">布局</a> <a href="/tags/移动端开发/" style="font-size: 10px;">移动端开发</a> <a href="/tags/箭头函数/" style="font-size: 10px;">箭头函数</a> <a href="/tags/路由-vue/" style="font-size: 10px;">路由 vue</a>
     </div>
   </div>
 
@@ -224,7 +408,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">October 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">June 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">January 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">October 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">June 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li></ul>
     </div>
   </div>
 
@@ -237,23 +421,23 @@
       <ul>
         
           <li>
-            <a href="/2020/10/15/小程序-audio-使用填坑记/">小程序-audio-使用填坑记</a>
+            <a href="/2021/01/22/简单布局实现/">简单布局实现</a>
           </li>
         
           <li>
-            <a href="/2020/10/14/JSON对象与Blob对象互相转换/">JSON对象与Blob对象互相转换</a>
+            <a href="/2021/01/21/实现图片预加载与图片懒加载/">实现图片预加载与图片懒加载</a>
           </li>
         
           <li>
-            <a href="/2020/10/12/文字沿着不规则路径排版/">文字沿着不规则路径排版</a>
+            <a href="/2021/01/21/vue-router-添加动态路由/">vue-router 添加动态路由</a>
           </li>
         
           <li>
-            <a href="/2020/09/21/小程序-video-组件使用填坑记/">小程序 video 组件使用填坑记</a>
+            <a href="/2021/01/18/vue-cli3项目常用配置/">vue-cli3项目常用配置</a>
           </li>
         
           <li>
-            <a href="/2020/09/16/前端面试整理/">前端面试整理</a>
+            <a href="/2021/01/14/Proxy-和-Reflect-学习/">Proxy 和 Reflect 学习</a>
           </li>
         
       </ul>
@@ -268,7 +452,7 @@
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2020 hwx<br>
+      &copy; 2021 hwx<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>

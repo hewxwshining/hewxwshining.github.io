@@ -62,6 +62,1456 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-简单布局实现" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/01/22/简单布局实现/" class="article-date">
+  <time datetime="2021-01-22T03:25:59.000Z" itemprop="datePublished">2021-01-22</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/CSS/">CSS</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/01/22/简单布局实现/">简单布局实现</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="标题与内容布局"><a href="#标题与内容布局" class="headerlink" title="标题与内容布局"></a>标题与内容布局</h3><p><img src="/images/layout/1.gif" alt="标题与内容布局"></p>
+<p>当标题的字体发生改变时内容的宽度与标题的宽度保持一致</p>
+<pre><code>html
+&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;&lt;/title&gt;
+    &lt;style type=&quot;text/css&quot;&gt;
+    h2 {
+        font-size: 32px;
+
+        color: #000;
+    }
+    p {
+        font-size: 12px;
+        color: #333;
+    }
+    /*方法一*/
+    h2 {
+        width: min-content;
+        white-space: nowrap;
+    }
+
+    p {
+        white-space: normal;
+    }
+
+    /*方法二*/
+    h2 {
+        display: table;
+    }
+
+    p {
+        display: table-caption;
+        caption-side: bottom;
+    }
+    &lt;/style&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+    &lt;h2&gt;IPHONE XR&lt;br&gt; IS THE FUCKING&lt;br&gt; BEST EVER MADE
+         &lt;p&gt;iPhone XR has not been authorized as required by the rules of the Federal Communications Commission. iPhone XR is not, and may not be, offered for sale or lease, or sold or leased, until authorization is obtained.&lt;/p&gt;
+    &lt;/h2&gt;
+    &lt;div&gt;改变H2字号大小查看动态变化：&lt;input type=&quot;range&quot; min=&quot;20&quot; max=&quot;60&quot; value=&quot;32&quot; size=&quot;50&quot; align=&quot;absmiddle&quot; onmousemove=&quot;change()&quot;&gt;&lt;/div&gt;
+    &lt;script type=&quot;text/javascript&quot;&gt;
+    var input = document.getElementsByTagName(&apos;input&apos;);
+    var h2 = document.getElementsByTagName(&quot;h2&quot;);
+
+    function change() {
+        h2[0].style.fontSize = input[0].value + &apos;px&apos;;
+    }
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://heweixia.com/2021/01/22/简单布局实现/" data-id="cklj8qg0l003gkcvwfwxqq24f" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/layout/">layout</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-实现图片预加载与图片懒加载" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/01/21/实现图片预加载与图片懒加载/" class="article-date">
+  <time datetime="2021-01-21T12:08:19.000Z" itemprop="datePublished">2021-01-21</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/js/">js</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/01/21/实现图片预加载与图片懒加载/">实现图片预加载与图片懒加载</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在页面上我们一般都是用img标签加载图片，但是当图片加载过多时，页面出现了，但是加载的图片还没出来，导致页面显示的效果混乱，所以一般都是使用图片预加载，当图片加载好了后，才放到页面里面。</p>
+<h1 id="方法一：在div中动态添加img标签"><a href="#方法一：在div中动态添加img标签" class="headerlink" title="方法一：在div中动态添加img标签"></a>方法一：在div中动态添加img标签</h1><p>原理：首先div中显示背景图片，当图片加载好后添加到div的标签中去</p>
+<p>html代码如下</p>
+<pre><code>&lt;div class=&quot;canvas&quot; data-src=&quot;images/product/product1.png&quot; &gt;&lt;/div&gt;</code></pre><p>CSS代码如下</p>
+<pre><code>.canvas {
+    width: 100px;
+    min-height: 100px;
+    background: #fff url(&quot;../images/loading.gif&quot;) center center no-repeat;
+    background-size: 15px auto;
+}</code></pre><p>JS代码如下</p>
+<pre><code>var load = {
+    loadCanvas: function() {
+        var that = this;
+        $(&quot;#productul&quot;).find(&quot;.canvas&quot;).each(function(index, el) {
+            var imgSrc = $(this).data(&quot;src&quot;);
+            var _this = $(this);
+            that.loadImage(imgSrc, aa);
+
+            function aa() {
+                $(_this).append(this);
+                $(_this).css(&quot;background&quot;, &quot;none&quot;);
+            };
+        });
+    },
+    loadImage: function(url, callback) {
+        var img = new Image(); //创建一个Image对象，实现图片的预下载 
+        img.src = url;
+        if (img.complete) { // 如果图片已经存在于浏览器缓存，直接调用回调函数 
+            callback.call(img);
+            return; // 直接返回，不用再处理onload事件 
+        }
+        img.onload = function() { //图片下载完毕时异步调用callback函数。 
+            callback.call(img); //将回调函数的this替换为Image对象 
+        };
+    },
+};</code></pre><h1 id="方法二：使用canvas"><a href="#方法二：使用canvas" class="headerlink" title="方法二：使用canvas"></a>方法二：使用canvas</h1><p>html代码如下</p>
+<p><canvas data-src="images/product/product1.png"></canvas></p>
+<pre><code>loadCanvas: function() {
+    var imglength = $(&quot;#productul&quot;).find(&quot;canvas&quot;).length;
+    if (imglength &gt; 0) {
+        $(&quot;#productul&quot;).find(&quot;canvas&quot;).each(function() {
+            var imgSrc = $(this).data(&quot;src&quot;);
+            var imageObj = new Image();
+            imageObj.canvs = $(this)[0];
+            var cvs = imageObj.canvs.getContext(&apos;2d&apos;);
+            if (cvs) {
+                imageObj.src = imgSrc;
+                imageObj.onload = function() {
+                    imageObj.canvs.width = this.width;
+                    imageObj.canvs.height = this.height;
+                    cvs.drawImage(this, 0, 0);
+                    $(imageObj.canvs).css(&quot;background-image&quot;, &quot;none&quot;);
+                }
+            }
+        })
+    }
+}</code></pre><h1 id="实现瀑布流的图片懒加载"><a href="#实现瀑布流的图片懒加载" class="headerlink" title="实现瀑布流的图片懒加载"></a>实现瀑布流的图片懒加载</h1><p>懒加载的原理是图片在可视区域才去加载图片， 在不可视区域不用加载， 滚动滚动条可以调整显示区域；</p>
+<p>CSS代码如下：</p>
+<pre><code>.pubu {
+    position: absolute;
+    width: 1100px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.box {
+    padding: 20px 0 0 20px;
+    float: left;
+    box-shadow: 1px 1px #ddd;
+}
+
+.box img {
+    width: 200px;
+    height: auto;
+    opacity: 0;
+}</code></pre><p>html代码如下：</p>
+<pre><code>&lt;div class=&quot;pubu&quot;&gt;
+    &lt;div class=&quot;box&quot;&gt;
+        &lt;img data-original=&quot;images/0.jpg&quot; src=&quot;images/0.jpg&quot;&gt;
+    &lt;/div&gt;
+       &lt;!-- 省略中间 img 代码 --&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;box&quot;&gt;
+        &lt;img data-original=&quot;images/33.jpg&quot; src=&quot;images/0.jpg&quot;&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre><p>JS 代码如下：</p>
+<pre><code>let cols = 5;
+window.onload = function() {
+    let oBoxs = document.getElementsByClassName(&quot;box&quot;);
+    let oImgs = document.getElementsByTagName(&apos;img&apos;);
+    loadImg(oImgs, oBoxs);
+    window.onscroll = function() { //滚动时重新加载图片
+        loadImg(oImgs, oBoxs);
+    }
+}
+
+function loadImg(arr, oBoxs) {
+    for (let i = 0; i &lt; arr.length; i++) {
+        if (arr[i].getBoundingClientRect().top &lt; document.documentElement.clientHeight &amp;&amp; !arr[i].isLoad) { //当图片在可视区域时加载图片
+            arr[i].isLoad = true;
+            if (arr[i].dataset) {
+                afterLoadImg(arr[i], arr[i].dataset.original, oBoxs)
+            } else {
+                afterLoadImg(arr[i], arr[i].getAttribute(&quot;data-original&quot;), oBoxs)
+            }
+            arr[i].style.cssText = &quot;transition:  opacity 4s; opacity: 1&quot;
+        }
+    }
+}
+
+function afterLoadImg(obj, url, oBoxs) {
+    obj.src = url;
+    obj.onload = function(e) { //图片加载完成后计算图片的高度
+        waterFall(oBoxs, cols, oBoxs[0].offsetWidth);
+    }
+}
+
+function waterFall(ele, col, eleWidth) {
+    let hArr = [];
+    for (let i = 0; i &lt; ele.length; i++) {
+        if (i &lt; col) {
+            hArr.push(ele[i].offsetHeight)
+        } else {
+            var minH = Math.min.apply(null, hArr);
+            let index = hArr.indexOf(minH);
+            ele[i].style.position = &quot;absolute&quot;;
+            ele[i].style.top = minH + &quot;px&quot;;
+            ele[i].style.left = index * eleWidth + &apos;px&apos;;
+            hArr[index] += ele[i].offsetHeight;
+        }
+    }
+}</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://heweixia.com/2021/01/21/实现图片预加载与图片懒加载/" data-id="cklj8qg0a002ukcvwy6ht8o4n" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/img/">img</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-vue-router-添加动态路由" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/01/21/vue-router-添加动态路由/" class="article-date">
+  <time datetime="2021-01-21T02:07:59.000Z" itemprop="datePublished">2021-01-21</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/vue/">vue</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/01/21/vue-router-添加动态路由/">vue-router 添加动态路由</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>这篇文章是基于 vue-router v4.02 版本来实现的。vue-router v4.0.2 的版本与 v.3.x 的版本区别有很多，可以直查看一下<a href="https://next.router.vuejs.org/guide/migration/index.html" target="_blank" rel="noopener">这里</a>， 本片文章只说一下怎么使用vue-router去动态创建路由。具体可以直接看代码，一目了然了。</p>
+<h3 id="使用vue-cli3创建项目"><a href="#使用vue-cli3创建项目" class="headerlink" title="使用vue-cli3创建项目"></a>使用vue-cli3创建项目</h3><pre><code>vue create router-test</code></pre><h3 id="设置路由-“router-index-js”"><a href="#设置路由-“router-index-js”" class="headerlink" title="设置路由 “router/index.js”"></a>设置路由 “router/index.js”</h3><pre><code>import { createRouter, createWebHashHistory } from &apos;vue-router&apos;
+import defaultRouter from &apos;./defaultRouter&apos;
+import store from &apos;@/store&apos;
+import dynamicRouter from &apos;./dynamicRouter&apos;
+
+const router = createRouter({
+  history: createWebHashHistory(),
+  routes: defaultRouter,
+  scrollBehavior(to, from, savedPosition) {
+    // keep-alive 返回缓存页面后记录浏览位置
+    if (savedPosition &amp;&amp; to.meta.keepAlive) {
+      return savedPosition;
+    }
+    // 异步滚动操作
+    return new Promise((resolve) =&gt; {
+      setTimeout(() =&gt; {
+        resolve({ x: 0, y: 0 })
+      }, 200)
+    })
+  }
+})
+
+
+
+// 重新添加路由并消除路由重复警告
+const selfaddRoutes = function(params) {
+  params.forEach(item =&gt; router.addRoute(item))
+}
+
+router.beforeResolve(async (to, from, next) =&gt; {
+  let { hasRoute } = store.state; //防止路由重复添加
+
+  if (hasRoute) {
+    next();
+  } else {
+    await dynamicRouter(selfaddRoutes)
+
+    let routes = router.getRoutes(); //重新设置跳转路由
+    routes.forEach((item) =&gt; {
+      if (to.path == item.path) {
+        to.name = item.name;
+      }
+    })
+
+    next({ ...to, replace: true })
+
+  }
+})
+
+export default router</code></pre><ol>
+<li>v4版本去掉了 <code>addRoutes()</code> 方法，现用 <code>addRoute()</code>，所有路由只能一个一个添加；</li>
+<li>默认路由处添加了 <code>/:pathMatch(.*)*</code> 全路由匹配，在首次（刷新）导航进入到一个动态路由地址，这时会直接跳到 page_error 页面， 所以在导航进入动态路由地址时需要重新将 <code>to</code> 与最新的路由列表进行匹配，这里直接更改 <code>to.name</code> 值，即可；</li>
+</ol>
+<h3 id="使用vuex设置路由状态-“store-index-js”"><a href="#使用vuex设置路由状态-“store-index-js”" class="headerlink" title="使用vuex设置路由状态 “store/index.js”"></a>使用vuex设置路由状态 “store/index.js”</h3><pre><code>import { createStore } from &apos;vuex&apos;
+
+export default createStore({
+  state: {
+    &quot;hasRoute&quot;: false
+  },
+  metters:{
+      &quot;hasRoute&quot; : state =&gt; state.hasRoute
+  },
+  mutations: {
+       setHasRoute(state, hasRoute){
+           state.hasRoute = hasRoute;
+       }
+  },
+  actions: {},
+  modules: {}
+})</code></pre><h3 id="设置默认路由-“router-defaultRouter-js”"><a href="#设置默认路由-“router-defaultRouter-js”" class="headerlink" title="设置默认路由 “router/defaultRouter.js”"></a>设置默认路由 “router/defaultRouter.js”</h3><pre><code>import Home from &apos;@/views/Home.vue&apos;
+const defaultRouter = [{
+    path: &apos;&apos;,
+    name: &apos;Home&apos;,
+    component: Home
+  },
+  {
+    path: &apos;/about&apos;,
+    name: &apos;About&apos;,
+    component: () =&gt; import(&apos;@/views/About.vue&apos;)
+  }, {
+    path: &apos;/:pathMatch(.*)*&apos;,
+    name: &quot;page_error&quot;,
+    component: () =&gt; import(&apos;@/views/error_page/404&apos;),
+    meta: {
+      requiresAuth: false
+    }
+  }
+]
+
+export default defaultRouter</code></pre><h3 id="设置动态路由-“router-dynamicRouter-js”"><a href="#设置动态路由-“router-dynamicRouter-js”" class="headerlink" title="设置动态路由 “router/dynamicRouter.js”"></a>设置动态路由 “router/dynamicRouter.js”</h3><pre><code>import store from &apos;@/store&apos;
+import defaultRouter from &apos;./defaultRouter&apos;
+
+import axios from &apos;axios&apos;;
+
+//重新构建路由对象
+let menuMap = function(menu) {
+  return menu.map(v =&gt; {
+    let { path, name, component, title, icon = &quot;&quot; } = v;
+    let item = {
+      path,
+      name,
+      meta: {
+        title,
+        icon
+      },
+      component: () =&gt; import(`@/${component}`)
+    };
+    if (v.children) {
+      item.children = menuMap(v.children);
+    }
+    return item;
+  })
+}
+
+//异步获取路由列表
+const addPostRouter = function(selfaddroutes) {
+  return new Promise((resolve, reject) =&gt; {
+    axios({
+      url: &apos;./static/menu.json&apos;
+    }).then((res) =&gt; {
+      defaultRouter.unshift(...menuMap(res.data));
+      selfaddroutes(defaultRouter);
+      store.commit(&apos;setHasRoute&apos;, true); //更新路由状态；
+      resolve(true)
+    }).catch((err) =&gt; {
+      reject(err);
+    })
+  })
+}
+
+export default addPostRouter;</code></pre><h3 id="menu-json"><a href="#menu-json" class="headerlink" title="menu.json"></a>menu.json</h3><p>该文件路径地址为 “public/static/menu.json”</p>
+<pre><code>[{
+    &quot;path&quot;: &quot;/add&quot;,
+    &quot;name&quot;: &quot;add&quot;,
+    &quot;title&quot;: &quot;添加用户&quot;,
+    &quot;component&quot;: &quot;views/user/add&quot;
+},
+{
+    &quot;path&quot;: &quot;/list&quot;,
+    &quot;name&quot;: &quot;list&quot;,
+    &quot;title&quot;: &quot;用户列表&quot;,
+    &quot;component&quot;: &quot;views/user/list&quot;
+},
+{
+    &quot;path&quot;: &quot;/task&quot;,
+    &quot;name&quot;: &quot;task&quot;,
+    &quot;title&quot;: &quot;任务&quot;,
+    &quot;component&quot;: &quot;views/task/index&quot;,
+    &quot;children&quot;: [
+    {
+        &quot;path&quot;: &quot;list&quot;,
+        &quot;name&quot;: &quot;task_list&quot;,
+        &quot;title&quot;: &quot;任务列表&quot;,
+        &quot;component&quot;: &quot;views/task/list&quot;
+    },
+    {
+        &quot;path&quot;: &quot;add&quot;,
+        &quot;name&quot;: &quot;task_add&quot;,
+        &quot;title&quot;: &quot;添加任务&quot;,
+        &quot;component&quot;: &quot;views/task/add&quot;
+    }]
+}]</code></pre><h3 id="删除路由"><a href="#删除路由" class="headerlink" title="删除路由"></a>删除路由</h3><pre><code>router.addRoute({ path: &apos;/about&apos;, name: &apos;about&apos;, component: About })
+// remove the route
+router.removeRoute(&apos;about&apos;)</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://heweixia.com/2021/01/21/vue-router-添加动态路由/" data-id="cklj8qg05002jkcvw10t1x86r" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/router/">router</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-vue-cli3项目常用配置" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/01/18/vue-cli3项目常用配置/" class="article-date">
+  <time datetime="2021-01-18T08:39:38.000Z" itemprop="datePublished">2021-01-18</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/vue/">vue</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/01/18/vue-cli3项目常用配置/">vue-cli3项目常用配置</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>转载地址：<a href="https://segmentfault.com/a/1190000022512358?content_source_url=https://github.com/vue3/vue3-News" title="一份关于vue-cli3项目常用项配置" target="_blank" rel="noopener">一份关于vue-cli3项目常用项配置</a></p>
+<p>根据项目实际经验，内容有所更改</p>
+<h3 id="vue-config-js"><a href="#vue-config-js" class="headerlink" title="vue.config.js"></a>vue.config.js</h3><p>完整的架构配置</p>
+<pre><code>const path = require(&apos;path&apos;);
+const UglifyJsPlugin = require(&apos;uglifyjs-webpack-plugin&apos;) // 去掉注释
+const CompressionWebpackPlugin = require(&apos;compression-webpack-plugin&apos;); // 开启压缩
+const { HashedModuleIdsPlugin } = require(&apos;webpack&apos;);
+
+function resolve(dir) {
+    return path.join(__dirname, dir)
+}
+
+const isProduction = process.env.NODE_ENV === &apos;production&apos;;
+
+// cdn预加载使用
+const externals = {
+    &apos;vue&apos;: &apos;Vue&apos;,
+    &apos;vue-router&apos;: &apos;VueRouter&apos;,
+    &apos;vuex&apos;: &apos;Vuex&apos;,
+    &apos;axios&apos;: &apos;axios&apos;,
+    &quot;element-ui&quot;: &quot;ELEMENT&quot;
+}
+
+const cdn = {
+    // 开发环境
+    dev: {
+        css: [
+            &apos;https://unpkg.com/element-ui/lib/theme-chalk/index.css&apos;
+        ],
+        js: []
+    },
+    // 生产环境
+    build: {
+        css: [
+            &apos;https://unpkg.com/element-ui/lib/theme-chalk/index.css&apos;
+        ],
+        js: [
+            &apos;https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js&apos;,
+            &apos;https://cdn.jsdelivr.net/npm/vue-router@3.0.1/dist/vue-router.min.js&apos;,
+            &apos;https://cdn.jsdelivr.net/npm/vuex@3.0.1/dist/vuex.min.js&apos;,
+            &apos;https://cdn.jsdelivr.net/npm/axios@0.18.0/dist/axios.min.js&apos;,
+            &apos;https://unpkg.com/element-ui/lib/index.js&apos;
+        ]
+    }
+}
+
+module.exports = {
+    publicPath: process.env.NODE_ENV === &apos;production&apos; ? &apos;/static/&apos; : &quot;&quot;, //部署应用包时的基本 URL
+      outputDir: &quot;../dist/static&quot;, //生产环境构建文件的目录
+      assetsDir: &quot;./test&quot;,  //放置生成的静态资源 (js、css、img、fonts) 的 (相对于 outputDir 的) 目录
+      indexPath: &apos;../templates/index.html&apos;,//指定生成的 index.html 的输出路径 (相对于 outputDir)
+    lintOnSave: false, // 关闭eslint
+    //生产环境 sourceMap
+    productionSourceMap: false,
+    chainWebpack: config =&gt; {
+
+        config.resolve.alias
+            .set(&apos;@&apos;, resolve(&apos;src&apos;))
+
+        // 压缩图片
+        config.module
+            .rule(&apos;images&apos;)
+            .test(/\.(png|jpe?g|gif|svg)(\?.*)?$/)
+            .use(&apos;image-webpack-loader&apos;)
+            .loader(&apos;image-webpack-loader&apos;)
+            .options({ bypassOnDebug: true })
+
+        // webpack 会默认给commonChunk打进chunk-vendors，所以需要对webpack的配置进行delete
+        config.optimization.delete(&apos;splitChunks&apos;)
+
+        config.plugin(&apos;html&apos;).tap(args =&gt; {
+            if (process.env.NODE_ENV === &apos;production&apos;) {
+                args[0].cdn = cdn.build
+            }
+            if (process.env.NODE_ENV === &apos;development&apos;) {
+                args[0].cdn = cdn.dev
+            }
+            return args
+        })
+
+        config
+            .plugin(&apos;webpack-bundle-analyzer&apos;)
+            .use(require(&apos;webpack-bundle-analyzer&apos;).BundleAnalyzerPlugin)
+    },
+
+    configureWebpack: config =&gt; {
+        const plugins = [];
+
+        if (isProduction) {
+            plugins.push(
+                new UglifyJsPlugin({
+                    uglifyOptions: {
+                        output: {
+                            comments: false, // 去掉注释
+                        },
+                        warnings: false,
+                        compress: {
+                            drop_console: true,
+                            drop_debugger: false,
+                            pure_funcs: [&apos;console.log&apos;]//移除console
+                        }
+                    }
+                })
+            )
+            // 服务器也要相应开启gzip
+            plugins.push(
+                new CompressionWebpackPlugin({
+                    algorithm: &apos;gzip&apos;,
+                    test: /\.(js|css)$/,// 匹配文件名
+                    threshold: 10000, // 对超过10k的数据压缩
+                    deleteOriginalAssets: false, // 不删除源文件
+                    minRatio: 0.8 // 压缩比
+                })
+            )
+
+            // 用于根据模块的相对路径生成 hash 作为模块 id, 一般用于生产环境
+            plugins.push(
+                new HashedModuleIdsPlugin()
+            )
+
+            // 开启分离js
+            config.optimization = {
+                runtimeChunk: &apos;single&apos;,
+                splitChunks: {
+                    chunks: &apos;all&apos;,
+                    maxInitialRequests: Infinity,
+                    minSize: 1000 * 60,
+                    cacheGroups: {
+                        vendor: {
+                            test: /[\\/]node_modules[\\/]/,
+                            name(module) {
+                                // 排除node_modules 然后吧 @ 替换为空 ,考虑到服务器的兼容
+                                const packageName = module.context.match(/[\\/]node_modules[\\/](.*?)([\\/]|$)/)[1]
+                                return `npm.${packageName.replace(&apos;@&apos;, &apos;&apos;)}`
+                            }
+                        }
+                    }
+                }
+            };
+
+            // 取消webpack警告的性能提示
+            config.performance = {
+                hints: &apos;warning&apos;,
+                //入口起点的最大体积
+                maxEntrypointSize: 1000 * 500,
+                //生成文件的最大体积
+                maxAssetSize: 1000 * 1000,
+                //只给出 js 文件的性能提示
+                assetFilter: function (assetFilename) {
+                    return assetFilename.endsWith(&apos;.js&apos;);
+                }
+            }
+
+            // 打包时npm包转CDN
+            config.externals = externals;
+        }
+
+        return { plugins }
+    },
+
+    pluginOptions: {
+        // 配置全局less
+        &apos;style-resources-loader&apos;: {
+            preProcessor: &apos;less&apos;,
+            patterns: [resolve(&apos;./src/style/theme.less&apos;)]
+        }
+    },
+       devServer: {
+        open: true, // 自动启动浏览器
+        host: &apos;localhost&apos;, // 处理sockjs-node报错
+        port: 6060, // 端口号
+        https: false,
+        hotOnly: true, // 热更新
+        proxy: {
+            &apos;^/sso&apos;: {
+                target: process.env.VUE_APP_SSO, // 重写路径
+                ws: true, //开启WebSocket
+                secure: false, // 如果是https接口，需要配置这个参数
+                changeOrigin: true
+            }
+        }
+    }
+}</code></pre><h3 id="html模板配置cdn"><a href="#html模板配置cdn" class="headerlink" title="html模板配置cdn"></a>html模板配置cdn</h3><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+
+&lt;head&gt;
+    &lt;meta charset=&quot;utf-8&quot;&gt;
+    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1.0&quot;&gt;
+    &lt;link rel=&quot;icon&quot; href=&quot;&lt;%= BASE_URL %&gt;favicon.ico&quot;&gt;
+    &lt;title&gt;&lt;%= htmlWebpackPlugin.options.title %&gt;&lt;/title&gt;
+    &lt;% for (var i in
+        htmlWebpackPlugin.options.cdn &amp;&amp; htmlWebpackPlugin.options.cdn.css) { %&gt;
+    &lt;link href=&quot;&lt;%= htmlWebpackPlugin.options.cdn.css[i] %&gt;&quot; rel=&quot;preload&quot; as=&quot;style&quot; /&gt;
+    &lt;link href=&quot;&lt;%= htmlWebpackPlugin.options.cdn.css[i] %&gt;&quot; rel=&quot;stylesheet&quot; /&gt;
+    &lt;% } %&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+    &lt;noscript&gt;
+        &lt;strong&gt;We&apos;re sorry but &lt;%= htmlWebpackPlugin.options.title %&gt; doesn&apos;t work properly without JavaScript enabled.
+            Please enable it to continue.&lt;/strong&gt;
+    &lt;/noscript&gt;
+    &lt;div id=&quot;app&quot;&gt;&lt;/div&gt;
+    &lt;!-- built files will be auto injected --&gt;
+    &lt;% for (var i in
+        htmlWebpackPlugin.options.cdn &amp;&amp; htmlWebpackPlugin.options.cdn.js) { %&gt;
+    &lt;script src=&quot;&lt;%= htmlWebpackPlugin.options.cdn.js[i] %&gt;&quot;&gt;&lt;/script&gt;
+    &lt;% } %&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre><h3 id="开启Gzip压缩，包含文件js、css"><a href="#开启Gzip压缩，包含文件js、css" class="headerlink" title="开启Gzip压缩，包含文件js、css"></a>开启Gzip压缩，包含文件js、css</h3><pre><code>new CompressionWebpackPlugin({
+      algorithm: &apos;gzip&apos;,
+      test: /\.(js|css)$/, // 匹配文件名
+      threshold: 10000, // 对超过10k的数据压缩
+      deleteOriginalAssets: false, // 不删除源文件
+      minRatio: 0.8 // 压缩比
+})</code></pre><h3 id="为-sass-提供全局样式，以及全局变量"><a href="#为-sass-提供全局样式，以及全局变量" class="headerlink" title="为 sass 提供全局样式，以及全局变量"></a>为 sass 提供全局样式，以及全局变量</h3><pre><code>css: {
+    // 并将所有的 *.(css|scss|sass|less|styl(us)?) 文件视为 CSS Modules 模块
+    requireModuleExtension: true,
+    // 是否将组件中的 CSS 提取至一个独立的 CSS 文件中
+    extract: true,
+    // 是否为 CSS 开启 source map
+    sourceMap: false,
+    loaderOptions: {
+        css: {},
+        sass: {
+            additionalData: `
+            @import &quot;@/styles/index.scss&quot;;
+            $src: &quot;${process.env.VUE_APP_OSS_SRC}&quot;;
+            `
+        }
+    }
+}</code></pre><h3 id="去掉注释、去掉console-log"><a href="#去掉注释、去掉console-log" class="headerlink" title="去掉注释、去掉console.log"></a>去掉注释、去掉console.log</h3><p>安装 <code>cnpm i uglifyjs-webpack-plugin -D</code></p>
+<pre><code>const UglifyJsPlugin = require(&apos;uglifyjs-webpack-plugin&apos;)
+new UglifyJsPlugin({
+    uglifyOptions: {
+        output: {
+            comments: false, // 去掉注释
+        },
+        warnings: false,
+        compress: {
+            drop_console: true,
+            drop_debugger: false,
+            pure_funcs: [&apos;console.log&apos;] //移除console
+        }
+    }
+})</code></pre><h3 id="压缩图片"><a href="#压缩图片" class="headerlink" title="压缩图片"></a>压缩图片</h3><pre><code>chainWebpack: config =&gt; {
+    // 压缩图片
+    config.module
+        .rule(&apos;images&apos;)
+        .test(/\.(png|jpe?g|gif|svg)(\?.*)?$/)
+        .use(&apos;image-webpack-loader&apos;)
+        .loader(&apos;image-webpack-loader&apos;)
+        .options({ bypassOnDebug: true })
+
+}</code></pre><h3 id="本地代理"><a href="#本地代理" class="headerlink" title="本地代理"></a>本地代理</h3><pre><code>devServer: {
+    open: true, // 自动启动浏览器
+    host: &apos;localhost&apos;, // 处理sockjs-node报错
+    port: 6060, // 端口号
+    https: false,
+    hotOnly: true, // 热更新
+    proxy: {
+        &apos;^/sso&apos;: {
+            target: process.env.VUE_APP_SSO, // 重写路径
+            ws: true, //开启WebSocket
+            secure: false, // 如果是https接口，需要配置这个参数
+            changeOrigin: true
+        }
+    }
+}</code></pre><h3 id="配置环境变量开发模式、测试模式、生产模式"><a href="#配置环境变量开发模式、测试模式、生产模式" class="headerlink" title="配置环境变量开发模式、测试模式、生产模式"></a>配置环境变量开发模式、测试模式、生产模式</h3><p>在根目录新建</p>
+<p><strong>.env.development</strong></p>
+<pre><code>#开发环境
+NODE_ENV=&apos;development&apos;
+
+VUE_APP_SSO=&apos;http://http://localhost:9080&apos;</code></pre><p><strong>.env.test</strong></p>
+<pre><code>NODE_ENV = &apos;production&apos; # 如果我们在.env.test文件中把NODE_ENV设置为test的话，那么打包出来的目录结构是有差异的
+VUE_APP_MODE = &apos;test&apos;
+VUE_APP_SSO=&apos;http://http://localhost:9080&apos;
+outputDir = test</code></pre><p><strong>.env.production</strong></p>
+<pre><code>NODE_ENV = &apos;production&apos;
+
+VUE_APP_SSO=&apos;http://http://localhost:9080&apos;</code></pre><p><strong>package.json</strong></p>
+<pre><code>&quot;scripts&quot;: {
+    &quot;build&quot;: &quot;vue-cli-service build --no-clean&quot;, //生产打包
+    &quot;lint&quot;: &quot;vue-cli-service lint&quot;,
+    &quot;dev&quot;: &quot;vue-cli-service serve&quot;, // 开发模式
+    &quot;test&quot;: &quot;vue-cli-service build --mode test&quot;, // 测试打包
+    &quot;publish&quot;: &quot;vue-cli-service build &amp;&amp; vue-cli-service build --mode test&quot; // 测试和生产一起打包
+ }</code></pre><h3 id="只打包改变的文件"><a href="#只打包改变的文件" class="headerlink" title="只打包改变的文件"></a>只打包改变的文件</h3><p>安装<code>cnpm i webpack -D</code></p>
+<pre><code>const { HashedModuleIdsPlugin } = require(&apos;webpack&apos;);
+configureWebpack: config =&gt; {    
+    const plugins = [];
+    plugins.push(
+        new HashedModuleIdsPlugin()
+    )
+}</code></pre><h3 id="开启分析打包日志"><a href="#开启分析打包日志" class="headerlink" title="开启分析打包日志"></a>开启分析打包日志</h3><pre><code>chainWebpack: config =&gt; {
+    config
+        .plugin(&apos;webpack-bundle-analyzer&apos;)
+        .use(require(&apos;webpack-bundle-analyzer&apos;).BundleAnalyzerPlugin)
+}</code></pre><h3 id="axios配置"><a href="#axios配置" class="headerlink" title="axios配置"></a>axios配置</h3><pre><code>import axios from &quot;axios&quot;;
+import merge from &apos;lodash/merge&apos;
+import qs from &apos;qs&apos;
+
+/**
+ * 实例化
+ * config是库的默认值，然后是实例的 defaults 属性，最后是请求设置的 config 参数。后者将优先于前者
+ */
+const http = axios.create({
+    timeout: 1000 * 30,
+    withCredentials: true, // 表示跨域请求时是否需要使用凭证
+});
+
+/**
+ * 请求拦截
+ */
+http.interceptors.request.use(function (config) {
+    return config;
+}, function (error) {
+    return Promise.reject(error);
+});
+
+
+/**
+ * 响应拦截
+ */
+http.interceptors.response.use(response =&gt; {
+    // 过期之类的操作
+    if (response.data &amp;&amp; (response.data.code === 401)) {
+        // window.location.href = &apos;&apos;; 重定向
+    }
+    return response
+}, error =&gt; {
+    return Promise.reject(error)
+})
+
+
+/**
+ * 请求地址处理
+ */
+http.adornUrl = (url) =&gt; {
+    return url;
+}
+
+/**
+ * get请求参数处理
+ * params 参数对象
+ * openDefultParams 是否开启默认参数
+ */
+http.adornParams = (params = {}, openDefultParams = true) =&gt; {
+    var defaults = {
+        t: new Date().getTime()
+    }
+    return openDefultParams ? merge(defaults, params) : params
+}
+
+
+/**
+ * post请求数据处理
+ * @param {*} data 数据对象
+ * @param {*} openDefultdata 是否开启默认数据?
+ * @param {*} contentType 数据格式
+ *  json: &apos;application/json; charset=utf-8&apos;
+ *  form: &apos;application/x-www-form-urlencoded; charset=utf-8&apos;
+ */
+http.adornData = (data = {}, openDefultdata = true, contentType = &apos;json&apos;) =&gt; {
+    var defaults = {
+        t: new Date().getTime()
+    }
+    data = openDefultdata ? merge(defaults, data) : data
+    return contentType === &apos;json&apos; ? JSON.stringify(data) : qs.stringify(data)
+}
+
+
+/**
+ * windPost请求
+ * @param {String} url [请求地址]
+ * @param {Object} params [请求携带参数]
+ */
+http.windPost = function (url, params) {
+    return new Promise((resolve, reject) =&gt; {
+        http.post(http.adornUrl(url), qs.stringify(params))
+            .then(res =&gt; {
+                resolve(res.data)
+            })
+            .catch(error =&gt; {
+                reject(error)
+            })
+    })
+}
+
+
+/**
+ * windJsonPost请求
+ * @param {String} url [请求地址]
+ * @param {Object} params [请求携带参数]
+ */
+http.windJsonPost = function (url, params) {
+    return new Promise((resolve, reject) =&gt; {
+        http.post(http.adornUrl(url), http.adornParams(params))
+            .then(res =&gt; {
+                resolve(res.data)
+            })
+            .catch(error =&gt; {
+                reject(error)
+            })
+    })
+}
+
+
+/**
+ * windGet请求
+ * @param {String} url [请求地址]
+ * @param {Object} params [请求携带参数]
+ */
+http.windGet = function (url, params) {
+    return new Promise((resolve, reject) =&gt; {
+        http.get(http.adornUrl(url), { params: params })
+            .then(res =&gt; {
+                resolve(res.data)
+            })
+            .catch(error =&gt; {
+                reject(error)
+            })
+    })
+}
+
+/**
+ * 上传图片
+ */
+http.upLoadPhoto = function (url, params, callback) {
+    let config = {}
+    if (callback !== null) {
+        config = {
+            onUploadProgress: function (progressEvent) {
+                //属性lengthComputable主要表明总共需要完成的工作量和已经完成的工作是否可以被测量
+                //如果lengthComputable为false，就获取不到progressEvent.total和progressEvent.loaded
+                callback(progressEvent)
+            }
+        }
+    }
+    return new Promise((resolve, reject) =&gt; {
+        http.post(http.adornUrl(url), http.adornParams(params), config)
+            .then(res =&gt; {
+                resolve(res.data)
+            })
+            .catch(error =&gt; {
+                reject(error)
+            })
+    })
+}
+export default http;</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://heweixia.com/2021/01/18/vue-cli3项目常用配置/" data-id="cklj8qg1r005nkcvwkpxqacs9" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/config/">config</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Proxy-和-Reflect-学习" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/01/14/Proxy-和-Reflect-学习/" class="article-date">
+  <time datetime="2021-01-14T12:29:46.000Z" itemprop="datePublished">2021-01-14</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/js/">js</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/01/14/Proxy-和-Reflect-学习/">Proxy 和 Reflect 学习</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Proxy-和-Reflect-学习"><a href="#Proxy-和-Reflect-学习" class="headerlink" title="Proxy 和 Reflect 学习"></a>Proxy 和 Reflect 学习</h1><blockquote>
+<p><strong>Proxy</strong> 对象用于创建一个对象的代理，从而实现基本操作的拦截和自定义（如属性查找、赋值、枚举、函数调用等）。  </p>
+</blockquote>
+<p>语法：</p>
+<pre><code>const p = new Proxy(target, handler)</code></pre><ul>
+<li><strong>target</strong>：需要使用Proxy包装代理的目标对象， 该对象可以是任何类型的对象，包括原生数组，函数，甚至另一个代理；</li>
+<li><strong>handler</strong>：代理配置，一个通常以<strong>函数（钩子）</strong>作为属性的对象，各属性中的函数分别定义了在执行各种操作时代理 <code>P</code> 的行为， 比如 <code>p</code> 添加属性（set）, 读取属性（get）等</li>
+</ul>
+<h3 id="无操作转发代理"><a href="#无操作转发代理" class="headerlink" title="无操作转发代理"></a>无操作转发代理</h3><p>对 <code>p</code> 进行操作，如果在 handler 中存在相应的钩子，则它将运行，并且 Proxy 有机会对其进行处理，否则代理会将所用应用到它的操作转发到 <code>target</code> 对象上。</p>
+<pre><code>let target = { a: 36 };
+let p = new Proxy(target, {});
+
+p.a = 37; // 操作转发到目标
+console.log(target.a); // 37. 操作已经被正确地转发
+
+p.b = 38; //操作转发到目标
+console.log(target.b); //38 操作已经被正确地转发</code></pre><p><code>Proxy</code> 是一种特殊的“奇异对象”。 它没有自己的属性。 如果 handler 为空，则透明地将操作转发给 <code>target</code></p>
+<p>对于对象的大多数操作，JavaScript 规范中都有一个所谓的“内部方法”，它描述了最底层的工作方式。 例如 [[Get]]，用于读取属性的内部方法， [[Set]]，用于写入属性的内部方法，等等。这些方法仅在规范中使用，我们不能直接通过方法名调用它们。</p>
+<p>Proxy 钩子会拦截这些方法的调用，它们在<a href="https://tc39.es/ecma262/#sec-proxy-object-internal-methods-and-internal-slots" target="_blank" rel="noopener">代理规范</a>在下表中列出。</p>
+<p>对于每个内部方法，此表中都有一个钩子：可用于添加到 new Proxy 时的 handler 参数中以拦截操作的方法名称：</p>
+<table>
+<thead>
+<tr>
+<th>内部方法</th>
+<th>handle方法</th>
+<th>合适出发</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>[[Get]]</td>
+<td>get</td>
+<td>读取属性</td>
+</tr>
+<tr>
+<td>[[Set]]</td>
+<td>set</td>
+<td>写入属性</td>
+</tr>
+<tr>
+<td>[[Delete]]</td>
+<td>deleteProperty</td>
+<td>delete 操作</td>
+</tr>
+<tr>
+<td>[[OwnPropertyKeys]]</td>
+<td>ownKeys</td>
+<td>属性操作</td>
+</tr>
+<tr>
+<td>[[Call]]</td>
+<td>apply</td>
+<td>proxy 对象作为函数被调用</td>
+</tr>
+<tr>
+<td>[[Construct]]</td>
+<td>construct</td>
+<td>new 操作</td>
+</tr>
+<tr>
+<td>HasProperty</td>
+<td>has</td>
+<td>in 操作</td>
+</tr>
+<tr>
+<td>[[GetPrototypeOf]]</td>
+<td>getPrototypeOf</td>
+<td>读取代理对象的原型</td>
+</tr>
+<tr>
+<td>[[SetPrototypeOf]]</td>
+<td>setPrototypeOf</td>
+<td>设置代理对象的原型</td>
+</tr>
+<tr>
+<td>[[IsExtensible]]</td>
+<td>isExtensible</td>
+<td>Object.isExtensible</td>
+</tr>
+<tr>
+<td>[[PreventExtensions]]</td>
+<td>preventExtensions</td>
+<td>Object.preventExtensions</td>
+</tr>
+<tr>
+<td>[[DefineOwnProperty]]</td>
+<td>defineProperty</td>
+<td>Object.defineProperty, Object.defineProperties</td>
+</tr>
+<tr>
+<td>[[GetOwnProperty]]</td>
+<td>getOwnPropertyDescriptor</td>
+<td>Object.getOwnPropertyDescriptor, for..in, Object.keys/values/entries</td>
+</tr>
+</tbody></table>
+<h3 id="1、get-函数，-拦截读取操作"><a href="#1、get-函数，-拦截读取操作" class="headerlink" title="1、get 函数， 拦截读取操作"></a>1、get 函数， 拦截读取操作</h3><p>语法</p>
+<pre><code>get(target, property, receiver)</code></pre><ul>
+<li>target ： 是目标对象，该对象作为第一个参数传递给 new Proxy；</li>
+<li>property ：被获取的属性名；</li>
+<li>receiver ： 如果目标属性是一个 getter 访问器属性，则 receiver 就是本次读取属性所在的 this 对象。通常，这就是 proxy 对象本身；</li>
+<li>返回任何值</li>
+</ul>
+<p>当访问 <code>P</code> 中不存在的属性时，默认返回的 <code>undefined</code> , 可通过 get 方法改变对象属性的默认值；</p>
+<pre><code>const handler = {
+    get: function(obj, prop) {
+        return prop in obj ? obj[prop] : 37;
+    }
+};
+
+const p = new Proxy({}, handler);
+p.a = 1;
+p.b = undefined;
+
+console.log(p.a, p.b); // 1, undefined
+console.log(&apos;c&apos; in p, p.c); // false, 37 </code></pre><h3 id="2、set-函数，-拦截写入操作"><a href="#2、set-函数，-拦截写入操作" class="headerlink" title="2、set 函数， 拦截写入操作"></a>2、set 函数， 拦截写入操作</h3><p>语法</p>
+<pre><code>set(target, property, value, receiver)
+
+Return booleanTrapResult.</code></pre><ul>
+<li>target ： 是目标对象，该对象作为第一个参数传递给 new Proxy；</li>
+<li>property ： 将被设置的属性名或 Symbol；</li>
+<li>value ： 新属性值；</li>
+<li>receiver ： 与 get 钩子类似，仅与 setter 访问器相关；</li>
+<li>返回一个布尔值。</li>
+</ul>
+<p>通过代理，可以轻松地验证向一个对象的传值</p>
+<pre><code>let validator = {
+  set: function(obj, prop, value) {
+    if (prop === &apos;age&apos;) {
+      if (!Number.isInteger(value)) {
+        throw new TypeError(&apos;The age is not an integer&apos;);
+      }
+      if (value &gt; 200) {
+        throw new RangeError(&apos;The age seems invalid&apos;);
+      }
+    }
+    // The default behavior to store the value
+    obj[prop] = value;
+
+    // 表示成功
+    return true;
+  }
+};
+
+let person = new Proxy({}, validator);
+person.age = 100;
+console.log(person.age);
+// 100
+person.age = &apos;young&apos;;
+// 抛出异常: Uncaught TypeError: The age is not an integer
+person.age = 300;
+// 抛出异常: Uncaught RangeError: The age seems invalid</code></pre><h3 id="3、deleteProperty-函数，-拦截-delete-操作"><a href="#3、deleteProperty-函数，-拦截-delete-操作" class="headerlink" title="3、deleteProperty 函数， 拦截 delete 操作"></a>3、deleteProperty 函数， 拦截 delete 操作</h3><p>语法</p>
+<pre><code>deleteProperty(target, p)</code></pre><ul>
+<li>target：删除属性的目标对象；</li>
+<li>p：待删除的属性名。</li>
+<li>必须返回一个 Boolean 类型的值，表示了该属性是否被成功删除。</li>
+</ul>
+<p>通过代理，可以可拦击对象属性的删除操作</p>
+<pre><code>let target = { v: &quot;v&quot;, a: &quot;a&quot; };
+let p = new Proxy(target, {
+    deleteProperty(target, p) {
+        if (p == &apos;v&apos;) {
+            return false;
+        }
+        Reflect.deleteProperty(target, p);
+        return true;
+    }
+})
+delete p.v;
+delete p.a;
+console.log(p)  //Proxy {v: &quot;v&quot;}</code></pre><h3 id="4、ownKeys-函数，拦截属性键操作"><a href="#4、ownKeys-函数，拦截属性键操作" class="headerlink" title="4、ownKeys 函数，拦截属性键操作"></a>4、ownKeys 函数，拦截属性键操作</h3><p>语法</p>
+<pre><code>ownKeys(target) </code></pre><ul>
+<li>target： 获取自身属性键的目标对象。</li>
+<li>必须返回一个数组</li>
+</ul>
+<p>当使用 <code>for...in</code>、<code>Object.keys</code>、<code>Reflect.ownKeys</code>、<code>Object.getOwnPropertyNames</code>、<code>Object.getOwnPropertySymbols</code> 时触发</p>
+<pre><code>let target = { v: &quot;vs&quot;, a:&quot;as&quot; };
+let p = new Proxy(target, {
+    ownKeys(target) {
+        return Reflect.ownKeys(target).filter(key =&gt; key != &apos;v&apos;)
+    }
+})
+console.log(Object.keys(p)); //[&apos;a&apos;]
+console.log(Reflect.ownKeys(p));//[&apos;a&apos;]</code></pre><h3 id="5、apply-函数，-拦截调用函数操作"><a href="#5、apply-函数，-拦截调用函数操作" class="headerlink" title="5、apply 函数， 拦截调用函数操作"></a>5、apply 函数， 拦截调用函数操作</h3><p>语法</p>
+<pre><code>apply(target, thisArgument, argArray) </code></pre><ul>
+<li>target： 是目标对象（函数是 JavaScript 中的对象）;</li>
+<li>thisArgument： target函数被调用时绑定的this对象，默认 undefined;</li>
+<li>argArray： target函数调用时传入的实参列表，该参数应该是一个类数组的对象。</li>
+</ul>
+<p>当函数被调用时触发， 当使用 <code>Function.prototype.apply()</code>、<code>Function.prototype.call()</code>、<code>Reflect.apply()</code> 被触发</p>
+<pre><code>let target = function(a, b) {
+    return a + &quot; =&gt;&quot; + b
+}
+let p = new Proxy(target, {
+    apply(target, thisArgument, argArray) {
+        console.log(target, thisArgument, argArray)  //target函数  undefined  [&quot;a&quot;, &quot;A&quot;]
+        let f = function(a, b) {
+            return a + b;
+        }
+        return Reflect.apply(f, thisArgument,argArray)
+
+    }
+})
+console.log(p(&apos;a&apos;, &quot;A&quot;))  // &quot;ab&quot;</code></pre><h3 id="6、-construct-函数，-拦截new操作"><a href="#6、-construct-函数，-拦截new操作" class="headerlink" title="6、 construct 函数， 拦截new操作"></a>6、 construct 函数， 拦截new操作</h3><p>语法</p>
+<pre><code>construct(target, argArray, newTarget) </code></pre><ul>
+<li>target ： 被运行的目标构造函数；</li>
+<li>argArray ： 类数组，目标构造函数调用时的参数;</li>
+<li>newTarget : 最初被调用的构造函数，就下面的例子而言是P；</li>
+<li>必须返回一个对象</li>
+</ul>
+<p>构造函数创建对象时被拦截；</p>
+<pre><code>let target = function(a, b) {
+    this.firstName = a;
+    this.lastName = b
+}
+let P = new Proxy(target, {
+    construct(target, argArray, newTarget) {
+        // console.log(target, argArray, newTarget)
+        // return Reflect.construct(target, argArray, newTarget)
+        return {}
+    }
+})
+
+let p = new P(&apos;li&apos;, &apos;san&apos;);
+console.log(p);     // {}   返回的对象不继承于target, 这是一个新的对象;</code></pre><h3 id="7、-has函数，-拦截-in-操作"><a href="#7、-has函数，-拦截-in-操作" class="headerlink" title="7、 has函数， 拦截 in 操作"></a>7、 has函数， 拦截 in 操作</h3><p>语法</p>
+<pre><code>has( target, property)</code></pre><ul>
+<li>target ： 目标对象；</li>
+<li>propertyKey ： 属性名，需要检查目标对象是否存在此属性；</li>
+<li>返回一个 boolean 属性的值。</li>
+</ul>
+<p>当使用 <code>in</code>操作、<code>Reflect.has</code>时被触发</p>
+<pre><code>let target = {
+    a:&quot;1&quot;,
+    b:&quot;5&quot;
+}
+let p = new Proxy(target, {
+    has(target, prop){
+        return target.a &lt; prop &amp;&amp; target.b&gt;= prop ? true: false
+    }
+})
+console.log(6 in  p);  //false
+console.log(Reflect.has(p, 4))  // true</code></pre><h3 id="8、-getPrototypeOf函数，-当读取代理对象的原型时，被触发"><a href="#8、-getPrototypeOf函数，-当读取代理对象的原型时，被触发" class="headerlink" title="8、 getPrototypeOf函数， 当读取代理对象的原型时，被触发"></a>8、 getPrototypeOf函数， 当读取代理对象的原型时，被触发</h3><p>语法</p>
+<pre><code>getPrototypeOf(target)</code></pre><ul>
+<li>target： 被代理的目标对象。</li>
+<li>返回值必须是一个对象或者 null</li>
+</ul>
+<p>当 getPrototypeOf 方法被调用时，this 指向的是它所属的处理器对象。<code>Object.getPrototypeOf()</code>、<code>Reflect.getPrototypeOf()</code>、<code>__proto__</code>、<code>Object.prototype.isPrototypeOf()</code>、<code>instanceof</code>这五种操作可以触发JS引擎读取一个对象的原型；</p>
+<pre><code>var obj = {};
+var p = new Proxy(obj, {
+    getPrototypeOf(target) {
+        return Array.prototype;
+    }
+});
+console.log(
+    Object.getPrototypeOf(p) === Array.prototype,  // true
+    Reflect.getPrototypeOf(p) === Array.prototype, // true
+    p.__proto__ === Array.prototype,               // true
+    Array.prototype.isPrototypeOf(p),              // true
+    p instanceof Array                             // true
+);</code></pre><h3 id="9、setPrototypeOf-函数，-当设置代理对象的原型时，被触发"><a href="#9、setPrototypeOf-函数，-当设置代理对象的原型时，被触发" class="headerlink" title="9、setPrototypeOf 函数， 当设置代理对象的原型时，被触发"></a>9、setPrototypeOf 函数， 当设置代理对象的原型时，被触发</h3><p>语法</p>
+<pre><code>var p = new Proxy(target, {
+  setPrototypeOf(target, prototype) {}
+});</code></pre><ul>
+<li>target ： 被拦截目标对象；</li>
+<li>prototype ： 对象原型或null;</li>
+<li>成功修改了[[Prototype]], setPrototypeOf 方法返回 true,否则返回 false；</li>
+</ul>
+<p>当调用<code>Object.setPrototypeOf()</code>、<code>Reflect.setPrototypeOf()</code> 被触发</p>
+<pre><code>var handlerReturnsFalse = {
+    setPrototypeOf(target, newProto) {
+        return false;
+    }
+};
+
+var newProto = {}, target = {};
+
+var p1 = new Proxy(target, handlerReturnsFalse);
+Object.setPrototypeOf(p1, newProto); // throws a TypeError
+Reflect.setPrototypeOf(p1, newProto); // returns false</code></pre><h3 id="10、-DefineOwnProperty-函数"><a href="#10、-DefineOwnProperty-函数" class="headerlink" title="10、 DefineOwnProperty 函数"></a>10、 DefineOwnProperty 函数</h3><p>语法</p>
+<pre><code>var p = new Proxy(target, {
+  defineProperty(target, property, descriptor) { }
+});</code></pre><ul>
+<li>target： 目标对象；</li>
+<li>property ：待检索其描述的属性名；</li>
+<li>descriptor： 待定义或修改的属性的描述符；</li>
+<li>必须以一个 Boolean 返回，表示定义该属性的操作成功与否。</li>
+</ul>
+<p>当调用 <code>Object.defineProperty()</code>、<code>Reflect.defineProperty()</code>、<code>proxy.property=&#39;value&#39;</code> 被触发</p>
+<pre><code>var p = new Proxy({}, {
+  defineProperty: function(target, prop, descriptor) {
+    console.log(&apos;called: &apos; + prop);
+    return true;
+  }
+});
+
+var desc = { configurable: true, enumerable: true, value: 10 };
+Object.defineProperty(p, &apos;a&apos;, desc); // &quot;called: a&quot;</code></pre><h3 id="11、-getOwnPropertyDescriptor-函数"><a href="#11、-getOwnPropertyDescriptor-函数" class="headerlink" title="11、 getOwnPropertyDescriptor 函数"></a>11、 getOwnPropertyDescriptor 函数</h3><p>语法</p>
+<pre><code>var p = new Proxy(target, {
+  getOwnPropertyDescriptor(target, property) {}
+});</code></pre><ul>
+<li>target： 目标对象；</li>
+<li>property ：返回属性名称的描述；</li>
+<li>必须返回一个 object 或 undefined。</li>
+</ul>
+<p>当调用 <code>Object.getOwnPropertyDescriptor()</code>、<code>Reflect.getOwnPropertyDescriptor()</code> 被触发，以下是 <code>Object.getOwnPropertyDescriptor()</code>的代码陷阱：</p>
+<pre><code>var p = new Proxy({ a: 20}, {
+  getOwnPropertyDescriptor: function(target, prop) {
+    console.log(&apos;called: &apos; + prop);
+    return { configurable: true, enumerable: true, value: 10 };
+  }
+});
+
+console.log(Object.getOwnPropertyDescriptor(p, &apos;a&apos;).value); // &quot;called: a&quot;
+                                                            // 10</code></pre><h1 id="内置对象：-内部插槽（internal-slots）"><a href="#内置对象：-内部插槽（internal-slots）" class="headerlink" title="内置对象： 内部插槽（internal slots）"></a>内置对象： 内部插槽（internal slots）</h1><p>js 有许多内置对象，例如 Map, Set, Date, Promise 等都使用了所谓的 “内部插槽”，内部插槽不是对象属性，也不会继承。根据特定的内部插槽规范，这种状态可以由任何 ECMAScript语言类型的值 或 特定的ECMAScript规范类型的值 组成。除非另有明确说明，否则内部插槽将作为创建对象过程的一部分进行分配，并且可能不会动态添加到对象中。除非另有说明，否则内部插槽的初始值为 undefined。规范中的各种算法都会创建具有内部插槽的对象。但是，ECMAScript语言没有提供将内部插槽与对象关联的直接方法。</p>
+<p>假设有对象 <code>Obj</code> , <code>let p = new Proxy(Obj, {})</code>, 对于普通对象 <code>p.method()</code> 和 <code>Obj.method()</code> 结果通常是一样的，此即为代理的透明性。但如果 <code>method</code> 访问了 <code>Obj</code> 内部插槽的方法，由于 <code>p</code> (代理对象) 并没有 <code>Obj</code> 的那些内部插槽的方法，故而会抛出 TypeError 。 这里我们只能猜测 <code>Obj</code> 有内部插槽而不能严格断言，因为方法可能由于任何原因抛出 <code>TypeError</code> , 或者访问内部插槽的代码可以通过测试是否具有内部插槽或 <code>catch</code> 掉 <code>error</code> 来不抛出 <code>TypeError</code>。</p>
+<p>例如代理Map实例对象：</p>
+<pre><code>let map = new Map()
+let p = new Proxy(map, {})
+p.set(&apos;test&apos;, 1) //Error</code></pre><p>或者</p>
+<pre><code>let map = new Map()
+let p = new Proxy(map, {
+    get(target, prop, receiver){
+        return targe[prop]
+    }
+})
+p.set(&apos;test&apos;, 1) //Error</code></pre><p>以上两种写法， Proxy map后都会报错。</p>
+<p>先理解一下这个几行代码， 当执行代码 <code>p.set()</code> 的时候，JS引擎会先尝试获取 <code>p</code> 对象上的 <code>set</code> 属性，然后判断 <code>set</code> 属性是不是一个函数对象。如果它不是函数对象，则抛出类型错误（TypeError）; 这里 <code>p.set()</code> 调用的是 <code>map</code> 内部插槽的 <code>set</code> 方法，但是 <code>p</code> 本身并没这个方法所以报错了。 </p>
+<p>对于 <code>map.set(&#39;test&#39;, 1)</code>, 从外部看，只执行了两个基本语义：<code>map_set = Set(map, &#39;test&#39;, value)</code> 、 <code>Call(map_set, map, [&#39;test&#39;, 1])</code>。落到具体的Map对象上，第一步默认情况下获得 Map.prototype.set方法，第二步默认相对于执行 <code>Map.prototype.set.apply(map, [&#39;test&#39;,1])</code>。</p>
+<pre><code>let m = new Map();
+let p = new Proxy(m, {
+    get(target, prop, receiver) {
+        let value = Reflect.get(...arguments); //target.__proto__[prop]
+        return typeof value == &apos;function&apos; ? value.bind(target) : value;
+    }
+})
+p.set(&apos;test&apos;,1);
+p.get(&apos;test&apos;)   //1
+
+等同于
+
+let m = new Map();
+let p = new Proxy(m,{}）
+p.set.call(m, &apos;test&apos;, 2);
+p.get.call(m, &apos;test&apos;)  //2;</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://heweixia.com/2021/01/14/Proxy-和-Reflect-学习/" data-id="cklj8qg1j005ckcvwysa9v93r" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="proxy-学习" class="article article-type-proxy" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/01/14/学习/" class="article-date">
+  <time datetime="2021-01-14T12:27:53.000Z" itemprop="datePublished">2021-01-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/01/14/学习/">学习</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://heweixia.com/2021/01/14/学习/" data-id="cklj8qg0c0030kcvwztuq6c5z" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-聊一聊-flex-0-1-auto-的问题" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/01/08/聊一聊-flex-0-1-auto-的问题/" class="article-date">
+  <time datetime="2021-01-08T02:46:11.000Z" itemprop="datePublished">2021-01-08</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/flex/">flex</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/01/08/聊一聊-flex-0-1-auto-的问题/">聊一聊 flex: 0 1 auto 的问题</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><code>flex</code> 是 <code>flex-grow</code>、<code>flex-shrink</code>、<code>flex-basis</code> 这三个属性的缩写, 即</p>
+<pre><code>flex: &lt;flex-grow&gt; &lt;flex-shrink&gt; &lt;flex-basis&gt;;</code></pre><ul>
+<li><p>flex-grow属性定义项目的放大比例，默认为0，即如果存在剩余空间，也不放大。</p>
+</li>
+<li><p>flex-shrink属性定义了项目的缩小比例，默认为1，即如果空间不足，该项目将缩小。</p>
+</li>
+<li><p>flex-basis属性定义了在分配多余空间之前，项目占据的主轴空间（main size）， flex-basis 值会覆盖掉 width 值。</p>
+<pre><code>item{
+    flex: 0 1 auto;
+}
+或
+.item {
+    flex-grow: 0; // 增长比例，子项合计宽度小于容器宽度，需要根据每个子项设置的此属性比例对剩下的长度进行分配
+    flex-shrink: 1; // 回缩比例，子项合计宽度大于容器宽度，需要根据每个子项设置的此属性比例对多出的长度进行分配
+    flex-basis: auto; // 设置了宽度跟宽度走，没设置宽度跟内容实际宽度走
+}</code></pre></li>
+</ul>
+        
+          <p class="article-more-link">
+            <a href="/2021/01/08/聊一聊-flex-0-1-auto-的问题/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://heweixia.com/2021/01/08/聊一聊-flex-0-1-auto-的问题/" data-id="cklj8qg0o003nkcvwreiv78sz" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/布局/">布局</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-小程序-audio-使用填坑记" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/10/15/小程序-audio-使用填坑记/" class="article-date">
@@ -98,7 +1548,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://heweixia.com/2020/10/15/小程序-audio-使用填坑记/" data-id="ckizdta3k002tu0vwpca42avd" class="article-share-link">Share</a>
+      <a data-url="http://heweixia.com/2020/10/15/小程序-audio-使用填坑记/" data-id="cklj8qg0e0032kcvwvxd778g9" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/小程序/">小程序</a></li></ul>
@@ -152,7 +1602,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://heweixia.com/2020/10/14/JSON对象与Blob对象互相转换/" data-id="ckizdta2j000yu0vw2rqb685y" class="article-share-link">Share</a>
+      <a data-url="http://heweixia.com/2020/10/14/JSON对象与Blob对象互相转换/" data-id="cklj8qfzc000xkcvw6ntp2bnc" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li></ul>
@@ -204,409 +1654,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://heweixia.com/2020/10/12/文字沿着不规则路径排版/" data-id="ckizdta4t0053u0vwkzaittkk" class="article-share-link">Share</a>
+      <a data-url="http://heweixia.com/2020/10/12/文字沿着不规则路径排版/" data-id="cklj8qg1u005tkcvwm4x84ws6" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/svg/">svg</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/动画/">动画</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-小程序-video-组件使用填坑记" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/09/21/小程序-video-组件使用填坑记/" class="article-date">
-  <time datetime="2020-09-21T09:01:30.000Z" itemprop="datePublished">2020-09-21</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/小程序/">小程序</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/09/21/小程序-video-组件使用填坑记/">小程序 video 组件使用填坑记</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="video-组件"><a href="#video-组件" class="headerlink" title="video 组件"></a>video 组件</h3><p>最近业务开发时遇到视频播放到结束前几秒的位置时自动停止播放的情况，而且在不同的播放环境下表现形式不一样：</p>
-<ul>
-<li>系统播放器环境下可以完整无卡顿播放；</li>
-<li>google 浏览器中在结束前几秒自动停止，不会继续播放；</li>
-</ul>
-<p>对于上面情况的视频，小程序 video 组件监听方法在开发者工具、Android和ios表现形式也不一样；</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;video</span><br><span class="line">	 id=&quot;myVideo&quot;</span><br><span class="line">	 autoplay </span><br><span class="line">	 src=&quot;&#123;&#123;currentMediaPath&#125;&#125;&quot;</span><br><span class="line">	 custom-cache=&quot;&#123;&#123;false&#125;&#125;&quot; </span><br><span class="line">	 controls=&apos;&#123;&#123;false&#125;&#125;&apos;</span><br><span class="line">	 bindplay=&quot;handlePlay&quot; </span><br><span class="line">	 bindpause=&quot;handlepause&quot;</span><br><span class="line">	 bindended=&quot;handleVideoEnd&quot;</span><br><span class="line">	 binderror=&quot;handleVideoError&quot; </span><br><span class="line">	 bindtimeupdate = &quot;handleTimeUpdate&quot;</span><br><span class="line">	 muted=&quot;&#123;&#123;true&#125;&#125;&quot; </span><br><span class="line">	 object-fit=&quot;contain&quot;</span><br><span class="line">	 enable-progress-gesture=&quot;&#123;&#123;false&#125;&#125;&quot; </span><br><span class="line">	 show-center-play-btn=&quot;&#123;&#123;false&#125;&#125;&quot; &gt;</span><br><span class="line">&lt;/video&gt;</span><br></pre></td></tr></table></figure>
-
-<table>
-<thead>
-<tr>
-<th>是否响应</th>
-<th align="center">bindplay</th>
-<th align="center">bindpause</th>
-<th align="center">bindended</th>
-<th align="center">binderror</th>
-<th align="center">bindtimeupdate</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>开发者工具</td>
-<td align="center">是</td>
-<td align="center">是</td>
-<td align="center">是</td>
-<td align="center">是</td>
-<td align="center">是</td>
-</tr>
-<tr>
-<td>Android10</td>
-<td align="center">是</td>
-<td align="center">否</td>
-<td align="center">否</td>
-<td align="center">否</td>
-<td align="center">是</td>
-</tr>
-<tr>
-<td>IOS</td>
-<td align="center">是</td>
-<td align="center">是</td>
-<td align="center">是</td>
-<td align="center">是</td>
-<td align="center">是</td>
-</tr>
-</tbody></table>
-<p>业务需求是需要在视频播放完后自动隐藏其自身，但是因为 android 无法监听到 bindend 与 bindpause 即使试了很多方法都没有用，最后只能监听到 bindtimeupdate 方法， </p>
-<p>bindtimeupdate 播放进度变化时触发 ， 这个函数会返回一个当前播放进度， 跟视频的总时长，当当前进度大于总时长时隐藏自身，除了这个方法还没找到其他方法解决目前的问题</p>
-<h3 id="视频播放前出现黑屏"><a href="#视频播放前出现黑屏" class="headerlink" title="视频播放前出现黑屏"></a>视频播放前出现黑屏</h3><p>在真机上视频播放时都会先出现黑屏然后才是真正的内容，导致的原因是视频加载时间过长，视频在未加载完成时显示的是黑屏。 减少黑屏的办法是在未加载完成之前，不显示内容，加载完成后才显示，经过试验视频的加载都是在<code>play</code>后进行的， 所以要保证视频的加载又要不显示内容，即    <code>video</code> 组件需要占位而不显示内容， <code>visibility: hidden</code> 是最好的选择</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">.hidden &#123;</span><br><span class="line">  visibility: hidden;</span><br><span class="line">  -webkit-backface-visibility: hidden;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;video class=&quot;&#123;&#123;showVideo? &apos;visible&apos;:&apos;hidden&apos;&#125;&#125;&quot; &gt;&lt;/video&gt;</span><br></pre></td></tr></table></figure>
-
-<p>对于这个样式开发工具上表现良好，但是在真机上效果不尽人意，android 机可以实现在视频加载完成后正常显示内容，但是 ios 机首帧仍会出现黑屏的情况，黑屏出现的时间不长，一闪而过，暂时没有找到可以解决的办法，官网上也一直没有对这个做优化。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://heweixia.com/2020/09/21/小程序-video-组件使用填坑记/" data-id="ckizdta3m002vu0vwjm5y0toc" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/小程序/">小程序</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-前端面试整理" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/09/16/前端面试整理/" class="article-date">
-  <time datetime="2020-09-16T09:07:24.000Z" itemprop="datePublished">2020-09-16</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/面试/">面试</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/09/16/前端面试整理/">前端面试整理</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><a href="https://blog.fundebug.com/2019/01/03/understand-browser-rendering/" target="_blank" rel="noopener">深入浅出浏览器渲染原理</a></p>
-<p><a href="/2020/09/08/call、apply、bind、new-实现原理/">call、apply、bind、new-实现原理</a></p>
-<p><a href="https://blog.fundebug.com/2019/02/22/compare-http-method-get-and-post/" target="_blank" rel="noopener">Post 与 get 区别</a></p>
-<p><a href="http://hcysun.me/vue-design/zh/renderer-patch.html#%E4%B8%BB%E5%8A%A8%E6%9B%B4%E6%96%B0" target="_blank" rel="noopener">VUE 渲染原理</a></p>
-<p><a href="/2020/09/10/VUE双向绑定原理/">VUE 双向绑定原理</a></p>
-<p><a href="https://tech.meituan.com/2018/09/27/fe-security.html" target="_blank" rel="noopener">如何防止 XSS 攻击</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://heweixia.com/2020/09/16/前端面试整理/" data-id="ckizdta3j002pu0vwmetnpvca" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/html/">html</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-页面渲染，浏览器工作原理" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/09/14/页面渲染，浏览器工作原理/" class="article-date">
-  <time datetime="2020-09-14T09:05:55.000Z" itemprop="datePublished">2020-09-14</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/前端基础/">前端基础</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/09/14/页面渲染，浏览器工作原理/">页面渲染，浏览器工作原理</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="1、-浏览器解析域名；"><a href="#1、-浏览器解析域名；" class="headerlink" title="1、 浏览器解析域名；"></a>1、 浏览器解析域名；</h3><ul>
-<li><p>浏览器缓存中没有该域名 IP 地址， 通过域名服务器（ NDS ）进行查找,返回该域名的IP地址；</p>
-</li>
-<li><p>浏览器缓存中有该域名 IP 地址， 直接访问该IP地址；</p>
-</li>
-</ul>
-<h3 id="2、-浏览器向服务器发起连接请求-（-TCP-三次握手）"><a href="#2、-浏览器向服务器发起连接请求-（-TCP-三次握手）" class="headerlink" title="2、 浏览器向服务器发起连接请求 （ TCP 三次握手）"></a>2、 浏览器向服务器发起连接请求 （ TCP 三次握手）</h3><h3 id="3、-浏览器向服务器发起-HTTP-GET-请求"><a href="#3、-浏览器向服务器发起-HTTP-GET-请求" class="headerlink" title="3、 浏览器向服务器发起 HTTP GET 请求"></a>3、 浏览器向服务器发起 HTTP GET 请求</h3><p>对于网站来说，这个请求通常是一个HTML文件</p>
-<h3 id="3、服务器向浏览器相关的响应头和-THML-内容"><a href="#3、服务器向浏览器相关的响应头和-THML-内容" class="headerlink" title="3、服务器向浏览器相关的响应头和 THML 内容"></a>3、服务器向浏览器相关的响应头和 THML 内容</h3><ul>
-<li><p>初始页面加载的14Kb规则，TCP慢开始就是初始响应为14Kb的原因</p>
-<p>  TCP第一个响应包是14kb大小。这是慢开始的一部分，慢开始是一种均衡网络连接速度的算法。慢开始逐渐增加发送数据的数量直到达到网络的最大带宽。</p>
-</li>
-</ul>
-<h3 id="4、浏览器解析返回的数据；"><a href="#4、浏览器解析返回的数据；" class="headerlink" title="4、浏览器解析返回的数据；"></a>4、浏览器解析返回的数据；</h3><p><strong>解析</strong> 是浏览器将通过网络接收的数据转换为 DOM 和 CSSOM 的步骤，通过渲染器把 DOM 和 CSSOM 在屏幕上绘制成页面</p>
-        
-          <p class="article-more-link">
-            <a href="/2020/09/14/页面渲染，浏览器工作原理/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://heweixia.com/2020/09/14/页面渲染，浏览器工作原理/" data-id="ckizdta3v003du0vwvq1fk0bj" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/html/">html</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-VUE双向绑定原理" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/09/10/VUE双向绑定原理/" class="article-date">
-  <time datetime="2020-09-10T08:41:52.000Z" itemprop="datePublished">2020-09-10</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/vue/">vue</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/09/10/VUE双向绑定原理/">VUE双向绑定原理</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><blockquote>
-<p>vue.js 则是采用数据劫持结合发布者-订阅者模式的方式，通过 Object.defineProperty() 来劫持各个属性的 setter，getter，在数据变动时发布消息给订阅者，触发相应的监听回调。我们先来看 Object.defineProperty() 这个方法。</p>
-</blockquote>
-        
-          <p class="article-more-link">
-            <a href="/2020/09/10/VUE双向绑定原理/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://heweixia.com/2020/09/10/VUE双向绑定原理/" data-id="ckizdta4n004uu0vw3ajtal40" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue/">vue</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-call、apply、bind、new-实现原理" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/09/08/call、apply、bind、new-实现原理/" class="article-date">
-  <time datetime="2020-09-08T06:49:36.000Z" itemprop="datePublished">2020-09-08</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/前端基础/">前端基础</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/09/08/call、apply、bind、new-实现原理/">call、apply、bind、new 实现原理</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="Function-prototype-call"><a href="#Function-prototype-call" class="headerlink" title="Function.prototype.call()"></a><em>Function.prototype.call()</em></h2><p><code>call()</code> 方法使用一个指定的 this 值和单独给出的一个或多个参数来调用一个函数。</p>
-<p>该方法的语法和作用与 <code>apply()</code> 方法类似，只有一个区别，就是 <code>call()</code> 方法接受的是一个参数列表，而 <code>apply()</code> 方法接受的是一个包含多个参数的数组。</p>
-<p>语法:</p>
-<blockquote>
-<p>function.call(thisArg, arg1, arg2, …)</p>
-</blockquote>
-<h3 id="使用-call-方法调用父构造函数"><a href="#使用-call-方法调用父构造函数" class="headerlink" title="使用 call 方法调用父构造函数"></a>使用 call 方法调用父构造函数</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">function Product(name, price) &#123;</span><br><span class="line">  this.name = name;</span><br><span class="line">  this.price = price;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function Food(name, price) &#123;</span><br><span class="line">  Product.call(this, name, price);</span><br><span class="line">  this.category = &apos;food&apos;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var cheese = new Food(&apos;feta&apos;, 5);</span><br><span class="line">// cheese &#123; name: &apos;feta&apos;, price: 5, category: &apos;food&apos; &#125;</span><br></pre></td></tr></table></figure>
-
-<p>使用 Food 构造函数创建的对象实例都会拥有在 Product 构造函数中添加的 name 属性和 price 属性,但 category 属性是在各自的构造函数中定义的。</p>
-        
-          <p class="article-more-link">
-            <a href="/2020/09/08/call、apply、bind、new-实现原理/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://heweixia.com/2020/09/08/call、apply、bind、new-实现原理/" data-id="ckizdta380024u0vwyn8117l3" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-DOM基础测试49" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/07/06/DOM基础测试49/" class="article-date">
-  <time datetime="2020-07-06T07:39:42.000Z" itemprop="datePublished">2020-07-06</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/基础测试/">基础测试</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/07/06/DOM基础测试49/">DOM基础测试49</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><p>已知页面上有一个 <code>&lt;select&gt;</code>下拉框元素，假设该元素的 DOM 对象是 select，请问：<br>1、请获得当前下拉框元素所在的<code>&lt;form&gt;</code>元素；<br>2、请问，当前下拉框选中元素的索引值（选中项的序号）是多少？<br>3、请问，我想知道第3个<code>&lt;options&gt;</code>元素的value属性值，代码该如何书写？<br>4、设置 select.value = ‘xxx’ 并不能让<code>&lt;select&gt;</code>下拉框元素触发 change 事件，实现使用 value 属性赋值的时候，下拉框元素 change 事件可以被触发。</p>
-        
-          <p class="article-more-link">
-            <a href="/2020/07/06/DOM基础测试49/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://heweixia.com/2020/07/06/DOM基础测试49/" data-id="ckizdta2h000uu0vwo301p4cv" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DOM/">DOM</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-DOM基础测试41" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/07/06/DOM基础测试41/" class="article-date">
-  <time datetime="2020-07-06T03:03:50.000Z" itemprop="datePublished">2020-07-06</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/基础测试/">基础测试</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/07/06/DOM基础测试41/">DOM基础测试41</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><img src="/images/base-test/dom-41-1.png" alt> </p>
-        
-          <p class="article-more-link">
-            <a href="/2020/07/06/DOM基础测试41/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://heweixia.com/2020/07/06/DOM基础测试41/" data-id="ckizdta2f000ru0vwxw98738l" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DOM/">DOM</a></li></ul>
 
     </footer>
   </div>
@@ -619,7 +1670,7 @@
 
   <nav id="page-nav">
     
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
   </nav>
 
 </section>
@@ -630,7 +1681,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Regexp/">Regexp</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/css3/">css3</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/js/">js</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/reactjs/">reactjs</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/sublime/">sublime</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/svg/">svg</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/vue/">vue</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端基础/">前端基础</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/基础测试/">基础测试</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/小程序/">小程序</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/移动端开发/">移动端开发</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/面试/">面试</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/CSS/">CSS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Regexp/">Regexp</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/css3/">css3</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/flex/">flex</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/js/">js</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/reactjs/">reactjs</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/sublime/">sublime</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/svg/">svg</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/vue/">vue</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端基础/">前端基础</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/基础测试/">基础测试</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/小程序/">小程序</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/移动端开发/">移动端开发</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/面试/">面试</a></li></ul>
     </div>
   </div>
 
@@ -640,7 +1691,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DOM/">DOM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6/">es6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/form/">form</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/">html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react-router/">react-router</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/regexp/">regexp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sublime/">sublime</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/svg/">svg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/">vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vuex/">vuex</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack/">webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/动画/">动画</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/小程序/">小程序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/打包/">打包</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/移动端开发/">移动端开发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/箭头函数/">箭头函数</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/路由-vue/">路由 vue</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DOM/">DOM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/config/">config</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6/">es6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/form/">form</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/">html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/img/">img</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/layout/">layout</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react-router/">react-router</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/regexp/">regexp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/router/">router</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sublime/">sublime</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/svg/">svg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/">vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vuex/">vuex</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack/">webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/动画/">动画</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/小程序/">小程序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/布局/">布局</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/移动端开发/">移动端开发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/箭头函数/">箭头函数</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/路由-vue/">路由 vue</a></li></ul>
     </div>
   </div>
 
@@ -650,7 +1701,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/CSS/" style="font-size: 16px;">CSS</a> <a href="/tags/DOM/" style="font-size: 18px;">DOM</a> <a href="/tags/es6/" style="font-size: 10px;">es6</a> <a href="/tags/form/" style="font-size: 10px;">form</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/html/" style="font-size: 12px;">html</a> <a href="/tags/js/" style="font-size: 20px;">js</a> <a href="/tags/react-router/" style="font-size: 10px;">react-router</a> <a href="/tags/regexp/" style="font-size: 10px;">regexp</a> <a href="/tags/sublime/" style="font-size: 10px;">sublime</a> <a href="/tags/svg/" style="font-size: 14px;">svg</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/vuex/" style="font-size: 10px;">vuex</a> <a href="/tags/webpack/" style="font-size: 10px;">webpack</a> <a href="/tags/动画/" style="font-size: 14px;">动画</a> <a href="/tags/小程序/" style="font-size: 14px;">小程序</a> <a href="/tags/打包/" style="font-size: 10px;">打包</a> <a href="/tags/移动端开发/" style="font-size: 10px;">移动端开发</a> <a href="/tags/箭头函数/" style="font-size: 10px;">箭头函数</a> <a href="/tags/路由-vue/" style="font-size: 10px;">路由 vue</a>
+      <a href="/tags/CSS/" style="font-size: 16px;">CSS</a> <a href="/tags/DOM/" style="font-size: 18px;">DOM</a> <a href="/tags/config/" style="font-size: 12px;">config</a> <a href="/tags/es6/" style="font-size: 10px;">es6</a> <a href="/tags/form/" style="font-size: 10px;">form</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/html/" style="font-size: 12px;">html</a> <a href="/tags/img/" style="font-size: 10px;">img</a> <a href="/tags/js/" style="font-size: 20px;">js</a> <a href="/tags/layout/" style="font-size: 10px;">layout</a> <a href="/tags/react-router/" style="font-size: 10px;">react-router</a> <a href="/tags/regexp/" style="font-size: 10px;">regexp</a> <a href="/tags/router/" style="font-size: 10px;">router</a> <a href="/tags/sublime/" style="font-size: 10px;">sublime</a> <a href="/tags/svg/" style="font-size: 14px;">svg</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/vuex/" style="font-size: 10px;">vuex</a> <a href="/tags/webpack/" style="font-size: 10px;">webpack</a> <a href="/tags/动画/" style="font-size: 14px;">动画</a> <a href="/tags/小程序/" style="font-size: 14px;">小程序</a> <a href="/tags/布局/" style="font-size: 10px;">布局</a> <a href="/tags/移动端开发/" style="font-size: 10px;">移动端开发</a> <a href="/tags/箭头函数/" style="font-size: 10px;">箭头函数</a> <a href="/tags/路由-vue/" style="font-size: 10px;">路由 vue</a>
     </div>
   </div>
 
@@ -659,7 +1710,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">October 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">June 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">January 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">October 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">June 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li></ul>
     </div>
   </div>
 
@@ -672,23 +1723,23 @@
       <ul>
         
           <li>
-            <a href="/2020/10/15/小程序-audio-使用填坑记/">小程序-audio-使用填坑记</a>
+            <a href="/2021/01/22/简单布局实现/">简单布局实现</a>
           </li>
         
           <li>
-            <a href="/2020/10/14/JSON对象与Blob对象互相转换/">JSON对象与Blob对象互相转换</a>
+            <a href="/2021/01/21/实现图片预加载与图片懒加载/">实现图片预加载与图片懒加载</a>
           </li>
         
           <li>
-            <a href="/2020/10/12/文字沿着不规则路径排版/">文字沿着不规则路径排版</a>
+            <a href="/2021/01/21/vue-router-添加动态路由/">vue-router 添加动态路由</a>
           </li>
         
           <li>
-            <a href="/2020/09/21/小程序-video-组件使用填坑记/">小程序 video 组件使用填坑记</a>
+            <a href="/2021/01/18/vue-cli3项目常用配置/">vue-cli3项目常用配置</a>
           </li>
         
           <li>
-            <a href="/2020/09/16/前端面试整理/">前端面试整理</a>
+            <a href="/2021/01/14/Proxy-和-Reflect-学习/">Proxy 和 Reflect 学习</a>
           </li>
         
       </ul>
@@ -703,7 +1754,7 @@
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2020 hwx<br>
+      &copy; 2021 hwx<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>

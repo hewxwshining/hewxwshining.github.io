@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>vue-cli3项目常用配置 | Hex笔记</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="转载地址：一份关于vue-cli3项目常用项配置 根据项目实际经验，内容有所更改 vue.config.js完整的架构配置 const path = require(&amp;apos;path&amp;apos;); const UglifyJsPlugin = require(&amp;apos;uglifyjs-webpack-plugin&amp;apos;) // 去掉注释 const CompressionWebpa">
+<meta name="keywords" content="config">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vue-cli3项目常用配置">
+<meta property="og:url" content="http://heweixia.com/2021/01/18/vue-cli3项目常用配置/index.html">
+<meta property="og:site_name" content="Hex笔记">
+<meta property="og:description" content="转载地址：一份关于vue-cli3项目常用项配置 根据项目实际经验，内容有所更改 vue.config.js完整的架构配置 const path = require(&amp;apos;path&amp;apos;); const UglifyJsPlugin = require(&amp;apos;uglifyjs-webpack-plugin&amp;apos;) // 去掉注释 const CompressionWebpa">
+<meta property="og:locale" content="zh_CN.utf8">
+<meta property="og:updated_time" content="2021-02-24T08:54:32.674Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="vue-cli3项目常用配置">
+<meta name="twitter:description" content="转载地址：一份关于vue-cli3项目常用项配置 根据项目实际经验，内容有所更改 vue.config.js完整的架构配置 const path = require(&amp;apos;path&amp;apos;); const UglifyJsPlugin = require(&amp;apos;uglifyjs-webpack-plugin&amp;apos;) // 去掉注释 const CompressionWebpa">
+  
+    <link rel="alternate" href="/atom.xml" title="Hex笔记" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hex笔记</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://heweixia.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-vue-cli3项目常用配置" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/01/18/vue-cli3项目常用配置/" class="article-date">
+  <time datetime="2021-01-18T08:39:38.000Z" itemprop="datePublished">2021-01-18</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/vue/">vue</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      vue-cli3项目常用配置
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>转载地址：<a href="https://segmentfault.com/a/1190000022512358?content_source_url=https://github.com/vue3/vue3-News" title="一份关于vue-cli3项目常用项配置" target="_blank" rel="noopener">一份关于vue-cli3项目常用项配置</a></p>
+<p>根据项目实际经验，内容有所更改</p>
+<h3 id="vue-config-js"><a href="#vue-config-js" class="headerlink" title="vue.config.js"></a>vue.config.js</h3><p>完整的架构配置</p>
+<pre><code>const path = require(&apos;path&apos;);
+const UglifyJsPlugin = require(&apos;uglifyjs-webpack-plugin&apos;) // 去掉注释
+const CompressionWebpackPlugin = require(&apos;compression-webpack-plugin&apos;); // 开启压缩
+const { HashedModuleIdsPlugin } = require(&apos;webpack&apos;);
+
+function resolve(dir) {
+    return path.join(__dirname, dir)
+}
+
+const isProduction = process.env.NODE_ENV === &apos;production&apos;;
+
+// cdn预加载使用
+const externals = {
+    &apos;vue&apos;: &apos;Vue&apos;,
+    &apos;vue-router&apos;: &apos;VueRouter&apos;,
+    &apos;vuex&apos;: &apos;Vuex&apos;,
+    &apos;axios&apos;: &apos;axios&apos;,
+    &quot;element-ui&quot;: &quot;ELEMENT&quot;
+}
+
+const cdn = {
+    // 开发环境
+    dev: {
+        css: [
+            &apos;https://unpkg.com/element-ui/lib/theme-chalk/index.css&apos;
+        ],
+        js: []
+    },
+    // 生产环境
+    build: {
+        css: [
+            &apos;https://unpkg.com/element-ui/lib/theme-chalk/index.css&apos;
+        ],
+        js: [
+            &apos;https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js&apos;,
+            &apos;https://cdn.jsdelivr.net/npm/vue-router@3.0.1/dist/vue-router.min.js&apos;,
+            &apos;https://cdn.jsdelivr.net/npm/vuex@3.0.1/dist/vuex.min.js&apos;,
+            &apos;https://cdn.jsdelivr.net/npm/axios@0.18.0/dist/axios.min.js&apos;,
+            &apos;https://unpkg.com/element-ui/lib/index.js&apos;
+        ]
+    }
+}
+
+module.exports = {
+    publicPath: process.env.NODE_ENV === &apos;production&apos; ? &apos;/static/&apos; : &quot;&quot;, //部署应用包时的基本 URL
+      outputDir: &quot;../dist/static&quot;, //生产环境构建文件的目录
+      assetsDir: &quot;./test&quot;,  //放置生成的静态资源 (js、css、img、fonts) 的 (相对于 outputDir 的) 目录
+      indexPath: &apos;../templates/index.html&apos;,//指定生成的 index.html 的输出路径 (相对于 outputDir)
+    lintOnSave: false, // 关闭eslint
+    //生产环境 sourceMap
+    productionSourceMap: false,
+    chainWebpack: config =&gt; {
+
+        config.resolve.alias
+            .set(&apos;@&apos;, resolve(&apos;src&apos;))
+
+        // 压缩图片
+        config.module
+            .rule(&apos;images&apos;)
+            .test(/\.(png|jpe?g|gif|svg)(\?.*)?$/)
+            .use(&apos;image-webpack-loader&apos;)
+            .loader(&apos;image-webpack-loader&apos;)
+            .options({ bypassOnDebug: true })
+
+        // webpack 会默认给commonChunk打进chunk-vendors，所以需要对webpack的配置进行delete
+        config.optimization.delete(&apos;splitChunks&apos;)
+
+        config.plugin(&apos;html&apos;).tap(args =&gt; {
+            if (process.env.NODE_ENV === &apos;production&apos;) {
+                args[0].cdn = cdn.build
+            }
+            if (process.env.NODE_ENV === &apos;development&apos;) {
+                args[0].cdn = cdn.dev
+            }
+            return args
+        })
+
+        config
+            .plugin(&apos;webpack-bundle-analyzer&apos;)
+            .use(require(&apos;webpack-bundle-analyzer&apos;).BundleAnalyzerPlugin)
+    },
+
+    configureWebpack: config =&gt; {
+        const plugins = [];
+
+        if (isProduction) {
+            plugins.push(
+                new UglifyJsPlugin({
+                    uglifyOptions: {
+                        output: {
+                            comments: false, // 去掉注释
+                        },
+                        warnings: false,
+                        compress: {
+                            drop_console: true,
+                            drop_debugger: false,
+                            pure_funcs: [&apos;console.log&apos;]//移除console
+                        }
+                    }
+                })
+            )
+            // 服务器也要相应开启gzip
+            plugins.push(
+                new CompressionWebpackPlugin({
+                    algorithm: &apos;gzip&apos;,
+                    test: /\.(js|css)$/,// 匹配文件名
+                    threshold: 10000, // 对超过10k的数据压缩
+                    deleteOriginalAssets: false, // 不删除源文件
+                    minRatio: 0.8 // 压缩比
+                })
+            )
+
+            // 用于根据模块的相对路径生成 hash 作为模块 id, 一般用于生产环境
+            plugins.push(
+                new HashedModuleIdsPlugin()
+            )
+
+            // 开启分离js
+            config.optimization = {
+                runtimeChunk: &apos;single&apos;,
+                splitChunks: {
+                    chunks: &apos;all&apos;,
+                    maxInitialRequests: Infinity,
+                    minSize: 1000 * 60,
+                    cacheGroups: {
+                        vendor: {
+                            test: /[\\/]node_modules[\\/]/,
+                            name(module) {
+                                // 排除node_modules 然后吧 @ 替换为空 ,考虑到服务器的兼容
+                                const packageName = module.context.match(/[\\/]node_modules[\\/](.*?)([\\/]|$)/)[1]
+                                return `npm.${packageName.replace(&apos;@&apos;, &apos;&apos;)}`
+                            }
+                        }
+                    }
+                }
+            };
+
+            // 取消webpack警告的性能提示
+            config.performance = {
+                hints: &apos;warning&apos;,
+                //入口起点的最大体积
+                maxEntrypointSize: 1000 * 500,
+                //生成文件的最大体积
+                maxAssetSize: 1000 * 1000,
+                //只给出 js 文件的性能提示
+                assetFilter: function (assetFilename) {
+                    return assetFilename.endsWith(&apos;.js&apos;);
+                }
+            }
+
+            // 打包时npm包转CDN
+            config.externals = externals;
+        }
+
+        return { plugins }
+    },
+
+    pluginOptions: {
+        // 配置全局less
+        &apos;style-resources-loader&apos;: {
+            preProcessor: &apos;less&apos;,
+            patterns: [resolve(&apos;./src/style/theme.less&apos;)]
+        }
+    },
+       devServer: {
+        open: true, // 自动启动浏览器
+        host: &apos;localhost&apos;, // 处理sockjs-node报错
+        port: 6060, // 端口号
+        https: false,
+        hotOnly: true, // 热更新
+        proxy: {
+            &apos;^/sso&apos;: {
+                target: process.env.VUE_APP_SSO, // 重写路径
+                ws: true, //开启WebSocket
+                secure: false, // 如果是https接口，需要配置这个参数
+                changeOrigin: true
+            }
+        }
+    }
+}</code></pre><h3 id="html模板配置cdn"><a href="#html模板配置cdn" class="headerlink" title="html模板配置cdn"></a>html模板配置cdn</h3><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+
+&lt;head&gt;
+    &lt;meta charset=&quot;utf-8&quot;&gt;
+    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1.0&quot;&gt;
+    &lt;link rel=&quot;icon&quot; href=&quot;&lt;%= BASE_URL %&gt;favicon.ico&quot;&gt;
+    &lt;title&gt;&lt;%= htmlWebpackPlugin.options.title %&gt;&lt;/title&gt;
+    &lt;% for (var i in
+        htmlWebpackPlugin.options.cdn &amp;&amp; htmlWebpackPlugin.options.cdn.css) { %&gt;
+    &lt;link href=&quot;&lt;%= htmlWebpackPlugin.options.cdn.css[i] %&gt;&quot; rel=&quot;preload&quot; as=&quot;style&quot; /&gt;
+    &lt;link href=&quot;&lt;%= htmlWebpackPlugin.options.cdn.css[i] %&gt;&quot; rel=&quot;stylesheet&quot; /&gt;
+    &lt;% } %&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+    &lt;noscript&gt;
+        &lt;strong&gt;We&apos;re sorry but &lt;%= htmlWebpackPlugin.options.title %&gt; doesn&apos;t work properly without JavaScript enabled.
+            Please enable it to continue.&lt;/strong&gt;
+    &lt;/noscript&gt;
+    &lt;div id=&quot;app&quot;&gt;&lt;/div&gt;
+    &lt;!-- built files will be auto injected --&gt;
+    &lt;% for (var i in
+        htmlWebpackPlugin.options.cdn &amp;&amp; htmlWebpackPlugin.options.cdn.js) { %&gt;
+    &lt;script src=&quot;&lt;%= htmlWebpackPlugin.options.cdn.js[i] %&gt;&quot;&gt;&lt;/script&gt;
+    &lt;% } %&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre><h3 id="开启Gzip压缩，包含文件js、css"><a href="#开启Gzip压缩，包含文件js、css" class="headerlink" title="开启Gzip压缩，包含文件js、css"></a>开启Gzip压缩，包含文件js、css</h3><pre><code>new CompressionWebpackPlugin({
+      algorithm: &apos;gzip&apos;,
+      test: /\.(js|css)$/, // 匹配文件名
+      threshold: 10000, // 对超过10k的数据压缩
+      deleteOriginalAssets: false, // 不删除源文件
+      minRatio: 0.8 // 压缩比
+})</code></pre><h3 id="为-sass-提供全局样式，以及全局变量"><a href="#为-sass-提供全局样式，以及全局变量" class="headerlink" title="为 sass 提供全局样式，以及全局变量"></a>为 sass 提供全局样式，以及全局变量</h3><pre><code>css: {
+    // 并将所有的 *.(css|scss|sass|less|styl(us)?) 文件视为 CSS Modules 模块
+    requireModuleExtension: true,
+    // 是否将组件中的 CSS 提取至一个独立的 CSS 文件中
+    extract: true,
+    // 是否为 CSS 开启 source map
+    sourceMap: false,
+    loaderOptions: {
+        css: {},
+        sass: {
+            additionalData: `
+            @import &quot;@/styles/index.scss&quot;;
+            $src: &quot;${process.env.VUE_APP_OSS_SRC}&quot;;
+            `
+        }
+    }
+}</code></pre><h3 id="去掉注释、去掉console-log"><a href="#去掉注释、去掉console-log" class="headerlink" title="去掉注释、去掉console.log"></a>去掉注释、去掉console.log</h3><p>安装 <code>cnpm i uglifyjs-webpack-plugin -D</code></p>
+<pre><code>const UglifyJsPlugin = require(&apos;uglifyjs-webpack-plugin&apos;)
+new UglifyJsPlugin({
+    uglifyOptions: {
+        output: {
+            comments: false, // 去掉注释
+        },
+        warnings: false,
+        compress: {
+            drop_console: true,
+            drop_debugger: false,
+            pure_funcs: [&apos;console.log&apos;] //移除console
+        }
+    }
+})</code></pre><h3 id="压缩图片"><a href="#压缩图片" class="headerlink" title="压缩图片"></a>压缩图片</h3><pre><code>chainWebpack: config =&gt; {
+    // 压缩图片
+    config.module
+        .rule(&apos;images&apos;)
+        .test(/\.(png|jpe?g|gif|svg)(\?.*)?$/)
+        .use(&apos;image-webpack-loader&apos;)
+        .loader(&apos;image-webpack-loader&apos;)
+        .options({ bypassOnDebug: true })
+
+}</code></pre><h3 id="本地代理"><a href="#本地代理" class="headerlink" title="本地代理"></a>本地代理</h3><pre><code>devServer: {
+    open: true, // 自动启动浏览器
+    host: &apos;localhost&apos;, // 处理sockjs-node报错
+    port: 6060, // 端口号
+    https: false,
+    hotOnly: true, // 热更新
+    proxy: {
+        &apos;^/sso&apos;: {
+            target: process.env.VUE_APP_SSO, // 重写路径
+            ws: true, //开启WebSocket
+            secure: false, // 如果是https接口，需要配置这个参数
+            changeOrigin: true
+        }
+    }
+}</code></pre><h3 id="配置环境变量开发模式、测试模式、生产模式"><a href="#配置环境变量开发模式、测试模式、生产模式" class="headerlink" title="配置环境变量开发模式、测试模式、生产模式"></a>配置环境变量开发模式、测试模式、生产模式</h3><p>在根目录新建</p>
+<p><strong>.env.development</strong></p>
+<pre><code>#开发环境
+NODE_ENV=&apos;development&apos;
+
+VUE_APP_SSO=&apos;http://http://localhost:9080&apos;</code></pre><p><strong>.env.test</strong></p>
+<pre><code>NODE_ENV = &apos;production&apos; # 如果我们在.env.test文件中把NODE_ENV设置为test的话，那么打包出来的目录结构是有差异的
+VUE_APP_MODE = &apos;test&apos;
+VUE_APP_SSO=&apos;http://http://localhost:9080&apos;
+outputDir = test</code></pre><p><strong>.env.production</strong></p>
+<pre><code>NODE_ENV = &apos;production&apos;
+
+VUE_APP_SSO=&apos;http://http://localhost:9080&apos;</code></pre><p><strong>package.json</strong></p>
+<pre><code>&quot;scripts&quot;: {
+    &quot;build&quot;: &quot;vue-cli-service build --no-clean&quot;, //生产打包
+    &quot;lint&quot;: &quot;vue-cli-service lint&quot;,
+    &quot;dev&quot;: &quot;vue-cli-service serve&quot;, // 开发模式
+    &quot;test&quot;: &quot;vue-cli-service build --mode test&quot;, // 测试打包
+    &quot;publish&quot;: &quot;vue-cli-service build &amp;&amp; vue-cli-service build --mode test&quot; // 测试和生产一起打包
+ }</code></pre><h3 id="只打包改变的文件"><a href="#只打包改变的文件" class="headerlink" title="只打包改变的文件"></a>只打包改变的文件</h3><p>安装<code>cnpm i webpack -D</code></p>
+<pre><code>const { HashedModuleIdsPlugin } = require(&apos;webpack&apos;);
+configureWebpack: config =&gt; {    
+    const plugins = [];
+    plugins.push(
+        new HashedModuleIdsPlugin()
+    )
+}</code></pre><h3 id="开启分析打包日志"><a href="#开启分析打包日志" class="headerlink" title="开启分析打包日志"></a>开启分析打包日志</h3><pre><code>chainWebpack: config =&gt; {
+    config
+        .plugin(&apos;webpack-bundle-analyzer&apos;)
+        .use(require(&apos;webpack-bundle-analyzer&apos;).BundleAnalyzerPlugin)
+}</code></pre><h3 id="axios配置"><a href="#axios配置" class="headerlink" title="axios配置"></a>axios配置</h3><pre><code>import axios from &quot;axios&quot;;
+import merge from &apos;lodash/merge&apos;
+import qs from &apos;qs&apos;
+
+/**
+ * 实例化
+ * config是库的默认值，然后是实例的 defaults 属性，最后是请求设置的 config 参数。后者将优先于前者
+ */
+const http = axios.create({
+    timeout: 1000 * 30,
+    withCredentials: true, // 表示跨域请求时是否需要使用凭证
+});
+
+/**
+ * 请求拦截
+ */
+http.interceptors.request.use(function (config) {
+    return config;
+}, function (error) {
+    return Promise.reject(error);
+});
+
+
+/**
+ * 响应拦截
+ */
+http.interceptors.response.use(response =&gt; {
+    // 过期之类的操作
+    if (response.data &amp;&amp; (response.data.code === 401)) {
+        // window.location.href = &apos;&apos;; 重定向
+    }
+    return response
+}, error =&gt; {
+    return Promise.reject(error)
+})
+
+
+/**
+ * 请求地址处理
+ */
+http.adornUrl = (url) =&gt; {
+    return url;
+}
+
+/**
+ * get请求参数处理
+ * params 参数对象
+ * openDefultParams 是否开启默认参数
+ */
+http.adornParams = (params = {}, openDefultParams = true) =&gt; {
+    var defaults = {
+        t: new Date().getTime()
+    }
+    return openDefultParams ? merge(defaults, params) : params
+}
+
+
+/**
+ * post请求数据处理
+ * @param {*} data 数据对象
+ * @param {*} openDefultdata 是否开启默认数据?
+ * @param {*} contentType 数据格式
+ *  json: &apos;application/json; charset=utf-8&apos;
+ *  form: &apos;application/x-www-form-urlencoded; charset=utf-8&apos;
+ */
+http.adornData = (data = {}, openDefultdata = true, contentType = &apos;json&apos;) =&gt; {
+    var defaults = {
+        t: new Date().getTime()
+    }
+    data = openDefultdata ? merge(defaults, data) : data
+    return contentType === &apos;json&apos; ? JSON.stringify(data) : qs.stringify(data)
+}
+
+
+/**
+ * windPost请求
+ * @param {String} url [请求地址]
+ * @param {Object} params [请求携带参数]
+ */
+http.windPost = function (url, params) {
+    return new Promise((resolve, reject) =&gt; {
+        http.post(http.adornUrl(url), qs.stringify(params))
+            .then(res =&gt; {
+                resolve(res.data)
+            })
+            .catch(error =&gt; {
+                reject(error)
+            })
+    })
+}
+
+
+/**
+ * windJsonPost请求
+ * @param {String} url [请求地址]
+ * @param {Object} params [请求携带参数]
+ */
+http.windJsonPost = function (url, params) {
+    return new Promise((resolve, reject) =&gt; {
+        http.post(http.adornUrl(url), http.adornParams(params))
+            .then(res =&gt; {
+                resolve(res.data)
+            })
+            .catch(error =&gt; {
+                reject(error)
+            })
+    })
+}
+
+
+/**
+ * windGet请求
+ * @param {String} url [请求地址]
+ * @param {Object} params [请求携带参数]
+ */
+http.windGet = function (url, params) {
+    return new Promise((resolve, reject) =&gt; {
+        http.get(http.adornUrl(url), { params: params })
+            .then(res =&gt; {
+                resolve(res.data)
+            })
+            .catch(error =&gt; {
+                reject(error)
+            })
+    })
+}
+
+/**
+ * 上传图片
+ */
+http.upLoadPhoto = function (url, params, callback) {
+    let config = {}
+    if (callback !== null) {
+        config = {
+            onUploadProgress: function (progressEvent) {
+                //属性lengthComputable主要表明总共需要完成的工作量和已经完成的工作是否可以被测量
+                //如果lengthComputable为false，就获取不到progressEvent.total和progressEvent.loaded
+                callback(progressEvent)
+            }
+        }
+    }
+    return new Promise((resolve, reject) =&gt; {
+        http.post(http.adornUrl(url), http.adornParams(params), config)
+            .then(res =&gt; {
+                resolve(res.data)
+            })
+            .catch(error =&gt; {
+                reject(error)
+            })
+    })
+}
+export default http;</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://heweixia.com/2021/01/18/vue-cli3项目常用配置/" data-id="cklj8qg1r005nkcvwkpxqacs9" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/config/">config</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/01/21/vue-router-添加动态路由/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          vue-router 添加动态路由
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/01/14/Proxy-和-Reflect-学习/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Proxy 和 Reflect 学习</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/CSS/">CSS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Regexp/">Regexp</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/css3/">css3</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/flex/">flex</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/js/">js</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/reactjs/">reactjs</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/sublime/">sublime</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/svg/">svg</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/vue/">vue</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端基础/">前端基础</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/基础测试/">基础测试</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/小程序/">小程序</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/移动端开发/">移动端开发</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/面试/">面试</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DOM/">DOM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/config/">config</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6/">es6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/form/">form</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/">html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/img/">img</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/layout/">layout</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react-router/">react-router</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/regexp/">regexp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/router/">router</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sublime/">sublime</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/svg/">svg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/">vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vuex/">vuex</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack/">webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/动画/">动画</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/小程序/">小程序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/布局/">布局</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/移动端开发/">移动端开发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/箭头函数/">箭头函数</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/路由-vue/">路由 vue</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/CSS/" style="font-size: 16px;">CSS</a> <a href="/tags/DOM/" style="font-size: 18px;">DOM</a> <a href="/tags/config/" style="font-size: 12px;">config</a> <a href="/tags/es6/" style="font-size: 10px;">es6</a> <a href="/tags/form/" style="font-size: 10px;">form</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/html/" style="font-size: 12px;">html</a> <a href="/tags/img/" style="font-size: 10px;">img</a> <a href="/tags/js/" style="font-size: 20px;">js</a> <a href="/tags/layout/" style="font-size: 10px;">layout</a> <a href="/tags/react-router/" style="font-size: 10px;">react-router</a> <a href="/tags/regexp/" style="font-size: 10px;">regexp</a> <a href="/tags/router/" style="font-size: 10px;">router</a> <a href="/tags/sublime/" style="font-size: 10px;">sublime</a> <a href="/tags/svg/" style="font-size: 14px;">svg</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/vuex/" style="font-size: 10px;">vuex</a> <a href="/tags/webpack/" style="font-size: 10px;">webpack</a> <a href="/tags/动画/" style="font-size: 14px;">动画</a> <a href="/tags/小程序/" style="font-size: 14px;">小程序</a> <a href="/tags/布局/" style="font-size: 10px;">布局</a> <a href="/tags/移动端开发/" style="font-size: 10px;">移动端开发</a> <a href="/tags/箭头函数/" style="font-size: 10px;">箭头函数</a> <a href="/tags/路由-vue/" style="font-size: 10px;">路由 vue</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">January 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">October 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">June 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/01/22/简单布局实现/">简单布局实现</a>
+          </li>
+        
+          <li>
+            <a href="/2021/01/21/实现图片预加载与图片懒加载/">实现图片预加载与图片懒加载</a>
+          </li>
+        
+          <li>
+            <a href="/2021/01/21/vue-router-添加动态路由/">vue-router 添加动态路由</a>
+          </li>
+        
+          <li>
+            <a href="/2021/01/18/vue-cli3项目常用配置/">vue-cli3项目常用配置</a>
+          </li>
+        
+          <li>
+            <a href="/2021/01/14/Proxy-和-Reflect-学习/">Proxy 和 Reflect 学习</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 hwx<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
